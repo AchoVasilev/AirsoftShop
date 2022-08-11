@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirsoftShop.WebApi", "AirsoftShop.WebApi\AirsoftShop.WebApi.csproj", "{97D77600-B857-4AE3-AF7B-B345818583E6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirsoftShop.Data", "AirsoftShop.Data\AirsoftShop.Data.csproj", "{D691B2F5-5BA2-4AF4-B8A5-266ECCB8B16A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirsoftShop.Services", "AirsoftShop.Services\AirsoftShop.Services.csproj", "{096400AF-BBEB-4F5A-87AB-47591926EEEC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirsoftShop.Controllers", "AirsoftShop.Controllers\AirsoftShop.Controllers.csproj", "{1227290C-B0B2-4BDC-9F2B-187BB9E1413B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{97D77600-B857-4AE3-AF7B-B345818583E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97D77600-B857-4AE3-AF7B-B345818583E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97D77600-B857-4AE3-AF7B-B345818583E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97D77600-B857-4AE3-AF7B-B345818583E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D691B2F5-5BA2-4AF4-B8A5-266ECCB8B16A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D691B2F5-5BA2-4AF4-B8A5-266ECCB8B16A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D691B2F5-5BA2-4AF4-B8A5-266ECCB8B16A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D691B2F5-5BA2-4AF4-B8A5-266ECCB8B16A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{096400AF-BBEB-4F5A-87AB-47591926EEEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{096400AF-BBEB-4F5A-87AB-47591926EEEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{096400AF-BBEB-4F5A-87AB-47591926EEEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{096400AF-BBEB-4F5A-87AB-47591926EEEC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1227290C-B0B2-4BDC-9F2B-187BB9E1413B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1227290C-B0B2-4BDC-9F2B-187BB9E1413B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1227290C-B0B2-4BDC-9F2B-187BB9E1413B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1227290C-B0B2-4BDC-9F2B-187BB9E1413B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
