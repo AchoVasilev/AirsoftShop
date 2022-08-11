@@ -1,7 +1,6 @@
-﻿using System.Diagnostics;
-using Microsoft.AspNetCore.Mvc;
+﻿namespace AirsoftShop.Controllers;
 
-namespace AirsoftShop.WebApi.Controllers;
+using Microsoft.AspNetCore.Mvc;
 
 public class HomeController : Controller
 {

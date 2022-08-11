@@ -7,15 +7,9 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Reference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore">
-        <HintPath>..\..\..\..\.nuget\packages\microsoft.aspnetcore.identity.entityframeworkcore\6.0.7\lib\net6.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll</HintPath>
-      </Reference>
-      <Reference Include="Microsoft.EntityFrameworkCore">
-        <HintPath>..\..\..\..\.nuget\packages\microsoft.entityframeworkcore\6.0.7\lib\net6.0\Microsoft.EntityFrameworkCore.dll</HintPath>
-      </Reference>
-      <Reference Include="Microsoft.EntityFrameworkCore.Relational">
-        <HintPath>..\..\..\..\.nuget\packages\microsoft.entityframeworkcore.relational\6.0.7\lib\net6.0\Microsoft.EntityFrameworkCore.Relational.dll</HintPath>
-      </Reference>
+        <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.7" />
+        <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.7" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.7" />
     </ItemGroup>
 
 </Project>
