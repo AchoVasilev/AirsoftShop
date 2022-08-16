@@ -2,7 +2,9 @@
 
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Models;
+using Models.Base;
 using Models.Images;
 
 public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
@@ -44,6 +46,21 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 
     public DbSet<WishList> WishLists { get; init; }
 
+    public override int SaveChanges(bool acceptAllChangesOnSuccess)
+    {
+        this.ApplyAuditInformation();
+
+        return base.SaveChanges(acceptAllChangesOnSuccess);
+    }
+
+    public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess,
+        CancellationToken cancellationToken = new CancellationToken())
+    {
+        this.ApplyAuditInformation();
+        
+        return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
+    }
+    
     protected override void OnModelCreating(ModelBuilder builder)
     {
         builder.Entity<Gun>()
@@ -77,5 +94,51 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
         }
 
         base.OnModelCreating(builder);
+    }
+
+    private void ApplyAuditInformation()
+        => this.ChangeTracker
+            .Entries()
+            .ToList()
+            .ForEach(entry =>
+            {
+                switch (entry.Entity)
+                {
+                    case IDeletableEntity<int> deletableEntity:
+                        CheckForDeletedEntity(entry, deletableEntity);
+                        break;
+                    case IDeletableEntity<string> deletableEntity:
+                        CheckForDeletedEntity(entry, deletableEntity);
+                        break;
+                    case IEntity<int> entity:
+                        CheckForIEntity(entry, entity);
+                        break;
+                    case IEntity<string> entity:
+                        CheckForIEntity(entry, entity);
+                        break;
+                }
+            });
+
+    private static void CheckForIEntity<T>(EntityEntry entry, IEntity<T> entity)
+    {
+        if (entry.State == EntityState.Added)
+        {
+            entity.CreatedOn = DateTime.UtcNow;
+        }
+        else if (entry.State == EntityState.Modified)
+        {
+            entity.ModifiedOn = DateTime.UtcNow;
+        }
+    }
+
+    private static void CheckForDeletedEntity<T>(EntityEntry entry, IDeletableEntity<T> deletableEntity)
+    {
+        if (entry.State == EntityState.Deleted)
+        {
+            deletableEntity.DeletedOn = DateTime.UtcNow;
+            deletableEntity.IsDeleted = true;
+
+            entry.State = EntityState.Modified;
+        }
     }
 }
