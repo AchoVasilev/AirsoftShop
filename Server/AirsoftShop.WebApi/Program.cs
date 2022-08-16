@@ -2,11 +2,14 @@ using AirsoftShop.WebApi.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.RegisterDatabase(builder.Configuration)
+builder.Services
+    .RegisterDatabase(builder.Configuration)
     .RegisterIdentity()
     .AddControllers();
 
 var app = builder.Build();
+
+await app.PrepareDatabase();
 
 if (app.Environment.IsDevelopment())
 {

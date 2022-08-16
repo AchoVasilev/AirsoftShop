@@ -11,7 +11,7 @@ public class ItemInWishList : DeletableEntity<string>
     }
 
     [ForeignKey(nameof(Gun))]
-    public int GunId { get; set; }
+    public string GunId { get; set; }
 
     public virtual Gun Gun { get; set; }
 

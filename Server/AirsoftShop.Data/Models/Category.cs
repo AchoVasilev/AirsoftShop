@@ -2,9 +2,10 @@ namespace AirsoftShop.Data.Models;
 
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Base;
 using Images;
 using static Constants.Data.Constants;
-public class Category
+public class Category : DeletableEntity<int>
 {
     public Category()
     {
