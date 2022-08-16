@@ -6,6 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services
     .RegisterDatabase(builder.Configuration)
     .RegisterIdentity()
+    .AddJwtAuthentication(builder.Services.GetJwtSettings(builder.Configuration))
     .AddControllers();
 
 builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();

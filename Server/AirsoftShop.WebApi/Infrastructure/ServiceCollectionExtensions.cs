@@ -1,24 +1,28 @@
 namespace AirsoftShop.WebApi.Infrastructure;
 
+using System.Text;
 using AirsoftShop.Data.Models;
-using AirsoftShop.Data.Persistence;
+using Data.Persistence;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using Models;
 
-public static class ServiceCollectionExtensions
+internal static class ServiceCollectionExtensions
 {
-    public static IServiceCollection RegisterDatabase(this IServiceCollection services, IConfiguration configuration)
+    internal static IServiceCollection RegisterDatabase(this IServiceCollection services, IConfiguration configuration)
     {
         var connectionString = configuration.GetConnectionString("DefaultConnection");
-        
+
         services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(connectionString));
         services.AddDatabaseDeveloperPageExceptionFilter();
 
         return services;
     }
-    
-    public static IServiceCollection RegisterIdentity(this IServiceCollection services)
+
+    internal static IServiceCollection RegisterIdentity(this IServiceCollection services)
     {
         services.AddIdentity<ApplicationUser, IdentityRole>(options =>
             {
@@ -29,6 +33,42 @@ public static class ServiceCollectionExtensions
                 options.Password.RequiredLength = 6;
             })
             .AddEntityFrameworkStores<ApplicationDbContext>();
+
+        return services;
+    }
+
+    internal static JwtConfiguration GetJwtSettings(this IServiceCollection services, IConfiguration configuration)
+    {
+        var jwtSettingsConfiguration = configuration.GetSection("JwtConfiguration");
+        services.Configure<JwtConfiguration>(jwtSettingsConfiguration);
+
+        var appSettings = jwtSettingsConfiguration.Get<JwtConfiguration>();
+
+        return appSettings;
+    }
+
+    internal static IServiceCollection AddJwtAuthentication(this IServiceCollection services,
+        JwtConfiguration jwtConfiguration)
+    {
+        var key = Encoding.ASCII.GetBytes(jwtConfiguration.Secret);
+
+        services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(x =>
+            {
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters()
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
 
         return services;
     }

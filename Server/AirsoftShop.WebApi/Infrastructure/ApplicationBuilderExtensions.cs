@@ -2,19 +2,19 @@ namespace AirsoftShop.WebApi.Infrastructure;
 
 using AirsoftShop.Data.Models;
 using AirsoftShop.Data.Models.Images;
-using AirsoftShop.Data.Persistence;
+using Data.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Models;
 using Newtonsoft.Json;
 
-public static class ApplicationBuilderExtensions
+internal static class ApplicationBuilderExtensions
 {
-    public static IApplicationBuilder UseRoutingAndAuth(this IApplicationBuilder app)
+    internal static IApplicationBuilder UseRoutingAndAuth(this IApplicationBuilder app)
         => app.UseRouting()
             .UseAuthentication()
             .UseAuthorization();
 
-    public static async Task<IApplicationBuilder> PrepareDatabase(this IApplicationBuilder app)
+    internal static async Task<IApplicationBuilder> PrepareDatabase(this IApplicationBuilder app)
     {
         using var scopedServices = app.ApplicationServices.CreateScope();
 
