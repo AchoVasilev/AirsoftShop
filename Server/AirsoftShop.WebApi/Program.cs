@@ -1,4 +1,5 @@
 using AirsoftShop.Common.Services;
+using AirsoftShop.Services.Services.Category;
 using AirsoftShop.WebApi.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,7 +10,8 @@ builder.Services
     .AddJwtAuthentication(builder.Services.GetJwtSettings(builder.Configuration))
     .AddControllers();
 
-builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
+builder.Services.AddScoped<ICurrentUserService, CurrentUserService>()
+    .AddTransient<ICategoryService, CategoryService>();
 
 var app = builder.Build();
 

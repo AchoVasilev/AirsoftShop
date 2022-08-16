@@ -6,4 +6,8 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\AirsoftShop.Data\AirsoftShop.Data.csproj" />
+    </ItemGroup>
+
 </Project>

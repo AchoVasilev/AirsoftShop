@@ -31,6 +31,7 @@
   <ItemGroup>
     <ProjectReference Include="..\AirsoftShop.Common\AirsoftShop.Common.csproj" />
     <ProjectReference Include="..\AirsoftShop.Data\AirsoftShop.Data.csproj" />
+    <ProjectReference Include="..\AirsoftShop.Services\AirsoftShop.Services.csproj" />
   </ItemGroup>
 
   <ItemGroup>
