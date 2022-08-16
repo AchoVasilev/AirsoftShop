@@ -1,5 +1,6 @@
 ﻿namespace AirsoftShop.Data.Persistence;
 
+using Common.Services;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
@@ -9,15 +10,17 @@ using Models.Images;
 
 public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 {
-    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+    private readonly ICurrentUserService currentUserService;
+
+    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options, ICurrentUserService currentUserService)
         : base(options)
-    {
-    }
-    
+        => this.currentUserService = currentUserService;
+
+
     public DbSet<Address> Addresses { get; init; }
 
     public DbSet<Cart> Carts { get; init; }
-    
+
     public DbSet<Category> Categories { get; init; }
 
     public DbSet<City> Cities { get; init; }
@@ -33,9 +36,9 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     public DbSet<Gun> Guns { get; init; }
 
     public DbSet<Image> Images { get; init; }
-    
+
     public DbSet<CategoryImage> CategoryImages { get; init; }
-    
+
     public DbSet<ItemImage> ItemImages { get; init; }
 
     public DbSet<ItemInWishList> ItemsInWishList { get; init; }
@@ -57,10 +60,10 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
         CancellationToken cancellationToken = new CancellationToken())
     {
         this.ApplyAuditInformation();
-        
+
         return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
     }
-    
+
     protected override void OnModelCreating(ModelBuilder builder)
     {
         builder.Entity<Gun>()
@@ -119,23 +122,26 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
                 }
             });
 
-    private static void CheckForIEntity<T>(EntityEntry entry, IEntity<T> entity)
+    private void CheckForIEntity<T>(EntityEntry entry, IEntity<T> entity)
     {
         if (entry.State == EntityState.Added)
         {
             entity.CreatedOn = DateTime.UtcNow;
+            entity.CreatedBy = this.currentUserService.GetUserId();
         }
         else if (entry.State == EntityState.Modified)
         {
             entity.ModifiedOn = DateTime.UtcNow;
+            entity.ModifiedBy = this.currentUserService.GetUserId();
         }
     }
 
-    private static void CheckForDeletedEntity<T>(EntityEntry entry, IDeletableEntity<T> deletableEntity)
+    private void CheckForDeletedEntity<T>(EntityEntry entry, IDeletableEntity<T> deletableEntity)
     {
         if (entry.State == EntityState.Deleted)
         {
             deletableEntity.DeletedOn = DateTime.UtcNow;
+            deletableEntity.DeletedBy = this.currentUserService.GetUserId();
             deletableEntity.IsDeleted = true;
 
             entry.State = EntityState.Modified;

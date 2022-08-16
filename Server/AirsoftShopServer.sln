@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirsoftShop.Services", "Air
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirsoftShop.Controllers", "AirsoftShop.Controllers\AirsoftShop.Controllers.csproj", "{1227290C-B0B2-4BDC-9F2B-187BB9E1413B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirsoftShop.Common", "AirsoftShop.Common\AirsoftShop.Common.csproj", "{737A767A-73D8-4429-B463-0DAAD9B7C367}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +38,9 @@ Global
 		{1227290C-B0B2-4BDC-9F2B-187BB9E1413B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1227290C-B0B2-4BDC-9F2B-187BB9E1413B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1227290C-B0B2-4BDC-9F2B-187BB9E1413B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{737A767A-73D8-4429-B463-0DAAD9B7C367}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{737A767A-73D8-4429-B463-0DAAD9B7C367}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{737A767A-73D8-4429-B463-0DAAD9B7C367}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{737A767A-73D8-4429-B463-0DAAD9B7C367}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
