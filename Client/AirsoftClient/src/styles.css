@@ -1,1 +1,214 @@
-/* You can add global styles to this file, and also import other style files */
+@import url("https://use.fontawesome.com/releases/v6.1.1/css/all.css");
+@import url("./reset.css");
+@import url("./typography.css");
+@import url('~@angular/material/prebuilt-themes/deeppurple-amber.css');
+
+a {
+    color: #fff;
+}
+
+.error {
+    color: red;
+    font-weight: bold;
+    margin-top: 6px;
+    font-style: italic;
+}
+
+.invalid {
+    border: 1px solid red;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.offer-btn {
+    padding: 10px 30px;
+    background-color: red;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.btn-details:hover {
+    background-color: #FB5104;
+    transition: 300ms ease-in-out;
+}
+
+/* BASKET */
+
+.basket-steps {
+    padding-bottom: 2em;
+    border-bottom: 2px solid #000;
+    margin-bottom: 1rem;
+}
+
+.basket-steps ul {
+    display: flex;
+    justify-content: space-between;
+}
+
+.basket-step {
+    display: flex;
+    align-items: center;
+    padding-bottom: 6px;
+    position: relative;
+    flex-basis: 21%;
+}
+
+.basket-step span {
+    padding-right: 10em;
+}
+
+.basket-step h5,
+.basket-step a {
+    color: #333;
+    font-weight: bold;
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+.basket-step a {
+    margin-bottom: 12px;
+}
+
+.basket-step a:hover {
+    color: #FB5104;
+    transition: 300ms ease-in-out;
+}
+
+.basket-step::after {
+    content: '';
+    width: 100%;
+    background-color: #C2C2C2;
+    height: 6px;
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+}
+
+.basket-step i {
+    background-color: black;
+    color: #fff;
+    font-weight: bold;
+    font-size: 20px;
+    padding: 1rem;
+    margin-right: 4px;
+}
+
+.basket-title {
+    color: #333;
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+.basket-actions {
+    margin-top: 2rem;
+}
+
+.basket-actions-container {
+    background-color: #E1E1E1;
+    display: flex;
+    justify-content: space-between;
+    padding: 2rem;
+}
+
+.basket-actions-container a {
+    color: #fff;
+    font-size: 2rem;
+    background-color: #333;
+    padding: 2rem;
+    border-radius: 4px;
+    text-align: center;
+}
+
+#basket-icon,
+#basket-step::after {
+    background-color: #FB5104;
+}
+
+.basket-item-img {
+    width: 80px;
+}
+
+.basket-item-img-wrapper {
+    display: flex;
+    width: 80px;
+    height: 80px;
+    align-items: center;
+    border: 2px solid #C2C2C2;
+    padding: 6px;
+}
+
+.basket-item-img-wrapper img {
+    width: 100%;
+}
+
+.basket-form table {
+    width: 100%;
+}
+
+.basket-form table td {
+    padding: 10px 5px;
+}
+
+.basket-item-desc,
+.basket-item-price {
+    vertical-align: middle;
+}
+
+.basket-item-title {
+    font-size: 14px;
+    display: block;
+}
+
+.basket-item-title a {
+    color: #333;
+    font-weight: bold;
+}
+
+.basket-item-title a:hover {
+    color: #FB5104;
+    transition: 300ms ease-in-out;
+}
+
+.basket-item-manufacturer {
+    margin-top: 4px;
+    font-size: 13px;
+    color: gray;
+}
+
+.basket-item-price,
+.basket-quantity,
+.basket-remove {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.basket-quantity {
+    width: 150px;
+}
+
+.basket-remove {
+    width: 160px;
+}
+
+.basket-item-price {
+    width: 90px;
+}
+
+.basket-item-price p {
+    color: #333;
+    font-weight: bold;
+}
+
+.basket-actions-container a:hover,
+button.order-summary-btn:hover {
+    background-color: #FB5104;
+    transition: 300ms ease-in-out;
+}

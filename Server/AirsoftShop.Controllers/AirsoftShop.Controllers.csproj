@@ -7,7 +7,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <FrameworkReference Include="Microsoft.AspNetCore.App"/>
+        <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\AirsoftShop.Services\AirsoftShop.Services.csproj" />
     </ItemGroup>
 
 </Project>

@@ -1,4 +1,4 @@
-namespace AirsoftShop.WebApi.Controllers;
+namespace AirsoftShop.Controllers;
 
 using Microsoft.AspNetCore.Mvc;
 

@@ -1,0 +1,117 @@
+<section class="user">
+    <article class="register">
+        <h1 class="register-header">Регистрация</h1>
+        <p class="register-description">
+            Ако нямате регистрация в платформата, ще бъдете помолени да въведете ваши лични данни, както и адрес
+            за доставка
+        </p>
+        <a class="register-btn" [routerLink]="['/client', 'register']" type="button">Регистрация</a>
+        <a class="register-company-btn" [routerLink]="['/dealer', 'register']" type="button">Станете наш партньор</a>
+    </article>
+
+    <article class="login">
+        <form [formGroup]="loginFormGroup" (ngSubmit)="loginHandler()">
+            <h1 class="login-header">
+                Вход за регистрирани потребители
+            </h1>
+            <article class="email-wrapper">
+                <label for="username">E-mail/Потребителско име</label>
+                <i class="fa-solid fa-square-envelope fa-icon-lg"></i>
+                <input formControlName="username" type="text" id="username" name="username"
+                    placeholder="example@example.com"
+                    [ngClass]="loginFormGroup.controls['username'].touched && loginFormGroup.controls['username'].invalid ? 'invalid' : ''">
+                <ng-container
+                    *ngIf="loginFormGroup.controls['username'].touched && loginFormGroup.controls['username'].invalid">
+                    <p class="error">
+                        Полето е задължително
+                    </p>
+                </ng-container>
+            </article>
+            <article class="password-wrapper">
+                <label for="password">Парола</label>
+                <i class="fa-solid fa-lock fa-icon-lg"></i>
+                <input formControlName="password" type="password" id="password" name="password"
+                    [ngClass]="loginFormGroup.controls['password'].touched && loginFormGroup.controls['password'].invalid ? 'invalid' : ''">
+
+                <ng-container
+                    *ngIf="loginFormGroup.controls['password'].touched && loginFormGroup.controls['password'].invalid">
+                    <p *ngIf="loginFormGroup.controls['password'].errors?.['required'] && 
+                    !loginFormGroup.controls['password'].errors?.['minlength']" class="error">
+                        Полето е задължително
+                    </p>
+                    <p *ngIf="!loginFormGroup.controls['password'].errors?.['required'] && 
+                        loginFormGroup.controls['password'].errors?.['minlength']" class="error">
+                        Паролата трябва да е с дължина поне 6 символа.
+                    </p>
+                </ng-container>
+            </article>
+            <article class="btn-wrapper">
+                <a href="" class="forgotten-password">Забравена парола?</a>
+                <button type="submit" [disabled]="loginFormGroup.invalid" [class.disabled]="loginFormGroup.invalid"
+                    class="login-btn">Влез</button>
+            </article>
+        </form>
+    </article>
+</section>
+
+<section class="benefits">
+    <article class="benefits-wrapper">
+        <h2 class="benefits-title">Предимствата да имате акаунт</h2>
+        <article class="benefit-wrapper">
+            <article class="benefit">
+                <article class="benefit-img">
+                    <i class="fa-solid fa-list-check"></i>
+                </article>
+                <h3 class="title-benefit">
+                    Списък с желания
+                </h3>
+                <p class="benefit-text">
+                    Запазете продуктите, които желаете да закупите, проверете сегашната им цена и се върнете по
+                    всяко
+                    време. Чрез вашият акаунт вие лесно можете да запазите търсените продукти на едно място.
+                </p>
+            </article>
+            <article class="benefit">
+                <article class="benefit-img">
+                    <i class="fa-solid fa-arrow-down-wide-short"></i>
+                </article>
+                <h3 class="title-benefit">
+                    Лесно поръчване
+                </h3>
+                <p class="benefit-text">
+                    Всичките Ви поръчки ще са на едно място. Няма да е необходимо да проверявате своя и-мейл за
+                    обновленията около статуса на поръчката.
+                </p>
+            </article>
+            <article class="benefit">
+                <article class="benefit-img">
+                    <i class="fa-solid fa-briefcase"></i>
+                </article>
+                <h3 class="title-benefit">
+                    Обработка на оплакванията
+                </h3>
+                <p class="benefit-text">
+                    Вашият акаунт ще улесни процесът на оплакване и обработката му. Чрез вашият акаунт Вие ще
+                    можете
+                    бързо и лесно да проверявате детайлите около всяко Ваше оплакване.
+                </p>
+            </article>
+            <article class="benefit">
+                <article class="benefit-img">
+                    <i class="fa-solid fa-dolly"></i>
+                </article>
+                <h3 class="title-benefit">
+                    Връщане на продукт
+                </h3>
+                <p class="benefit-text">
+                    Чрез Вашият акаунт ще имате достъп до улеснено връщане на продуктите. Влезте в него, за да
+                    можете
+                    лесно да управлявате Вашите рекламации, да проверявате техния статус и да имате улеснена
+                    връзка
+                    с
+                    нашият център за клиенти.
+                </p>
+            </article>
+        </article>
+    </article>
+</section>

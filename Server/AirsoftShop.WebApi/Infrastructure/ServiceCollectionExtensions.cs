@@ -7,7 +7,10 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using Models;
+using AirsoftShop.Common.Models;
+using Common.Services;
+using Services.Services.Category;
+using Services.Services.Identity;
 
 internal static class ServiceCollectionExtensions
 {
@@ -72,4 +75,9 @@ internal static class ServiceCollectionExtensions
 
         return services;
     }
+
+    internal static IServiceCollection RegisterApplicationServices(this IServiceCollection services)
+        => services.AddScoped<ICurrentUserService, CurrentUserService>()
+            .AddTransient<IIdentityService, IdentityService>()
+            .AddTransient<ICategoryService, CategoryService>();
 }

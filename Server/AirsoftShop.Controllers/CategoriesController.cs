@@ -1,7 +1,7 @@
-namespace AirsoftShop.WebApi.Controllers;
+namespace AirsoftShop.Controllers;
 
+using AirsoftShop.Services.Services.Category;
 using Microsoft.AspNetCore.Mvc;
-using Services.Services.Category;
 
 public class CategoriesController : BaseController
 {

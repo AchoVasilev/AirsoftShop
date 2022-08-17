@@ -1,0 +1,215 @@
+.user {
+    padding: 60px 100px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.register,
+.user,
+.register-btn,
+.login-btn {
+    color: #333333;
+}
+
+.register-header,
+.login-header {
+    font-weight: bold;
+}
+
+.login,
+.register {
+    flex-basis: 50%;
+}
+
+.register {
+    border-right: 2px solid #333333;
+}
+
+.register-header {
+    margin-bottom: 20px;
+}
+
+.register-description {
+    font-size: 14px;
+    margin-bottom: 25px;
+}
+
+.register-btn {
+    color: #fff;
+    background-color: #333333;
+    font-size: 2.5rem;
+    font-weight: 800;
+    padding: 2rem 10rem;
+    display: inline-block;
+    margin-bottom: 15px;
+    text-align: center;
+    border-radius: 4px;
+}
+
+.register-company-btn {
+    color: #fff;
+    background-color: #333333;
+    font-size: 2.5rem;
+    font-weight: 800;
+    padding: 2rem 4.3rem;
+    display: inline-block;
+    margin-bottom: 15px;
+    text-align: center;
+    border-radius: 4px;
+    white-space: nowrap;
+}
+
+.register-btn:hover,
+.register-company-btn:hover {
+    background-color: #FB5104;
+    transition: 300ms ease-in-out;
+}
+
+.fa-icon-lg {
+    font-size: 3em;
+    vertical-align: middle;
+    margin-right: 2px;
+}
+
+.fa-icon-lg:hover {
+    color: #FB5104;
+    transition: 300ms ease-in-out;
+}
+
+.login-header {
+    margin-bottom: 30px;
+}
+
+.login {
+    padding-left: 3rem;
+}
+
+.email-wrapper label,
+.password-wrapper label {
+    display: block;
+    margin-bottom: 0.7em;
+}
+
+.email-wrapper {
+    margin-bottom: 30px;
+}
+
+input {
+    padding: 0.7rem 2rem 1rem 1em;
+    border-radius: 2px;
+    font-size: 16px;
+    border: 1px solid black;
+    width: 90%;
+}
+
+#username:hover,
+#password:hover {
+    background-color: lightgray;
+    color: #333333;
+    transition: 300ms ease-in-out;
+}
+
+.password-wrapper {
+    margin-bottom: 28px;
+}
+
+.btn-wrapper a {
+    color: #333333;
+    display: block;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.btn-wrapper a:hover {
+    color: #FB5104;
+    transition: 300ms ease-in-out;
+}
+
+.login-btn {
+    display: block;
+    font-size: 18px;
+    padding: 10px 16rem;
+    text-align: center;
+    background-color: #333333;
+    color: #fff;
+    border-radius: 4px;
+    font-weight: 800;
+    border: none;
+    cursor: pointer;
+    margin-left: 42px;
+}
+
+.login-btn:hover {
+    background-color: #FB5104;
+    transition: 300ms ease-in-out;
+}
+
+.benefits {
+    padding: 40px 65px;
+}
+
+.benefits-title {
+    color: #333333;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.benefits-wrapper {
+    background-color: whitesmoke;
+    padding: 50px;
+    border-radius: 3px;
+}
+
+.benefit-wrapper {
+    display: flex;
+    padding: 10px 20px;
+}
+
+.benefit {
+    margin: 0 12px;
+}
+
+.benefit-img {
+    background-color: #E24E2A;
+    padding: 21px;
+    width: fit-content;
+    margin: 0 auto;
+}
+
+.benefit-img i {
+    color: white;
+    font-size: 55px;
+}
+
+.title-benefit {
+    color: #333333;
+    font-size: 18px;
+    text-align: center;
+    position: relative;
+    padding-top: 15px;
+    padding-bottom: 40px;
+}
+
+.benefit:first-child .title-benefit::after {
+    bottom: 5px;
+}
+
+.benefit-text {
+    color: #616668;
+    text-align: center;
+}
+
+.error {
+    color: red;
+    font-weight: bold;
+    margin-top: 6px;
+    font-style: italic;
+}
+
+.invalid {
+    border: 1px solid red;
+}
+
+.disabled {
+    cursor: not-allowed;
+}

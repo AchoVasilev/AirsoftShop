@@ -1,0 +1,156 @@
+.nav {
+    background-image: url('../../../../../images/header_bg.jpg');
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 80px;
+    position: fixed;
+    width: 100%;
+    z-index: 100;
+    overflow: hidden;
+    top: 0;
+}
+
+.nav section {
+    display: flex;
+    align-items: center;
+}
+
+.nav section button {
+    margin-left: 14px;
+}
+
+.catalog-btn {
+    padding: 10px 14px 10px 8px;
+    background-color: #7E6E4E;
+    font-size: 16px;
+    border-radius: 2px;
+    word-spacing: 3rem;
+    border: none;
+    cursor: pointer;
+}
+
+.nav-menu {
+    display: flex;
+    align-items: center;
+}
+
+.nav-menu li {
+    padding: 15px;
+    display: block;
+}
+
+.nav-menu-item-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    vertical-align: middle;
+    font-weight: 500;
+    position: relative
+}
+
+.nav-menu-item-link:hover {
+    color: #FB5104;
+    transition: 300ms ease-in-out;
+}
+
+.badge {
+    position: absolute;
+    background-color: black;
+    border-radius: 50%;
+    padding: 3px 7px;
+    bottom: 13px;
+    right: 0px;
+}
+
+.nav-menu-item-link:hover i {
+    transform: scaleX(-1);
+    -moz-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    -ms-transform: scaleX(-1);
+    transition: transform 300ms ease-in-out;
+    color: #FB5104;
+}
+
+.nav-menu-item-link span {
+    margin-top: 23px;
+}
+
+.nav-menu li a i {
+    font-size: 2rem;
+}
+
+.nav-logo {
+    width: 175px;
+}
+
+.nav-logo img {
+    width: 100%;
+}
+
+.nav-catalog {
+    position: fixed;
+    margin-top: 353px;
+    left: 269px;
+    z-index: 12;
+    display: none;
+}
+
+.catalog-menu {
+    position: relative;
+    background-color: #AB5E00;
+    width: 280px;
+    padding: 5px 0;
+}
+
+.catalog-menu li {
+    padding: 5px 15px;
+    display: flex;
+    border-bottom: 1px solid #464E1B;
+}
+
+.catalog-menu li:last-child {
+    border-bottom: none;
+}
+
+.catalog-menu li a {
+    padding: 10px 0;
+    display: block;
+    position: relative;
+    font-weight: 700;
+}
+
+.catalog-menu li img {
+    margin-right: 10px;
+    border-radius: 3px;
+    opacity: .7;
+    transition: opacity .2s ease;
+    width: 100%;
+    max-width: 35px;
+}
+
+.catalog-menu li:hover>ul {
+    visibility: visible;
+    transition: 300ms ease-in-out;
+}
+
+.sub-menu {
+    width: 280px;
+    position: absolute;
+    left: 100%;
+    min-height: 100%;
+    visibility: hidden;
+    top: 0;
+}
+
+.sub-menu li {
+    background-color: #7E6E4E;
+    padding: 0 15px;
+    border-bottom: 1px solid #464E1B;
+}
+
+.sub-menu li a {
+    padding: 12px;
+    display: block;
+    position: relative;
+}
