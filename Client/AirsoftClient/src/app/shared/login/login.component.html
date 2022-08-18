@@ -15,15 +15,19 @@
                 Вход за регистрирани потребители
             </h1>
             <article class="email-wrapper">
-                <label for="username">E-mail/Потребителско име</label>
+                <label for="email">E-mail/Потребителско име</label>
                 <i class="fa-solid fa-square-envelope fa-icon-lg"></i>
-                <input formControlName="username" type="text" id="username" name="username"
-                    placeholder="example@example.com"
-                    [ngClass]="loginFormGroup.controls['username'].touched && loginFormGroup.controls['username'].invalid ? 'invalid' : ''">
+                <input formControlName="email" type="text" id="email" name="email" placeholder="example@example.com"
+                    [ngClass]="loginFormGroup.controls['email'].touched && loginFormGroup.controls['email'].invalid ? 'invalid' : ''">
                 <ng-container
-                    *ngIf="loginFormGroup.controls['username'].touched && loginFormGroup.controls['username'].invalid">
-                    <p class="error">
+                    *ngIf="loginFormGroup.controls['email'].touched && loginFormGroup.controls['email'].invalid">
+                    <p class="error"
+                        *ngIf="loginFormGroup.controls['email'].touched && loginFormGroup.controls['email'].errors?.['required']">
                         Полето е задължително
+                    </p>
+                    <p class="error"
+                        *ngIf="loginFormGroup.controls['email'].touched && loginFormGroup.controls['email'].errors?.['email']">
+                        Невалиден и-мейл
                     </p>
                 </ng-container>
             </article>
