@@ -73,7 +73,8 @@ public class Gun : DeletableEntity<string>
 
     public decimal Price { get; set; }
 
-    [ForeignKey(nameof(Dealer))] 
+    [ForeignKey(nameof(Dealer))]
+    [Required]
     public string DealerId { get; set; }
 
     public virtual Dealer Dealer { get; set; }
@@ -83,5 +84,5 @@ public class Gun : DeletableEntity<string>
 
     public virtual SubCategory SubCategory { get; set; }
     
-    public ICollection<ItemImage> Images { get; set; }
+    public IEnumerable<ItemImage> Images { get; set; }
 }

@@ -3,7 +3,6 @@
     <PropertyGroup>
         <TargetFramework>net6.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
-        <Nullable>enable</Nullable>
     </PropertyGroup>
 
     <ItemGroup>
@@ -27,6 +26,10 @@
 
     <ItemGroup>
       <ProjectReference Include="..\AirsoftShop.Common\AirsoftShop.Common.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Persistence\Migrations" />
     </ItemGroup>
 
 </Project>

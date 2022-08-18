@@ -17,5 +17,35 @@ export class UserService {
     return this.httpClient.post(this.loginUrl, body);
   }
 
+  setToken(token: any) {
+    localStorage.setItem('token', token);
+  }
 
+  getToken() {
+    return localStorage.getItem('token');
+  }
+
+  isAuthenticated() {
+    if (this.getToken()) {
+      return true;
+    }
+
+    return false;
+  }
+
+  setClient(isClient: any) {
+    localStorage.setItem('isClient', isClient);
+  }
+
+  getClient() {
+    if (localStorage.getItem('isClient')) {
+      return true;
+    }
+
+    return false;
+  }
+
+  logOut() {
+    localStorage.removeItem('token');
+  }
 }

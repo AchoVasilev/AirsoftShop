@@ -1,5 +1,6 @@
 namespace AirsoftShop.Data.Models;
 
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Base;
 using Enums;
@@ -25,6 +26,7 @@ public class Order : DeletableEntity<string>
     public virtual Courier Courier { get; set; }
 
     [ForeignKey(nameof(Client))]
+    [Required]
     public string ClientId { get; set; }
 
     public virtual Client Client { get; set; }

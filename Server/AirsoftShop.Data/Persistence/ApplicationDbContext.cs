@@ -105,20 +105,24 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
             .ToList()
             .ForEach(entry =>
             {
-                switch (entry.Entity)
+                if (entry.Entity is IDeletableEntity<int> intDeletableEntity)
                 {
-                    case IDeletableEntity<int> deletableEntity:
-                        CheckForDeletedEntity(entry, deletableEntity);
-                        break;
-                    case IDeletableEntity<string> deletableEntity:
-                        CheckForDeletedEntity(entry, deletableEntity);
-                        break;
-                    case IEntity<int> entity:
-                        CheckForIEntity(entry, entity);
-                        break;
-                    case IEntity<string> entity:
-                        CheckForIEntity(entry, entity);
-                        break;
+                    this.CheckForDeletedEntity(entry, intDeletableEntity);
+                }
+
+                if (entry.Entity is IDeletableEntity<string> stringDeletableEntity)
+                {
+                    this.CheckForDeletedEntity(entry, stringDeletableEntity);
+                }
+
+                if (entry.Entity is IEntity<int> intEntity)
+                {
+                    this.CheckForIEntity(entry, intEntity);
+                }
+
+                if (entry.Entity is IEntity<string> stringEntity)
+                {
+                    this.CheckForIEntity(entry, stringEntity);
                 }
             });
 
@@ -127,12 +131,16 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
         if (entry.State == EntityState.Added)
         {
             entity.CreatedOn = DateTime.UtcNow;
-            entity.CreatedBy = this.currentUserService.GetUserId();
+            entity.CreatedBy = this.currentUserService.GetUserId() != null
+                ? this.currentUserService.GetUserId()
+                : "admin";
         }
         else if (entry.State == EntityState.Modified)
         {
             entity.ModifiedOn = DateTime.UtcNow;
-            entity.ModifiedBy = this.currentUserService.GetUserId();
+            entity.CreatedBy = this.currentUserService.GetUserId() != null
+                ? this.currentUserService.GetUserId()
+                : "admin";
         }
     }
 
@@ -141,7 +149,9 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
         if (entry.State == EntityState.Deleted)
         {
             deletableEntity.DeletedOn = DateTime.UtcNow;
-            deletableEntity.DeletedBy = this.currentUserService.GetUserId();
+            deletableEntity.DeletedBy = this.currentUserService.GetUserId() != null
+                ? this.currentUserService.GetUserId()
+                : "admin";
             deletableEntity.IsDeleted = true;
 
             entry.State = EntityState.Modified;

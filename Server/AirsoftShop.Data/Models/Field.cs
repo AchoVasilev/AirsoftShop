@@ -6,6 +6,11 @@ using Images;
 
 public class Field : DeletableEntity<int>
 {
+    public Field()
+    {
+        this.Images = new HashSet<Image>();
+    }
+    
     [ForeignKey(nameof(Dealer))]
     public string DealerId { get; set; }
 
@@ -16,8 +21,5 @@ public class Field : DeletableEntity<int>
 
     public virtual Address Address { get; set; }
 
-    [ForeignKey(nameof(Image))]
-    public string ImageId { get; set; }
-
-    public virtual Image Image { get; set; }
+    public virtual IEnumerable<Image> Images { get; set; }
 }

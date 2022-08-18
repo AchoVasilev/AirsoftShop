@@ -49,7 +49,7 @@ internal static class ApplicationBuilderExtensions
                     Url = "https://res.cloudinary.com/dpo3vbxnl/image/upload/v1649915945/BgAirsoft/speedy_q4gl0r.png",
                     Name = "Speedy",
                     Extension = "png"
-                }
+                },
             },
             new Courier()
             {

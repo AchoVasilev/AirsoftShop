@@ -9,11 +9,11 @@ public class BaseImage : DeletableEntity<string>
         this.Id = Guid.NewGuid().ToString();
     }
     
-    public string RemoteImageUrl { get; set; }
+    public string? RemoteImageUrl { get; set; }
 
-    public string Url { get; set; }
+    public string? Url { get; set; }
 
-    public string Name { get; set; }
+    public string? Name { get; set; }
 
-    public string Extension { get; set; }
+    public string? Extension { get; set; }
 }

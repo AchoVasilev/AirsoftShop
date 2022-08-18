@@ -43,6 +43,6 @@ public class UsersController : BaseController
         var appSettings = this.options.Value.Secret;
         var encryptedToken = this.identityService.GenerateJwtToken(user.Id, user.Email, appSettings);
 
-        return new LoginResponseModel() { Token = encryptedToken, IsClient = user?.ClientId != null};
+        return new LoginResponseModel() { Token = encryptedToken, IsClient = user.ClientId != null};
     }
 }

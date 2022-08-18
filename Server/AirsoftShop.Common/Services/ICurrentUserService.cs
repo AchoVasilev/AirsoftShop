@@ -2,7 +2,7 @@ namespace AirsoftShop.Common.Services;
 
 public interface ICurrentUserService
 {
-    string GetUserName();
+    string? GetUserName();
 
-    string GetUserId();
+    string? GetUserId();
 }
