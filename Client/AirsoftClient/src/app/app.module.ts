@@ -15,6 +15,8 @@ import { AuthService } from './services/auth/auth.service';
 import { AuthGuardService } from './guards/auth-guard.service';
 import { AuthInterceptor } from './guards/interceptors/auth-interceptor.interceptor';
 import { ErrorInterceptor } from './guards/interceptors/error.interceptor';
+import { NotFoundComponent } from './shared/not-found/not-found.component';
+import { HomeModule } from './features/home/home.module';
 
 
 @NgModule({
@@ -22,13 +24,15 @@ import { ErrorInterceptor } from './guards/interceptors/error.interceptor';
     AppComponent,
     NavbarComponent,
     FooterComponent,
-    LoginComponent
+    LoginComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
+    HomeModule,
     BrowserAnimationsModule,
     MatProgressSpinnerModule,
     ToastrModule.forRoot()

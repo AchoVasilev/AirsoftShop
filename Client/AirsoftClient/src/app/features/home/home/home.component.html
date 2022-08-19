@@ -1,0 +1,134 @@
+<mat-spinner *ngIf="isLoading" style="margin: 0 auto;"></mat-spinner>
+<section class="intro" *ngIf="isLoaded">
+    <article class="intro-content intro-first">
+        <h1 class="intro-content-heading">Кои сме ние:</h1>
+        <p class="intro-content-text">
+            Екипът на <strong>BgAirsoft</strong> е тук, за да ви предостави платформа на всички магазини, терени
+            и събития,
+            свързани с военната игра Airsoft. Повече информация може да намерите по-надолу, а ето и част от
+            някои терени:
+        </p>
+    </article>
+
+    <article class="field-images" #slides>
+        <article class="field-image fade" [style.display]="slideIndex == 0 ? 'block' : 'none'">
+            <a href="https://www.airsoftimpact.com/teren/" target="_blank">
+                <img src="https://www.airsoftimpact.com/wp-content/uploads/2021/09/_7-scaled-e1632903224768.jpg" alt="">
+            </a>
+        </article>
+
+        <article class="field-image fade none" [style.display]="slideIndex == 1 ? 'block' : 'none'">
+            <a href="https://airsoftsofiafield.com/%D0%B3%D0%B0%D0%BB%D0%B5%D1%80%D0%B8%D1%8F/" target="_blank">
+                <img src="https://airsoftsofiafield.com/img/airsoft-sofia-field.jpg" alt="">
+            </a>
+        </article>
+    </article>
+
+    <div>
+        <a class="prev" (click)="plusSlides(-1)">&#10094;</a>
+        <a class="next" (click)="plusSlides(1)">&#10095;</a>
+    </div>
+
+    <article class="intro-content intro-second">
+        <h2 class="intro-content-heading">Какво е Еърсофт?</h2>
+        <p class="intro-content-text">
+            Този вид спорт е познат на света с няколко имена: Еърсофт (Airsoft), Страйкбол (Strikeball), Софт
+            Еър (Soft Air).
+            Името „страйкбол-airsoft" е измислено от руски играчи и буквално преведено от английски означава
+            "удар с топче", поради
+            проблемите с изговарянето и двусмислието на оригиналната английска дума "airsoft", която означава
+            „мек въздух“ или "мека
+            пневматика". В България се използват и трите му наименования.
+        </p>
+    </article>
+</section>
+
+<section class="offers">
+    <article class="offer">
+        <article class="offer-img">
+            <img src="../../../assets/img/gun-shop-img.jpg" alt="gun shop image">
+        </article>
+        <h3 class="offer-heading">Оръжия</h3>
+        <p class="offer-text">Тук можете да закупите всякакъв вид еърсофт оръжия</p>
+        <a routerLink="/products/guns/all" class="offer-btn">
+            Пазарувай <i class="fa-solid fa-cart-shopping"></i>
+        </a>
+    </article>
+
+    <article class="offer">
+        <article class="offer-img">
+            <img src="../../../assets/img/apparel-shop-img.jpg" alt="apparel shop image">
+        </article>
+        <h3 class="offer-heading">Тактически дрехи</h3>
+        <p class="offer-text">Тук можете да закупите всякакъв вид тактически дрехи</p>
+        <a routerLink="/products/guns/all" class="offer-btn">
+            Пазарувай <i class="fa-solid fa-cart-shopping"></i>
+        </a>
+    </article>
+
+    <article class="offer">
+        <article class="offer-img">
+            <img src="../../../assets/img/field-img.jpg" alt="field image">
+        </article>
+        <h3 class="offer-heading">Терени</h3>
+        <p class="offer-text">Тук можете да видите всички терени на територията на България</p>
+        <a routerLink="/products/guns/all" class="offer-btn">
+            Посети
+        </a>
+    </article>
+</section>
+
+<!-- <ng-container *ngIf="scrollTop > 0">
+    <router-outlet name="first"></router-outlet>
+</ng-container> -->
+
+<app-products *ngIf="scrollTop > 0"></app-products>
+
+<app-categories *ngIf="scrollTop > 550"></app-categories>
+
+<section class="partners">
+    <h2 class="partners-heading">
+        Нашите партньори
+    </h2>
+    <article class="partner">
+        <article class="partner-img">
+            <a href="" target="_blank">
+                <img src="../../../assets/img/partners/AirsoftBulgaria.jpg" alt="">
+            </a>
+        </article>
+    </article>
+
+    <article class="partner">
+        <article class="partner-img">
+            <a href="" target="_blank">
+                <img src="../../../assets/img/partners/AirsoftSofia.png" alt="">
+            </a>
+        </article>
+    </article>
+
+    <article class="partner">
+        <article class="partner-img">
+            <a href="" target="_blank">
+                <img src="../../../assets/img/partners/TheArmoury.png" alt="">
+            </a>
+        </article>
+
+    </article>
+
+    <article class="partner">
+        <article class="partner-img">
+            <a href="" target="_blank">
+                <img src="../../../assets/img/partners/CRG-Airsoft.jpg" alt="">
+            </a>
+        </article>
+
+    </article>
+
+    <article class="partner">
+        <article class="partner-img" target="_blank">
+            <a href="">
+                <img src="../../../assets/img/partners/BoinoPole.png" alt="">
+            </a>
+        </article>
+    </article>
+</section>
