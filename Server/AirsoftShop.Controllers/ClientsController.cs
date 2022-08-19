@@ -1,6 +1,6 @@
 namespace AirsoftShop.Controllers;
 
-public class ClientsController
+public class ClientsController : BaseController
 {
     
 }

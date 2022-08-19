@@ -14,6 +14,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { AuthService } from './services/auth/auth.service';
 import { AuthGuardService } from './guards/auth-guard.service';
 import { AuthInterceptor } from './guards/interceptors/auth-interceptor.interceptor';
+import { ErrorInterceptor } from './guards/interceptors/error.interceptor';
 
 
 @NgModule({
@@ -38,6 +39,11 @@ import { AuthInterceptor } from './guards/interceptors/auth-interceptor.intercep
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptor,
       multi: true
     }
   ],
