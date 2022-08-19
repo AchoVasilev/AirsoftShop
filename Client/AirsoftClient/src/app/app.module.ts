@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
@@ -11,6 +11,9 @@ import { NavbarComponent } from './shared/navbar/navbar.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { LoginComponent } from './shared/login/login.component';
 import { ToastrModule } from 'ngx-toastr';
+import { AuthService } from './services/auth/auth.service';
+import { AuthGuardService } from './guards/auth-guard.service';
+import { AuthInterceptor } from './guards/interceptors/auth-interceptor.interceptor';
 
 
 @NgModule({
@@ -29,7 +32,15 @@ import { ToastrModule } from 'ngx-toastr';
     MatProgressSpinnerModule,
     ToastrModule.forRoot()
   ],
-  providers: [],
+  providers: [
+    AuthService,
+    AuthGuardService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

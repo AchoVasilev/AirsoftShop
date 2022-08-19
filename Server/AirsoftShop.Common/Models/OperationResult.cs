@@ -13,9 +13,22 @@ public class OperationResult<T>
     
     public T? Model { get; set; }
     
-    public static implicit operator OperationResult<T> (bool succeeded)
-        => new OperationResult<T> () { Succeeded = succeeded };
-    
+    public IEnumerable<T>? Models { get; set; }
+
+    public static implicit operator OperationResult<T> (T model)
+        => new OperationResult<T> ()
+        {
+            Model = model,
+            Succeeded = true
+        };
+
+    public static implicit operator OperationResult<T>(List<T> models)
+        => new OperationResult<T>()
+        {
+            Models = models,
+            Succeeded = true
+        };
+
     public static implicit operator OperationResult<T> (string errorMessage)
         => new OperationResult<T> ()
         {
