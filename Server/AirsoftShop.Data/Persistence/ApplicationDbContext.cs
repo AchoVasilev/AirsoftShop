@@ -1,6 +1,7 @@
 ﻿namespace AirsoftShop.Data.Persistence;
 
 using Common.Services;
+using Extensions;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
@@ -86,6 +87,15 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
             .Property(x => x.TotalPrice)
             .HasPrecision(14, 2);
 
+        RemoveCascadeDelete(builder);
+
+        ApplySoftDeleteQueryFilter(builder);
+
+        base.OnModelCreating(builder);
+    }
+
+    private static void RemoveCascadeDelete(ModelBuilder builder)
+    {
         var entityTypes = builder.Model.GetEntityTypes().ToList();
         var foreignKeys = entityTypes
             .SelectMany(e => e.GetForeignKeys()
@@ -95,8 +105,21 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
         {
             foreignKey.DeleteBehavior = DeleteBehavior.Restrict;
         }
+    }
 
-        base.OnModelCreating(builder);
+    private static void ApplySoftDeleteQueryFilter(ModelBuilder builder)
+    {
+        foreach (var entityType in builder.Model.GetEntityTypes())
+        {
+            if (typeof(IDeletableEntity<int>).IsAssignableFrom(entityType.ClrType))
+            {
+                entityType.AddSoftDeletableQueryFilter<int>();
+            }
+            else if (typeof(IDeletableEntity<string>).IsAssignableFrom(entityType.ClrType))
+            {
+                entityType.AddSoftDeletableQueryFilter<string>();
+            }
+        }
     }
 
     private void ApplyAuditInformation()

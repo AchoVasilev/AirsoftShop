@@ -1,4 +1,4 @@
-namespace AirsoftShop.Services.Models;
+namespace AirsoftShop.Services.Models.Categories;
 
 public class SubcategoryServiceModel
 {
