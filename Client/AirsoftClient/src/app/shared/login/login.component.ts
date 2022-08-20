@@ -38,6 +38,8 @@ export class LoginComponent implements OnInit {
         if (result['isClient']) {
           this.authService.setClient(result['isClient']);
         }
+
+        this.router.navigate(['/home']);
       });
   }
 }

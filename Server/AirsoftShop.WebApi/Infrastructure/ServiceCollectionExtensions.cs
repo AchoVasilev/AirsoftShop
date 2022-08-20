@@ -13,6 +13,7 @@ using Common.Services;
 using Microsoft.OpenApi.Models;
 using Models;
 using Services.Services.Category;
+using Services.Services.City;
 using Services.Services.Dealers;
 using Services.Services.File;
 using Services.Services.Identity;
@@ -102,7 +103,8 @@ internal static class ServiceCollectionExtensions
             .AddTransient<ICategoryService, CategoryService>()
             .AddTransient<IProductService, ProductService>()
             .AddTransient<IFileService, FileService>()
-            .AddTransient<IDealerService, DealerService>();
+            .AddTransient<IDealerService, DealerService>()
+            .AddTransient<ICityService, CityService>();
 
     internal static IServiceCollection AddSwagger(this IServiceCollection services)
         => services.AddSwaggerGen(c =>

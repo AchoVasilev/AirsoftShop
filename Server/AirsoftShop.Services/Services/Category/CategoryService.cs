@@ -35,6 +35,7 @@ public class CategoryService : ICategoryService
                 Name = x.Name,
                 ImageUrl = x.Image.Url
             })
+            .Take(8)
             .AsNoTracking()
             .ToListAsync();
 }

@@ -1,7 +1,9 @@
 namespace AirsoftShop.Controllers;
 
 using CloudinaryDotNet;
+using Common.Services;
 using Data.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Models.Dealers;
@@ -17,17 +19,19 @@ public class DealersController : BaseController
     private readonly IDealerService dealerService;
     private readonly IFileService fileService;
     private readonly Cloudinary cloudinary;
+    private readonly ICurrentUserService currentUserService;
 
     public DealersController(
         UserManager<ApplicationUser> userManager,
         IDealerService dealerService,
         IFileService fileService,
-        Cloudinary cloudinary)
+        Cloudinary cloudinary, ICurrentUserService currentUserService)
     {
         this.userManager = userManager;
         this.dealerService = dealerService;
         this.fileService = fileService;
         this.cloudinary = cloudinary;
+        this.currentUserService = currentUserService;
     }
 
     [HttpPost]
@@ -69,5 +73,16 @@ public class DealersController : BaseController
         }
 
         return this.BadRequest(new { ErrorMessage = UnsuccessfulActionMsg, result.ErrorMessages });
+    }
+
+    [Authorize]
+    [HttpGet]
+    public async Task<ActionResult> Profile()
+    {
+        var userId = this.currentUserService.GetUserId();
+
+        var result = await this.dealerService.Profile(userId!);
+
+        return this.Ok(result.Model);
     }
 }

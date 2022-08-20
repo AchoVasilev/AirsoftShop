@@ -22,6 +22,7 @@ public static class Messages
 
     public const string InvalidUserMsg = "Нямате права";
     public const string UserNotClientMsg = "Трябва да се регистрирате като клиент!";
+    public const string UserNotDealerMsg = "Трябва да се регистрирате като продавач!";
 
     public const string SuccessfulOrderMsg = "Успешна поръчка!";
     

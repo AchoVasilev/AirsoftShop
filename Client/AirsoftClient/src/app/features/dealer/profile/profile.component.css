@@ -1,0 +1,268 @@
+.clearfix:before,
+.clearfix:after {
+    content: " ";
+    display: table;
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+.clearfix {
+    *zoom: 1;
+}
+
+.container {
+    position: relative;
+    padding: 50px 5px;
+    clear: both;
+}
+
+.mcd-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    background: #FFF;
+    border-radius: 2px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border: 1px solid lightgray;
+    width: 250px;
+}
+
+.mcd-menu li {
+    position: relative;
+}
+
+.mcd-menu li a {
+    display: block;
+    text-decoration: none;
+    padding: 12px 20px;
+    color: #777;
+    text-align: left;
+    height: 45px;
+    position: relative;
+    border-bottom: 1px solid #EEE;
+}
+
+.mcd-menu li a i {
+    float: left;
+    font-size: 20px;
+    margin: 0 10px 0 0;
+}
+
+.mcd-menu li a p {
+    float: left;
+    margin: 0;
+}
+
+.mcd-menu li a strong {
+    display: block;
+    text-transform: uppercase;
+}
+
+.mcd-menu li a small {
+    display: block;
+    font-size: 10px;
+}
+
+.mcd-menu li a i,
+.mcd-menu li a strong,
+.mcd-menu li a small {
+    position: relative;
+
+    transition: all 300ms linear;
+    -o-transition: all 300ms linear;
+    -ms-transition: all 300ms linear;
+    -moz-transition: all 300ms linear;
+    -webkit-transition: all 300ms linear;
+}
+
+.mcd-menu li:hover>a i {
+    opacity: 1;
+    -webkit-animation: moveFromTop 300ms ease-in-out;
+    -moz-animation: moveFromTop 300ms ease-in-out;
+    -ms-animation: moveFromTop 300ms ease-in-out;
+    -o-animation: moveFromTop 300ms ease-in-out;
+    animation: moveFromTop 300ms ease-in-out;
+}
+
+.mcd-menu li:hover a strong {
+    opacity: 1;
+    -webkit-animation: moveFromLeft 300ms ease-in-out;
+    -moz-animation: moveFromLeft 300ms ease-in-out;
+    -ms-animation: moveFromLeft 300ms ease-in-out;
+    -o-animation: moveFromLeft 300ms ease-in-out;
+    animation: moveFromLeft 300ms ease-in-out;
+}
+
+.mcd-menu li:hover a small {
+    opacity: 1;
+    -webkit-animation: moveFromRight 300ms ease-in-out;
+    -moz-animation: moveFromRight 300ms ease-in-out;
+    -ms-animation: moveFromRight 300ms ease-in-out;
+    -o-animation: moveFromRight 300ms ease-in-out;
+    animation: moveFromRight 300ms ease-in-out;
+}
+
+.mcd-menu li:hover>a {
+    color: #e67e22;
+}
+
+.mcd-menu li a.active {
+    position: relative;
+    color: #e67e22;
+    border: 0;
+    box-shadow: 0 0 5px #DDD;
+    -moz-box-shadow: 0 0 5px #DDD;
+    -webkit-box-shadow: 0 0 5px #DDD;
+
+    border-left: 4px solid #e67e22;
+    border-right: 4px solid #e67e22;
+    margin: 0 -4px;
+}
+
+.mcd-menu li a.active:before {
+    content: "";
+    position: absolute;
+    top: 42%;
+    left: 0;
+    border-left: 5px solid #e67e22;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+}
+
+.mcd-menu li a.active:after {
+    content: "";
+    position: absolute;
+    top: 42%;
+    right: 0;
+    border-right: 5px solid #e67e22;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+}
+
+@keyframes moveFromTop {
+    from {
+        opacity: 0;
+        -webkit-transform: translateY(200%);
+        -moz-transform: translateY(200%);
+        -ms-transform: translateY(200%);
+        -o-transform: translateY(200%);
+        transform: translateY(200%);
+    }
+
+    to {
+        opacity: 1;
+        -webkit-transform: translateY(0%);
+        -moz-transform: translateY(0%);
+        -ms-transform: translateY(0%);
+        -o-transform: translateY(0%);
+        transform: translateY(0%);
+    }
+}
+
+.mcd-menu li ul {
+    position: absolute;
+    height: auto;
+    min-width: 200px;
+    padding: 0;
+    margin: 0;
+    background: #FFF;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 300ms linear;
+    -o-transition: all 300ms linear;
+    -ms-transition: all 300ms linear;
+    -moz-transition: all 300ms linear;
+    -webkit-transition: all 300ms linear;
+    z-index: 1000;
+    left: 280px;
+    top: 0px;
+    border-left: 4px solid #e67e22;
+}
+
+.mcd-menu li:hover>ul {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+    left: 250px;
+}
+
+.profile-wrapper {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 30px;
+    padding-right: 100px;
+    align-items: center;
+    height: 80vh;
+}
+
+.profile {
+    flex-basis: 80%;
+    display: flex;
+    justify-content: space-between;
+    padding-top: 1em;
+}
+
+.profile-card {
+    flex-basis: 30%;
+    padding: 30px;
+    background-color: rgb(252, 249, 249);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile-img {
+    width: 200px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 8px;
+    height: 200px;
+    margin-left: 16px;
+}
+
+.profile-img img {
+    width: 100%;
+}
+
+.profile-card-title {
+    color: #333;
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.profile-data {
+    flex-basis: 60%;
+    background-color: rgb(252, 249, 249);
+}
+
+table {
+    width: 100%;
+}
+
+tr:nth-child(odd) {
+    background-color: rgb(236, 236, 236);
+}
+
+tr:hover {
+    background-color: lightgray;
+}
+
+.element-heading {
+    width: 28%;
+}
+
+td span {
+    color: #333;
+    font-weight: bold;
+    padding: 8px;
+}
+
+td p {
+    color: #333;
+    padding: 1em 0;
+    text-align: center;
+    letter-spacing: 1px;
+}

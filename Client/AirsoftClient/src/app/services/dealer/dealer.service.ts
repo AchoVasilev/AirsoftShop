@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { UserDealerViewModel } from 'src/app/models/dealers/UserDealerViewModel';
+import { UserDealerViewModel } from 'src/app/models/dealers/userDealerViewModel';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -12,10 +12,10 @@ export class DealerService {
   constructor(private httpClient: HttpClient) { }
 
   register(body: FormData) {
-    return this.httpClient.post(`${this.apiUrl}/dealers`, body, { withCredentials: true });
+    return this.httpClient.post(`${this.apiUrl}/dealers`, body);
   }
 
   getDealerData(): Observable<UserDealerViewModel> {
-    return this.httpClient.get<UserDealerViewModel>(`${this.apiUrl}/dealer/profile`);
+    return this.httpClient.get<UserDealerViewModel>(`${this.apiUrl}/dealers`);
   }
 }

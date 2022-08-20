@@ -1,6 +1,6 @@
-import { CityViewModel } from "./cityViewModel";
+import { CityModel } from "./CityModel";
 
 export interface AddressViewModel {
     streetName: string,
-    city: CityViewModel
+    city: CityModel
 }

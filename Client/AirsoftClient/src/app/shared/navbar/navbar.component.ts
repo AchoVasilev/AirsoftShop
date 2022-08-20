@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CategoryViewModel } from 'src/app/models/categories/categoryViewModel';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { CategoryService } from 'src/app/services/categories/category.service';
 
 @Component({
   selector: 'app-navbar',
@@ -19,10 +20,18 @@ export class NavbarComponent implements OnInit {
     return this.authService.getClient();
   }
 
-  constructor(private authService: AuthService,
+  constructor(
+    private authService: AuthService,
+    private categoryService: CategoryService,
     private router: Router) { }
 
   ngOnInit(): void {
+    this.loadCategories();
+  }
+
+  loadCategories(): void {
+    this.categoryService.loadCategories()
+      .subscribe(res => this.categories = res);
   }
 
   catalogClick(): void {

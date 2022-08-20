@@ -1,1 +1,103 @@
-<p>profile works!</p>
+<section>
+    <mat-spinner *ngIf="isLoading" style="margin: 0 auto;"></mat-spinner>
+    <section class="profile-wrapper" *ngIf="isLoaded">
+        <div class="container">
+            <nav>
+                <ul class="mcd-menu">
+                    <li>
+                        <a routerLink="/products/guns/all" class="active">
+                            <i class="fa fa-edit"></i>
+                            <strong>Каталог</strong>
+                        </a>
+                    </li>
+                    <li>
+                        <a routerLink="/building">
+                            <i class="fa fa-gift"></i>
+                            <strong>Ваучери</strong>
+                        </a>
+                    </li>
+                    <li>
+                        <a routerLink="/products/mine">
+                            <i class="fa fa-clipboard-list"></i>
+                            <strong>Моите артикули</strong>
+                        </a>
+                    </li>
+                    <li>
+                        <a routerLink="/building">
+                            <i class="fa fa-receipt"></i>
+                            <strong>Моите поръчки</strong>
+                        </a>
+                    </li>
+                    <li>
+                        <a routerLink="/building">
+                            <i class="fa fa-gear"></i>
+                            <strong>Настройки</strong>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <article class="profile" *ngIf="dealer">
+            <section class="profile-card">
+                <article class="profile-img">
+                    <img src="{{dealer.imageUrl}}" alt="">
+                </article>
+
+                <h3 class="profile-card-title">
+                    {{dealer.dealer.name}}
+                </h3>
+            </section>
+
+            <section class="profile-data">
+                <table>
+                    <tbody>
+                        <tr class="element">
+                            <td class="element-heading"><span>Име</span></td>
+                            <td>
+                                <p>{{dealer.dealer.name}}</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="element-heading"><span>Електронна поща</span></td>
+                            <td>
+                                <p>{{dealer.email}}</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="element-heading"><span>Телефон</span></td>
+                            <td>
+                                <p>{{dealer.dealer.phoneNumber}}</p>
+                            </td>
+                        </tr>
+                        <tr class="element">
+                            <td class="element-heading">
+                                <span>Град</span>
+                            </td>
+                            <td class="">
+                                <p class="">{{dealer.dealer.address.city.zipCode}}, {{dealer.dealer.address.city.name}}
+                                </p>
+                            </td>
+                        </tr>
+                        <tr class="element">
+                            <td class="element-heading">
+                                <span>Адрес</span>
+                            </td>
+                            <td class="">
+                                <p class="">{{dealer.dealer.address.streetName}}</p>
+                            </td>
+                        </tr>
+                        <tr class="element">
+                            <td class="element-heading">
+                                <span>Сайт</span>
+                            </td>
+                            <td class="">
+                                <p class="">{{dealer.dealer.siteUrl}}</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </article>
+    </section>
+</section>

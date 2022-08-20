@@ -9,6 +9,10 @@ const routes: Routes = [
     component: LoginComponent
   },
   {
+    path: 'dealer',
+    loadChildren: () => import('./features/dealer/dealer.module').then(x => x.DealerModule)
+  },
+  {
     path: '**',
     component: NotFoundComponent
   }
