@@ -13,6 +13,6 @@ export class ProductService {
   constructor(private httpClient: HttpClient) { }
 
   getNewestEightGuns(): Observable<InitialGunViewModel[]> {
-    return this.httpClient.get<InitialGunViewModel[]>(`${this.apiUrl}/product/getNewestGuns`);
+    return this.httpClient.get<InitialGunViewModel[]>(`${this.apiUrl}/products/newest`);
   }
 }

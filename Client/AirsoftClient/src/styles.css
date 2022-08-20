@@ -212,5 +212,13 @@ button.order-summary-btn:hover {
     background-color: #FB5104;
     transition: 300ms ease-in-out;
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}

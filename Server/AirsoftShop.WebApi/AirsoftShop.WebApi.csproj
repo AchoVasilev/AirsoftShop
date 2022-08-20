@@ -26,10 +26,12 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\AirsoftShop.Common\AirsoftShop.Common.csproj" />
+    <ProjectReference Include="..\AirsoftShop.Controllers\AirsoftShop.Controllers.csproj" />
     <ProjectReference Include="..\AirsoftShop.Data\AirsoftShop.Data.csproj" />
     <ProjectReference Include="..\AirsoftShop.Services\AirsoftShop.Services.csproj" />
   </ItemGroup>

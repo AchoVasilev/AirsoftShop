@@ -1,5 +1,5 @@
 export interface InitialGunViewModel {
-    id: number,
+    id: string,
     name: string,
     dealerName: string,
     dealerSiteUrl: string,

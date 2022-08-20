@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using AirsoftShop.Common.Models;
 using Common.Services;
+using Microsoft.OpenApi.Models;
 using Services.Services.Category;
 using Services.Services.Identity;
 
@@ -80,4 +81,10 @@ internal static class ServiceCollectionExtensions
         => services.AddScoped<ICurrentUserService, CurrentUserService>()
             .AddTransient<IIdentityService, IdentityService>()
             .AddTransient<ICategoryService, CategoryService>();
+
+    internal static IServiceCollection AddSwagger(this IServiceCollection services)
+        => services.AddSwaggerGen(c =>
+        {
+            c.SwaggerDoc("v1", new OpenApiInfo() { Title = "AirsoftShop API", Version = "v1" });
+        });
 }

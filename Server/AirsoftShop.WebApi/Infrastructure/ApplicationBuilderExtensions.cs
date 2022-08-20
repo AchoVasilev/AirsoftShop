@@ -13,6 +13,14 @@ internal static class ApplicationBuilderExtensions
         => app.UseRouting()
             .UseAuthentication()
             .UseAuthorization();
+    
+    internal static IApplicationBuilder UseSwaggerUi(this IApplicationBuilder app)
+        => app.UseSwagger()
+            .UseSwaggerUI(options =>
+            {
+                options.SwaggerEndpoint("/swagger/v1/swagger.json", "AirsoftShop API V1");
+                options.RoutePrefix = string.Empty;
+            });
 
     internal static async Task<IApplicationBuilder> PrepareDatabase(this IApplicationBuilder app)
     {

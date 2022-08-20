@@ -6,4 +6,6 @@ using Models.Categories;
 public interface ICategoryService
 {
     Task<IEnumerable<CategoryServiceModel>> GetAllWithSubcategories();
+
+    Task<IEnumerable<BasicCategoryServiceModel>> GetFourNewestCategories();
 }
