@@ -9,7 +9,7 @@ import { AuthService } from 'src/app/services/auth/auth.service';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  categories: CategoryViewModel[] | undefined;
+  categories: CategoryViewModel[] = [];
 
   get isLoggedIn(): boolean {
     return this.authService.isAuthenticated();

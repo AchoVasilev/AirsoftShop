@@ -1,1 +1,17 @@
-<p>categories works!</p>
+<mat-spinner *ngIf="isLoading" style="margin: 0 auto;"></mat-spinner>
+<section class="categories" *ngIf="isLoaded">
+    <h2 class="items-heading">
+        Нашите топ категории
+        <a routerLink="/products/guns/all" class="view-collection">
+            Разгледайте колекцията<i class="fas fa-angle-right"></i>
+        </a>
+    </h2>
+    <article class="category" *ngFor="let category of categories">
+        <article class="category-img">
+            <a routerLink="/products/guns/all">
+                <img src="{{category.imageUrl}}" alt="">
+                <h3 class="category-title pad">{{category.name}}</h3>
+            </a>
+        </article>
+    </article>
+</section>

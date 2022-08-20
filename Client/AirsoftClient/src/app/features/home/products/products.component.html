@@ -1,1 +1,25 @@
-<p>products works!</p>
+<mat-spinner *ngIf="isLoading" style="margin: 0 auto;"></mat-spinner>
+<section class="products" *ngIf="isLoaded">
+    <h3 class="items-heading">
+        Нашите топ продукти
+        <a routerLink="/products/all" class="view-collection">
+            Разгледайте колекцията<i class="fas fa-angle-right"></i>
+        </a>
+    </h3>
+    <article class="product" *ngFor="let gun of guns">
+        <a routerLink="/products/{{gun.name}}/{{gun.id}}" class="product-img">
+            <img src="{{gun.imageUrl}}" alt="product bbs image">
+        </a>
+        <h6 class="product-brand">{{gun.manufacturer}}</h6>
+        <a routerLink="/products/{{gun.name}}/{{gun.id}}">
+            <h3 class="product-name">{{gun.name}}</h3>
+        </a>
+        <a href="{{gun.dealerSiteUrl}}" target="_blank">
+            <h5 class="product-seller">{{gun.dealerName}}</h5>
+        </a>
+        <p class="product-description">Цвят: {{gun.color}}; Мощност: {{gun.power}} J</p>
+        <a routerLink="/products/{{gun.name}}/{{gun.id}}" class="offer-btn btn-details">
+            Детайли <i class="fa-solid fa-magnifying-glass"></i>
+        </a>
+    </article>
+</section>
