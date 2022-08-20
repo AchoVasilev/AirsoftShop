@@ -8,10 +8,15 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using AirsoftShop.Common.Models;
+using CloudinaryDotNet;
 using Common.Services;
 using Microsoft.OpenApi.Models;
+using Models;
 using Services.Services.Category;
+using Services.Services.Dealers;
+using Services.Services.File;
 using Services.Services.Identity;
+using Services.Services.Product;
 
 internal static class ServiceCollectionExtensions
 {
@@ -77,10 +82,27 @@ internal static class ServiceCollectionExtensions
         return services;
     }
 
+    internal static IServiceCollection RegisterCloudinary(this IServiceCollection services, IConfiguration configuration)
+    {
+        var cloudinarySection = configuration.GetSection("Cloudinary");
+        
+        services.Configure<CloudinarySettings>(cloudinarySection);
+        var appSettings = cloudinarySection.Get<CloudinarySettings>();
+
+        var cloudinaryAccount = new Account(appSettings.CloudifyName, appSettings.ApiKey, appSettings.ApiSecret);
+        var cloudinary = new Cloudinary(cloudinaryAccount);
+        services.AddSingleton(cloudinary);
+
+        return services;
+    }
+
     internal static IServiceCollection RegisterApplicationServices(this IServiceCollection services)
         => services.AddScoped<ICurrentUserService, CurrentUserService>()
             .AddTransient<IIdentityService, IdentityService>()
-            .AddTransient<ICategoryService, CategoryService>();
+            .AddTransient<ICategoryService, CategoryService>()
+            .AddTransient<IProductService, ProductService>()
+            .AddTransient<IFileService, FileService>()
+            .AddTransient<IDealerService, DealerService>();
 
     internal static IServiceCollection AddSwagger(this IServiceCollection services)
         => services.AddSwaggerGen(c =>

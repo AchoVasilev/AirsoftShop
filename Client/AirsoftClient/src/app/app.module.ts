@@ -12,7 +12,7 @@ import { FooterComponent } from './shared/footer/footer.component';
 import { LoginComponent } from './shared/login/login.component';
 import { ToastrModule } from 'ngx-toastr';
 import { AuthService } from './services/auth/auth.service';
-import { AuthGuardService } from './infrastructure/guards/auth-guard.service';
+import { AuthGuard } from './infrastructure/guards/auth-guard';
 import { AuthInterceptor } from './infrastructure/interceptors/auth-interceptor.interceptor';
 import { ErrorInterceptor } from './infrastructure/interceptors/error.interceptor';
 import { NotFoundComponent } from './shared/not-found/not-found.component';
@@ -39,7 +39,7 @@ import { HomeModule } from './features/home/home.module';
   ],
   providers: [
     AuthService,
-    AuthGuardService,
+    AuthGuard,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

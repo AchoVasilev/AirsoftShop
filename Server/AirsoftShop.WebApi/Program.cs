@@ -7,6 +7,7 @@ builder.Services
     .RegisterIdentity()
     .AddSwagger()
     .AddJwtAuthentication(builder.Services.GetJwtSettings(builder.Configuration))
+    .RegisterCloudinary(builder.Configuration)
     .RegisterApplicationServices()
     .AddControllers();
 

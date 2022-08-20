@@ -1,6 +1,7 @@
 namespace AirsoftShop.Controllers.Models.Users;
 
 using System.ComponentModel.DataAnnotations;
+using static Data.Constants.Data.Constants;
 
 public class LoginUserRequestModel
 {
@@ -9,6 +10,6 @@ public class LoginUserRequestModel
     public string Email { get; set; }
     
     [Required]
-    [MinLength(6)]
+    [MinLength(PasswordMinLength)]
     public string Password { get; set; }
 }

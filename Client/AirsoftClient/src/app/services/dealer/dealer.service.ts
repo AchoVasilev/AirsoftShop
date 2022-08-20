@@ -12,7 +12,7 @@ export class DealerService {
   constructor(private httpClient: HttpClient) { }
 
   register(body: FormData) {
-    return this.httpClient.post(`${this.apiUrl}/dealer/Register`, body, { withCredentials: true });
+    return this.httpClient.post(`${this.apiUrl}/dealers`, body, { withCredentials: true });
   }
 
   getDealerData(): Observable<UserDealerViewModel> {
