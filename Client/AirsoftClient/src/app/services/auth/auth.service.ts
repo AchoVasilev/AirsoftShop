@@ -8,8 +8,8 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class AuthService {
-
-  private loginUrl: string = `${environment.apiUrl}/users/login`;
+  private baseUrl = environment.apiUrl;
+  private loginUrl: string = `${this.baseUrl}/users/login`;
 
   constructor(private httpClient: HttpClient) { }
 

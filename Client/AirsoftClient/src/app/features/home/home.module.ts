@@ -20,6 +20,9 @@ import { CategoriesComponent } from './categories/categories.component';
     RouterModule,
     HomeRoutingModule,
     MatProgressSpinnerModule
+  ],
+  exports: [
+    HomeComponent
   ]
 })
 export class HomeModule { }

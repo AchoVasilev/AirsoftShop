@@ -29,10 +29,10 @@ import { HomeModule } from './features/home/home.module';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
     HomeModule,
+    AppRoutingModule,
     BrowserAnimationsModule,
     MatProgressSpinnerModule,
     ToastrModule.forRoot()
