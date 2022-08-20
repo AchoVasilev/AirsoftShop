@@ -12,9 +12,9 @@ import { FooterComponent } from './shared/footer/footer.component';
 import { LoginComponent } from './shared/login/login.component';
 import { ToastrModule } from 'ngx-toastr';
 import { AuthService } from './services/auth/auth.service';
-import { AuthGuardService } from './guards/auth-guard.service';
-import { AuthInterceptor } from './guards/interceptors/auth-interceptor.interceptor';
-import { ErrorInterceptor } from './guards/interceptors/error.interceptor';
+import { AuthGuardService } from './infrastructure/guards/auth-guard.service';
+import { AuthInterceptor } from './infrastructure/interceptors/auth-interceptor.interceptor';
+import { ErrorInterceptor } from './infrastructure/interceptors/error.interceptor';
 import { NotFoundComponent } from './shared/not-found/not-found.component';
 import { HomeModule } from './features/home/home.module';
 

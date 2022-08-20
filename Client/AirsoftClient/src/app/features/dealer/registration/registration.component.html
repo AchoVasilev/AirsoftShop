@@ -1,0 +1,180 @@
+<section class="registration">
+    <h1 class="registration-title">Станете партньор</h1>
+    <form class="registration-form" [formGroup]="registerFormGroup" (ngSubmit)="handleRegistration()">
+        <section class="registration-data">
+            <article class="registration-wrapper">
+                <article class="first-name-wrapper">
+                    <label for="name">Име на фирма <span
+                            [ngClass]="shouldShowErrorForControl('name') ? 'error' : ''">*</span></label>
+                    <input type="text" id="name" name="name" formControlName="name"
+                        [ngClass]="shouldShowErrorForControl('name') ? 'invalid' : ''">
+
+                    <ng-container *ngIf="shouldShowErrorForControl('name')">
+                        <p class="error" *ngIf="registerFormGroup.controls['name'].errors?.['required']">
+                            Полето е задължително!
+                        </p>
+                        <p class="error" *ngIf="registerFormGroup.controls['name'].errors?.['minlength']">
+                            Полето трябва да е с дължина поне 2 символа!
+                        </p>
+                        <p class="error" *ngIf="registerFormGroup.controls['name'].errors?.['maxlength']">
+                            Полето трябва да е с максимална дължина от 40 символа!
+                        </p>
+                    </ng-container>
+                </article>
+                <article class="last-name-wrapper">
+                    <label for="dealerNumber">ЕИК <span
+                            [ngClass]="shouldShowErrorForControl('dealerNumber') ? 'error' : ''">*</span></label>
+                    <input type="text" id="dealerNumber" name="dealerNumber" formControlName="dealerNumber"
+                        [ngClass]="shouldShowErrorForControl('dealerNumber') ? 'invalid' : ''">
+
+                    <ng-container *ngIf="shouldShowErrorForControl('dealerNumber')">
+                        <p class="error" *ngIf="registerFormGroup.controls['dealerNumber'].errors?.['required']">
+                            Полето е задължително!
+                        </p>
+                        <p class="error" *ngIf="registerFormGroup.controls['dealerNumber'].errors?.['minlength']">
+                            Полето трябва да е с дължина поне 2 символа!
+                        </p>
+                        <p class="error" *ngIf="registerFormGroup.controls['dealerNumber'].errors?.['maxlength']">
+                            Полето трябва да е с максимална дължина от 40 символа!
+                        </p>
+                    </ng-container>
+                </article>
+            </article>
+            <article class="field-wrapper">
+                <label for="streetName">Адрес/Седалище <span
+                        [ngClass]="shouldShowErrorForControl('streetName') ? 'error' : ''">*</span></label>
+                <input type="text" id="streetName" name="streetName" formControlName="streetName"
+                    [ngClass]="shouldShowErrorForControl('streetName') ? 'invalid' : ''">
+
+                <ng-container *ngIf="shouldShowErrorForControl('streetName')">
+                    <p class="error" *ngIf="registerFormGroup.controls['streetName'].errors?.['required']">
+                        Полето е задължително!
+                    </p>
+                    <p class="error" *ngIf="registerFormGroup.controls['streetName'].errors?.['minlength']">
+                        Полето трябва да е с дължина поне 2 символа!
+                    </p>
+                    <p class="error" *ngIf="registerFormGroup.controls['streetName'].errors?.['maxlength']">
+                        Полето трябва да е с максимална дължина от 40 символа!
+                    </p>
+                </ng-container>
+            </article>
+            <article class="field-wrapper">
+                <input type="file" id="image" name="image" accept="image/*" formControlName="image"
+                    (change)="onChange($event)" [ngClass]="shouldShowErrorForControl('image') ? 'invalid' : ''">
+                <label class="image-label" for="image"><i class="fa-solid fa-image fa-2xl"></i> Снимка
+                    <span [ngClass]="shouldShowErrorForControl('image') ? 'error' : ''">*</span></label>
+
+                <ng-container *ngIf="shouldShowErrorForControl('image')">
+                    <p class="error" *ngIf="registerFormGroup.controls['image'].errors?.['required']">
+                        Полето е задължително!
+                    </p>
+                </ng-container>
+            </article>
+            <article class="field-wrapper">
+                <label for="siteUrl">Линк към сайт: </label>
+                <input type="text" id="siteUrl" name="siteUrl" formControlName="siteUrl">
+            </article>
+            <article class="registration-wrapper">
+                <article class="city-wrapper">
+                    <label for="cityName">Град: <span
+                            [ngClass]="shouldShowErrorForControl('cityName') ? 'error' : ''">*</span></label>
+                    <select id="cityName" class="custom-select" *ngIf="cities" name="cityName"
+                        formControlName="cityName">
+                        [ngClass]="shouldShowErrorForControl('cityName') ? 'invalid' : ''">
+                        <option *ngFor="let city of cities" [value]="city.name">{{city.name}}</option>
+                    </select>
+
+                    <ng-container *ngIf="shouldShowErrorForControl('cityName')">
+                        <p class="error" *ngIf="registerFormGroup.controls['cityName'].errors?.['required']">
+                            Полето е задължително!
+                        </p>
+                    </ng-container>
+                </article>
+            </article>
+            <article class="registration-wrapper">
+                <article class="phone-wrapper">
+                    <label for="phone">Телефонен номер <span
+                            [ngClass]="shouldShowErrorForControl('phone') ? 'error' : ''">*</span></label>
+                    <input type="text" id="phone" name="phone" formControlName="phone"
+                        [ngClass]="shouldShowErrorForControl('phone') ? 'invalid' : ''">
+
+                    <ng-container *ngIf="shouldShowErrorForControl('phone')">
+                        <p class="error" *ngIf="registerFormGroup.controls['phone'].errors?.['required']">
+                            Полето е задължително!
+                        </p>
+                        <p class="error" *ngIf="registerFormGroup.controls['phone'].errors?.['pattern']">
+                            Въведете правилен телефонен номер!
+                        </p>
+                    </ng-container>
+                </article>
+                <article class="email-wrapper">
+                    <label for="email">Електронна поща <span
+                            [ngClass]="shouldShowErrorForControl('email') ? 'error' : ''">*</span></label>
+                    <input type="text" id="email" name="email" formControlName="email"
+                        [ngClass]="shouldShowErrorForControl('email') ? 'invalid' : ''">
+
+                    <ng-container *ngIf="shouldShowErrorForControl('email')">
+                        <p class="error" *ngIf="registerFormGroup.controls['email'].errors?.['required']">
+                            Полето е задължително!
+                        </p>
+                        <p class="error" *ngIf="registerFormGroup.controls['email'].errors?.['email']">
+                            Въведете правилен и-мейл!
+                        </p>
+                    </ng-container>
+                </article>
+            </article>
+        </section>
+        <section class="registration-login-data">
+            <article class="field-wrapper">
+                <label for="username">Потребителско име/и-имейл <span
+                        [ngClass]="shouldShowErrorForControl('username') ? 'error' : ''">*</span></label>
+                <input type="text" id="username" name="username" formControlName="username"
+                    [ngClass]="shouldShowErrorForControl('username') ? 'invalid' : ''">
+                <p class="text">Потребителското име трябва да е с дължина между 3 и 40 символа(само числа и букви)</p>
+
+                <ng-container *ngIf="shouldShowErrorForControl('username')">
+                    <p class="error" *ngIf="registerFormGroup.controls['username'].errors?.['required']">
+                        Полето е задължително!
+                    </p>
+                    <p class="error" *ngIf="registerFormGroup.controls['username'].errors?.['minlength']">
+                        Полето трябва да е с дължина поне 2 символа!
+                    </p>
+                    <p class="error" *ngIf="registerFormGroup.controls['username'].errors?.['maxlength']">
+                        Полето трябва да е с максимална дължина от 40 символа!
+                    </p>
+                </ng-container>
+            </article>
+            <article formGroupName="passwords" class="field-wrapper">
+                <label for="password">Парола <span
+                        [ngClass]="shouldShowErrorForControl('password', passwordsGroup) ? 'error' : ''">*</span></label>
+                <input type="password" id="password" name="password" formControlName="password"
+                    [ngClass]="shouldShowErrorForControl('password', passwordsGroup) ? 'invalid' : ''">
+                <p class="text">Паролата трябва да е с минимална дължина от 6 символа</p>
+
+                <ng-container *ngIf="shouldShowErrorForControl('password', passwordsGroup)">
+                    <p class="error" *ngIf="passwordsGroup.controls['password'].errors?.['required']">
+                        Полето е задължително!
+                    </p>
+                    <p class="error" *ngIf="passwordsGroup.controls['password'].errors?.['minlength']">
+                        Полето трябва да е с дължина поне 6 символа!
+                    </p>
+                </ng-container>
+            </article>
+            <article formGroupName="passwords" class="field-wrapper">
+                <label for="repeatPassword">Повтори парола <span
+                        [ngClass]="shouldShowErrorForControl('repeatPassword', passwordsGroup) ? 'error' : ''">*</span></label>
+                <input type="password" id="repeat-password" name="repeatPassword" formControlName="repeatPassword"
+                    [ngClass]="shouldShowErrorForControl('repeatPassword', passwordsGroup) ? 'invalid' : ''">
+
+                <ng-container *ngIf="shouldShowErrorForControl('repeatPassword', passwordsGroup)">
+                    <p class="error" *ngIf="passwordsGroup.controls['repeatPassword'].errors?.['passwordMissmatch']">
+                        Паролите не съвпадат!
+                    </p>
+                </ng-container>
+            </article>
+            <p class="text">Полетата, които имат * (звездичка), са задължителни.</p>
+            <button type="submit" class="submit-btn" [class.disabled]="registerFormGroup.invalid"
+                [disabled]="registerFormGroup.invalid">Регистрация</button>
+        </section>
+    </form>
+</section>

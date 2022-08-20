@@ -1,0 +1,138 @@
+.registration {
+    padding: 40px 80px;
+    display: flex;
+    flex-direction: column;
+}
+
+.registration-title {
+    color: #333;
+    margin-bottom: 1em;
+    text-align: center;
+}
+
+.registration-form {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    width: 55%;
+}
+
+.field-wrapper,
+.registration-wrapper {
+    margin-bottom: 1rem;
+}
+
+.field-wrapper {
+    position: relative;
+}
+
+.registration-form label {
+    display: block;
+    margin-bottom: 1em;
+}
+
+.registration-wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.first-name-wrapper,
+.last-name-wrapper,
+.phone-wrapper,
+.email-wrapper {
+    flex-basis: 49%;
+}
+
+.city-wrapper {
+    flex-basis: 100%;
+}
+
+#name,
+#dealerNumber,
+#phone,
+#email {
+    padding: 0.7rem 2rem 0.7rem 1rem;
+    border-radius: 2px;
+    font-size: 16px;
+    border: 1px solid #333333;
+    width: 100%;
+    display: block;
+}
+
+#image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 225px;
+    opacity: 0;
+    padding: 14px 0;
+    cursor: pointer;
+}
+
+.image-label {
+    display: block;
+    padding: 16px 45px;
+    color: #333;
+    border: 1px solid black;
+    cursor: pointer;
+    width: 100%;
+}
+
+.field-wrapper input,
+select {
+    padding: 0.7rem 2rem 1rem 1em;
+    border-radius: 2px;
+    font-size: 16px;
+    border: 1px solid #333333;
+    width: 100%;
+}
+
+.registration-login-data p {
+    font-size: 14px;
+    font-style: italic;
+    color: rgb(184, 184, 184);
+}
+
+#username,
+#password {
+    margin-bottom: 5px;
+}
+
+.submit-btn {
+    width: 100%;
+    margin-top: 10px;
+    padding: 15px;
+    font-weight: 800;
+    color: white;
+    background-color: #333;
+    border: none;
+    border-radius: 2px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.submit-btn:hover {
+    background-color: #FB5104;
+    transition: 300ms ease-in-out;
+}
+
+p.text {
+    font-size: 14px;
+    font-style: italic;
+    color: rgb(184, 184, 184);
+}
+
+.field-wrapper p.error {
+    color: red;
+    font-weight: bold;
+    margin-top: 6px;
+    font-style: italic;
+}
+
+.registration-wrapper .invalid {
+    border: 1px solid red;
+}
+
+.disabled {
+    cursor: not-allowed;
+}
