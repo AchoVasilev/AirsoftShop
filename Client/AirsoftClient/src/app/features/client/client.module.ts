@@ -1,24 +1,26 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { DealerRoutingModule } from './dealer-routing.module';
+import { ClientRoutingModule } from './client-routing.module';
 import { RegistrationComponent } from './registration/registration.component';
-import { ProfileComponent } from './profile/profile.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { ClientService } from 'src/app/services/client/client.service';
 
 
 @NgModule({
   declarations: [
-    RegistrationComponent,
-    ProfileComponent
+    RegistrationComponent
   ],
   imports: [
     CommonModule,
+    ClientRoutingModule,
     ReactiveFormsModule,
-    DealerRoutingModule,
     FormsModule,
     MatProgressSpinnerModule
+  ],
+  providers: [
+    ClientService
   ]
 })
-export class DealerModule { }
+export class ClientModule { }
