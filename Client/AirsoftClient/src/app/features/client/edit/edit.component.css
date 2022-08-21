@@ -1,0 +1,362 @@
+.clearfix:before,
+.clearfix:after {
+    content: " ";
+    display: table;
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+.clearfix {
+    *zoom: 1;
+}
+
+.container {
+    position: relative;
+    padding: 50px 5px;
+    clear: both;
+}
+
+.mcd-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    background: #FFF;
+    border-radius: 2px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border: 1px solid lightgray;
+    width: 250px;
+}
+
+.mcd-menu li {
+    position: relative;
+}
+
+.mcd-menu li a {
+    display: block;
+    text-decoration: none;
+    padding: 12px 20px;
+    color: #777;
+    text-align: left;
+    height: 45px;
+    position: relative;
+    border-bottom: 1px solid #EEE;
+}
+
+.mcd-menu li a i {
+    float: left;
+    font-size: 20px;
+    margin: 0 10px 0 0;
+}
+
+.mcd-menu li a p {
+    float: left;
+    margin: 0;
+}
+
+.mcd-menu li a strong {
+    display: block;
+    text-transform: uppercase;
+}
+
+.mcd-menu li a small {
+    display: block;
+    font-size: 10px;
+}
+
+.mcd-menu li a i,
+.mcd-menu li a strong,
+.mcd-menu li a small {
+    position: relative;
+
+    transition: all 300ms linear;
+    -o-transition: all 300ms linear;
+    -ms-transition: all 300ms linear;
+    -moz-transition: all 300ms linear;
+    -webkit-transition: all 300ms linear;
+}
+
+.mcd-menu li:hover>a i {
+    opacity: 1;
+    -webkit-animation: moveFromTop 300ms ease-in-out;
+    -moz-animation: moveFromTop 300ms ease-in-out;
+    -ms-animation: moveFromTop 300ms ease-in-out;
+    -o-animation: moveFromTop 300ms ease-in-out;
+    animation: moveFromTop 300ms ease-in-out;
+}
+
+.mcd-menu li:hover a strong {
+    opacity: 1;
+    -webkit-animation: moveFromLeft 300ms ease-in-out;
+    -moz-animation: moveFromLeft 300ms ease-in-out;
+    -ms-animation: moveFromLeft 300ms ease-in-out;
+    -o-animation: moveFromLeft 300ms ease-in-out;
+    animation: moveFromLeft 300ms ease-in-out;
+}
+
+.mcd-menu li:hover a small {
+    opacity: 1;
+    -webkit-animation: moveFromRight 300ms ease-in-out;
+    -moz-animation: moveFromRight 300ms ease-in-out;
+    -ms-animation: moveFromRight 300ms ease-in-out;
+    -o-animation: moveFromRight 300ms ease-in-out;
+    animation: moveFromRight 300ms ease-in-out;
+}
+
+.mcd-menu li:hover>a {
+    color: #e67e22;
+}
+
+.mcd-menu li a.active {
+    position: relative;
+    color: #e67e22;
+    border: 0;
+    box-shadow: 0 0 5px #DDD;
+    -moz-box-shadow: 0 0 5px #DDD;
+    -webkit-box-shadow: 0 0 5px #DDD;
+
+    border-left: 4px solid #e67e22;
+    border-right: 4px solid #e67e22;
+    margin: 0 -4px;
+}
+
+.mcd-menu li a.active:before {
+    content: "";
+    position: absolute;
+    top: 42%;
+    left: 0;
+    border-left: 5px solid #e67e22;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+}
+
+.mcd-menu li a.active:after {
+    content: "";
+    position: absolute;
+    top: 42%;
+    right: 0;
+    border-right: 5px solid #e67e22;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+}
+
+@keyframes moveFromTop {
+    from {
+        opacity: 0;
+        -webkit-transform: translateY(200%);
+        -moz-transform: translateY(200%);
+        -ms-transform: translateY(200%);
+        -o-transform: translateY(200%);
+        transform: translateY(200%);
+    }
+
+    to {
+        opacity: 1;
+        -webkit-transform: translateY(0%);
+        -moz-transform: translateY(0%);
+        -ms-transform: translateY(0%);
+        -o-transform: translateY(0%);
+        transform: translateY(0%);
+    }
+}
+
+.mcd-menu li ul {
+    position: absolute;
+    height: auto;
+    min-width: 200px;
+    padding: 0;
+    margin: 0;
+    background: #FFF;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 300ms linear;
+    -o-transition: all 300ms linear;
+    -ms-transition: all 300ms linear;
+    -moz-transition: all 300ms linear;
+    -webkit-transition: all 300ms linear;
+    z-index: 1000;
+    left: 280px;
+    top: 0px;
+    border-left: 4px solid #e67e22;
+}
+
+.mcd-menu li:hover>ul {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+    left: 250px;
+}
+
+.profile-wrapper {
+    display: flex;
+    flex-direction: column;
+    padding-top: 30px;
+    padding-right: 100px;
+    height: 80vh;
+}
+
+.wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.page-header {
+    color: #333;
+    font-weight: bold;
+    text-align: center;
+}
+
+.profile {
+    flex-basis: 80%;
+    display: flex;
+    justify-content: space-between;
+    padding-top: 1em;
+}
+
+.profile-card {
+    flex-basis: 30%;
+    padding: 30px;
+    background-color: rgb(252, 249, 249);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile-img {
+    width: 200px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 8px;
+    height: 200px;
+    margin-left: 16px;
+}
+
+.profile-img img {
+    width: 100%;
+}
+
+.profile-card-title {
+    color: #333;
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.profile-data {
+    flex-basis: 60%;
+    background-color: rgb(252, 249, 249);
+}
+
+.field-wrapper,
+.registration-wrapper {
+    margin-bottom: 1rem;
+}
+
+.registration-form label {
+    display: block;
+    margin-bottom: 1em;
+}
+
+.registration-wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.first-name-wrapper,
+.last-name-wrapper,
+.postcode-wrapper,
+.phone-wrapper,
+.email-wrapper {
+    flex-basis: 49%;
+}
+
+.city-wrapper {
+    flex-basis: 100%;
+}
+
+.registration-wrapper input,
+select {
+    padding: 0.7rem 2rem 0.7rem 1rem;
+    border-radius: 2px;
+    font-size: 16px;
+    border: 1px solid #333333;
+    width: 100%;
+    display: block;
+}
+
+.registration-data-title {
+    color: #333;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.field-wrapper input {
+    padding: 0.7rem 2rem 1rem 1em;
+    border-radius: 2px;
+    font-size: 16px;
+    border: 1px solid #333333;
+    width: 100%;
+}
+
+.registration-login-data p.text {
+    font-size: 14px;
+    font-style: italic;
+    color: rgb(184, 184, 184);
+}
+
+#username,
+#password {
+    margin-bottom: 5px;
+}
+
+.submit-btn {
+    margin: 10px;
+    padding: 15px;
+    font-weight: 800;
+    color: white;
+    background-color: #333;
+    border: none;
+    border-radius: 2px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.submit-btn:hover {
+    background-color: #FB5104;
+    transition: 300ms ease-in-out;
+}
+
+.error {
+    color: red;
+    font-weight: bold;
+    margin-top: 6px;
+    font-style: italic;
+}
+
+.registration-wrapper .invalid {
+    border: 1px solid red;
+}
+
+.submit-btn:disabled {
+    cursor: not-allowed;
+    background-color: rgb(92, 92, 92);
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.close {
+    margin: 10px;
+    padding: 15px;
+    font-weight: 800;
+    color: white;
+    background-color: red;
+    border: none;
+    border-radius: 2px;
+    font-size: 16px;
+    cursor: pointer;
+}

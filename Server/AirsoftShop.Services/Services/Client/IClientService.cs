@@ -8,4 +8,6 @@ public interface IClientService
     Task<OperationResult<ClientResultServiceModel>> CreateClient(CreateClientServiceModel model);
 
     Task<OperationResult<UserClientServiceModel>> Profile(string userId);
+    
+    Task<OperationResult<ClientResultServiceModel>> EditClient(string? userId, ClientEditServiceModel editModel);
 }

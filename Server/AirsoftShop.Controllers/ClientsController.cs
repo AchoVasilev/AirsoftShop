@@ -70,4 +70,34 @@ public class ClientsController : BaseController
         
         return this.Ok(result.Model);
     }
+    
+    [HttpPut]
+    [Authorize]
+    public async Task<ActionResult> Edit(EditClientFormModel model)
+    {
+        var user = await this.userManager.FindByEmailAsync(model.Email);
+        if (user is null)
+        {
+            return this.BadRequest(new { ErrorMessage = UsernameExistsMsg });
+        }
+        
+        var userId = this.currentUserService.GetUserId();
+        var editModel = new ClientEditServiceModel()
+        {
+            FirstName = model.FirstName,
+            LastName = model.LastName,
+            Email = model.Email,
+            Phone = model.Phone,
+            CityName = model.CityName,
+            StreetName = model.StreetName
+        };
+        
+        var result = await this.clientService.EditClient(userId, editModel);
+        if (result.Succeeded)
+        {
+            return this.Ok(new { Message = SuccessfulEditMsg });
+        }
+
+        return this.BadRequest(new { ErrorMessage = UnsuccessfulActionMsg });
+    }
 }

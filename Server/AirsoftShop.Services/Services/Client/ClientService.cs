@@ -119,4 +119,38 @@ public class ClientService : IClientService
 
         return model;
     }
+
+    public async Task<OperationResult<ClientResultServiceModel>> EditClient(string? userId, ClientEditServiceModel editModel)
+    {
+        var city = await this.data.Cities
+            .FirstOrDefaultAsync(x => x.Name == editModel.CityName);
+
+        if (city is null)
+        {
+            return InvalidCityMsg;
+        }
+        
+        var user = await this.data.Users
+            .Where(x => x.Id == userId && x.Email == editModel.Email)
+            .Include(x => x.Client)
+            .ThenInclude(x => x.Address)
+            .FirstOrDefaultAsync();
+
+        if (user is null)
+        {
+            return InvalidUserMsg;
+        }
+        
+        user.Client.Address.StreetName = editModel.StreetName;
+        user.Client.Address.CityId = city.Id;
+        user.Client.FirstName = editModel.FirstName;
+        user.Client.LastName = editModel.LastName;
+        user.Email = editModel.Email;
+        user.Client.Email = editModel.Email;
+        user.Client.PhoneNumber = editModel.Phone;
+
+        await this.data.SaveChangesAsync();
+
+        return true;
+    }
 }
