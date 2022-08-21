@@ -82,7 +82,11 @@ public class DealersController : BaseController
         var userId = this.currentUserService.GetUserId();
 
         var result = await this.dealerService.Profile(userId!);
-
+        if (result.Failed)
+        {
+            return this.BadRequest(new { result.ErrorMessage });
+        }
+        
         return this.Ok(result.Model);
     }
 }

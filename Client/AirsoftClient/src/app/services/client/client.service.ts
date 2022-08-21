@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ClientInputModel } from 'src/app/models/client/clientInputModel';
+import { UserClientViewModel } from 'src/app/models/client/userClientViewModel';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -15,9 +16,9 @@ export class ClientService {
     return this.httpClient.post<ClientInputModel>(`${environment.apiUrl}/clients`, body);
   }
 
-  // getClientData(): Observable<UserClientViewModel> {
-  //   return this.httpClient.get<UserClientViewModel>(`${environment.apiUrl}/client/profile`);
-  // }
+  getClientData(): Observable<UserClientViewModel> {
+    return this.httpClient.get<UserClientViewModel>(`${environment.apiUrl}/clients`);
+  }
 
   // edit(body: EditClientModel): Observable<Object> {
   //   return this.httpClient.put(`${environment.apiUrl}/client/edit`, body);

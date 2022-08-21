@@ -1,0 +1,90 @@
+<mat-spinner style="margin: 0 auto;" *ngIf="isLoading"></mat-spinner>
+<section class="profile-wrapper" *ngIf="isLoaded">
+    <div class="container">
+        <nav>
+            <ul class="mcd-menu">
+                <li>
+                    <a [routerLink]="['/catalog']" class="active">
+                        <i class="fa fa-edit"></i>
+                        <strong>Каталог</strong>
+                    </a>
+                </li>
+                <li>
+                    <a [routerLink]="['/vouchers']">
+                        <i class="fa fa-gift"></i>
+                        <strong>Ваучери</strong>
+                    </a>
+                </li>
+                <li>
+                    <a [routerLink]="['/cart']">
+                        <i class="fa fa-cart-shopping"></i>
+                        <strong>Количка</strong>
+                    </a>
+                </li>
+                <li>
+                    <a routerLink="/orders/client">
+                        <i class="fa fa-receipt"></i>
+                        <strong>Моите поръчки</strong>
+                    </a>
+                </li>
+                <li>
+                    <a [routerLink]="['/client', 'edit']">
+                        <i class="fa fa-gear"></i>
+                        <strong>Настройки</strong>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <article class="profile" *ngIf="client">
+        <section class="profile-card">
+            <article class="profile-img">
+                <img src="{{client.imageUrl}}" alt="">
+            </article>
+
+            <h3 class="profile-card-title">
+                {{client.client.firstName}} {{client.client.lastName}}
+            </h3>
+        </section>
+
+        <section class="profile-data">
+            <table>
+                <tbody>
+                    <tr class="element">
+                        <td class="element-heading"><span>Имена</span></td>
+                        <td>
+                            <p>{{client.client.firstName}} {{client.client.lastName}}</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="element-heading"><span>Електронна поща</span></td>
+                        <td>
+                            <p>{{client.email}}</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="element-heading"><span>Телефон</span></td>
+                        <td>
+                            <p>{{client.client.phoneNumber}}</p>
+                        </td>
+                    </tr>
+                    <tr class="element">
+                        <td class="element-heading">
+                            <span>Град</span>
+                        </td>
+                        <td class="">
+                            <p class="">{{client.client.address.city.zipCode}}, {{client.client.address.city.name}}</p>
+                        </td>
+                    </tr>
+                    <tr class="element">
+                        <td class="element-heading"><span>Адрес</span></td>
+                        <td class="">
+                            <p class="">{{client.client.address.streetName}}</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </article>
+</section>

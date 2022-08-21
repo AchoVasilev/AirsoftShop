@@ -1,6 +1,8 @@
 namespace AirsoftShop.Controllers;
 
+using Common.Services;
 using Data.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Models.Clients;
@@ -12,11 +14,16 @@ public class ClientsController : BaseController
 {
     private readonly IClientService clientService;
     private readonly UserManager<ApplicationUser> userManager;
+    private readonly ICurrentUserService currentUserService;
 
-    public ClientsController(IClientService clientService, UserManager<ApplicationUser> userManager)
+    public ClientsController(
+        IClientService clientService, 
+        UserManager<ApplicationUser> userManager,
+        ICurrentUserService currentUserService)
     {
         this.clientService = clientService;
         this.userManager = userManager;
+        this.currentUserService = currentUserService;
     }
 
     [HttpPost]
@@ -39,7 +46,7 @@ public class ClientsController : BaseController
             StreetName = model.StreetName,
             Username = model.Username
         };
-        
+
         var result = await this.clientService.CreateClient(client);
         if (result.Succeeded)
         {
@@ -47,5 +54,20 @@ public class ClientsController : BaseController
         }
 
         return this.BadRequest(new { ErrorMessage = UnsuccessfulActionMsg, result.ErrorMessages });
+    }
+
+    [Authorize]
+    [HttpGet]
+    public async Task<ActionResult> Profile()
+    {
+        var userId = this.currentUserService.GetUserId();
+        
+        var result = await this.clientService.Profile(userId!);
+        if (result.Failed)
+        {
+            return this.BadRequest(new { result.ErrorMessage });
+        }
+        
+        return this.Ok(result.Model);
     }
 }

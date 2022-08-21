@@ -6,6 +6,8 @@ using Data.Models.Images;
 using Data.Persistence;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Models.Address;
+using Models.Cities;
 using Models.Clients;
 using static Common.Constants.Messages;
 
@@ -72,5 +74,49 @@ public class ClientService : IClientService
         return result.Errors
             .Select(error => error.Description)
             .ToList();
+    }
+    
+    public async Task<OperationResult<UserClientServiceModel>> Profile(string userId)
+    {
+        var user = await this.userManager
+            .Users
+            .Include(x => x.Image)
+            .Include(x => x.Client)
+            .ThenInclude(x => x.Address)
+            .ThenInclude(x => x.City)
+            .AsNoTracking()
+            .FirstOrDefaultAsync(x => x.Id == userId);
+
+        if (user is null)
+        {
+            return UserNotDealerMsg;
+        }
+
+        var model = new UserClientServiceModel()
+        {
+            UserId = user.Id,
+            ClientId = user.DealerId,
+            Email = user.Email,
+            Username = user.UserName,
+            ImageUrl = user.Image.Url,
+            Client = new ClientServiceModel()
+            {
+                FirstName = user.Client.FirstName,
+                LastName = user.Client.LastName,
+                PhoneNumber = user.Client.PhoneNumber,
+                Address = new AddressServiceModel()
+                {
+                    StreetName = user.Client.Address.StreetName,
+                    City = new CityServiceModel()
+                    {
+                        Id = user.Client.Address.CityId,
+                        Name = user.Client.Address.City.Name,
+                        ZipCode = user.Client.Address.City.ZipCode
+                    }
+                }
+            }
+        };
+
+        return model;
     }
 }

@@ -6,4 +6,6 @@ using Models.Clients;
 public interface IClientService
 {
     Task<OperationResult<ClientResultServiceModel>> CreateClient(CreateClientServiceModel model);
+
+    Task<OperationResult<UserClientServiceModel>> Profile(string userId);
 }
