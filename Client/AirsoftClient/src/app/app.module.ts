@@ -25,7 +25,7 @@ import { HomeModule } from './features/home/home.module';
     NavbarComponent,
     FooterComponent,
     LoginComponent,
-    NotFoundComponent
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,

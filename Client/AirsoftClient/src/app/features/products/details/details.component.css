@@ -1,0 +1,190 @@
+.item {
+    padding: 40px 100px;
+}
+
+.item-top {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2em;
+    padding-bottom: 2em;
+    border-bottom: 1px solid #333;
+}
+
+.img-wrapper {
+    width: 580px;
+}
+
+.img-wrapper img {
+    width: 100%;
+}
+
+.item-data {
+    flex-basis: 60%;
+    padding-left: 1em;
+}
+
+.item-data-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 1em;
+}
+
+.item-title {
+    text-align: center;
+    font-weight: bold;
+    color: #333;
+    padding: 1rem;
+    flex-basis: 100%;
+}
+
+.item-price {
+    flex-basis: 100%;
+    margin-top: 1em;
+    color: #333;
+    font-weight: bold;
+}
+
+.item-subtitle {
+    color: #333;
+    font-weight: bold;
+    flex-basis: 34%;
+    margin-bottom: 6px;
+}
+
+.item-subtitle a {
+    color: #333;
+    font-weight: normal;
+}
+
+.item-subtitle span {
+    font-weight: normal;
+}
+
+.item-subtitle a:hover {
+    color: #FB5104;
+    transition: 300ms ease-in-out;
+}
+
+.item-data-controls-wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.buttons-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.add-btn {
+    background-color: #333;
+    color: #fff;
+    font-weight: bold;
+    padding: 2rem 3rem;
+    font-size: 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.add-btn:hover,
+.action-btn:hover,
+.dealer-action-btn:hover {
+    background-color: #FB5104;
+    transition: 300ms ease-in-out;
+}
+
+.action-btn {
+    background-color: #333;
+    color: #fff;
+    font-weight: bold;
+    padding: 1rem 7rem;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.action-btn:first-child {
+    margin-bottom: 1rem;
+}
+
+.description {
+    color: #333;
+    line-height: 1.3;
+    text-indent: 2em;
+    text-align: justify;
+    margin-bottom: 2em;
+}
+
+.description span {
+    font-weight: bold;
+}
+
+.includes-title {
+    color: #333;
+    font-weight: bold;
+    padding: 8px;
+}
+
+.item-description {
+    margin-bottom: 2em;
+}
+
+.item-includes {
+    display: flex;
+    flex-direction: column;
+    padding-left: 40px;
+}
+
+.item-includes li {
+    color: #333;
+    list-style-type: disc;
+    padding: 8px;
+}
+
+table {
+    width: 100%;
+}
+
+tr:nth-child(odd) {
+    background-color: rgb(236, 236, 236);
+}
+
+tr:hover {
+    background-color: lightgray;
+}
+
+.element-heading {
+    width: 28%;
+}
+
+td span {
+    color: #333;
+    font-weight: bold;
+    padding: 8px;
+}
+
+td p {
+    color: #333;
+    padding: 12px 0;
+}
+
+.dealer-controls {
+    display: flex;
+    justify-content: space-between;
+}
+
+.dealer-action-btn {
+    background-color: #333;
+    color: #fff;
+    font-weight: bold;
+    padding: 1rem 7rem;
+    margin-bottom: 1rem;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
