@@ -14,7 +14,7 @@ namespace AirsoftShop.Controllers.Models.Products
         [StringLength(DefaultMaxLength, MinimumLength = DefaultMinLength, ErrorMessage = LengthErrorMsg)]
         public string Manufacturer { get; set; }
 
-        public IFormFile Image { get; set; }
+        public IEnumerable<IFormFile> Images { get; set; }
 
         [Range(RangeMinLength, RangeMaxLength, ErrorMessage = LengthErrorMsg)]
         public double Power { get; set; }
