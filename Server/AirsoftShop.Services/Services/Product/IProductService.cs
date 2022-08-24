@@ -7,5 +7,9 @@ public interface IProductService
 {
     Task<IEnumerable<InitialGunViewModel>> GetNewestEightGuns();
     
-    Task<OperationResult<CreatedGunServiceModel>> CreateGun (CreateGunServiceModel model, string dealerId);
+    Task<OperationResult<ResultGunServiceModel>> CreateGun (CreateGunServiceModel model, string dealerId);
+
+    Task<GunDetailsServiceModel?> GetDetails(string gunId);
+    
+    Task<OperationResult<ResultGunServiceModel>> Edit(string dealerId, EditGunServiceModel model);
 }

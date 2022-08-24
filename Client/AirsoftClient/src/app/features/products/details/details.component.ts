@@ -82,7 +82,7 @@ export class DetailsComponent implements OnInit {
       })
   }
 
-  onDelete(gunId: number) {
+  onDelete(gunId: string) {
     this.isLoading = true;
     this.isLoaded = false;
     this.productService.deleteGun(gunId)

@@ -1,6 +1,6 @@
 namespace AirsoftShop.Services.Models.Products;
 
-public class CreatedGunServiceModel
+public class ResultGunServiceModel
 {
     public string Id { get; set; }
     

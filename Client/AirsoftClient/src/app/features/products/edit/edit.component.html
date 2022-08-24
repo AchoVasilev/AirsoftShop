@@ -9,7 +9,7 @@
 </section>
 <section class="create" *ngIf="isLoaded">
     <h1 class="create-title">Добавяне на ново оръжие</h1>
-    <form action="" class="create-form" [formGroup]="gunCreateFormGroup" (ngSubmit)="createGunHandler()">
+    <form action="" class="create-form" [formGroup]="gunCreateFormGroup" (ngSubmit)="editGun()">
         <section class="create-data">
             <article class="create-wrapper">
                 <article class="create-inline-wrapper">
@@ -49,19 +49,6 @@
                 </article>
             </article>
             <article class="create-wrapper">
-                <article class="create-inline-wrapper">
-                    <input type="file" id="image" name="image" accept="image/*" multiple formControlName="image"
-                        (change)="onChange($event)" [class.invalid]="shouldShowErrorForControl('image')">
-                    <label class="image-label" for="image"><i class="fa-solid fa-image fa-2xl"></i> Снимка
-                        <span [class.error]="shouldShowErrorForControl('image')">*</span>
-                    </label>
-
-                    <ng-container *ngIf="shouldShowErrorForControl('image')">
-                        <p class="error" *ngIf="gunCreateFormGroup.controls['image'].errors?.['required']">
-                            Полето е задължително!
-                        </p>
-                    </ng-container>
-                </article>
                 <article class="create-inline-wrapper">
                     <label for="power">Мощност(J) <span
                             [class.error]="shouldShowErrorForControl('power')">*</span></label>

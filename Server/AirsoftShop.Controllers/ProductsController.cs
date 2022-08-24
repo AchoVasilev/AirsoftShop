@@ -3,6 +3,7 @@ namespace AirsoftShop.Controllers;
 using CloudinaryDotNet;
 using Common.Services;
 using Data.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Models.Products;
@@ -40,6 +41,7 @@ public class ProductsController : BaseController
         => this.Ok(await this.productService.GetNewestEightGuns());
 
     [HttpPost]
+    [Authorize]
     public async Task<IActionResult> CreateGun([FromForm] GunInputModel model)
     {
         var userId = this.currentUserService.GetUserId();
@@ -47,7 +49,7 @@ public class ProductsController : BaseController
 
         if (user.DealerId is null)
         {
-            return this.BadRequest(new { ErrorMessage = InvalidUserMsg });
+            return this.Unauthorized(new { ErrorMessage = InvalidUserMsg });
         }
 
         var imageIds = new List<string>();
@@ -93,4 +95,73 @@ public class ProductsController : BaseController
 
         return this.CreatedAtAction(nameof(this.CreateGun), result.Model);
     }
+    
+    [AllowAnonymous]
+    [HttpGet]
+    [Route("details")]
+    public async Task<IActionResult> GetDetails([FromQuery] string gunId)
+    {
+        var res = await this.productService.GetDetails(gunId);
+        if (res is null)
+        {
+            return this.NotFound();
+        }
+        
+        return this.Ok(res);
+    }
+
+    [Authorize]
+    [HttpPut]
+    public async Task<IActionResult> EditGun([FromBody] GunEditModel model)
+    {
+        var userId = this.currentUserService.GetUserId();
+        var user = await this.userManager.FindByIdAsync(userId);
+
+        if (user.DealerId is null)
+        {
+            return this.Unauthorized(new { ErrorMessage = InvalidUserMsg });
+        }
+        
+        var editModel = new EditGunServiceModel()
+        {
+            Barrel = model.Barrel,
+            Blowback = model.Blowback,
+            Capacity = model.Capacity,
+            Color = model.Color,
+            Firing = model.Firing,
+            Hopup = model.Hopup,
+            Length = model.Length,
+            Magazine = model.Magazine,
+            Manufacturer = model.Manufacturer,
+            Material = model.Material,
+            Name = model.Name,
+            Speed = model.Speed,
+            SubCategoryName = model.SubCategoryName,
+            Power = model.Power,
+            Price = model.Price,
+            Weight = model.Weight,
+            Propulsion = model.Propulsion,
+        };
+        
+        var result = await this.productService.Edit(user.DealerId, editModel);
+        if (result.Failed)
+        {
+            return this.BadRequest(new { result.ErrorMessage });
+        }
+
+        return this.Ok(result.Model);
+    }
+
+    [HttpDelete]
+    public async Task<IActionResult> DeleteGun([FromBody] string gunId)
+    {
+        var result = await this.productService.DeleteGunAsync(gunId);
+        if (result == false)
+        {
+            return BadRequest(new { ErrorMessage = MessageConstants.UnsuccessfulActionMsg });
+        }
+
+        return Ok(result);
+    }
+
 }
