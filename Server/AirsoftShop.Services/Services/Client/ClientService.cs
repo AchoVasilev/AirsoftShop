@@ -138,7 +138,7 @@ public class ClientService : IClientService
 
         if (user is null)
         {
-            return InvalidUserMsg;
+            return NotAuthorizedMsg;
         }
         
         user.Client.Address.StreetName = editModel.StreetName;

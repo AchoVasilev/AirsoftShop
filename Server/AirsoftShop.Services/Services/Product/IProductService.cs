@@ -12,4 +12,6 @@ public interface IProductService
     Task<GunDetailsServiceModel?> GetDetails(string gunId);
     
     Task<OperationResult<ResultGunServiceModel>> Edit(string dealerId, EditGunServiceModel model);
+
+    Task<OperationResult<ResultGunServiceModel>> DeleteGun(string gunId, string dealerId);
 }

@@ -49,7 +49,7 @@ public class ProductsController : BaseController
 
         if (user.DealerId is null)
         {
-            return this.Unauthorized(new { ErrorMessage = InvalidUserMsg });
+            return this.Unauthorized(new { ErrorMessage = NotAuthorizedMsg });
         }
 
         var imageIds = new List<string>();
@@ -119,7 +119,7 @@ public class ProductsController : BaseController
 
         if (user.DealerId is null)
         {
-            return this.Unauthorized(new { ErrorMessage = InvalidUserMsg });
+            return this.Unauthorized(new { ErrorMessage = NotAuthorizedMsg });
         }
         
         var editModel = new EditGunServiceModel()
@@ -153,15 +153,23 @@ public class ProductsController : BaseController
     }
 
     [HttpDelete]
+    [Authorize]
     public async Task<IActionResult> DeleteGun([FromBody] string gunId)
     {
-        var result = await this.productService.DeleteGunAsync(gunId);
-        if (result == false)
+        var userId = this.currentUserService.GetUserId();
+        var user = await this.userManager.FindByIdAsync(userId);
+
+        if (user.DealerId is null)
         {
-            return BadRequest(new { ErrorMessage = MessageConstants.UnsuccessfulActionMsg });
+            return this.Unauthorized(new { ErrorMessage = NotAuthorizedMsg });
+        }
+        
+        var result = await this.productService.DeleteGun(gunId, user.DealerId);
+        if (result.Failed)
+        {
+            return this.BadRequest(new { result.ErrorMessage });
         }
 
-        return Ok(result);
+        return this.Ok(result);
     }
-
 }

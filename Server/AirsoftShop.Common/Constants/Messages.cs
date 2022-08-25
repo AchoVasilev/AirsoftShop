@@ -20,7 +20,7 @@ public static class Messages
     public const string FailedUserLoginMsg = "Невалиден потребител или парола";
     public const string UsernameExistsMsg = "Потребител с това име вече съществува";
 
-    public const string InvalidUserMsg = "Нямате права";
+    public const string NotAuthorizedMsg = "Нямате права";
     public const string UserNotClientMsg = "Трябва да се регистрирате като клиент!";
     public const string UserNotDealerMsg = "Трябва да се регистрирате като продавач!";
 

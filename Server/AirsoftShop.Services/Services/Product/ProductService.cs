@@ -38,7 +38,7 @@ public class ProductService : IProductService
 
         if (dealer is null)
         {
-            return InvalidUserMsg;
+            return NotAuthorizedMsg;
         }
         
         var subCategoryId = await this.data.SubCategories
@@ -124,7 +124,7 @@ public class ProductService : IProductService
 
         if (dealer is null)
         {
-            return InvalidUserMsg;
+            return NotAuthorizedMsg;
         }
         
         var subCategoryId = await this.data.SubCategories
@@ -170,6 +170,33 @@ public class ProductService : IProductService
             Name = gun.Name,
             Id = gun.Id
         };
+
+        return result;
+    }
+
+    public async Task<OperationResult<ResultGunServiceModel>> DeleteGun(string gunId, string dealerId)
+    {
+        var gun = await this.data.Guns
+            .FirstOrDefaultAsync(x => x.Id == gunId);
+
+        if (gun is null)
+        {
+            return InvalidGun;
+        }
+
+        if (gun.DealerId != dealerId)
+        {
+            return NotAuthorizedMsg;
+        }
+
+        var result = new ResultGunServiceModel()
+        {
+            Id = gun.Id,
+            Name = gun.Name
+        };
+        
+        this.data.Remove(gun);
+        await this.data.SaveChangesAsync();
 
         return result;
     }
