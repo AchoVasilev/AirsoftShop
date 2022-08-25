@@ -8,13 +8,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CreateComponent } from './create/create.component';
 import { DetailsComponent } from './details/details.component';
 import { EditComponent } from './edit/edit.component';
+import { GunListComponent } from './gun-list/gun-list.component';
 
 
 @NgModule({
   declarations: [
     CreateComponent,
     DetailsComponent,
-    EditComponent
+    EditComponent,
+    GunListComponent
   ],
   imports: [
     CommonModule,

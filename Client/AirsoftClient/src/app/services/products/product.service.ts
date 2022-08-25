@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { GunDetailsViewModel } from 'src/app/models/products/guns/gunDetailsViewModel';
 import { GunEditModel } from 'src/app/models/products/guns/gunEditModel';
+import { GunsViewModel } from 'src/app/models/products/guns/gunsViewModel';
 import { InitialGunViewModel } from 'src/app/models/products/guns/initialGunViewModel';
 import { environment } from 'src/environments/environment';
 
@@ -40,5 +41,22 @@ export class ProductService {
 
   editGun(model: GunEditModel): Observable<object> {
     return this.httpClient.put(`${this.apiUrl}/products`, model);
+  }
+
+  getAllGunsQuery(categoryName: string,
+    itemsPerPage: number,
+    orderBy: string, dealers: string[], manufacturers: string[], colors: string[], powers: number[], page: number): Observable<GunsViewModel> {
+    return this.httpClient.get<GunsViewModel>(`${this.apiUrl}/products`, {
+      params: {
+        categoryName,
+        itemsPerPage,
+        orderBy,
+        dealers,
+        manufacturers,
+        colors,
+        powers,
+        page
+      }
+    })
   }
 }

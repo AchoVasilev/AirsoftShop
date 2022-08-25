@@ -1,0 +1,487 @@
+/* ARROW */
+.arrow {
+    border: solid black;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+}
+
+.down {
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+}
+
+/* PAGE */
+strong {
+    font-weight: 500;
+    color: black;
+}
+
+.gun-wish i,
+.gun-compare i {
+    color: black;
+}
+
+.active {
+    display: block;
+    visibility: visible;
+    opacity: 1;
+}
+
+.page {
+    background-color: #fff;
+    margin-top: 88px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+    padding: 40px 67px;
+}
+
+.wrapper {
+    flex-basis: 80%;
+}
+
+.search {
+    display: flex;
+    flex-direction: column;
+}
+
+.search-categories-list {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.search-categories-list-item {
+    margin: 5px;
+    border: 2px solid #FB5104;
+    width: 23%;
+}
+
+.clicked {
+    background-color: #FB5104;
+}
+
+.search-categories-list-item a {
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    font-weight: 500;
+    color: black;
+    border: none;
+}
+
+.search-categories-list-item a i {
+    color: black;
+}
+
+.search-categories-list-item:hover {
+    background-color: #FB5104;
+    transition: 300ms ease-in-out;
+}
+
+.search-categories-list-item:hover a,
+.search-categories-list-item:hover i {
+    color: white;
+}
+
+.container-checkbox-div {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.search-description {
+    display: flex;
+    color: black;
+    flex-direction: column;
+}
+
+.search-description-heading {
+    margin-bottom: 10px;
+    color: black;
+}
+
+.search-description-count {
+    color: black;
+}
+
+.search-submenu {
+    display: flex;
+    flex-wrap: wrap;
+    flex-basis: 40%;
+    margin-bottom: 15px;
+}
+
+.search-submenu form {
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.search-submenu-dropdown {
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    margin-right: 10px;
+    cursor: pointer;
+    border: 2px solid #FB5104;
+    background-color: #fff;
+    color: black;
+    align-items: center;
+}
+
+.search-submenu-dropdown span {
+    color: black;
+    line-height: 1em;
+    font-weight: 400;
+}
+
+.search-submenu-dropdown i {
+    margin-left: 20px;
+    margin-bottom: 4px;
+    margin-right: 1px;
+    align-self: end;
+    color: black;
+}
+
+.submenu-dropdown-list {
+    border: 2px solid #FB5104;
+    background-color: #fff;
+    color: #333333;
+    font-size: 1.1em;
+    padding: 7px 0;
+    margin-right: 3px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.submenu-dropdown-list option {
+    text-align: center;
+    padding: 4px 0;
+    color: #333333;
+    padding: 7px;
+    display: block;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.submenu-count-list {
+    padding: 8px 0;
+    border: 2px solid #FB5104;
+    background-color: #fff;
+    color: #333333;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.submenu-count-list option {
+    color: #333333;
+    display: block;
+    padding: 7px;
+    font-size: 15px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.pagination {
+    display: flex;
+}
+
+.pagination li button {
+    padding: 7px;
+    font-weight: bold;
+    color: white;
+    background-color: #333333;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.pagination li:hover button {
+    background-color: #FB5104;
+    color: white;
+    transition: 300ms ease-in-out;
+}
+
+.pagination li button:disabled {
+    cursor: not-allowed;
+    background-color: rgb(92, 92, 92);
+}
+
+.pagination li span {
+    margin: 4px;
+    text-align: center;
+}
+
+.pagination li.disabled button:hover {
+    background-color: unset;
+    color: black;
+}
+
+/* GUNS */
+.guns {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.gun {
+    flex-basis: 30%;
+    margin: 15px 10px;
+    padding: 10px;
+    position: relative;
+    z-index: 0;
+    white-space: nowrap;
+}
+
+.gun-buttons-wrapper {
+    position: absolute;
+    top: 1.5rem;
+    right: 0;
+}
+
+.gun-wish {
+    margin: 10px;
+}
+
+.gun-buttons-wrapper a i:hover {
+    color: #FB5104;
+    transition: 300ms ease-in-out;
+}
+
+.gun-img {
+    max-width: 400px;
+    display: block;
+}
+
+.gun-img:hover+.tooltip {
+    visibility: visible;
+    opacity: 1;
+    display: block;
+    transition: 300ms ease-in-out;
+}
+
+.gun-img img {
+    width: 100%;
+    height: 200px;
+    padding: 3px;
+    border-radius: 3px;
+    transition: transform 300ms ease-in-out;
+}
+
+.gun-img img:hover {
+    transform: scale(1.1);
+    box-shadow: none;
+    border: none;
+}
+
+.gun-price {
+    font-weight: 500;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: black;
+}
+
+.gun-name {
+    margin-top: 8px;
+    margin-bottom: 16px;
+    color: black;
+    font-weight: 500;
+}
+
+.gun-manufacturer {
+    font-size: 14px;
+    margin-bottom: 10px;
+    color: black;
+    text-transform: uppercase;
+}
+
+.gun-manufacturer strong {
+    text-transform: capitalize;
+}
+
+.tooltip {
+    position: absolute;
+    visibility: hidden;
+    top: -38%;
+    background: #ebe9e8;
+    opacity: 0;
+    padding: 10px;
+    border-radius: 3px;
+    box-shadow: 1px 1px 13px -4px;
+    display: none;
+    color: black;
+}
+
+.tooltip::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #ebe9e8 transparent transparent transparent;
+    box-shadow: 1px 1px 13px -4px;
+}
+
+.gun-listing {
+    position: relative;
+    padding: 5px;
+    line-height: 1.2;
+}
+
+.gun-listing-item {
+    color: black;
+}
+
+.basket-btn {
+    background-color: #333333;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+}
+
+.basket-btn i {
+    color: #fff;
+}
+
+.basket-btn:hover {
+    background-color: #FB5104;
+    transition: 300ms ease-in-out;
+}
+
+/* ASIDE */
+aside {
+    flex-basis: 18%;
+    margin-right: 20px;
+}
+
+.filters {
+    border: 1px solid lightgray;
+    border-radius: 2px;
+    margin: 5px;
+}
+
+.filter {
+    padding: 10px;
+    border-top: 1px solid lightgray;
+}
+
+.filter:first-child {
+    border: none;
+}
+
+.filter-header {
+    color: black;
+    margin-bottom: 10px;
+}
+
+.filter ul li {
+    margin: 7px;
+}
+
+.filter ul li:last-child {
+    margin-bottom: 10px;
+}
+
+.filter ul li label span {
+    color: black;
+}
+
+.container-checkbox {
+    display: inline-block;
+    position: relative;
+    padding-left: 24px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    color: black;
+}
+
+/* Hide the browser's default checkbox */
+.container-checkbox input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 16px;
+    width: 16px;
+    border: 2px solid #FB5104;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the checkmark when checked */
+.container-checkbox input:checked~.checkmark:after {
+    display: block;
+}
+
+/* Style the checkmark/indicator */
+.container-checkbox .checkmark:after {
+    left: 4px;
+    top: 1px;
+    width: 6px;
+    height: 10px;
+    border: solid #FB5104;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+
+.submit-btn,
+.show-btn {
+    background-color: #333333;
+    color: #fff;
+    cursor: pointer;
+    border: none;
+    border-radius: 2px;
+    padding: 4px 12px;
+}
+
+.submit-btn:hover,
+.show-btn:hover {
+    background-color: #FB5104;
+    transition: 300ms ease-in-out;
+}
+
+.no-guns h2 {
+    color: #333333;
+    font-weight: bold;
+    text-align: center;
+}
+
+.spinner {
+    height: 100%;
+}
+
+.dark-overlay {
+    background-color: rgba(0, 0, 0, 0.7);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 100%;
+    z-index: 1000;
+}

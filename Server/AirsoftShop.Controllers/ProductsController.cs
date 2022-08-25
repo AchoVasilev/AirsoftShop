@@ -172,4 +172,63 @@ public class ProductsController : BaseController
 
         return this.Ok(result);
     }
+    
+    [AllowAnonymous]
+    [HttpGet]
+    [Route("all")]
+    public async Task<IActionResult> GetAll([FromQuery] AllGunsQueryModel query)
+    {
+        var queryModel = new GunsQueryServiceModel()
+        {
+            CategoryName = query.CategoryName,
+            Colors = query.Colors,
+            Dealers = query.Dealers,
+            ItemsPerPage = query.ItemsPerPage,
+            Manufacturers = query.Manufacturers,
+            OrderBy = query.OrderBy,
+            Page = query.Page,
+            Powers = query.Powers
+        };
+        
+        var guns = await this.productService.GetAllGuns(queryModel);
+        var allGunsViewModel = new GunsViewModel
+        {
+            AllGuns = guns,
+            ItemsPerPage = query.ItemsPerPage,
+            PageNumber = query.Page
+        };
+
+        if (string.IsNullOrEmpty(query.CategoryName) || query.CategoryName.ToLower() == "all" || query.CategoryName == "null")
+        {
+            allGunsViewModel.Colors = await this.productService.GetAllColors();
+            allGunsViewModel.Manufacturers = await this.productService.GetAllManufacturers();
+            allGunsViewModel.Dealers = await this.productService.GetAllDealers();
+            allGunsViewModel.Powers = await this.productService.GetAllPowers();
+            allGunsViewModel.ItemCount = await this.productService.GetAllGunsCount();
+        }
+        else
+        {
+            var gunColors = new HashSet<string>();
+            var gunManufacturers = new HashSet<string>();
+            var gunDealers = new HashSet<string>();
+            var gunPowers = new HashSet<double>();
+
+            foreach (var gun in guns)
+            {
+                gunColors.Add(gun.Color);
+                gunManufacturers.Add(gun.Manufacturer);
+                gunDealers.Add(gun.DealerName);
+                gunPowers.Add(gun.Power);
+            }
+
+            allGunsViewModel.Colors = gunColors;
+            allGunsViewModel.Manufacturers = gunManufacturers;
+            allGunsViewModel.Dealers = gunDealers;
+            allGunsViewModel.Powers = gunPowers;
+            allGunsViewModel.ItemCount = guns.Count;
+        }
+            
+
+        return this.Ok(allGunsViewModel);
+    }
 }
