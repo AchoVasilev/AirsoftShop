@@ -1,0 +1,34 @@
+<mat-spinner *ngIf="isLoading" style="margin: 0 auto;"></mat-spinner>
+
+<section class="wish-list" *ngIf="isLoaded">
+    <article class="wish-list-item-headings">
+        <span></span>
+        <h4 class="wish-list-item-heading">
+            Поръчан на:
+        </h4>
+        <h4 class="wish-list-item-heading">
+            Цена на продукт:
+        </h4>
+        <span></span>
+    </article>
+    <article class="order" *ngFor="let gun of guns">
+        <article class="wish-list-item">
+            <article class="wish-list-item-product">
+                <a href="" class="wish-item-image-container">
+                    <img src="{{gun.imageUrl}}" alt="{{gun.name}} image">
+                </a>
+                <article class="wish-item-title-wrapper">
+                    <a href="" class="wish-item-title">
+                        {{gun.name}}
+                    </a>
+                    <p class="wish-item-manufacturer">Производител: {{gun.manufacturer}}</p>
+                </article>
+            </article>
+            <p>{{gun.createdOn}} г.</p>
+            <p>{{gun.price}} лв.</p>
+            <article class="wish-list-item-buttons">
+                <a routerLink="/products/{{gun.name}}/{{gun.id}}" class="wish-button">Детайли</a>
+            </article>
+        </article>
+    </article>
+</section>

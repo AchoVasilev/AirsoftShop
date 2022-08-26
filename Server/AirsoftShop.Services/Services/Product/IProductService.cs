@@ -25,6 +25,8 @@ public interface IProductService
 
     Task<ICollection<GunViewServiceModel>> FilterGunsByCategory(GunsQueryServiceModel query);
 
+    Task<OperationResult<OwnerGunListServiceModel>> GetMyProducts(string userId);
+
     Task<ICollection<GunViewServiceModel>> OrderGuns(GunSortModel model);
 
     Task<ICollection<GunViewServiceModel>> GetAllGuns(GunsQueryServiceModel query);

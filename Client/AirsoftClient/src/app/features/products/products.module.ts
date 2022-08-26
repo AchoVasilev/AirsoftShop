@@ -9,6 +9,7 @@ import { CreateComponent } from './create/create.component';
 import { DetailsComponent } from './details/details.component';
 import { EditComponent } from './edit/edit.component';
 import { GunListComponent } from './gun-list/gun-list.component';
+import { MineComponent } from './mine/mine.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { GunListComponent } from './gun-list/gun-list.component';
     CreateComponent,
     DetailsComponent,
     EditComponent,
-    GunListComponent
+    GunListComponent,
+    MineComponent
   ],
   imports: [
     CommonModule,

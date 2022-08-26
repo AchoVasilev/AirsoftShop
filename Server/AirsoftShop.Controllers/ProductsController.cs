@@ -96,7 +96,6 @@ public class ProductsController : BaseController
         return this.CreatedAtAction(nameof(this.CreateGun), result.Model);
     }
     
-    [AllowAnonymous]
     [HttpGet]
     [Route("details")]
     public async Task<IActionResult> GetDetails([FromQuery] string gunId)
@@ -173,7 +172,6 @@ public class ProductsController : BaseController
         return this.Ok(result);
     }
     
-    [AllowAnonymous]
     [HttpGet]
     [Route("all")]
     public async Task<IActionResult> GetAll([FromQuery] AllGunsQueryModel query)
@@ -230,5 +228,21 @@ public class ProductsController : BaseController
             
 
         return this.Ok(allGunsViewModel);
+    }
+    
+    [HttpGet]
+    [Route("mine")]
+    [Authorize]
+    public async Task<IActionResult> MyProducts()
+    {
+        var userId = this.currentUserService.GetUserId();
+        var result = await this.productService.GetMyProducts(userId!);
+
+        if (result.Failed)
+        {
+            return this.Unauthorized(new { result.ErrorMessage });
+        }
+        
+        return this.Ok(result.Models);
     }
 }

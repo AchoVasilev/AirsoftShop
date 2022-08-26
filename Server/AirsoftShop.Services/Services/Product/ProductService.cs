@@ -343,6 +343,36 @@ public class ProductService : IProductService
                     ImageUrls = x.Images.Select(y => y.Url).ToList()
                 })
                     .ToListAsync();
+        
+        public async Task<OperationResult<OwnerGunListServiceModel>> GetMyProducts(string userId)
+        {
+            var dealerId = await this.data.Users
+                .Where(x => x.Id == userId)
+                .Select(x => x.DealerId)
+                .FirstOrDefaultAsync();
+
+            if (dealerId is null)
+            {
+                return NotAuthorizedMsg;
+            }
+
+            var guns = await this.data.Guns
+                .Where(x => x.DealerId == dealerId)
+                .Select(x => new OwnerGunListServiceModel()
+                {
+                    Id = x.Id,
+                    Color = x.Color,
+                    CreatedOn = x.CreatedOn.ToString("dd/MM/yyyy"),
+                    DealerId = dealerId,
+                    ImageUrl = x.Images.Select(i => i.Url).First(),
+                    Manufacturer = x.Manufacturer,
+                    Name = x.Name,
+                    Price = x.Price,
+                })
+                .ToListAsync();
+
+            return guns;
+        }
 
         public async Task<ICollection<GunViewServiceModel>> OrderGuns(GunSortModel model)
             => await this.QuerySortGuns(model)

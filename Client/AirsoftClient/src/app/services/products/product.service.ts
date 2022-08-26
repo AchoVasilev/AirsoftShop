@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { DealerGunsList } from 'src/app/models/products/guns/dealerGunList';
 import { GunDetailsViewModel } from 'src/app/models/products/guns/gunDetailsViewModel';
 import { GunEditModel } from 'src/app/models/products/guns/gunEditModel';
 import { GunsViewModel } from 'src/app/models/products/guns/gunsViewModel';
@@ -58,5 +59,9 @@ export class ProductService {
         page
       }
     })
+  }
+
+  getDealerProducts(): Observable<DealerGunsList[]> {
+    return this.httpClient.get<DealerGunsList[]>(`${this.apiUrl}/products/mine`);
   }
 }
