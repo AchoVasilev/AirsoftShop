@@ -60,7 +60,7 @@ export class DetailsComponent implements OnInit {
       });
   }
 
-  addToBasket(gunId: number, price: number) {
+  addToBasket(gunId: string, price: number) {
     this.isLoading = true;
     this.isLoaded = false;
 

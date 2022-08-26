@@ -1,5 +1,5 @@
 export interface GunDetailsViewModel {
-    id: number,
+    id: string,
     name: string,
     manufacturer: string,
     imageUrl: string,

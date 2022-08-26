@@ -151,7 +151,7 @@ export class GunListComponent implements OnInit {
     this.getAllGuns();
   }
 
-  addToBasket(gunId: number, price: number) {
+  addToBasket(gunId: string, price: number) {
     this.isLoaded = false;
     this.isLoading = true;
     this.cartService.AddItem(gunId)

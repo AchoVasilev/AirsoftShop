@@ -9,6 +9,10 @@ const routes: Routes = [
     component: LoginComponent
   },
   {
+    path: 'products',
+    loadChildren: () => import('./features/products/products.module').then(x => x.ProductsModule)
+  },
+  {
     path: 'dealer',
     loadChildren: () => import('./features/dealer/dealer.module').then(x => x.DealerModule)
   },

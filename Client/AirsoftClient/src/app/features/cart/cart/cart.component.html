@@ -1,0 +1,122 @@
+<mat-spinner style="margin: 0 auto;" *ngIf="isLoading"></mat-spinner>
+
+<app-empty *ngIf="isLoaded && items.length == 0"></app-empty>
+
+<section class="basket" *ngIf="isLoaded && items.length > 0">
+    <article class="basket-steps">
+        <ul>
+            <li class="basket-step" id="first-basket-step">
+                <i class="fa-solid fa-1 fa-2xl" id="basket-icon"></i>
+                <h5 class="basket-header">Кошница</h5>
+                <span></span>
+            </li>
+            <li class="basket-step">
+                <i class="fa-solid fa-2 fa-2xl"></i>
+                <h5>Вашите данни</h5>
+                <span></span>
+            </li>
+            <li class="basket-step">
+                <i class="fa-solid fa-3 fa-2xl"></i>
+                <h5>Доставка и заплащане</h5>
+            </li>
+            <li class="basket-step">
+                <i class="fa-solid fa-4 fa-2xl"></i>
+                <h5>Проверка и потвърждение</h5>
+            </li>
+        </ul>
+    </article>
+
+    <form class="basket-form" action="">
+        <h2 class="basket-title">Лист на продуктите в кошницата ({{items.length}} бр.)</h2>
+        <table>
+            <tbody>
+                <tr class="basket-products-label">
+                    <th colspan="2"></th>
+                    <th class="basket-product-price">
+                        Цена
+                    </th>
+                    <!-- <th class="basket-product-quantity">
+                        Количество
+                    </th> -->
+                    <th class="basket-product-action">
+                        Премахване от количката
+                    </th>
+                </tr>
+                <tr class="basket-item" *ngFor="let item of items">
+                    <td class="basket-item-img">
+                        <a class="basket-item-img-wrapper" routerLink="/products/guns/{{item.name}}/{{item.id}}">
+                            <img src="{{item.imageUrl}}">
+                        </a>
+                    </td>
+                    <td class="basket-item-desc">
+                        <h3 class="basket-item-title">
+                            <a href="">{{item.name}} - {{item.color}}</a>
+                        </h3>
+                        <p class="basket-item-manufacturer">Производител: {{item.manufacturer}}</p>
+                    </td>
+                    <td class="basket-item-price">
+                        <p>{{item.price.toFixed(2)}} лв.</p>
+                    </td>
+                    <!-- <td class="basket-quantity">
+                        <span>
+                            <button class="basket-quantity-btn"><i class="fa-solid fa-minus fa-lg"></i></button>
+                            <input type="text" value="1">
+                            <button class="basket-quantity-btn"><i class="fa-solid fa-plus fa-lg"></i></button>
+                        </span>
+                    </td> -->
+                    <td class="basket-remove">
+                        <button class="basket-remove-btn" (click)="onItemRemove(item.id, item.price, $event)"><i
+                                class="fa-solid fa-xmark fa-2xl"></i></button>
+                    </td>
+                </tr>
+                <tr class="basket-tools-bottom">
+                    <td colspan="8">
+                        <article class="tools-bottom-wrapper">
+                            <span class="basket-code-text">
+                                Имате ли код за отсъпка?
+                            </span>
+                            <form action="" method="">
+                                <input type="text">
+                                <button class="code-btn">Приложи</button>
+                            </form>
+                        </article>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+    <article class="basket-summary">
+        <article class="summary-text">
+            <p class="summary-text-free">
+                <span>Безплатна доставка</span> за поръчки над 500 лв.
+            </p>
+            <p class="summary-text-remaining" *ngIf="totalPrice < 500">
+                В момента ви остават само {{(500 - totalPrice).toFixed(2)}} лв. до безплатна доставка.
+            </p>
+        </article>
+        <article class="summary-prices">
+            <article class="summary-prices-price">
+                <p class="summary-total-price-text">
+                    Цена на продуктите:
+                </p>
+                <p class="summary-total-price-value">
+                    {{totalPrice}} лв.
+                </p>
+            </article>
+            <article class="summary-prices-total">
+                <p class="summary-final-price-text">
+                    Крайна цена:
+                </p>
+                <p class="summary-final-price-value">
+                    {{totalPrice}} лв.
+                </p>
+            </article>
+        </article>
+    </article>
+    <article class="basket-actions">
+        <article class="basket-actions-container">
+            <a routerLink="/products/guns/all">Продължи да пазаруваш</a>
+            <a routerLink="/cart/myData">Напред</a>
+        </article>
+    </article>
+</section>

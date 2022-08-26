@@ -1,0 +1,33 @@
+.card {
+    padding: 80px 100px;
+    background-color: #fff;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card-body-title {
+    margin: 1em 0;
+    color: #333;
+    font-weight: bold;
+}
+
+.card-body-subtitle {
+    color: #333;
+}
+
+.shop-btn {
+    margin: 3em 0;
+    background-color: #333;
+    padding: 1rem 2rem;
+    font-weight: bold;
+    border-radius: 4px;
+}
+
+.shop-btn:hover {
+    background-color: #FB5104;
+    transition: 300ms ease-in-out;
+}

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AddToCartResultModel } from 'src/app/models/cart/addToCartResultModel';
+import { CartViewModel } from 'src/app/models/cart/cartViewModel';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -12,7 +13,17 @@ export class CartService {
 
   constructor(private httpClient: HttpClient) { }
 
-  AddItem(gunId: number): Observable<AddToCartResultModel> {
+  AddItem(gunId: string): Observable<AddToCartResultModel> {
     return this.httpClient.post<AddToCartResultModel>(`${this.apiUrl}/carts`, gunId);
+  }
+
+  GetItems(): Observable<CartViewModel[]> {
+    return this.httpClient.get<CartViewModel[]>(`${this.apiUrl}/carts`);
+  }
+
+  RemoveItem(itemId: string): Observable<Object> {
+    return this.httpClient.delete(`${this.apiUrl}/carts`, {
+      params: { itemId }
+    });
   }
 }

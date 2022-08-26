@@ -1,5 +1,5 @@
 export interface AllGunViewModel {
-    id: number,
+    id: string,
     dealerName: string,
     name: string,
     manufacturer: string,

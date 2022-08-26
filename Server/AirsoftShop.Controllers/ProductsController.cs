@@ -61,7 +61,7 @@ public class ProductsController : BaseController
                 return this.BadRequest(new { ErrorMessage = UnsuccessfulActionMsg });
             }
 
-            var imageId = await this.fileService.AddImageToDatabase(imageResult.Model);
+            var imageId = await this.fileService.AddImageToDatabase(imageResult.Model!);
             imageIds.Add(imageId);
         }
 

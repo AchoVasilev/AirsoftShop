@@ -9,11 +9,11 @@ using Newtonsoft.Json;
 
 internal static class ApplicationBuilderExtensions
 {
-    internal static IApplicationBuilder UseRoutingAndAuth(this IApplicationBuilder app)
+    internal static void UseRoutingAndAuth(this IApplicationBuilder app) 
         => app.UseRouting()
             .UseAuthentication()
             .UseAuthorization();
-    
+
     internal static IApplicationBuilder UseSwaggerUi(this IApplicationBuilder app)
         => app.UseSwagger()
             .UseSwaggerUI(options =>
