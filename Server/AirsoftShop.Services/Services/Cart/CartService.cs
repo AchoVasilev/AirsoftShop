@@ -122,4 +122,24 @@ public class CartService : ICartService
 
         return deliveryData;
     }
+    
+    public async Task<bool> ClearCart(string clientId)
+    {
+        var client = await this.data.Clients
+            .Where(x => x.Id == clientId)
+            .Include(x => x.Cart)
+            .ThenInclude(x => x.Guns)
+            .FirstOrDefaultAsync();
+
+        client.Cart.Guns.Clear();
+
+        if (client.Cart.Guns.Count == 0)
+        {
+            await this.data.SaveChangesAsync();
+            
+            return true;
+        }
+
+        return false;
+    }
 }

@@ -1,7 +1,7 @@
 namespace AirsoftShop.Controllers.Models.Products;
 
 using Common.Models;
-using Services.Models.Products;
+using Services.Models.Product;
 
 public class GunsViewModel : PagingModel
 {

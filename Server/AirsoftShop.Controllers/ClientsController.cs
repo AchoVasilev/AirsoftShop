@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Models.Clients;
-using Services.Models.Clients;
+using Services.Models.Client;
 using Services.Services.Client;
 using static Common.Constants.Messages;
 

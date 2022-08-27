@@ -1,0 +1,131 @@
+<section class="summary">
+    <article class="basket-steps">
+        <ul>
+            <li class="basket-step">
+                <i class="fa-solid fa-1 fa-2xl"></i>
+                <a routerLink="/cart">Кошница</a>
+                <span></span>
+            </li>
+            <li class="basket-step">
+                <i class="fa-solid fa-2 fa-2xl"></i>
+                <a routerLink="/cart/myData">Вашите данни</a>
+                <span></span>
+            </li>
+            <li class="basket-step">
+                <i class="fa-solid fa-3 fa-2xl"></i>
+                <a routerLink="/cart/delivery">Доставка и заплащане</a>
+            </li>
+            <li class="basket-step" id="basket-step">
+                <i class="fa-solid fa-4 fa-2xl" id="basket-icon"></i>
+                <h5>Проверка и потвърждение</h5>
+            </li>
+        </ul>
+    </article>
+
+    <article class="summary-wrapper">
+        <form action="">
+            <section class="summary-details">
+                <h2 class="summary-details-title">Детайли:</h2>
+                <h4 class="summary-details-subtitle">Вашите данни:</h4>
+                <ul>
+                    <li class="summary-details-info">
+                        {{userData.client.firstName}} {{userData.client.lastName}}
+                    </li>
+                    <li class="summary-details-info">
+                        {{userData.client.address.streetName}}
+                    </li>
+                    <li class="summary-details-info">
+                        {{userData.client.address.city.zipCode}}, {{userData.client.address.city.name}}
+                    </li>
+                    <li class="summary-details-info">
+                        {{userData.client.phoneNumber}}
+                    </li>
+                    <li class="summary-details-info">
+                        {{userData.email}}
+                    </li>
+                    <li class="summary-details-info">
+                        <a routerLink="/client/edit">
+                            Променете данните
+                        </a>
+                    </li>
+                </ul>
+            </section>
+
+            <section class="summary-products">
+                <table>
+                    <tbody>
+                        <tr class="basket-products-label">
+                            <th colspan="2"></th>
+                            <th class="basket-product-price">
+                                Цена
+                            </th>
+                            <th class="basket-product-quantity">
+                                Количество
+                            </th>
+                        </tr>
+                        <tr class="basket-item" *ngFor="let item of cartItems">
+                            <td class="basket-item-img">
+                                <a class="basket-item-img-wrapper" routerLink="/products/{{item.name}}/{{item.id}}">
+                                    <img src="{{item.imageUrl}}">
+                                </a>
+                            </td>
+                            <td class="basket-item-desc">
+                                <h3 class="basket-item-title">
+                                    <a href="">{{item.name}} - {{item.color}}</a>
+                                </h3>
+                                <p class="basket-item-manufacturer">Производител: {{item.manufacturer}}</p>
+                            </td>
+                            <td class="basket-item-price">
+                                <p>{{item.price}} лв.</p>
+                            </td>
+                            <td class="basket-quantity">
+                                <p class="basket-quantity-text">1 бр.</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section class="summary-payment">
+                <h2 class="summary-details-title">Детайли за плащане и доставка</h2>
+                <ul>
+                    <li class="summary-payment-info">
+                        <p class="courier-title">
+                            <span class="payment-bold">Куриерска фирма:</span> {{courierName}}
+                        </p>
+                        <p class="delivery-price"> <span class="payment-bold">Доставка:</span> {{deliveryPrice}} лв.</p>
+                    </li>
+                    <li class="summary-payment-info">
+                        <span class="payment-bold">Начин на плащане:</span> {{paymentType == 'cash' ? 'Наложен платеж' :
+                        'С карта'}}
+                    </li>
+                    <li class="summary-payment-info">
+                        <a routerLink="/cart/delivery">
+                            Променете данните
+                        </a>
+                    </li>
+                </ul>
+            </section>
+
+            <section class="summary-final-price">
+                <article></article>
+                <article class="summary-final-price-wrapper">
+                    <p class="summary-final-price-text">
+                        Крайна цена:
+                    </p>
+                    <p class="summary-final-price-value">
+                        {{finalPrice}} лв.
+                    </p>
+                </article>
+            </section>
+
+            <section class="basket-actions">
+                <article class="basket-actions-container">
+                    <a routerLink="/cart">Към кошницата</a>
+                    <button class="order-summary-btn" type="button" (click)="sendOrder()">Изпращане на
+                        поръчката</button>
+                </article>
+            </section>
+        </form>
+    </article>
+</section>

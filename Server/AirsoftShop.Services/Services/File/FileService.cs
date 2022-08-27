@@ -9,8 +9,7 @@ namespace AirsoftShop.Services.Services.File
     using Data.Models.Images;
     using Data.Persistence;
     using Microsoft.AspNetCore.Http;
-    using Models.Files;
-
+    using Models.File;
     using static Common.Constants.Messages;
     public class FileService : IFileService
     {

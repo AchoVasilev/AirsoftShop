@@ -7,8 +7,8 @@ using Data.Persistence;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Models.Address;
-using Models.Cities;
-using Models.Clients;
+using Models.City;
+using Models.Client;
 using static Common.Constants.Messages;
 
 public class ClientService : IClientService

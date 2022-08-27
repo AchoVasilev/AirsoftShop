@@ -12,4 +12,6 @@ public interface ICartService
     Task<bool> DeleteItemById(string userClientId, string itemId);
 
     Task<CartDeliveryDataServiceModel> GetCartDeliveryData();
+
+    Task<bool> ClearCart(string clientId);
 }

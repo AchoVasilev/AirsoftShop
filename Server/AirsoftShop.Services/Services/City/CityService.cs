@@ -2,7 +2,7 @@ namespace AirsoftShop.Services.Services.City;
 
 using Data.Persistence;
 using Microsoft.EntityFrameworkCore;
-using Models.Cities;
+using Models.City;
 
 public class CityService : ICityService
 {

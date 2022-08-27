@@ -16,9 +16,10 @@ using Services.Services.Cart;
 using Services.Services.Category;
 using Services.Services.City;
 using Services.Services.Client;
-using Services.Services.Dealers;
+using Services.Services.Dealer;
 using Services.Services.File;
 using Services.Services.Identity;
+using Services.Services.Order;
 using Services.Services.Product;
 
 internal static class ServiceCollectionExtensions
@@ -108,6 +109,7 @@ internal static class ServiceCollectionExtensions
             .AddTransient<IDealerService, DealerService>()
             .AddTransient<ICartService, CartService>()
             .AddTransient<IClientService, ClientService>()
+            .AddTransient<IOrderService, OrderService>()
             .AddTransient<ICityService, CityService>();
 
     internal static IServiceCollection AddSwagger(this IServiceCollection services)

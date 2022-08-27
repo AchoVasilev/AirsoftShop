@@ -3,7 +3,7 @@ namespace AirsoftShop.Services.Services.File;
 using CloudinaryDotNet;
 using Common.Models;
 using Microsoft.AspNetCore.Http;
-using Models.Files;
+using Models.File;
 
 public interface IFileService
 {

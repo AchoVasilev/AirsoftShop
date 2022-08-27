@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Models.Products;
-using Services.Models.Products;
+using Services.Models.Product;
 using Services.Services.File;
 using Services.Services.Product;
 using static Common.Constants.Constants.WebConstants;

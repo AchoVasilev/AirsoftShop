@@ -6,7 +6,7 @@ using Data.Models.Enums;
 using Data.Models.Images;
 using Data.Persistence;
 using Microsoft.EntityFrameworkCore;
-using Models.Products;
+using Models.Product;
 using static Common.Constants.Messages;
 public class ProductService : IProductService
 {

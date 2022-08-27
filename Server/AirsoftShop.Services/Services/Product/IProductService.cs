@@ -1,7 +1,7 @@
 namespace AirsoftShop.Services.Services.Product;
 
 using Common.Models;
-using Models.Products;
+using Models.Product;
 
 public interface IProductService
 {

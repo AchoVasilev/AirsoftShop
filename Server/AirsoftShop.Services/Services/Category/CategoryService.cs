@@ -2,7 +2,7 @@ namespace AirsoftShop.Services.Services.Category;
 
 using Data.Persistence;
 using Microsoft.EntityFrameworkCore;
-using Models.Categories;
+using Models.Category;
 
 public class CategoryService : ICategoryService
 {

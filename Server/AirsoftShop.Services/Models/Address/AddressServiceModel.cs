@@ -1,6 +1,6 @@
 namespace AirsoftShop.Services.Models.Address;
 
-using Cities;
+using City;
 
 public class AddressServiceModel
 {

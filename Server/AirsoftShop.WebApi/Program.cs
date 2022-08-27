@@ -9,7 +9,10 @@ builder.Services
     .AddJwtAuthentication(builder.Services.GetJwtSettings(builder.Configuration))
     .RegisterCloudinary(builder.Configuration)
     .RegisterApplicationServices()
-    .AddControllers();
+    .AddControllers(options =>
+    {
+        options.Filters.Add<OperationCancelledExceptionFilter>();
+    });
 
 var app = builder.Build();
 

@@ -1,6 +1,6 @@
 namespace AirsoftShop.Services.Services.City;
 
-using Models.Cities;
+using Models.City;
 
 public interface ICityService
 {
