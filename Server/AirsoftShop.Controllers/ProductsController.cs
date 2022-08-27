@@ -173,7 +173,6 @@ public class ProductsController : BaseController
     }
     
     [HttpGet]
-    [Route("all")]
     public async Task<IActionResult> GetAll([FromQuery] AllGunsQueryModel query)
     {
         var queryModel = new GunsQueryServiceModel()

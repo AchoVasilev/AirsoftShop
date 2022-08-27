@@ -12,8 +12,10 @@ using CloudinaryDotNet;
 using Common.Services;
 using Microsoft.OpenApi.Models;
 using Models;
+using Services.Services.Cart;
 using Services.Services.Category;
 using Services.Services.City;
+using Services.Services.Client;
 using Services.Services.Dealers;
 using Services.Services.File;
 using Services.Services.Identity;
@@ -104,6 +106,8 @@ internal static class ServiceCollectionExtensions
             .AddTransient<IProductService, ProductService>()
             .AddTransient<IFileService, FileService>()
             .AddTransient<IDealerService, DealerService>()
+            .AddTransient<ICartService, CartService>()
+            .AddTransient<IClientService, ClientService>()
             .AddTransient<ICityService, CityService>();
 
     internal static IServiceCollection AddSwagger(this IServiceCollection services)

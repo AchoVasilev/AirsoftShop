@@ -46,7 +46,8 @@ export class ProductService {
 
   getAllGunsQuery(categoryName: string,
     itemsPerPage: number,
-    orderBy: string, dealers: string[], manufacturers: string[], colors: string[], powers: number[], page: number): Observable<GunsViewModel> {
+    orderBy: string, dealers: string[], manufacturers: string[], colors: string[], powers: number[], page: number)
+    : Observable<GunsViewModel> {
     return this.httpClient.get<GunsViewModel>(`${this.apiUrl}/products`, {
       params: {
         categoryName,
