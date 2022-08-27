@@ -1,7 +1,9 @@
 namespace AirsoftShop.Services.Services.Cart;
 
 using Common.Models;
+using Couriers;
 using Data.Models;
+using Data.Models.Enums;
 using Data.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Models.Cart;
@@ -93,5 +95,31 @@ public class CartService : ICartService
         await this.data.SaveChangesAsync();
 
         return result;
+    }
+    
+    public async Task<CartDeliveryDataServiceModel> GetCartDeliveryData()
+    {
+        var couriers = await this.data.Couriers
+            .Select(x => new CourierServiceModel()
+            {
+                Id = x.Id,
+                DeliveryDays = x.DeliveryDays,
+                DeliveryPrice = x.DeliveryPrice,
+                ImageUrl = x.Image.Url ?? x.Image.RemoteImageUrl,
+                Name = x.Name
+            })
+            .ToListAsync();
+
+        var deliveryData = new CartDeliveryDataServiceModel();
+
+        foreach (var courier in couriers)
+        {
+            deliveryData.Couriers.Add(courier);
+        }
+
+        deliveryData.CashPayment = PaymentType.Cash.ToString();
+        deliveryData.CardPayment = PaymentType.Card.ToString();
+
+        return deliveryData;
     }
 }

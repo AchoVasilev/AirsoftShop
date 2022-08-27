@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Services.Services.Cart;
 using static Common.Constants.Messages;
 
+[Authorize]
 public class CartsController : BaseController
 {
     private readonly ICurrentUserService currentUserService;
@@ -24,7 +25,6 @@ public class CartsController : BaseController
         this.userManager = userManager;
     }
 
-    [Authorize]
     [HttpPost]
     public async Task<IActionResult> Add([FromBody] string gunId)
     {
@@ -44,7 +44,6 @@ public class CartsController : BaseController
         return this.CreatedAtAction(nameof(this.Add), result.Model);
     }
 
-    [Authorize]
     [HttpGet]
     public async Task<IActionResult> GetUserItemsInCart()
     {
@@ -60,7 +59,6 @@ public class CartsController : BaseController
         return this.Ok(items);
     }
 
-    [Authorize]
     [HttpDelete]
     public async Task<IActionResult> DeleteItemById(string itemId)
     {
@@ -78,5 +76,14 @@ public class CartsController : BaseController
         }
 
         return this.Ok(new { Message = SuccessfulDeleteMsg });
+    }
+    
+    [HttpGet]
+    [Route("deliveryData")]
+    public async Task<IActionResult> GetDeliveryData()
+    {
+        var data = await this.cartService.GetCartDeliveryData();
+
+        return this.Ok(data);
     }
 }

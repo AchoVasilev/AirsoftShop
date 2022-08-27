@@ -6,12 +6,14 @@ import { CartComponent } from './cart/cart.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { EmptyComponent } from './empty/empty.component';
+import { DeliveryComponent } from './delivery/delivery.component';
 
 
 @NgModule({
   declarations: [
     CartComponent,
-    EmptyComponent
+    EmptyComponent,
+    DeliveryComponent
   ],
   imports: [
     CommonModule,

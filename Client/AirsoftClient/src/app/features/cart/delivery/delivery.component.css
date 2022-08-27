@@ -1,0 +1,207 @@
+.checkout-data {
+    padding: 60px 100px;
+}
+
+.basket-summary {
+    margin-top: 1rem;
+    margin-bottom: 10rem;
+    position: relative;
+}
+
+.summary-prices {
+    top: 0;
+    position: absolute;
+    right: 0;
+    padding: 10px;
+    display: block;
+    width: 26%;
+}
+
+.summary-prices-price {
+    display: flex;
+    justify-content: space-between;
+}
+
+.summary-total-price-value {
+    color: #333;
+    font-weight: bold;
+}
+
+.summary-total-price-text {
+    margin-bottom: 8px;
+}
+
+.summary-prices-total {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.summary-final-price-text,
+.summary-final-price-value {
+    color: #333;
+    font-weight: bold;
+    font-size: 1.5rem;
+    white-space: nowrap;
+}
+
+.basket-actions {
+    margin-top: 2rem;
+}
+
+.basket-actions-container {
+    background-color: #E1E1E1;
+    display: flex;
+    justify-content: space-between;
+    padding: 2rem;
+}
+
+.order-summary-btn {
+    border: none;
+    cursor: pointer;
+}
+
+.order-summary-btn:disabled:hover {
+    cursor: not-allowed;
+    background-color: rgb(95, 94, 94);
+}
+
+.order-summary-btn:disabled:hover {
+    background-color: rgb(95, 94, 94);
+}
+
+.basket-actions-container a,
+.order-summary-btn {
+    color: #fff;
+    font-size: 2rem;
+    background-color: #333;
+    padding: 2rem 2rem;
+    border-radius: 4px;
+}
+
+.basket-actions-container a:hover,
+.order-summary-btn:hover {
+    background-color: #FB5104;
+    transition: 300ms ease-in-out;
+}
+
+.checkout-delivery {
+    margin-bottom: 1rem;
+}
+
+.checkout-delivery-heading {
+    color: #333;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.delivery-firms {
+    border: 1px solid #E1E1E1;
+    margin-top: 1rem;
+}
+
+.delivery-firm {
+    border-bottom: 1px solid #E1E1E1;
+}
+
+.delivery-firm button {
+    width: 100%;
+    cursor: pointer;
+    background: none;
+    border: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.firm-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.firm-img-wrapper {
+    width: 100px;
+    margin-right: 1rem;
+    padding: 10px;
+}
+
+.firm-img-wrapper img {
+    width: 100%;
+    border: 1px solid #E1E1E1;
+}
+
+.firm-price {
+    text-align: center;
+    padding: 1rem 2rem;
+    background-color: #333;
+    font-weight: bold;
+    color: #fff;
+    margin-right: 1rem;
+}
+
+.firm-title {
+    text-align: left;
+    font-weight: bold;
+    color: #333;
+}
+
+.firm-subtitle {
+    color: gray;
+    font-style: italic;
+}
+
+.payment-methods {
+    margin-bottom: 1rem;
+    padding-bottom: 2rem;
+    border-bottom: 2px solid black;
+}
+
+.payment-methods ul {
+    border: 1px solid #E1E1E1;
+}
+
+.payment-method {
+    border: 1px solid #E1E1E1;
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 0;
+    align-items: center;
+}
+
+.method-wrapper {
+    flex-basis: 100%;
+    display: flex;
+}
+
+.method-wrapper input {
+    margin-left: 1em;
+    cursor: pointer;
+}
+
+.method-wrapper label {
+    display: block;
+    width: 100%;
+    color: #333;
+    font-weight: bold;
+    margin-left: 1em;
+    cursor: pointer;
+}
+
+.payment-method i {
+    margin-right: 1rem;
+}
+
+.basket-actions-container a:hover {
+    background-color: #FB5104;
+    transition: 300ms ease-in-out;
+    text-align: center;
+}
+
+#basket-icon,
+#first-basket-step::after {
+    background-color: #FB5104;
+}
+
+.selected {
+    border: 1px solid #FB5104 !important;
+}

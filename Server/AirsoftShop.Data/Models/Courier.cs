@@ -25,5 +25,5 @@ public class Courier : DeletableEntity<int>
 
     public virtual Image Image { get; set; }
 
-    public ICollection<Order> Orders { get; set; }
+    public virtual ICollection<Order> Orders { get; set; }
 }

@@ -1,0 +1,111 @@
+<mat-spinner *ngIf="isLoading" style="margin: 0 auto;"></mat-spinner>
+<section class="checkout-data" *ngIf="isLoaded">
+    <article class="basket-steps">
+        <ul>
+            <li class="basket-step">
+                <i class="fa-solid fa-1 fa-2xl"></i>
+                <a routerLink="/cart">Кошница</a>
+                <span></span>
+            </li>
+            <li class="basket-step">
+                <i class="fa-solid fa-2 fa-2xl"></i>
+                <a routerLink="/cart/myData">Вашите данни</a>
+                <span></span>
+            </li>
+            <li class="basket-step" id="basket-step">
+                <i class="fa-solid fa-3 fa-2xl" id="basket-icon"></i>
+                <h5>Доставка и заплащане</h5>
+            </li>
+            <li class="basket-step">
+                <i class="fa-solid fa-4 fa-2xl"></i>
+                <h5>Проверка и потвърждение</h5>
+            </li>
+        </ul>
+    </article>
+
+    <article class="checkout-wrapper" *ngIf="deliveryData">
+        <form action="">
+            <section class="checkout-delivery">
+                <h3 class="checkout-delivery-heading">Изберете куриер</h3>
+                <ul class="delivery-firms">
+                    <li class="delivery-firm" *ngFor="let courier of deliveryData.couriers">
+                        <button type="button" id="{{courier.name}}" #firms
+                            (click)="courierBtnClick($event, courier.id, courier.name)">
+                            <article class="firm-wrapper">
+                                <article class="firm-img-wrapper">
+                                    <img src="{{courier.imageUrl}}" alt="{{courier.name}} image">
+                                </article>
+                                <article class="firm-title-wrapper">
+                                    <h5 class="firm-title">
+                                        {{courier.name}}
+                                    </h5>
+                                    <p class="firm-subtitle">Доставка до {{courier.deliveryDays}} работни дни</p>
+                                </article>
+                            </article>
+                            <span class="firm-price">
+                                {{courier.deliveryPrice}} лв.
+                            </span>
+                        </button>
+                    </li>
+                </ul>
+            </section>
+
+            <section class="payment-methods">
+                <h3 class="checkout-delivery-heading">Изберете начин на плащане</h3>
+                <ul>
+                    <li class="payment-method">
+                        <article class="method-wrapper" (click)="radioBtnClick($event)">
+                            <input type="radio" id="card" #card value="card">
+                            <label for="card">Плащане чрез карта</label>
+                        </article>
+                        <i class="fa-solid fa-credit-card fa-2xl"></i>
+                    </li>
+                    <li class="payment-method">
+                        <article class="method-wrapper">
+                            <input type="radio" id="cash" #cash value="cash" (click)="radioBtnClick($event)">
+                            <label for="cash">Плащане чрез наложен платеж</label>
+                        </article>
+                        <i class="fa-solid fa-money-bill-1 fa-2xl"></i>
+                    </li>
+                </ul>
+            </section>
+
+            <section class="basket-summary">
+                <article class="summary-prices">
+                    <article class="summary-prices-price">
+                        <p class="summary-total-price-text">
+                            Цена на продуктите:
+                        </p>
+                        <p class="summary-total-price-value">
+                            {{itemsPrice}} лв.
+                        </p>
+                    </article>
+                    <article class="summary-prices-price">
+                        <p class="summary-total-price-text">
+                            Цена на доставката:
+                        </p>
+                        <p class="summary-total-price-value">
+                            + <span>{{itemsPrice < 500 ? deliveryPrice : 0}}</span> лв.
+                        </p>
+                    </article>
+                    <article class="summary-prices-total">
+                        <p class="summary-final-price-text">
+                            Крайна цена:
+                        </p>
+                        <p class="summary-final-price-value">
+                            {{finalPrice}} лв.
+                        </p>
+                    </article>
+                </article>
+            </section>
+            <article class="basket-actions">
+                <article class="basket-actions-container">
+                    <a routerLink="/cart">Към кошницата</a>
+                    <button class="order-summary-btn" (click)="summaryBtnClick()"
+                        [disabled]="courierId == undefined && paymentType == undefined" type="button">Обобщение на
+                        поръчката</button>
+                </article>
+            </article>
+        </form>
+    </article>
+</section>

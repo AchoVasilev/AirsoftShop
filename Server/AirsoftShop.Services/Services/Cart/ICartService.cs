@@ -10,4 +10,6 @@ public interface ICartService
     Task<IEnumerable<CartViewServiceModel>> GetItemsInCart(string userClientId);
     
     Task<bool> DeleteItemById(string userClientId, string itemId);
+
+    Task<CartDeliveryDataServiceModel> GetCartDeliveryData();
 }

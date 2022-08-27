@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AddToCartResultModel } from 'src/app/models/cart/addToCartResultModel';
+import { CartDeliveryViewModel } from 'src/app/models/cart/cartDeliveryViewModel';
 import { CartViewModel } from 'src/app/models/cart/cartViewModel';
 import { environment } from 'src/environments/environment';
 
@@ -25,5 +26,9 @@ export class CartService {
     return this.httpClient.delete(`${this.apiUrl}/carts`, {
       params: { itemId }
     });
+  }
+
+  GetCartDeliveryData(): Observable<CartDeliveryViewModel> {
+    return this.httpClient.get<CartDeliveryViewModel>(`${this.apiUrl}/carts/deliveryData`);
   }
 }
