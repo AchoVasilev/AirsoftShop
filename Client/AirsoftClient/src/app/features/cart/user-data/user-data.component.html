@@ -1,0 +1,82 @@
+<section class="your-data">
+    <article class="basket-steps">
+        <ul>
+            <li class="basket-step">
+                <i class="fa-solid fa-1 fa-2xl"></i>
+                <a routerLink="/cart">Кошница</a>
+                <span></span>
+            </li>
+            <li class="basket-step" id="basket-step">
+                <i class="fa-solid fa-2 fa-2xl" id="basket-icon"></i>
+                <h5>Вашите данни</h5>
+                <span></span>
+            </li>
+            <li class="basket-step">
+                <i class="fa-solid fa-3 fa-2xl"></i>
+                <h5>Доставка и заплащане</h5>
+            </li>
+            <li class="basket-step">
+                <i class="fa-solid fa-4 fa-2xl"></i>
+                <h5>Проверка и потвърждение</h5>
+            </li>
+        </ul>
+    </article>
+    <mat-spinner *ngIf="isLoading"></mat-spinner>
+    <article class="profile" *ngIf="isLoaded">
+        <section class="profile-card">
+            <article class="profile-img">
+                <img src="{{client.imageUrl}}" alt="">
+            </article>
+
+            <h3 class="profile-card-title">
+                {{client.client.firstName}} {{client.client.lastName}}
+            </h3>
+        </section>
+
+        <section class="profile-data">
+            <table>
+                <tbody>
+                    <tr class="element">
+                        <td class="element-heading"><span>Имена</span></td>
+                        <td>
+                            <p>{{client.client.firstName}} {{client.client.lastName}}</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="element-heading"><span>Електронна поща</span></td>
+                        <td>
+                            <p>{{client.email}}</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="element-heading"><span>Телефон</span></td>
+                        <td>
+                            <p>{{client.client.phoneNumber}}</p>
+                        </td>
+                    </tr>
+                    <tr class="element">
+                        <td class="element-heading">
+                            <span>Град</span>
+                        </td>
+                        <td class="">
+                            <p class="">{{client.client.address.city.zipCode}}, {{client.client.address.city.name}}</p>
+                        </td>
+                    </tr>
+                    <tr class="element">
+                        <td class="element-heading"><span>Адрес</span></td>
+                        <td class="">
+                            <p class="">{{client.client.address.streetName}}</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </article>
+    <section class="basket-actions">
+        <article class="basket-actions-container">
+            <a routerLink="/cart">Към кошницата</a>
+            <a routerLink="/client/edit">Промени данните</a>
+            <a routerLink="/cart/delivery">Продължи</a>
+        </article>
+    </section>
+</section>

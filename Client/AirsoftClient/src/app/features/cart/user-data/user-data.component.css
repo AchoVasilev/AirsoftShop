@@ -1,0 +1,164 @@
+.your-data {
+    padding: 60px 100px;
+}
+
+.profile {
+    display: flex;
+    padding: 50px 100px;
+    justify-content: space-between;
+}
+
+.profile-card {
+    flex-basis: 35%;
+    padding: 30px;
+    background-color: rgb(252, 249, 249);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile-img {
+    width: 200px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 8px;
+    height: 200px;
+    margin-left: 16px;
+}
+
+.profile-img img {
+    width: 100%;
+}
+
+.profile-card-title {
+    color: #333;
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.profile-data {
+    flex-basis: 60%;
+    background-color: rgb(252, 249, 249);
+    ;
+}
+
+table {
+    width: 100%;
+}
+
+tr:nth-child(odd) {
+    background-color: rgb(236, 236, 236);
+}
+
+tr:hover {
+    background-color: lightgray;
+}
+
+.element-heading {
+    width: 28%;
+}
+
+td span {
+    color: #333;
+    font-weight: bold;
+    padding: 8px;
+}
+
+td p {
+    color: #333;
+    padding: 1em 0;
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+.basket-actions {
+    margin-top: 2rem;
+}
+
+.basket-actions-container {
+    background-color: #E1E1E1;
+    display: flex;
+    justify-content: space-between;
+    padding: 2rem;
+}
+
+.basket-actions-container a {
+    color: #fff;
+    font-size: 2rem;
+    background-color: #333;
+    padding: 2rem 2rem;
+    border-radius: 4px;
+}
+
+.basket-actions-container a:hover {
+    background-color: #FB5104;
+    transition: 300ms ease-in-out;
+}
+
+.basket-steps {
+    padding-bottom: 2em;
+    border-bottom: 2px solid #000;
+    margin-bottom: 1rem;
+}
+
+.basket-steps ul {
+    display: flex;
+    justify-content: space-between;
+}
+
+.basket-step {
+    display: flex;
+    align-items: center;
+    padding-bottom: 6px;
+    position: relative;
+    flex-basis: 21%;
+}
+
+.basket-step span {
+    padding-right: 10em;
+}
+
+.marked {
+    background-color: #FB5104;
+}
+
+.basket-step h5,
+.basket-step a {
+    color: #333;
+    font-weight: bold;
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+.basket-step a {
+    margin-bottom: 13px;
+}
+
+.basket-step a:hover {
+    color: #FB5104;
+    transition: 300ms ease-in-out;
+}
+
+.basket-step::after {
+    content: '';
+    width: 100%;
+    background-color: #C2C2C2;
+    height: 6px;
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+}
+
+.basket-step i {
+    background-color: black;
+    color: #fff;
+    font-weight: bold;
+    font-size: 20px;
+    padding: 1rem;
+    margin-right: 4px;
+}
+
+#basket-icon,
+#basket-step::after {
+    background-color: #FB5104;
+}
