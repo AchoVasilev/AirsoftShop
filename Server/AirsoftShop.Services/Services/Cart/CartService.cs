@@ -96,7 +96,7 @@ public class CartService : ICartService
 
         return result;
     }
-    
+
     public async Task<CartDeliveryDataServiceModel> GetCartDeliveryData()
     {
         var couriers = await this.data.Couriers
@@ -122,7 +122,7 @@ public class CartService : ICartService
 
         return deliveryData;
     }
-    
+
     public async Task<bool> ClearCart(string clientId)
     {
         var client = await this.data.Clients
@@ -136,10 +136,28 @@ public class CartService : ICartService
         if (client.Cart.Guns.Count == 0)
         {
             await this.data.SaveChangesAsync();
-            
+
             return true;
         }
 
         return false;
+    }
+
+    public async Task<NavCartServiceModel> GetCartData(string clientId)
+    {
+        var model = await this.data.Clients
+            .Where(x => x.Id == clientId)
+            .Select(x => new NavCartServiceModel()
+            {
+                TotalPrice = x.Cart.Guns.Sum(g => g.Price),
+                ItemsCount = x.Cart.Guns.Count
+            })
+            .FirstOrDefaultAsync();
+        
+        return model ?? new NavCartServiceModel()
+        {
+            ItemsCount = 0,
+            TotalPrice = 0
+        };
     }
 }

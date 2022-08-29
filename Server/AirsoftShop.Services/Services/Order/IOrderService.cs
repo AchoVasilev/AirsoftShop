@@ -10,4 +10,5 @@ public interface IOrderService
     Task<IEnumerable<OrderListServiceModel>> GetClientOrders(string clientId);
     
     Task<OrderDetailsServiceModel?> GetOrderDetails(string clientId, string orderId);
+
 }

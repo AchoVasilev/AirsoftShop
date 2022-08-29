@@ -14,4 +14,6 @@ public interface ICartService
     Task<CartDeliveryDataServiceModel> GetCartDeliveryData();
 
     Task<bool> ClearCart(string clientId);
+    
+    Task<NavCartServiceModel> GetCartData(string clientId);
 }

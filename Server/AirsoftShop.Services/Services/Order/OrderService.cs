@@ -7,7 +7,6 @@ using Data.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Models.Courier;
 using Models.Order;
-using Models.Product;
 using static Common.Constants.Messages;
 public class OrderService : IOrderService
 {

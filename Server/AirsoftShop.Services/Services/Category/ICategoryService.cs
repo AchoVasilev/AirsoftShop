@@ -1,6 +1,5 @@
 namespace AirsoftShop.Services.Services.Category;
 
-using Models;
 using Models.Category;
 
 public interface ICategoryService

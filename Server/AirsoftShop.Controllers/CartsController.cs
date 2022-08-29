@@ -5,6 +5,7 @@ using Data.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Services.Models.Cart;
 using Services.Services.Cart;
 using static Common.Constants.Messages;
 
@@ -85,5 +86,28 @@ public class CartsController : BaseController
         var data = await this.cartService.GetCartDeliveryData();
 
         return this.Ok(data);
+    }
+    
+    [HttpGet]
+    [Route("getNavData")]
+    public async Task<IActionResult> GetProductCountAndPrice()
+    {
+        var userId = this.currentUserService.GetUserId();
+        var user = await this.userManager.FindByIdAsync(userId);
+        
+        if (user?.ClientId is null)
+        {
+            var cartModel = new NavCartServiceModel()
+            {
+                ItemsCount = 0,
+                TotalPrice = 0
+            };
+
+            return Ok(cartModel); 
+        }
+
+        var result = await this.cartService.GetCartData(user.ClientId); ;
+
+        return Ok(result);
     }
 }
