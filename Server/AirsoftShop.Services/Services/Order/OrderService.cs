@@ -6,7 +6,7 @@ using Data.Models.Enums;
 using Data.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Models.Order;
-
+using Models.Product;
 using static Common.Constants.Messages;
 public class OrderService : IOrderService
 {
@@ -83,4 +83,23 @@ public class OrderService : IOrderService
         
         return result;
     }
+
+    public async Task<IEnumerable<OrderListServiceModel>> GetClientOrders(string clientId) 
+        => await this.data.Orders
+            .Where(x => x.ClientId == clientId)
+            .Select(x => new OrderListServiceModel()
+            {
+                OrderId = x.Id,
+                TotalPrice = x.TotalPrice,
+                CreatedOn = x.CreatedOn.ToString("dd/MM/yyyy"),
+                Gun = x.Guns.Select(g => new OrderGunViewServiceModel()
+                {
+                    Manufacturer = g.Manufacturer,
+                    Id = g.Id,
+                    Color = g.Color,
+                    Name = g.Name,
+                    ImageUrl = g.Images.Select(i => i.Url ?? i.RemoteImageUrl).First(),
+                    Price = g.Price,
+                }).ToList()
+            }).ToListAsync();
 }

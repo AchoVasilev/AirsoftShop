@@ -21,6 +21,10 @@ const routes: Routes = [
     loadChildren: () => import('./features/client/client.module').then(x => x.ClientModule)
   },
   {
+    path: 'orders',
+    loadChildren: () => import('./features/order/order.module').then(x => x.OrderModule)
+  },
+  {
     path: '**',
     component: NotFoundComponent
   }

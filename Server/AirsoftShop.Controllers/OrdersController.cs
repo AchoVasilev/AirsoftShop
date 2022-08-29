@@ -63,4 +63,20 @@ public class OrdersController : BaseController
 
         return this.Ok(new { Message = SuccessfulOrderMsg, createdResult.Model.OrdersCount });
     }
+    
+    [HttpGet]
+    [Route("client")]
+    public async Task<IActionResult> GetClientOrders()
+    {
+        var userId = this.currentUserService.GetUserId();
+        var user = await this.userManager.FindByIdAsync(userId);
+        if (user?.ClientId is null)
+        {
+            return this.BadRequest(new { ErrorMessage = UserNotClientMsg });
+        }
+        
+        var orders = await this.orderService.GetClientOrders(user.ClientId);
+
+        return this.Ok(orders);
+    }
 }
