@@ -8,6 +8,7 @@ import { GunsViewModel } from 'src/app/models/products/guns/gunsViewModel';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { CartService } from 'src/app/services/cart/cart.service';
 import { CategoryService } from 'src/app/services/categories/category.service';
+import { DataService } from 'src/app/services/data/data.service';
 import { ProductService } from 'src/app/services/products/product.service';
 
 @Component({
@@ -38,6 +39,8 @@ export class GunListComponent implements OnInit {
   private powers: number[] = [];
   private price: number = 0;
   itemsCount: number = 0;
+  private cartItemsPrice: number = 0;
+  private cartItemsCount: number = 0;
 
   private pageChanges = new BehaviorSubject(undefined);
   allGuns!: GunsViewModel;
@@ -53,6 +56,7 @@ export class GunListComponent implements OnInit {
     private categoryService: CategoryService,
     private cartService: CartService,
     private authService: AuthService,
+    private dataService: DataService,
     private toastr: ToastrService,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute
@@ -62,6 +66,9 @@ export class GunListComponent implements OnInit {
     this.canAdd = this.authService.isAuthenticated() && this.authService.getClient();
     this.getAllGuns();
     this.getGunSubCategories();
+
+    this.dataService.cartItemsPrice.subscribe(price => this.cartItemsPrice = price);
+    this.dataService.cartItemsCount.subscribe(count => this.cartItemsCount = count);
 
     this.dealerFormGroup = this.formBuilder.group({
       dealers: this.formBuilder.array([])
@@ -158,12 +165,12 @@ export class GunListComponent implements OnInit {
       .subscribe({
         next: (result) => {
           this.toastr.success("Успешно добавяне!");
-          // this.itemsCount = this.cartItemsCount + 1;
-          // this.cartItemsCount = this.itemsCount;
+          this.itemsCount = this.cartItemsCount + 1;
+          this.dataService.changeCartItemsCount(this.itemsCount);
 
-          // this.price = +price;
-          // this.price = (+this.cartItemsPrice) + (+this.price);
-          // this.cartItemsPrice = this.price;
+          this.price = +price;
+          this.price = (+this.cartItemsPrice) + (+this.price);
+          this.dataService.changeCartItemsPrice(this.price);
         },
         complete: () => {
           this.isLoaded = true;

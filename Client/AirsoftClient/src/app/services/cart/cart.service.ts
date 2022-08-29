@@ -31,4 +31,8 @@ export class CartService {
   GetCartDeliveryData(): Observable<CartDeliveryViewModel> {
     return this.httpClient.get<CartDeliveryViewModel>(`${this.apiUrl}/carts/deliveryData`);
   }
+
+  GetItemsCountAndPrice(): Observable<any> {
+    return this.httpClient.get<any>(`${this.apiUrl}/carts/getNavData`);
+  }
 }

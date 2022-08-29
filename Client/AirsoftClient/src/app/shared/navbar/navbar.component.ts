@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CategoryViewModel } from 'src/app/models/categories/categoryViewModel';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { CartService } from 'src/app/services/cart/cart.service';
 import { CategoryService } from 'src/app/services/categories/category.service';
+import { DataService } from 'src/app/services/data/data.service';
 
 @Component({
   selector: 'app-navbar',
@@ -20,13 +22,29 @@ export class NavbarComponent implements OnInit {
     return this.authService.getClient();
   }
 
+  cartItemsPrice: number = 0;
+  cartItemsCount: number = 0;
+
   constructor(
     private authService: AuthService,
     private categoryService: CategoryService,
+    private dataService: DataService,
+    private cartService: CartService,
     private router: Router) { }
 
   ngOnInit(): void {
+    this.getCartData();
     this.loadCategories();
+    this.dataService.cartItemsCount.subscribe(count => this.cartItemsCount = count);
+    this.dataService.cartItemsPrice.subscribe(price => this.cartItemsPrice = price);
+  }
+
+  getCartData(): void {
+    this.cartService.GetItemsCountAndPrice()
+      .subscribe(res => {
+        this.dataService.changeCartItemsCount(res.itemsCount);
+        this.dataService.changeCartItemsPrice(res.totalPrice);
+      })
   }
 
   loadCategories(): void {

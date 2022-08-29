@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './shared/login/login.component';
 import { NotFoundComponent } from './shared/not-found/not-found.component';
+import { UnderConstructionComponent } from './shared/under-construction/under-construction.component';
 
 const routes: Routes = [
   {
@@ -23,6 +24,10 @@ const routes: Routes = [
   {
     path: 'orders',
     loadChildren: () => import('./features/order/order.module').then(x => x.OrderModule)
+  },
+  {
+    path: 'building',
+    component: UnderConstructionComponent
   },
   {
     path: '**',

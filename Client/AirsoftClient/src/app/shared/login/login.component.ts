@@ -3,6 +3,8 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { LoginInputModel } from 'src/app/models/loginInputModel';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { CartService } from 'src/app/services/cart/cart.service';
+import { DataService } from 'src/app/services/data/data.service';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +18,12 @@ export class LoginComponent implements OnInit {
     'password': new FormControl('', [Validators.required, Validators.minLength(6)])
   });
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private authService: AuthService) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private authService: AuthService,
+    private dataService: DataService,
+    private cartService: CartService) { }
 
   ngOnInit(): void {
     if (this.authService.isAuthenticated()) {
@@ -41,5 +48,13 @@ export class LoginComponent implements OnInit {
 
         this.router.navigate(['/home']);
       });
+  }
+
+  getCartData(): void {
+    this.cartService.GetItemsCountAndPrice()
+      .subscribe(res => {
+        this.dataService.changeCartItemsCount(res.itemsCount);
+        this.dataService.changeCartItemsPrice(res.totalPrice);
+      })
   }
 }

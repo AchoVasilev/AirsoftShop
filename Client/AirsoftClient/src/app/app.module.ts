@@ -17,6 +17,7 @@ import { AuthInterceptor } from './infrastructure/interceptors/auth-interceptor.
 import { ErrorInterceptor } from './infrastructure/interceptors/error.interceptor';
 import { NotFoundComponent } from './shared/not-found/not-found.component';
 import { HomeModule } from './features/home/home.module';
+import { UnderConstructionComponent } from './shared/under-construction/under-construction.component';
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import { HomeModule } from './features/home/home.module';
     FooterComponent,
     LoginComponent,
     NotFoundComponent,
+    UnderConstructionComponent,
   ],
   imports: [
     BrowserModule,

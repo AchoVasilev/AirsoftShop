@@ -5,6 +5,7 @@ import { DealerIdObj } from 'src/app/models/dealers/dealerIdObj';
 import { GunDetailsViewModel } from 'src/app/models/products/guns/gunDetailsViewModel';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { CartService } from 'src/app/services/cart/cart.service';
+import { DataService } from 'src/app/services/data/data.service';
 import { DealerService } from 'src/app/services/dealer/dealer.service';
 import { ProductService } from 'src/app/services/products/product.service';
 
@@ -26,6 +27,7 @@ export class DetailsComponent implements OnInit {
   private cartItemsCount: number = 0;
   private price: number = 0;
   private gunId = this.route.snapshot.params['id'];
+  private cartItemsPrice: number = 0;
 
   constructor(
     private productService: ProductService,
@@ -33,6 +35,7 @@ export class DetailsComponent implements OnInit {
     private authService: AuthService,
     private cartService: CartService,
     private dealerService: DealerService,
+    private dataService: DataService,
     private toastr: ToastrService,
     private router: Router
   ) { }
@@ -40,6 +43,9 @@ export class DetailsComponent implements OnInit {
   ngOnInit(): void {
     this.getGunDetails();
     this.getDealerId();
+    this.dataService.cartItemsPrice.subscribe(price => this.cartItemsPrice = price);
+    this.dataService.cartItemsCount.subscribe(count => this.cartItemsCount = count);
+
     this.isLoggedIn = this.authService.isAuthenticated();
     this.isClient = this.authService.getClient();
 
@@ -71,9 +77,12 @@ export class DetailsComponent implements OnInit {
           this.itemsCount = this.cartItemsCount + 1;
           this.cartItemsCount = this.itemsCount;
 
-          // this.price = +price;
-          // this.price = (+this.cartItemsPrice) + (+this.price);
-          // this.cartItemsPrice = this.price;
+          this.dataService.changeCartItemsCount(this.cartItemsCount);
+
+          this.price = +price;
+          this.price = (+this.cartItemsPrice) + (+this.price);
+
+          this.dataService.changeCartItemsPrice(this.price);
         },
         complete: () => {
           this.isLoading = false;
