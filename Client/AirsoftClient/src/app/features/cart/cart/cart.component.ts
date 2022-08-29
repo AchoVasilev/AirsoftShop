@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { CartViewModel } from 'src/app/models/cart/cartViewModel';
 import { CartService } from 'src/app/services/cart/cart.service';
+import { DataService } from 'src/app/services/data/data.service';
 
 @Component({
   selector: 'app-cart',
@@ -15,7 +16,7 @@ export class CartComponent implements OnInit {
   items: CartViewModel[] = [];
   totalPrice: number = 0;
 
-  constructor(private cartService: CartService, private toastr: ToastrService) { }
+  constructor(private cartService: CartService, private toastr: ToastrService, private dataService: DataService) { }
 
   ngOnInit(): void {
     this.loadCartItems();
@@ -25,6 +26,8 @@ export class CartComponent implements OnInit {
     this.cartService.GetItems()
       .subscribe(res => {
         this.items = res;
+        this.dataService.changeCartItems(this.items);
+
         this.isLoaded = true;
         this.isLoading = false;
       });
@@ -46,7 +49,10 @@ export class CartComponent implements OnInit {
 
           this.price = (+this.totalPrice) - (+itemPrice);
           this.totalPrice = this.price;
-          // this.itemsCount = this.items.length;
+          this.dataService.changeFinalPrice(this.totalPrice);
+
+          this.dataService.changeCartItemsCount(this.items.length);
+
           this.isLoaded = true;
           this.isLoading = false;
           this.toastr.success(res.message);
