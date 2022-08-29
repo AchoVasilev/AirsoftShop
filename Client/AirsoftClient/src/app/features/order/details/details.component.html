@@ -1,0 +1,92 @@
+<mat-spinner *ngIf="isLoading" style="margin: 0 auto;"></mat-spinner>
+<section class="order" *ngIf="isLoaded">
+    <a routerLink="/orders/client" class="order-back">
+        <i class="fa-solid fa-circle-chevron-left fa-2xl"></i>
+    </a>
+    <section class="order-wrapper">
+        <article class="order-status">
+            <h6 class="order-status-subtitle">
+                Детайли на поръчка с № {{details.id}}
+            </h6>
+            <h1 class="order-status-title">
+                {{currentDate}}
+            </h1>
+            <article>
+                <ul class="order-status-list">
+                    <li class="order-status-list-item" [class.status]="details.orderStatus == 'Processing'"
+                        id="process">Обработва се</li>
+                    <li class="order-status-list-item" [class.status]="details.orderStatus == 'Processed'"
+                        id="finished">Обработено</li>
+                    <li class="order-status-list-item" [class.status]="details.orderStatus == 'Shipped'" id="send">
+                        Изпратено</li>
+                    <li class="order-status-list-item" [class.status]="details.orderStatus == 'Delivered'"
+                        id="delivered">Доставено</li>
+                </ul>
+            </article>
+        </article>
+
+        <article class="summary-products">
+            <table>
+                <tbody>
+                    <tr class="basket-products-label">
+                        <th colspan="2"></th>
+                        <th class="basket-product-price">
+                            Цена
+                        </th>
+                        <th class="basket-product-quantity">
+                            Количество
+                        </th>
+                    </tr>
+                    <tr class="basket-item" *ngFor="let gun of details.guns">
+                        <td class="basket-item-img">
+                            <a class="basket-item-img-wrapper" routerLink="/products/{{gun.name}}/{{gun.id}}">
+                                <img src="{{gun.imageUrl}}">
+                            </a>
+                        </td>
+                        <td class="basket-item-desc">
+                            <h3 class="basket-item-title">
+                                <a routerLink="/products/{{gun.name}}/{{gun.id}}">{{gun.name}} - {{gun.color}}</a>
+                            </h3>
+                            <p class="basket-item-manufacturer">Производител: {{gun.manufacturer}}</p>
+                            <p class="basket-item-manufacturer">Продавач: {{gun.dealerName}}</p>
+                        </td>
+                        <td class="basket-item-price">
+                            <p>{{gun.price}} лв.</p>
+                        </td>
+                        <td class="basket-quantity">
+                            <p class="basket-quantity-text">1 бр.</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </article>
+
+        <article class="summary-payment">
+            <h3 class="order-status-title">Детайли за плащане и доставка</h3>
+            <ul>
+                <li class="summary-payment-info">
+                    <p class="courier-title">
+                        <span class="payment-bold">Куриерска фирма:</span> {{details.courier.name}}
+                    </p>
+                    <p class="delivery-price"> <span class="payment-bold">Доставка:</span>
+                        {{details.totalPrice > 500 ? 0 : details.courier.deliveryPrice}} лв.</p>
+                </li>
+                <li class="summary-payment-info">
+                    <span class="payment-bold">Начин на плащане:</span> {{details.paymentType == 'Card' ? 'Карта' :
+                    'Наложен платеж'}}
+                </li>
+            </ul>
+        </article>
+        <article class="summary-final-price">
+            <article></article>
+            <article class="summary-final-price-wrapper">
+                <p class="summary-final-price-text">
+                    Крайна цена:
+                </p>
+                <p class="summary-final-price-value">
+                    {{details.totalPrice}} лв.
+                </p>
+            </article>
+        </article>
+    </section>
+</section>

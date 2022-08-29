@@ -5,6 +5,7 @@ using Data.Models;
 using Data.Models.Enums;
 using Data.Persistence;
 using Microsoft.EntityFrameworkCore;
+using Models.Courier;
 using Models.Order;
 using Models.Product;
 using static Common.Constants.Messages;
@@ -102,4 +103,32 @@ public class OrderService : IOrderService
                     Price = g.Price,
                 }).ToList()
             }).ToListAsync();
+
+    public async Task<OrderDetailsServiceModel?> GetOrderDetails(string clientId, string orderId)
+        => await this.data.Orders
+            .Where(x => x.Id == orderId && x.ClientId == clientId)
+            .OrderByDescending(x => x.CreatedOn)
+            .Select(x => new OrderDetailsServiceModel()
+            {
+                Id = x.Id,
+                PaymentType = x.PaymentType.ToString(),
+                OrderStatus = x.OrderStatus.ToString(),
+                TotalPrice = x.TotalPrice,
+                Courier = new CourierOrderViewServiceModel()
+                {
+                    DeliveryPrice = x.Courier.DeliveryPrice,
+                    Name = x.Courier.Name
+                },
+                Guns = x.Guns.Select(g => new OrderDetailsGunServiceModel
+                {
+                    Id = g.Id,
+                    Name = g.Name,
+                    Price = g.Price,
+                    DealerName = g.Dealer.Name,
+                    Manufacturer = g.Manufacturer,
+                    Color = g.Color,
+                    ImageUrl = g.Images.Select(i => i.RemoteImageUrl ?? i.Url).First()
+                }).ToList()
+            })
+            .FirstOrDefaultAsync();
 }

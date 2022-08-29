@@ -79,4 +79,20 @@ public class OrdersController : BaseController
 
         return this.Ok(orders);
     }
+    
+    [HttpGet]
+    [Route("{id}")]
+    public async Task<IActionResult> GetOrderDetails([FromQuery]string id)
+    {
+        var userId = this.currentUserService.GetUserId();
+        var user = await this.userManager.FindByIdAsync(userId);
+        if (user?.ClientId is null)
+        {
+            return this.BadRequest(new { ErrorMessage = UserNotClientMsg });
+        }
+        
+        var result = await this.orderService.GetOrderDetails(user.ClientId, id);
+
+        return this.Ok(result);
+    }
 }
