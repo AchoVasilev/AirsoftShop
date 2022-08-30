@@ -125,14 +125,6 @@ public class DealerService : IDealerService
         {
             return EmailExistsMsg;
         }
-
-        var userNameExists = await this.data.Users
-            .AnyAsync(x => x.UserName == serviceModel.Username);
-        
-        if (userNameExists)
-        {
-            return UsernameExistsMsg;
-        }
         
         var city = await this.data.Cities
             .FirstOrDefaultAsync(x => x.Name == serviceModel.CityName);

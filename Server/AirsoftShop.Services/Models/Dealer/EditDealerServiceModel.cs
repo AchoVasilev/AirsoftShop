@@ -6,8 +6,6 @@ public class EditDealerServiceModel
 
     public string DealerNumber { get; init; }
 
-    public string Username { get; init; }
-
     public string Phone { get; init; }
 
     public string SiteUrl { get; init; }

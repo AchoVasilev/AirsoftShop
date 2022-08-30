@@ -110,7 +110,6 @@ public class DealersController : BaseController
             Phone = model.Phone,
             SiteUrl = model.SiteUrl,
             StreetName = model.StreetName,
-            Username = model.Username
         };
 
         var result = await this.dealerService.Edit(user.DealerId, serviceModel);

@@ -15,10 +15,6 @@ public class EditDealerInputModel
     public string DealerNumber { get; set; }
 
     [Required]
-    [StringLength(DefaultMaxLength, MinimumLength = DefaultMinLength, ErrorMessage = LengthErrorMsg)]
-    public string Username { get; set; }
-
-    [Required]
     [Phone]
     public string Phone { get; set; }
 
