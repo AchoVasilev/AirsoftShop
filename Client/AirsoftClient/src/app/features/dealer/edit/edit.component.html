@@ -1,1 +1,179 @@
-<p>edit works!</p>
+<mat-spinner style="margin: 0 auto;" *ngIf="isLoading"></mat-spinner>
+<section class="profile-wrapper" *ngIf="isLoaded">
+    <h1 class="page-header">Промяна на данните</h1>
+    <section class="wrap">
+        <div class="container">
+            <nav>
+                <ul class="mcd-menu">
+                    <li>
+                        <a routerLink="/products/guns/all" class="active">
+                            <i class="fa fa-edit"></i>
+                            <strong>Каталог</strong>
+                        </a>
+                    </li>
+                    <li>
+                        <a routerLink="/building">
+                            <i class="fa fa-gift"></i>
+                            <strong>Ваучери</strong>
+                        </a>
+                    </li>
+                    <li>
+                        <a routerLink="/products/mine">
+                            <i class="fa fa-clipboard-list"></i>
+                            <strong>Моите артикули</strong>
+                        </a>
+                    </li>
+                    <li>
+                        <a routerLink="/building">
+                            <i class="fa fa-receipt"></i>
+                            <strong>Моите поръчки</strong>
+                        </a>
+                    </li>
+                    <li>
+                        <a routerLink="/building">
+                            <i class="fa fa-gear"></i>
+                            <strong>Настройки</strong>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <article class="profile" *ngIf="dealer">
+            <section class="profile-card">
+                <article class="profile-img">
+                    <img src="{{dealer.imageUrl}}" alt="">
+                </article>
+
+                <h3 class="profile-card-title">
+                    {{dealer.dealer.name}}
+                </h3>
+            </section>
+
+            <section class="profile-data">
+                <form [formGroup]="editFormGroup" (ngSubmit)="editData()">
+                    <article class="registration-wrapper">
+                        <article class="first-name-wrapper">
+                            <label for="name">Име <span
+                                    [ngClass]="shouldShowErrorForControl('name') ? 'error' : ''">*</span></label>
+                            <input type="text" id="name" name="name" formControlName="name" [value]="dealer.dealer.name"
+                                [ngClass]="shouldShowErrorForControl('name') ? 'invalid' : ''">
+
+                            <ng-container *ngIf="shouldShowErrorForControl('name')">
+                                <p class="error" *ngIf="editFormGroup.controls['name'].errors?.['required']">
+                                    Полето е задължително!
+                                </p>
+                                <p class="error" *ngIf="editFormGroup.controls['name'].errors?.['minlength']">
+                                    Полето трябва да е с дължина поне 2 символа!
+                                </p>
+                                <p class="error" *ngIf="editFormGroup.controls['name'].errors?.['maxlength']">
+                                    Полето трябва да е с максимална дължина от 40 символа!
+                                </p>
+                            </ng-container>
+                        </article>
+                        <article class="last-name-wrapper">
+                            <label for="dealerNumber">ЕИК <span
+                                    [ngClass]="shouldShowErrorForControl('dealerNumber') ? 'error' : ''">*</span></label>
+                            <input type="text" id="dealerNumber" name="dealerNumber" formControlName="dealerNumber"
+                                [value]="dealer.dealer.dealerNumber"
+                                [ngClass]="shouldShowErrorForControl('dealerNumber') ? 'invalid' : ''">
+
+                            <ng-container *ngIf="shouldShowErrorForControl('dealerNumber')">
+                                <p class="error" *ngIf="editFormGroup.controls['dealerNumber'].errors?.['required']">
+                                    Полето е задължително!
+                                </p>
+                                <p class="error" *ngIf="editFormGroup.controls['dealerNumber'].errors?.['minlength']">
+                                    Полето трябва да е с дължина поне 2 символа!
+                                </p>
+                                <p class="error" *ngIf="editFormGroup.controls['dealerNumber'].errors?.['maxlength']">
+                                    Полето трябва да е с максимална дължина от 40 символа!
+                                </p>
+                            </ng-container>
+                        </article>
+                    </article>
+                    <article class="field-wrapper">
+                        <label for="streetName">Адрес <span
+                                [ngClass]="shouldShowErrorForControl('streetName') ? 'error' : ''">*</span></label>
+                        <input type="text" id="streetName" name="streetName" formControlName="streetName"
+                            [value]="dealer.dealer.address.streetName"
+                            [ngClass]="shouldShowErrorForControl('streetName') ? 'invalid' : ''">
+                        <ng-container *ngIf="shouldShowErrorForControl('streetName')">
+                            <p class="error" *ngIf="editFormGroup.controls['streetName'].errors?.['required']">
+                                Полето е задължително!
+                            </p>
+                            <p class="error" *ngIf="editFormGroup.controls['streetName'].errors?.['minlength']">
+                                Полето трябва да е с дължина поне 2 символа!
+                            </p>
+                            <p class="error" *ngIf="editFormGroup.controls['streetName'].errors?.['maxlength']">
+                                Полето трябва да е с максимална дължина от 40 символа!
+                            </p>
+                        </ng-container>
+                    </article>
+                    <article class="registration-wrapper">
+                        <article class="city-wrapper">
+                            <label for="city">Град: <span
+                                    [ngClass]="shouldShowErrorForControl('cityName') ? 'error' : ''">*</span></label>
+                            <select id="city" class="custom-select" *ngIf="cities" name="cityName"
+                                [value]="dealer.dealer.address.city.name" formControlName="cityName"
+                                value="{{dealer.dealer.address.city.name}}"
+                                [ngClass]="shouldShowErrorForControl('cityName') ? 'invalid' : ''">
+                                <option *ngFor="let city of cities" [value]="city.name">
+                                    {{city.name}}</option>
+                            </select>
+
+                            <ng-container *ngIf="shouldShowErrorForControl('cityName')">
+                                <p class="error" *ngIf="editFormGroup.controls['cityName'].errors?.['required']">
+                                    Полето е задължително!
+                                </p>
+                            </ng-container>
+                        </article>
+                    </article>
+                    <article class="registration-wrapper">
+                        <article class="phone-wrapper">
+                            <label for="phone">Телефонен номер
+                                <span [ngClass]="shouldShowErrorForControl('phone') ? 'error' : ''">*</span></label>
+                            <input type="text" id="phone" name="phone" formControlName="phone"
+                                [value]="dealer.dealer.phoneNumber"
+                                [ngClass]="shouldShowErrorForControl('phone') ? 'invalid' : ''">
+
+                            <ng-container *ngIf="shouldShowErrorForControl('phone')">
+                                <p class="error" *ngIf="editFormGroup.controls['phone'].errors?.['required']">
+                                    Полето е задължително!
+                                </p>
+                                <p class="error" *ngIf="editFormGroup.controls['phone'].errors?.['pattern']">
+                                    Въведете правилен телефонен номер!
+                                </p>
+                            </ng-container>
+                        </article>
+                        <article class="email-wrapper">
+                            <label for="email">Електронна поща <span
+                                    [ngClass]="shouldShowErrorForControl('email') ? 'error' : ''">*</span></label>
+                            <input type="text" id="email" name="email" formControlName="email" [value]="dealer.email"
+                                [ngClass]="shouldShowErrorForControl('email') ? 'invalid' : ''">
+
+                            <ng-container *ngIf="shouldShowErrorForControl('email')">
+                                <p class="error" *ngIf="editFormGroup.controls['email'].errors?.['required']">
+                                    Полето е задължително!
+                                </p>
+                                <p class="error" *ngIf="editFormGroup.controls['email'].errors?.['email']">
+                                    Въведете правилен и-мейл!
+                                </p>
+                            </ng-container>
+                        </article>
+                        <article class="registration-wrapper">
+                            <article class="phone-wrapper">
+                                <label for="siteUrl">Сайт</label>
+                                <input type="text" id="siteUrl" name="siteUrl" formControlName="siteUrl"
+                                    [value]="dealer.dealer.siteUrl">
+                            </article>
+                        </article>
+                    </article>
+                    <article class="buttons">
+                        <button class="close" (click)="closeEdit()">Откажи</button>
+                        <button [disabled]="editFormGroup.invalid" type="submit" class="submit-btn">Промени</button>
+                    </article>
+                </form>
+            </section>
+        </article>
+    </section>
+</section>

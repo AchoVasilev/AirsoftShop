@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { DealerIdObj } from 'src/app/models/dealers/dealerIdObj';
+import { EditDealerModel } from 'src/app/models/dealers/editDealerModel';
 import { UserDealerViewModel } from 'src/app/models/dealers/userDealerViewModel';
 import { environment } from 'src/environments/environment';
 
@@ -9,6 +10,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class DealerService {
+
   private apiUrl = environment.apiUrl;
   constructor(private httpClient: HttpClient) { }
 
@@ -22,5 +24,9 @@ export class DealerService {
 
   getDealerId(): Observable<DealerIdObj> {
     return this.httpClient.get<DealerIdObj>(`${this.apiUrl}/dealers/getDealerId`)
+  }
+
+  edit(body: EditDealerModel): Observable<any> {
+    return this.httpClient.put(`${this.apiUrl}/dealers`, body);
   }
 }
