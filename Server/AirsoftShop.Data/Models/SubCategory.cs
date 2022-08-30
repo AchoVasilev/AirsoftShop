@@ -7,7 +7,7 @@ public class SubCategory : DeletableEntity<int>
 {
     [Required]
     [MaxLength(DefaultMaxLength)]
-    public string Name { get; set; }
+    public string Name { get; init; }
 
     public int CategoryId { get; set; }
 

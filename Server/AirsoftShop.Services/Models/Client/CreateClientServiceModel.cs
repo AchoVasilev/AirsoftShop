@@ -2,19 +2,19 @@ namespace AirsoftShop.Services.Models.Client;
 
 public class CreateClientServiceModel
 {
-    public string FirstName { get; set; }
+    public string FirstName { get; init; }
     
-    public string LastName { get; set; }
+    public string LastName { get; init; }
     
-    public string StreetName { get; set; }
+    public string StreetName { get; init; }
     
-    public string CityName { get; set; }
+    public string CityName { get; init; }
     
-    public string Phone { get; set; }
+    public string Phone { get; init; }
     
-    public string Email { get; set; }
+    public string Email { get; init; }
     
-    public string Username { get; set; }
+    public string Username { get; init; }
     
-    public string Password { get; set; }
+    public string Password { get; init; }
 }

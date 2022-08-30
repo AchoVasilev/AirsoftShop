@@ -89,4 +89,36 @@ public class DealersController : BaseController
         
         return this.Ok(result.Model);
     }
+
+    [Authorize]
+    [HttpPut]
+    public async Task<ActionResult> Edit(EditDealerInputModel model)
+    {
+        var userId = this.currentUserService.GetUserId();
+        var user = await this.userManager.FindByIdAsync(userId);
+        if (user?.DealerId is null)
+        {
+            return this.BadRequest(new { ErrorMessage = UserNotDealerMsg });
+        }
+
+        var serviceModel = new EditDealerServiceModel()
+        {
+            Email = model.Email,
+            CityName = model.CityName,
+            DealerNumber = model.DealerNumber,
+            Name = model.Name,
+            Phone = model.Phone,
+            SiteUrl = model.SiteUrl,
+            StreetName = model.StreetName,
+            Username = model.Username
+        };
+
+        var result = await this.dealerService.Edit(user.DealerId, serviceModel);
+        if (result.Failed)
+        {
+            return this.BadRequest(result.ErrorMessage);
+        }
+        
+        return this.Ok(result.Model);
+    }
 }

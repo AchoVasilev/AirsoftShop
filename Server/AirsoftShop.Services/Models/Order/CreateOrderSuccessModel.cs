@@ -2,5 +2,5 @@ namespace AirsoftShop.Services.Models.Order;
 
 public class CreateOrderSuccessModel
 {
-    public int OrdersCount { get; set; }
+    public int OrdersCount { get; init; }
 }

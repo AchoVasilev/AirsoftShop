@@ -115,4 +115,60 @@ public class DealerService : IDealerService
 
         return model;
     }
+
+    public async Task<OperationResult<DealerResultServiceModel>> Edit(string dealerId, EditDealerServiceModel serviceModel)
+    {
+        var mailExists = await this.data.Users
+            .AnyAsync(x => x.Email == serviceModel.Email);
+        
+        if (mailExists)
+        {
+            return EmailExistsMsg;
+        }
+
+        var userNameExists = await this.data.Users
+            .AnyAsync(x => x.UserName == serviceModel.Username);
+        
+        if (userNameExists)
+        {
+            return UsernameExistsMsg;
+        }
+        
+        var city = await this.data.Cities
+            .FirstOrDefaultAsync(x => x.Name == serviceModel.CityName);
+
+        if (city is null)
+        {
+            return InvalidCityMsg;
+        }
+        
+        var user = await this.data.Dealers
+            .Include(x => x.Address)
+            .Include(x => x.User)
+            .FirstOrDefaultAsync(x => x.Id == dealerId);
+
+        if (user is null)
+        {
+            return UserNotDealerMsg;
+        }
+
+        user.Email = serviceModel.Email;
+        user.User.UserName = serviceModel.Email;
+        user.User.Email = serviceModel.Email;
+        user.Address.StreetName = serviceModel.StreetName;
+        user.Address.CityId = city.Id;
+        user.Name = serviceModel.Name;
+        user.SiteUrl = serviceModel.SiteUrl;
+        user.DealerNumber = serviceModel.DealerNumber;
+        user.PhoneNumber = serviceModel.Phone;
+
+        await this.data.SaveChangesAsync();
+
+        return new DealerResultServiceModel()
+        {
+            DealerId = user.Id,
+            DealerUserName = user.User.UserName,
+            UserId = user.UserId
+        };
+    }
 }

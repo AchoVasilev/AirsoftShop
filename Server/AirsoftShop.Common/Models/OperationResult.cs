@@ -2,17 +2,17 @@ namespace AirsoftShop.Common.Models;
 
 public class OperationResult<T>
 {
-    public string? ErrorMessage { get; set; }
+    public string? ErrorMessage { get; init; }
     
-    public List<string>? ErrorMessages { get; set; }
+    public List<string>? ErrorMessages { get; init; }
 
     public bool Succeeded { get; private set; }
 
     public bool Failed => this.Succeeded == false;
     
-    public T? Model { get; set; }
+    public T? Model { get; init; }
     
-    public IEnumerable<T>? Models { get; set; }
+    public IEnumerable<T>? Models { get; init; }
 
     public static implicit operator OperationResult<T>(bool succeeded)
         => new OperationResult<T>()

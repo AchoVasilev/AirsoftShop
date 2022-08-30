@@ -2,39 +2,39 @@ namespace AirsoftShop.Services.Models.Product;
 
 public class CreateGunServiceModel
 {
-        public string Name { get; set; }
+        public string Name { get; init; }
 
-        public string Manufacturer { get; set; }
+        public string Manufacturer { get; init; }
 
-        public IEnumerable<string> ImageIds { get; set; }
+        public IEnumerable<string> ImageIds { get; init; }
 
-        public double Power { get; set; }
+        public double Power { get; init; }
 
-        public string Color { get; set; }
+        public string Color { get; init; }
 
-        public double Weight { get; set; }
+        public double Weight { get; init; }
 
-        public string Magazine { get; set; }
+        public string Magazine { get; init; }
 
-        public int Capacity { get; set; }
+        public int Capacity { get; init; }
 
-        public int Speed { get; set; }
+        public int Speed { get; init; }
 
-        public string Firing { get; set; }
+        public string Firing { get; init; }
 
-        public int Length { get; set; }
+        public int Length { get; init; }
 
-        public int Barrel { get; set; }
+        public int Barrel { get; init; }
 
-        public string Propulsion { get; set; }
+        public string Propulsion { get; init; }
 
-        public string Material { get; set; }
+        public string Material { get; init; }
 
-        public string Blowback { get; set; }
+        public string Blowback { get; init; }
 
-        public string Hopup { get; set; }
+        public string Hopup { get; init; }
 
-        public decimal Price { get; set; }
+        public decimal Price { get; init; }
 
-        public string SubCategoryName { get; set; }
+        public string SubCategoryName { get; init; }
 }

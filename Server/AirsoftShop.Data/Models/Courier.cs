@@ -14,16 +14,16 @@ public class Courier : DeletableEntity<int>
 
     [Required]
     [MaxLength(DefaultMaxLength)]
-    public string Name { get; set; }
+    public string Name { get; init; }
 
-    public decimal DeliveryPrice { get; set; }
+    public decimal DeliveryPrice { get; init; }
 
-    public int DeliveryDays { get; set; }
+    public int DeliveryDays { get; init; }
 
     [ForeignKey(nameof(Image))]
     public string ImageId { get; set; }
 
-    public virtual Image Image { get; set; }
+    public virtual Image Image { get; init; }
 
     public virtual ICollection<Order> Orders { get; set; }
 }

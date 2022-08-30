@@ -8,8 +8,8 @@ public class City : DeletableEntity<int>
 {
     [Required]
     [MaxLength(DefaultMaxLength)]
-    public string Name { get; set; }
+    public string Name { get; init; }
 
     [MaxLength(NumbersMaxLength)]
-    public int ZipCode { get; set; }
+    public int ZipCode { get; init; }
 }

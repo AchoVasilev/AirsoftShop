@@ -34,7 +34,7 @@ public class Dealer : DeletableEntity<string>
     [ForeignKey(nameof(Address))] 
     public int AddressId { get; set; }
 
-    public virtual Address Address { get; set; }
+    public virtual Address Address { get; init; }
 
     [ForeignKey(nameof(User))] 
     public string UserId { get; set; }

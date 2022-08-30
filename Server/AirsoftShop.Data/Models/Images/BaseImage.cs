@@ -11,7 +11,7 @@ public abstract class BaseImage : DeletableEntity<string>
     
     public string RemoteImageUrl { get; set; }
 
-    public string Url { get; set; }
+    public string Url { get; init; }
 
     public string Name { get; set; }
 

@@ -78,7 +78,7 @@ public class ClientsController : BaseController
         var user = await this.userManager.FindByEmailAsync(model.Email);
         if (user is null)
         {
-            return this.BadRequest(new { ErrorMessage = UsernameExistsMsg });
+            return this.BadRequest(new { ErrorMessage = UserDoesNotExistMsg });
         }
         
         var userId = this.currentUserService.GetUserId();

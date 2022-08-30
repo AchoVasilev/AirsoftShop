@@ -14,13 +14,13 @@ public class Category : DeletableEntity<int>
     
     [Required]
     [MaxLength(DefaultMaxLength)]
-    public string Name { get; set; }
+    public string Name { get; init; }
 
     [Required]
     [ForeignKey(nameof(Image))]
     public string ImageId { get; set; }
 
-    public virtual CategoryImage Image { get; set; }
+    public virtual CategoryImage Image { get; init; }
 
-    public virtual ICollection<SubCategory> SubCategories { get; set; }
+    public virtual ICollection<SubCategory> SubCategories { get; init; }
 }

@@ -27,6 +27,6 @@ public class EditClientFormModel
     public string Phone { get; set; }
     
     [Required]
-    [EmailAddress]
+    [EmailAddress(ErrorMessage = InvalidEmailErrorMsg)]
     public string Email { get; set; }
 }

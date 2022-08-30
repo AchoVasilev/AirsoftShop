@@ -18,8 +18,10 @@ public static class Messages
     public const string InvalidCityMsg = "Избрали сте невалиден град";
 
     public const string FailedUserLoginMsg = "Невалиден потребител или парола";
+    
     public const string UsernameExistsMsg = "Потребител с това име вече съществува";
-
+    public const string EmailExistsMsg = "Потребител с този и-мейл вече съществува";
+    public const string UserDoesNotExistMsg = "Потребител с това потребителско име/и-мейл не съществува!";
     public const string NotAuthorizedMsg = "Нямате права";
     public const string UserNotClientMsg = "Трябва да се регистрирате като клиент!";
     public const string UserNotDealerMsg = "Трябва да се регистрирате като продавач!";

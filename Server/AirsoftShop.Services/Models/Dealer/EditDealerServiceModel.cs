@@ -1,8 +1,6 @@
 namespace AirsoftShop.Services.Models.Dealer;
 
-using Microsoft.AspNetCore.Http;
-
-public class CreateDealerServiceModel
+public class EditDealerServiceModel
 {
     public string Name { get; init; }
 
@@ -19,8 +17,4 @@ public class CreateDealerServiceModel
     public string StreetName { get; init; }
 
     public string CityName { get; init; }
-
-    public string Password { get; init; }
-
-    public IFormFile Image { get; set; }
 }
