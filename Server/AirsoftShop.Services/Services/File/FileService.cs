@@ -13,11 +13,15 @@ namespace AirsoftShop.Services.Services.File
     public class FileService : IFileService
     {
         private readonly ApplicationDbContext data;
+        private readonly Cloudinary cloudinary;
 
-        public FileService(ApplicationDbContext data) 
-            => this.data = data;
+        public FileService(ApplicationDbContext data, Cloudinary cloudinary)
+        {
+            this.data = data;
+            this.cloudinary = cloudinary;
+        }
 
-        public async Task<OperationResult<IFileServiceModel>> UploadImage(Cloudinary cloudinary, IFormFile? image, string folderName)
+        public async Task<OperationResult<IFileServiceModel>> UploadImage(IFormFile? image, string folderName)
         {
             if (image is null)
             {
@@ -60,7 +64,7 @@ namespace AirsoftShop.Services.Services.File
                     PublicId = $"{folderName}/{imageName}",
                 };
 
-                var uploadResult = cloudinary.Upload(uploadParams);
+                var uploadResult = this.cloudinary.Upload(uploadParams);
 
                 if (uploadResult is null)
                 {

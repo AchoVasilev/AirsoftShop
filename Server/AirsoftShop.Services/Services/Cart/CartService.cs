@@ -1,12 +1,12 @@
 namespace AirsoftShop.Services.Services.Cart;
 
 using Common.Models;
-using Couriers;
 using Data.Models;
 using Data.Models.Enums;
 using Data.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Models.Cart;
+using Models.Courier;
 using static Common.Constants.Messages;
 
 public class CartService : ICartService

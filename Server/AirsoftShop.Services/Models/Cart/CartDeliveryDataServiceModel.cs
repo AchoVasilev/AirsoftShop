@@ -1,6 +1,6 @@
 namespace AirsoftShop.Services.Models.Cart;
 
-using Couriers;
+using Courier;
 
 public class CartDeliveryDataServiceModel
 {

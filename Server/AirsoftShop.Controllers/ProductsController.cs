@@ -1,6 +1,5 @@
 namespace AirsoftShop.Controllers;
 
-using CloudinaryDotNet;
 using Common.Services;
 using Data.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -18,20 +17,17 @@ public class ProductsController : BaseController
     private readonly IProductService productService;
     private readonly ICurrentUserService currentUserService;
     private readonly IFileService fileService;
-    private readonly Cloudinary cloudinary;
     private readonly UserManager<ApplicationUser> userManager;
 
     public ProductsController(
         IProductService productService,
         ICurrentUserService currentUserService,
         IFileService fileService,
-        Cloudinary cloudinary,
         UserManager<ApplicationUser> userManager)
     {
         this.productService = productService;
         this.currentUserService = currentUserService;
         this.fileService = fileService;
-        this.cloudinary = cloudinary;
         this.userManager = userManager;
     }
 
@@ -55,7 +51,7 @@ public class ProductsController : BaseController
         var imageIds = new List<string>();
         foreach (var image in model.Images)
         {
-            var imageResult = await this.fileService.UploadImage(this.cloudinary, image, CloudinaryFolderName);
+            var imageResult = await this.fileService.UploadImage(image, CloudinaryFolderName);
             if (imageResult.Failed)
             {
                 return this.BadRequest(new { ErrorMessage = UnsuccessfulActionMsg });

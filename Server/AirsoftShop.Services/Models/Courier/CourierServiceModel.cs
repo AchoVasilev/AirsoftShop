@@ -1,4 +1,4 @@
-namespace AirsoftShop.Services.Couriers;
+namespace AirsoftShop.Services.Models.Courier;
 
 public class CourierServiceModel
 {

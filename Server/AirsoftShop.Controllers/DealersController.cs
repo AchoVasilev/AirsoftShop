@@ -1,6 +1,5 @@
 namespace AirsoftShop.Controllers;
 
-using CloudinaryDotNet;
 using Common.Services;
 using Data.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -18,19 +17,17 @@ public class DealersController : BaseController
     private readonly UserManager<ApplicationUser> userManager;
     private readonly IDealerService dealerService;
     private readonly IFileService fileService;
-    private readonly Cloudinary cloudinary;
     private readonly ICurrentUserService currentUserService;
 
     public DealersController(
         UserManager<ApplicationUser> userManager,
         IDealerService dealerService,
         IFileService fileService,
-        Cloudinary cloudinary, ICurrentUserService currentUserService)
+        ICurrentUserService currentUserService)
     {
         this.userManager = userManager;
         this.dealerService = dealerService;
         this.fileService = fileService;
-        this.cloudinary = cloudinary;
         this.currentUserService = currentUserService;
     }
 
@@ -43,7 +40,7 @@ public class DealersController : BaseController
             return this.BadRequest(new { ErrorMessage = UsernameExistsMsg });
         }
 
-        var imageResult = await this.fileService.UploadImage(this.cloudinary, model.Image, CloudinaryFolderName);
+        var imageResult = await this.fileService.UploadImage(model.Image, CloudinaryFolderName);
 
         if (imageResult.Failed)
         {
