@@ -90,6 +90,7 @@ public class CartsController : BaseController
     
     [HttpGet]
     [Route("getNavData")]
+    [AllowAnonymous]
     public async Task<IActionResult> GetProductCountAndPrice()
     {
         var userId = this.currentUserService.GetUserId();
@@ -103,11 +104,11 @@ public class CartsController : BaseController
                 TotalPrice = 0
             };
 
-            return Ok(cartModel); 
+            return this.Ok(cartModel); 
         }
 
         var result = await this.cartService.GetCartData(user.ClientId); ;
 
-        return Ok(result);
+        return this.Ok(result);
     }
 }

@@ -26,7 +26,7 @@ public class UsersController : BaseController
 
     [HttpPost]
     [Route(nameof(Login))]
-    public async Task<ActionResult<object>> Login(LoginUserRequestModel model)
+    public async Task<ActionResult<LoginResponseModel>> Login(LoginUserRequestModel model)
     {
         var user = await this.userManager.FindByEmailAsync(model.Email);
         if (user is null)
