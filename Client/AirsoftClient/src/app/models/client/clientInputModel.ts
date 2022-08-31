@@ -3,7 +3,7 @@ export interface ClientInputModel {
     lastName: string,
     streetName: string,
     cityName: string,
-    phone: string,
+    phoneNumber: string,
     email: string,
     username: string,
     password: string

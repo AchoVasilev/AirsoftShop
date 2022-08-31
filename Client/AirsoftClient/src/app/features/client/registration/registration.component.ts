@@ -26,7 +26,7 @@ export class RegistrationComponent implements OnInit {
     'lastName': new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(40)]),
     'streetName': new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(40)]),
     'cityName': new FormControl('', [Validators.required]),
-    'phone': new FormControl('', [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]),
+    'phoneNumber': new FormControl('', [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]),
     'email': new FormControl('', [Validators.required, Validators.email]),
     'username': new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(40)]),
     'passwords': new FormGroup({
@@ -61,14 +61,14 @@ export class RegistrationComponent implements OnInit {
   }
 
   handleRegistration() {
-    const { firstName, lastName, streetName, cityName, phone, email, username, passwords } = this.registerFormGroup.value;
+    const { firstName, lastName, streetName, cityName, phoneNumber, email, username, passwords } = this.registerFormGroup.value;
 
     const body: ClientInputModel = {
       firstName,
       lastName,
       streetName,
       cityName,
-      phone,
+      phoneNumber,
       email,
       username,
       password: passwords.password

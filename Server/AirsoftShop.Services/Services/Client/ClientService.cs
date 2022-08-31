@@ -47,7 +47,7 @@ public class ClientService : IClientService
                 FirstName = model.FirstName,
                 LastName = model.LastName,
                 Email = model.Email,
-                PhoneNumber = model.Phone,
+                PhoneNumber = model.PhoneNumber,
                 Address = new Address
                 {
                     StreetName = model.StreetName,
@@ -147,7 +147,7 @@ public class ClientService : IClientService
         user.Client.LastName = editModel.LastName;
         user.Email = editModel.Email;
         user.Client.Email = editModel.Email;
-        user.Client.PhoneNumber = editModel.Phone;
+        user.Client.PhoneNumber = editModel.PhoneNumber;
 
         await this.data.SaveChangesAsync();
 
