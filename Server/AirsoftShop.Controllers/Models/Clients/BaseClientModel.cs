@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using static Data.Constants.Data.Constants;
 using static Common.Constants.Messages;
 
-public class BaseClientModel
+public abstract class BaseClientModel
 {
     [Required]
     [StringLength(DefaultMaxLength, MinimumLength = DefaultMinLength, ErrorMessage = LengthErrorMsg)]

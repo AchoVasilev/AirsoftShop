@@ -4,5 +4,5 @@ using Base;
 
 public class EditGunServiceModel : ExtendedBaseGunServiceModel
 {
-        public string SubCategoryName { get; init; }
+        public string? SubCategoryName { get; init; }
 }

@@ -8,7 +8,7 @@ import { EditComponent } from './edit/edit.component';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'dealer',
     children: [
       {
         path: 'register',

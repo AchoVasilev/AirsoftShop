@@ -10,20 +10,10 @@ import { MineComponent } from "./mine/mine.component";
 
 export const routes: Routes = [
   {
-    path: '',
+    path: 'guns',
     children: [
-      // {
-      //   path: 'all',
-      //   component: ListComponent,
-      //   pathMatch: 'full'
-      // },
       {
-        path: 'guns/all',
-        component: GunListComponent,
-        pathMatch: 'full'
-      },
-      {
-        path: 'guns/:name',
+        path: 'all',
         component: GunListComponent,
         pathMatch: 'full'
       },
@@ -39,7 +29,7 @@ export const routes: Routes = [
         pathMatch: 'full'
       },
       {
-        path: 'guns/edit/:id',
+        path: 'edit/:id',
         component: EditComponent,
         pathMatch: 'full'
       },
