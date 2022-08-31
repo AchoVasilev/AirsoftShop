@@ -42,7 +42,7 @@ public class ClientsController : BaseController
             FirstName = model.FirstName,
             LastName = model.LastName,
             Password = model.Password,
-            PhoneNumber = model.Phone,
+            PhoneNumber = model.PhoneNumber,
             StreetName = model.StreetName,
             Username = model.Username
         };
@@ -87,7 +87,7 @@ public class ClientsController : BaseController
             FirstName = model.FirstName,
             LastName = model.LastName,
             Email = model.Email,
-            PhoneNumber = model.Phone,
+            PhoneNumber = model.PhoneNumber,
             CityName = model.CityName,
             StreetName = model.StreetName
         };

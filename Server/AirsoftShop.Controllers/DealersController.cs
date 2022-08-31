@@ -56,7 +56,7 @@ public class DealersController : BaseController
             Email = model.Email,
             Name = model.Name,
             Password = model.Password,
-            Phone = model.Phone,
+            Phone = model.PhoneNumber,
             DealerNumber = model.DealerNumber,
             SiteUrl = model.SiteUrl,
             StreetName = model.StreetName,
@@ -104,7 +104,7 @@ public class DealersController : BaseController
             CityName = model.CityName,
             DealerNumber = model.DealerNumber,
             Name = model.Name,
-            Phone = model.Phone,
+            Phone = model.PhoneNumber,
             SiteUrl = model.SiteUrl,
             StreetName = model.StreetName,
         };

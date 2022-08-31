@@ -23,7 +23,7 @@ export class EditComponent implements OnInit {
     'lastName': new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(40)]),
     'streetName': new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(40)]),
     'cityName': new FormControl('', [Validators.required]),
-    'phone': new FormControl('', [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]),
+    'phoneNumber': new FormControl('', [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]),
     'email': new FormControl('', [Validators.required, Validators.email]),
   });
 
@@ -45,7 +45,7 @@ export class EditComponent implements OnInit {
       lastName: this.client!.client.lastName,
       streetName: this.client!.client.address.streetName,
       cityName: this.client!.client.address.city.name,
-      phone: this.client!.client.phoneNumber,
+      phoneNumber: this.client!.client.phoneNumber,
       email: this.client!.email
     });
   }
@@ -67,13 +67,13 @@ export class EditComponent implements OnInit {
   }
 
   editData() {
-    const { firstName, lastName, streetName, cityName, phone, email } = this.editFormGroup.value;
+    const { firstName, lastName, streetName, cityName, phoneNumber, email } = this.editFormGroup.value;
     const editModel: EditClientModel = {
       firstName,
       lastName,
       streetName,
       cityName,
-      phone,
+      phoneNumber,
       email
     };
 

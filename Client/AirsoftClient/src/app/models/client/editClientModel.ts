@@ -3,6 +3,6 @@ export interface EditClientModel {
     lastName: string,
     streetName: string,
     cityName: string,
-    phone: string,
+    phoneNumber: string,
     email: string
 };
