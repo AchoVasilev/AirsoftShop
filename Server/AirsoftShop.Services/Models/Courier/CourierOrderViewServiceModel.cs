@@ -1,8 +1,7 @@
 namespace AirsoftShop.Services.Models.Courier;
 
-public class CourierOrderViewServiceModel
-{
-    public string Name { get; init; }
+using Base;
 
-    public decimal DeliveryPrice { get; init; }
+public class CourierOrderViewServiceModel : BaseCourierServiceModel
+{
 }
