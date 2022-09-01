@@ -1,7 +1,7 @@
 namespace AirsoftShop.Services.Services.Dealer;
 
 using AirsoftShop.Common.Models;
-using Common.Services.Common;
+using Common;
 using Models.Dealer;
 
 public interface IDealerService : ITransientService

@@ -1,7 +1,7 @@
 namespace AirsoftShop.Services.Services.Order;
 
 using AirsoftShop.Common.Models;
-using Common.Services.Common;
+using Common;
 using Models.Order;
 
 public interface IOrderService : ITransientService

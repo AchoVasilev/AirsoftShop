@@ -9,9 +9,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using AirsoftShop.Common.Models;
 using CloudinaryDotNet;
-using Common.Services.Common;
+using Common.Services;
 using Microsoft.OpenApi.Models;
 using Models;
+using Services.Common;
 
 internal static class ServiceCollectionExtensions
 {
@@ -123,6 +124,8 @@ internal static class ServiceCollectionExtensions
                 services.AddSingleton(type.Service, type.Implementation);
             }
         }
+
+        services.AddScoped<ICurrentUserService, CurrentUserService>();
         
         return services;
     }

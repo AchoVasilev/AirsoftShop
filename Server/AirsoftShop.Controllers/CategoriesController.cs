@@ -19,4 +19,9 @@ public class CategoriesController : BaseController
     [Route("newest")]
     public async Task<ActionResult> GetNewest()
         => this.Ok(await this.categoryService.GetFourNewestCategories());
+
+    [HttpGet]
+    [Route("gunSubcategories")]
+    public async Task<ActionResult> GetSubcategories()
+        => this.Ok(await this.categoryService.GetGunSubcategories());
 }

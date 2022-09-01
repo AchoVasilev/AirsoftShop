@@ -1,7 +1,7 @@
 namespace AirsoftShop.Services.Services.Client;
 
 using AirsoftShop.Common.Models;
-using Common.Services.Common;
+using Common;
 using Models.Client;
 
 public interface IClientService : ITransientService

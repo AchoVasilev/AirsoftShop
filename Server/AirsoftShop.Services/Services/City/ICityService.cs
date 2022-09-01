@@ -1,6 +1,6 @@
 namespace AirsoftShop.Services.Services.City;
 
-using Common.Services.Common;
+using Common;
 using Models.City;
 
 public interface ICityService : ITransientService

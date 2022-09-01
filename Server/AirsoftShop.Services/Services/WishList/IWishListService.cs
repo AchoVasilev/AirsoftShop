@@ -1,6 +1,6 @@
 namespace AirsoftShop.Services.Services.WishList;
 
-using Common.Services.Common;
+using Common;
 
 public interface IWishListService : ITransientService
 {

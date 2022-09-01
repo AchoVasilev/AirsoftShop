@@ -1,7 +1,7 @@
 namespace AirsoftShop.Services.Services.Cart;
 
 using AirsoftShop.Common.Models;
-using Common.Services.Common;
+using Common;
 using Models.Cart;
 
 public interface ICartService : ITransientService

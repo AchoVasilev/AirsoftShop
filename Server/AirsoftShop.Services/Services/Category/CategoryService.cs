@@ -6,6 +6,8 @@ using Models.Category;
 
 public class CategoryService : ICategoryService
 {
+    private const string GunCategoryName = "Еърсофт оръжия";
+    
     private readonly ApplicationDbContext data;
 
     public CategoryService(ApplicationDbContext data) 
@@ -37,5 +39,15 @@ public class CategoryService : ICategoryService
             })
             .Take(4)
             .AsNoTracking()
+            .ToListAsync();
+
+    public async Task<IEnumerable<SubcategoryServiceModel>> GetGunSubcategories()
+        => await this.data.SubCategories
+            .Where(x => x.Category.Name == GunCategoryName)
+            .Select(x => new SubcategoryServiceModel()
+            {
+                Id = x.Id,
+                Name = x.Name
+            })
             .ToListAsync();
 }

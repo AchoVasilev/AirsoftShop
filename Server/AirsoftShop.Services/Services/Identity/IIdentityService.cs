@@ -1,6 +1,6 @@
 namespace AirsoftShop.Services.Services.Identity;
 
-using Common.Services.Common;
+using Common;
 
 public interface IIdentityService : IScopedService
 {

@@ -1,7 +1,7 @@
 namespace AirsoftShop.Services.Services.File;
 
 using AirsoftShop.Common.Models;
-using Common.Services.Common;
+using Common;
 using Microsoft.AspNetCore.Http;
 using Models.File;
 

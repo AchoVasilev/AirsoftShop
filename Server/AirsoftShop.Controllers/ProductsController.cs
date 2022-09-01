@@ -38,7 +38,7 @@ public class ProductsController : BaseController
 
     [HttpPost]
     [Authorize]
-    public async Task<IActionResult> CreateGun([FromForm] GunInputModel model)
+    public async Task<IActionResult> CreateGun([FromForm]GunInputModel model)
     {
         var userId = this.currentUserService.GetUserId();
         var user = await this.userManager.FindByIdAsync(userId);

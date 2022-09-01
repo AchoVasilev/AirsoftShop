@@ -1,6 +1,6 @@
 namespace AirsoftShop.Services.Services.Category;
 
-using Common.Services.Common;
+using Common;
 using Models.Category;
 
 public interface ICategoryService : ITransientService
@@ -8,4 +8,6 @@ public interface ICategoryService : ITransientService
     Task<IEnumerable<CategoryServiceModel>> GetAllWithSubcategories();
 
     Task<IEnumerable<BasicCategoryServiceModel>> GetFourNewestCategories();
+
+    Task<IEnumerable<SubcategoryServiceModel>> GetGunSubcategories();
 }
