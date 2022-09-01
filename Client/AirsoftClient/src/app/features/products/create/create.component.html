@@ -9,7 +9,7 @@
 </section>
 <section class="create" *ngIf="isLoaded">
     <h1 class="create-title">Добавяне на ново оръжие</h1>
-    <form action="" class="create-form" [formGroup]="gunCreateFormGroup" (ngSubmit)="createGunHandler()">
+    <form action="post" class="create-form" [formGroup]="gunCreateFormGroup" (ngSubmit)="createGunHandler()">
         <section class="create-data">
             <article class="create-wrapper">
                 <article class="create-inline-wrapper">

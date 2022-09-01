@@ -66,7 +66,7 @@ export class CreateComponent implements OnInit {
   }
 
   onChange(event: any) {
-    this.files = <File[]>event.target.files;
+    this.files = event.target.files;
   }
 
   shouldShowErrorForControl(controlName: string, sourceGroup: FormGroup = this.gunCreateFormGroup) {
@@ -105,9 +105,13 @@ export class CreateComponent implements OnInit {
     body.append('name', name);
     body.append('manufacturer', manufacturer);
 
-    Array.from(this.files).map((file, index) => {
-      return body.append('images' + index, file);
-    });
+    for (let index = 0; index < this.files.length; index++) {
+      body.append('images', this.files[index]);
+    }
+
+    // Array.from(this.files).map((file, index) => {
+    //   return body.append('images' + index, file);
+    // });
 
     body.append('power', power);
     body.append('color', color);
@@ -132,7 +136,11 @@ export class CreateComponent implements OnInit {
           this.isLoaded = true;
           this.isLoading = false;
 
-          this.router.navigate([`/products/${res.name}/${res.gunId}`])
+          this.router.navigate([`/products/${res.name}/${res.id}`])
+        },
+        complete: () => {
+          this.isLoaded = true;
+          this.isLoading = false;
         }
       })
   }

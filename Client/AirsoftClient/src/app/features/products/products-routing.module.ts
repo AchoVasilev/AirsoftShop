@@ -10,7 +10,7 @@ import { MineComponent } from "./mine/mine.component";
 
 export const routes: Routes = [
   {
-    path: 'guns',
+    path: '',
     children: [
       {
         path: 'all',

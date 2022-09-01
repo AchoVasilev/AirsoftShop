@@ -93,16 +93,16 @@
             </article>
             <article class="registration-wrapper">
                 <article class="phone-wrapper">
-                    <label for="phone">Телефонен номер <span
-                            [ngClass]="shouldShowErrorForControl('phone') ? 'error' : ''">*</span></label>
-                    <input type="text" id="phone" name="phone" formControlName="phone"
-                        [ngClass]="shouldShowErrorForControl('phone') ? 'invalid' : ''">
+                    <label for="phoneNumber">Телефонен номер <span
+                            [ngClass]="shouldShowErrorForControl('phoneNumber') ? 'error' : ''">*</span></label>
+                    <input type="text" id="phoneNumber" name="phoneNumber" formControlName="phoneNumber"
+                        [ngClass]="shouldShowErrorForControl('phoneNumber') ? 'invalid' : ''">
 
-                    <ng-container *ngIf="shouldShowErrorForControl('phone')">
-                        <p class="error" *ngIf="registerFormGroup.controls['phone'].errors?.['required']">
+                    <ng-container *ngIf="shouldShowErrorForControl('phoneNumber')">
+                        <p class="error" *ngIf="registerFormGroup.controls['phoneNumber'].errors?.['required']">
                             Полето е задължително!
                         </p>
-                        <p class="error" *ngIf="registerFormGroup.controls['phone'].errors?.['pattern']">
+                        <p class="error" *ngIf="registerFormGroup.controls['phoneNumber'].errors?.['pattern']">
                             Въведете правилен телефонен номер!
                         </p>
                     </ng-container>

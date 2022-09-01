@@ -30,7 +30,7 @@ export class RegistrationComponent implements OnInit {
     'image': new FormControl(null, [Validators.required]),
     'siteUrl': new FormControl(null),
     'cityName': new FormControl('', [Validators.required]),
-    'phone': new FormControl('', [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]),
+    'phoneNumber': new FormControl('', [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]),
     'email': new FormControl('', [Validators.required, Validators.email]),
     'username': new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(40)]),
     'passwords': new FormGroup({
@@ -69,14 +69,14 @@ export class RegistrationComponent implements OnInit {
   }
 
   handleRegistration() {
-    const { name, dealerNumber, streetName, cityName, phone, email, image, siteUrl, username, passwords } = this.registerFormGroup.value;
+    const { name, dealerNumber, streetName, cityName, phoneNumber, email, image, siteUrl, username, passwords } = this.registerFormGroup.value;
 
     const body = new FormData();
     body.append('name', name);
     body.append('dealerNumber', dealerNumber);
     body.append('streetName', streetName);
     body.append('cityName', cityName);
-    body.append('phone', phone);
+    body.append('phoneNumber', phoneNumber);
     body.append('email', email);
     body.append('image', this.file);
     body.append('siteUrl', siteUrl);
