@@ -1,9 +1,10 @@
 namespace AirsoftShop.Services.Services.Product;
 
-using Common.Models;
+using AirsoftShop.Common.Models;
+using Common.Services.Common;
 using Models.Product;
 
-public interface IProductService
+public interface IProductService : ITransientService
 {
     Task<IEnumerable<InitialGunViewModel>> GetNewestEightGuns();
     

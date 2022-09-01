@@ -1,6 +1,6 @@
 namespace AirsoftShop.Services.Services.Client;
 
-using Common.Models;
+using AirsoftShop.Common.Models;
 using Data.Models;
 using Data.Models.Images;
 using Data.Persistence;
@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Models.Address;
 using Models.City;
 using Models.Client;
-using static Common.Constants.Messages;
+using static AirsoftShop.Common.Constants.Messages;
 
 public class ClientService : IClientService
 {

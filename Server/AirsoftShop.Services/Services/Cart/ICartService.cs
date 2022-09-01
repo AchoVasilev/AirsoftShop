@@ -1,9 +1,10 @@
 namespace AirsoftShop.Services.Services.Cart;
 
-using Common.Models;
+using AirsoftShop.Common.Models;
+using Common.Services.Common;
 using Models.Cart;
 
-public interface ICartService
+public interface ICartService : ITransientService
 {
     Task<OperationResult<AddedToCartResultServiceModel>> Add(string userClientId, string gunId);
     

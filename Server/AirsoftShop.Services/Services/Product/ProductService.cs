@@ -1,13 +1,13 @@
 namespace AirsoftShop.Services.Services.Product;
 
-using Common.Models;
+using AirsoftShop.Common.Models;
 using Data.Models;
 using Data.Models.Enums;
 using Data.Models.Images;
 using Data.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Models.Product;
-using static Common.Constants.Messages;
+using static AirsoftShop.Common.Constants.Messages;
 public class ProductService : IProductService
 {
     private readonly ApplicationDbContext data;
@@ -26,8 +26,9 @@ public class ProductService : IProductService
                 Power = x.Power,
                 DealerName = x.Dealer.Name,
                 DealerSiteUrl = x.Dealer.SiteUrl,
-                ImageUrl = x.Images.Select(i => i.Url).FirstOrDefault()
+                ImageUrl = x.Images.Select(i => i.Url ?? i.RemoteImageUrl).First()
             })
+            .Take(8)
             .AsNoTracking()
             .ToListAsync();
 
@@ -113,7 +114,7 @@ public class ProductService : IProductService
                 Length = x.Length,
                 Hopup = x.Hopup,
                 Price = x.Price,
-                ImageUrls = x.Images.Select(y => y.Url).ToList()
+                ImageUrls = x.Images.Select(y => y.Url ?? y.RemoteImageUrl).ToList()
             })
             .FirstOrDefaultAsync();
 
@@ -226,7 +227,7 @@ public class ProductService : IProductService
                         Length = x.Length,
                         Hopup = x.Hopup,
                         Price = x.Price,
-                        ImageUrls = x.Images.Select(y => y.Url).ToList()
+                        ImageUrls = x.Images.Select(y => y.Url ?? y.RemoteImageUrl).ToList()
                     })
                     .ToListAsync();
 
@@ -255,7 +256,7 @@ public class ProductService : IProductService
                         Length = x.Length,
                         Hopup = x.Hopup,
                         Price = x.Price,
-                        ImageUrls = x.Images.Select(y => y.Url).ToList()
+                        ImageUrls = x.Images.Select(y => y.Url ?? y.RemoteImageUrl).ToList()
                     })
                     .ToListAsync();
 
@@ -284,7 +285,7 @@ public class ProductService : IProductService
                         Length = x.Length,
                         Hopup = x.Hopup,
                         Price = x.Price,
-                        ImageUrls = x.Images.Select(y => y.Url).ToList()
+                        ImageUrls = x.Images.Select(y => y.Url ?? y.RemoteImageUrl).ToList()
                     })
                     .ToListAsync();
 
@@ -312,7 +313,7 @@ public class ProductService : IProductService
                     Length = x.Length,
                     Hopup = x.Hopup,
                     Price = x.Price,
-                    ImageUrls = x.Images.Select(y => y.Url).ToList()
+                    ImageUrls = x.Images.Select(y => y.Url ?? y.RemoteImageUrl).ToList()
                 })
                     .ToListAsync();
 
@@ -340,7 +341,7 @@ public class ProductService : IProductService
                     Length = x.Length,
                     Hopup = x.Hopup,
                     Price = x.Price,
-                    ImageUrls = x.Images.Select(y => y.Url).ToList()
+                    ImageUrls = x.Images.Select(y => y.Url ?? y.RemoteImageUrl).ToList()
                 })
                     .ToListAsync();
         
@@ -364,7 +365,7 @@ public class ProductService : IProductService
                     Color = x.Color,
                     CreatedOn = x.CreatedOn.ToString("dd/MM/yyyy"),
                     DealerId = dealerId,
-                    ImageUrl = x.Images.Select(i => i.Url).First(),
+                    ImageUrl = x.Images.Select(i => i.Url ?? i.RemoteImageUrl).First(),
                     Manufacturer = x.Manufacturer,
                     Name = x.Name,
                     Price = x.Price,
@@ -398,7 +399,7 @@ public class ProductService : IProductService
                     Length = x.Length,
                     Hopup = x.Hopup,
                     Price = x.Price,
-                    ImageUrls = x.Images.Select(y => y.Url).ToList()
+                    ImageUrls = x.Images.Select(y => y.Url ?? y.RemoteImageUrl).ToList()
                 })
                         .ToListAsync();
 
@@ -426,7 +427,7 @@ public class ProductService : IProductService
                     Length = x.Length,
                     Hopup = x.Hopup,
                     Price = x.Price,
-                    ImageUrls = x.Images.Select(y => y.Url).ToList()
+                    ImageUrls = x.Images.Select(y => y.Url ?? y.RemoteImageUrl).ToList()
                 })
                         .ToListAsync();
 

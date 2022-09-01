@@ -1,13 +1,13 @@
 namespace AirsoftShop.Services.Services.Order;
 
-using Common.Models;
+using AirsoftShop.Common.Models;
 using Data.Models;
 using Data.Models.Enums;
 using Data.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Models.Courier;
 using Models.Order;
-using static Common.Constants.Messages;
+using static AirsoftShop.Common.Constants.Messages;
 public class OrderService : IOrderService
 {
     private readonly ApplicationDbContext data;

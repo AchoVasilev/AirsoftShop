@@ -1,6 +1,8 @@
 namespace AirsoftShop.Common.Services;
 
-public interface ICurrentUserService
+using Common;
+
+public interface ICurrentUserService : IScopedService
 {
     string? GetUserName();
 

@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Models.City;
 using Models.Dealer;
-using static Common.Constants.Messages;
+using static AirsoftShop.Common.Constants.Messages;
 
 public class DealerService : IDealerService
 {

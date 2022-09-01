@@ -9,18 +9,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using AirsoftShop.Common.Models;
 using CloudinaryDotNet;
-using Common.Services;
+using Common.Services.Common;
 using Microsoft.OpenApi.Models;
 using Models;
-using Services.Services.Cart;
-using Services.Services.Category;
-using Services.Services.City;
-using Services.Services.Client;
-using Services.Services.Dealer;
-using Services.Services.File;
-using Services.Services.Identity;
-using Services.Services.Order;
-using Services.Services.Product;
 
 internal static class ServiceCollectionExtensions
 {
@@ -101,16 +92,40 @@ internal static class ServiceCollectionExtensions
     }
 
     internal static IServiceCollection RegisterApplicationServices(this IServiceCollection services)
-        => services.AddScoped<ICurrentUserService, CurrentUserService>()
-            .AddTransient<IIdentityService, IdentityService>()
-            .AddTransient<ICategoryService, CategoryService>()
-            .AddTransient<IProductService, ProductService>()
-            .AddTransient<IFileService, FileService>()
-            .AddTransient<IDealerService, DealerService>()
-            .AddTransient<ICartService, CartService>()
-            .AddTransient<IClientService, ClientService>()
-            .AddTransient<IOrderService, OrderService>()
-            .AddTransient<ICityService, CityService>();
+    {
+        var transientRegistrationType = typeof(ITransientService);
+        var scopedRegistrationType = typeof(IScopedService);
+        var singletonRegistrationType = typeof(ISingletonService);
+
+        var types = transientRegistrationType
+            .Assembly
+            .GetExportedTypes()
+            .Where(t => t.IsClass && !t.IsAbstract)
+            .Select(t => new
+            {
+                Service = t.GetInterface($"I{t.Name}"),
+                Implementation = t
+            })
+            .Where(s => s.Service != null);
+
+        foreach (var type in types)
+        {
+            if (transientRegistrationType.IsAssignableFrom(type.Service))
+            {
+                services.AddTransient(type.Service, type.Implementation);
+            }
+            else if (scopedRegistrationType.IsAssignableFrom(type.Service))
+            {
+                services.AddScoped(type.Service, type.Implementation);
+            }
+            else if (singletonRegistrationType.IsAssignableFrom(type.Service))
+            {
+                services.AddSingleton(type.Service, type.Implementation);
+            }
+        }
+        
+        return services;
+    }
 
     internal static IServiceCollection AddSwagger(this IServiceCollection services)
         => services.AddSwaggerGen(c =>

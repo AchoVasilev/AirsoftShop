@@ -1,0 +1,154 @@
+.wish-list {
+    padding: 40px 80px;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+}
+
+.not-logged-user-message {
+    background-color: #FB5104;
+    padding: 15px 8px;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 3px;
+    margin-bottom: 2rem;
+}
+
+.not-logged-user-message p {
+    padding-right: 5px;
+    flex-basis: 95%;
+    color: white;
+    font-size: 16px;
+}
+
+.not-logged-user-message p a {
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.not-logged-user-message p a:hover {
+    color: lightgray;
+    transition: 300ms ease-in-out;
+}
+
+.not-logged-user-message span {
+    font-size: 2rem;
+    padding-left: 5px;
+    color: white;
+}
+
+.wish-list-item-headings {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid lightgray;
+}
+
+.wish-list-item-headings span:first-child {
+    display: block;
+    flex-basis: 30%;
+}
+
+.wish-list-item-headings span:last-child {
+    display: block;
+    flex-basis: 9%;
+}
+
+.wish-list-item-heading {
+    margin: 5px;
+    color: #333333;
+    flex-basis: 15%;
+}
+
+.wish-list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid lightgray;
+    margin-bottom: 15px;
+}
+
+.wish-list-item p {
+    color: #333333;
+}
+
+.wish-item-image-container {
+    width: 200px;
+    display: inline-block;
+    padding: 10px;
+}
+
+.wish-item-image-container img {
+    width: 100%;
+}
+
+.wish-list-item-product {
+    display: flex;
+    align-items: center;
+}
+
+.wish-item-title-wrapper {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.wish-item-title {
+    color: #333333;
+    font-weight: 800;
+    margin-bottom: 8px;
+}
+
+.wish-item-title:hover {
+    color: #FB5104;
+    transition: 300ms ease-in-out;
+}
+
+.wish-item-manufacturer {
+    font-size: 12px;
+}
+
+.wish-list-item-buttons {
+    display: flex;
+    flex-direction: column;
+}
+
+.wish-button {
+    margin: 5px;
+    padding: 10px 50px;
+    background-color: #333333;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    font-weight: bold;
+}
+
+.wish-button:hover {
+    background-color: #FB5104;
+    cursor: pointer;
+    transition: 300ms ease-in-out;
+}
+
+.cart-button {
+    margin: 5px;
+    padding: 10px 20px;
+    background-color: #333333;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    font-weight: bold;
+    top: 0;
+    right: 0;
+}
+
+.cart-button:hover {
+    background-color: #FB5104;
+    cursor: pointer;
+    transition: 300ms ease-in-out;
+}
+
+.wish-list form {
+    align-self: end;
+}

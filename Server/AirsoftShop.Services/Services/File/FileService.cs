@@ -2,14 +2,14 @@ namespace AirsoftShop.Services.Services.File
 {
     using System.Linq;
     using System.Threading.Tasks;
+    using AirsoftShop.Common.Models;
     using CloudinaryDotNet;
     using CloudinaryDotNet.Actions;
-    using Common.Models;
     using Data.Models.Images;
     using Data.Persistence;
     using Microsoft.AspNetCore.Http;
     using Models.File;
-    using static Common.Constants.Messages;
+    using static AirsoftShop.Common.Constants.Messages;
     public class FileService : IFileService
     {
         private readonly ApplicationDbContext data;

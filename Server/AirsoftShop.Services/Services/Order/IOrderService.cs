@@ -1,9 +1,10 @@
 namespace AirsoftShop.Services.Services.Order;
 
-using Common.Models;
+using AirsoftShop.Common.Models;
+using Common.Services.Common;
 using Models.Order;
 
-public interface IOrderService
+public interface IOrderService : ITransientService
 {
     Task<OperationResult<CreateOrderSuccessModel>> CreateOrder(string userClientId, CreateOrderServiceModel model);
 
