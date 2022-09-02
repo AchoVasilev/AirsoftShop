@@ -3,8 +3,8 @@ namespace AirsoftShop.Common.Constants;
 public static class Messages
 {
     public const string RequiredFieldErrorMsg = "Полето е задължително.";
-    public const string LengthErrorMsg = "Полето трябва да е между {0} и {1} символа.";
-    public const string PasswordLengthErrorMsg = "Паролата трябва да е между {0} {1} символа.";
+    public const string LengthErrorMsg = "Полето трябва да е между {1} и {2} символа.";
+    public const string PasswordLengthErrorMsg = "Паролата трябва да е между {1} {2} символа.";
     public const string PasswordsNotMatchErrorMsg = "Паролите не съвпадат.";
 
     public const string InvalidEmailErrorMsg = "Моля въведете валиден и-мейл адрес.";

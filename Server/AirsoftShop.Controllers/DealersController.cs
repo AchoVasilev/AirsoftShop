@@ -117,4 +117,16 @@ public class DealersController : BaseController
         
         return this.Ok(result.Model);
     }
+
+    [HttpGet]
+    [Route("getDealerId")]
+    public async Task<ActionResult<string>> GetDealerId()
+    {
+        var userId = this.currentUserService.GetUserId();
+        var user = await this.userManager.FindByIdAsync(userId);
+        
+        return user?.DealerId is null ? 
+            string.Empty : 
+            new JsonResult(user.DealerId);
+    }
 }
