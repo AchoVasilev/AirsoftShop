@@ -220,7 +220,6 @@ public class ProductsController : BaseController
             allGunsViewModel.Powers = gunPowers;
             allGunsViewModel.ItemCount = guns.Count;
         }
-            
 
         return this.Ok(allGunsViewModel);
     }

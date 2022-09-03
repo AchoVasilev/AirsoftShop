@@ -107,7 +107,7 @@ public class CartsController : BaseController
             return this.Ok(cartModel); 
         }
 
-        var result = await this.cartService.GetCartData(user.ClientId); ;
+        var result = await this.cartService.GetCartData(user.ClientId);
 
         return this.Ok(result);
     }
