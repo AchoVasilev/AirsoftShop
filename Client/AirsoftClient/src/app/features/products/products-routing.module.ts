@@ -18,6 +18,11 @@ export const routes: Routes = [
         pathMatch: 'full'
       },
       {
+        path: 'guns/:name',
+        component: GunListComponent,
+        pathMatch: 'full'
+      },
+      {
         path: 'create',
         component: CreateComponent,
         pathMatch: 'full',

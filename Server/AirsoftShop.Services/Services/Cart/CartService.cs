@@ -34,7 +34,10 @@ public class CartService : ICartService
 
         if (client.CartId is null)
         {
-            client.Cart = new Cart();
+            client.Cart = new Cart()
+            {
+                ClientId = client.Id
+            };
         }
 
         client.Cart.Guns.Add(gun);
@@ -52,17 +55,19 @@ public class CartService : ICartService
 
     public async Task<IEnumerable<CartViewServiceModel>> GetItemsInCart(string userClientId)
     {
-        var cart = await this.data.Carts
-            .Where(x => x.ClientId == userClientId)
-            .Include(x => x.Guns)
+        var cart = await this.data.Clients
+            .Where(x => x.Id == userClientId)
+            .Include(x => x.Cart)
+            .ThenInclude(x => x.Guns)
+            .ThenInclude(x => x.Images)
             .FirstOrDefaultAsync();
 
-        var gunsInCart = cart.Guns
+        var gunsInCart = cart?.Cart.Guns
             .Select(cartGun => new CartViewServiceModel()
             {
                 Id = cartGun.Id,
                 Color = cartGun.Color,
-                ImageUrl = cartGun.Images.Select(x => x.Url).FirstOrDefault(),
+                ImageUrl = cartGun.Images.Select(x => x.Url ?? x.RemoteImageUrl).FirstOrDefault()!,
                 Manufacturer = cartGun.Manufacturer,
                 Name = cartGun.Name,
                 Price = cartGun.Price,

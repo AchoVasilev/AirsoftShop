@@ -15,7 +15,9 @@ export class CartService {
   constructor(private httpClient: HttpClient) { }
 
   AddItem(itemId: string): Observable<AddToCartResultModel> {
-    return this.httpClient.post<AddToCartResultModel>(`${this.apiUrl}/carts`, itemId);
+    return this.httpClient.post<AddToCartResultModel>(`${this.apiUrl}/carts`, {
+      itemId
+    });
   }
 
   AddItems(itemIds: string[]): Observable<AddToCartResultModel> {

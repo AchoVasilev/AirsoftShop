@@ -8,7 +8,7 @@ import { RegistrationComponent } from './registration/registration.component';
 
 const routes: Routes = [
   {
-    path: 'client',
+    path: '',
     children: [
       {
         path: 'register',

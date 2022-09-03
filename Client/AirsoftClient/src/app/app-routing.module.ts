@@ -22,8 +22,16 @@ const routes: Routes = [
     loadChildren: () => import('./features/client/client.module').then(x => x.ClientModule)
   },
   {
+    path: 'cart',
+    loadChildren: () => import('./features/cart/cart.module').then(x => x.CartModule)
+  },
+  {
     path: 'orders',
     loadChildren: () => import('./features/order/order.module').then(x => x.OrderModule)
+  },
+  {
+    path: 'wishlist',
+    loadChildren: () => import('./features/wish-list/wish-list.module').then(x => x.WishListModule)
   },
   {
     path: 'building',

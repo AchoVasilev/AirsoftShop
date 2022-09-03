@@ -4,8 +4,8 @@ namespace AirsoftShop.Services.Models.Product
 
     public class GunDetailsServiceModel : ExtendedBaseGunServiceModel
     {
-        public IEnumerable<string> ImageUrls { get; init; }
-
+        public string? ImageUrl { get; set; }
+        
         public string DealerName { get; init; }
 
         public string DealerId { get; init; }

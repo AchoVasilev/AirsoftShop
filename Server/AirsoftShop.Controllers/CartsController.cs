@@ -5,6 +5,7 @@ using Data.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Models;
 using Services.Models.Cart;
 using Services.Services.Cart;
 using static Common.Constants.Messages;
@@ -27,7 +28,7 @@ public class CartsController : BaseController
     }
 
     [HttpPost]
-    public async Task<IActionResult> Add([FromBody] string gunId)
+    public async Task<IActionResult> Add([FromBody] CartInputModel model)
     {
         var userId = this.currentUserService.GetUserId();
         var user = await this.userManager.FindByIdAsync(userId);
@@ -36,7 +37,7 @@ public class CartsController : BaseController
             return this.Unauthorized(new { ErrorMessage = NotAuthorizedMsg });
         }
 
-        var result = await this.cartService.Add(user.ClientId, gunId);
+        var result = await this.cartService.Add(user.ClientId, model.ItemId);
         if (result.Failed)
         {
             return this.BadRequest(new { result.ErrorMessage });

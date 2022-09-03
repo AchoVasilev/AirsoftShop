@@ -1,10 +1,11 @@
 namespace AirsoftShop.Services.Models.Product;
 
 using Base;
+using File;
 
 public class CreateGunServiceModel : ExtendedBaseGunServiceModel
 {
-        public IEnumerable<string> ImageIds { get; init; }
+        public IEnumerable<IFileServiceModel> Images { get; init; }
         
         public string? SubCategoryName { get; init; }
 }

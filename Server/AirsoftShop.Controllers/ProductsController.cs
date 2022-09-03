@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Models.Products;
+using Services.Models.File;
 using Services.Models.Product;
 using Services.Services.File;
 using Services.Services.Product;
@@ -48,7 +49,7 @@ public class ProductsController : BaseController
             return this.Unauthorized(new { ErrorMessage = NotAuthorizedMsg });
         }
 
-        var imageIds = new List<string>();
+        var fileModels = new List<IFileServiceModel>();
         foreach (var image in model.Images)
         {
             var imageResult = await this.fileService.UploadImage(image, CloudinaryFolderName);
@@ -57,8 +58,7 @@ public class ProductsController : BaseController
                 return this.BadRequest(new { ErrorMessage = UnsuccessfulActionMsg });
             }
 
-            var imageId = await this.fileService.AddItemImageToDatabase(imageResult.Model!);
-            imageIds.Add(imageId);
+            fileModels.Add(imageResult.Model!);
         }
 
         var gunModel = new CreateGunServiceModel()
@@ -69,7 +69,6 @@ public class ProductsController : BaseController
             Color = model.Color,
             Firing = model.Firing,
             Hopup = model.Hopup,
-            ImageIds = imageIds,
             Length = model.Length,
             Magazine = model.Magazine,
             Manufacturer = model.Manufacturer,
@@ -81,6 +80,7 @@ public class ProductsController : BaseController
             Price = model.Price,
             Weight = model.Weight,
             Propulsion = model.Propulsion,
+            Images = fileModels
         };
 
         var result = await this.productService.CreateGun(gunModel, user.DealerId);
@@ -93,7 +93,7 @@ public class ProductsController : BaseController
     }
     
     [HttpGet]
-    [Route("details")]
+    [Route("details/{gunId}")]
     public async Task<IActionResult> GetDetails([FromQuery] string gunId)
     {
         var res = await this.productService.GetDetails(gunId);

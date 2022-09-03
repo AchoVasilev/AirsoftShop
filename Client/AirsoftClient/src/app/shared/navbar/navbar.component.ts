@@ -33,7 +33,10 @@ export class NavbarComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit(): void {
-    this.getCartData();
+    if (this.isLoggedIn && this.isClient) {
+      this.getCartData();
+    }
+
     this.loadCategories();
     this.dataService.cartItemsCount.subscribe(count => this.cartItemsCount = count);
     this.dataService.cartItemsPrice.subscribe(price => this.cartItemsPrice = price);

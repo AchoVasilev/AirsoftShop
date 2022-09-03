@@ -84,5 +84,5 @@ public class Gun : DeletableEntity<string>
 
     public virtual SubCategory SubCategory { get; set; }
     
-    public IEnumerable<ItemImage> Images { get; init; }
+    public IEnumerable<ItemImage> Images { get; set; }
 }

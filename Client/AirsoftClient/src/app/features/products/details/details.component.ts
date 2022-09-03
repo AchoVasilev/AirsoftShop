@@ -53,7 +53,7 @@ export class DetailsComponent implements OnInit {
     this.isLoggedIn = this.authService.isAuthenticated();
     this.isClient = this.authService.getClient();
 
-    this.isOwner = this.isLoggedIn && this.dealerObj?.id == this.gun?.dealerId
+    this.isOwner = this.isLoggedIn && this.dealerObj?.id == this.gun?.dealerId && !this.isClient;
     this.isLoading = false;
     this.isLoaded = true;
   }
