@@ -44,7 +44,7 @@
                 </tr>
                 <tr class="basket-item" *ngFor="let item of items">
                     <td class="basket-item-img">
-                        <a class="basket-item-img-wrapper" routerLink="/products/guns/{{item.name}}/{{item.id}}">
+                        <a class="basket-item-img-wrapper" routerLink="/products/{{item.name}}/{{item.id}}">
                             <img src="{{item.imageUrl}}">
                         </a>
                     </td>
