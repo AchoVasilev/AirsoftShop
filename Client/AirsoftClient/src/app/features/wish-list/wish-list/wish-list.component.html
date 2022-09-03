@@ -1,4 +1,5 @@
-<section class="wish-list">
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+<section class="wish-list" *ngIf="isLoaded">
     <article class="not-logged-user-message">
         <span><i class="fa-solid fa-circle-info"></i></span>
         <p>
@@ -20,67 +21,29 @@
         </h6>
         <span></span>
     </article>
-    <article class="wish-list-item">
+    <article class="wish-list-item" *ngFor="let item in items">
         <article class="wish-list-item-product">
             <a href="" class="wish-item-image-container">
-                <img src="./images/m4.jpg" alt="">
+                <img src="{{item.imageUrl}}" alt="">
             </a>
             <article class="wish-item-title-wrapper">
                 <a href="" class="wish-item-title">
-                    320bbs M4 Carabine
+                    {{item.capacity}}bbs {{item.name}}
                 </a>
-                <p class="wish-item-manufacturer">Производител: Каспичан ООД</p>
+                <p class="wish-item-manufacturer">Производител: {{item.manufacturer}}</p>
             </article>
         </article>
-        <p>30.03.2022 г.</p>
-        <p>120 лв.</p>
+        <p>{{item.dateAdded}} г.</p>
+        <p>{{item.price}} лв.</p>
         <article class="wish-list-item-buttons">
-            <button class="wish-button">Купи</button>
-            <button class="wish-button">Премахни</button>
+            <button class="wish-button" (click)="addToCart(item.id, item.price)">Купи</button>
+            <button class="wish-button" (click)="onRemove(item.id)">Премахни</button>
         </article>
     </article>
 
-    <article class="wish-list-item">
-        <article class="wish-list-item-product">
-            <a href="" class="wish-item-image-container">
-                <img src="./images/glock.jpg" alt="">
-            </a>
-            <article class="wish-item-title-wrapper">
-                <a href="" class="wish-item-title">
-                    320bbs M4 Carabine
-                </a>
-                <p class="wish-item-manufacturer">Производител: Каспичан ООД</p>
-            </article>
-        </article>
-        <p>30.03.2022 г.</p>
-        <p>120 лв.</p>
-        <article class="wish-list-item-buttons">
-            <button class="wish-button">Купи</button>
-            <button class="wish-button">Премахни</button>
-        </article>
-    </article>
-
-    <article class="wish-list-item">
-        <article class="wish-list-item-product">
-            <a href="" class="wish-item-image-container">
-                <img src="./images/mask.jpg" alt="">
-            </a>
-            <article class="wish-item-title-wrapper">
-                <a href="" class="wish-item-title">
-                    320bbs M4 Carabine
-                </a>
-                <p class="wish-item-manufacturer">Производител: Каспичан ООД</p>
-            </article>
-        </article>
-        <p>30.03.2022 г.</p>
-        <p>120 лв.</p>
-        <article class="wish-list-item-buttons">
-            <button class="wish-button">Купи</button>
-            <button class="wish-button">Премахни</button>
-        </article>
-    </article>
-    <form action="">
-        <button class="cart-button"><i class="fa-solid fa-cart-arrow-down"></i> Добави всички в
-            количката</button>
+    <form action="post">
+        <button class="cart-button">
+            <i class="fa-solid fa-cart-arrow-down"></i> Добави всички в количката
+        </button>
     </form>
 </section>

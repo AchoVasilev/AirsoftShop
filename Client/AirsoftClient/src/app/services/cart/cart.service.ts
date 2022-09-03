@@ -14,8 +14,12 @@ export class CartService {
 
   constructor(private httpClient: HttpClient) { }
 
-  AddItem(gunId: string): Observable<AddToCartResultModel> {
-    return this.httpClient.post<AddToCartResultModel>(`${this.apiUrl}/carts`, gunId);
+  AddItem(itemId: string): Observable<AddToCartResultModel> {
+    return this.httpClient.post<AddToCartResultModel>(`${this.apiUrl}/carts`, itemId);
+  }
+
+  AddItems(itemIds: string[]): Observable<AddToCartResultModel> {
+    return this.httpClient.post<AddToCartResultModel>(`${this.apiUrl}/carts/bulkAdd`, itemIds);
   }
 
   GetItems(): Observable<CartViewModel[]> {

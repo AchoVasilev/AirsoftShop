@@ -24,7 +24,6 @@ export class DetailsComponent implements OnInit {
 
   gun!: GunDetailsViewModel;
 
-  private itemsCount: number = 0;
   private cartItemsCount: number = 0;
   private price: number = 0;
   private gunId = this.route.snapshot.params['id'];
@@ -79,8 +78,8 @@ export class DetailsComponent implements OnInit {
       .subscribe({
         next: (result) => {
           this.toastr.success("Успешно добавяне!");
-          this.itemsCount = this.cartItemsCount + 1;
-          this.cartItemsCount = this.itemsCount;
+
+          this.cartItemsCount = result.itemsCount;
 
           this.dataService.changeCartItemsCount(this.cartItemsCount);
 
@@ -93,7 +92,7 @@ export class DetailsComponent implements OnInit {
           this.isLoading = false;
           this.isLoaded = true;
         }
-      })
+      });
   }
 
   onDelete(gunId: string) {
