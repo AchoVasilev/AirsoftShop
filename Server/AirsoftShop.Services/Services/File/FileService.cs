@@ -93,5 +93,20 @@ namespace AirsoftShop.Services.Services.File
 
             return image.Id;
         }
+
+        public async Task<string> AddItemImageToDatabase(IFileServiceModel model)
+        {
+            var image = new ItemImage()
+            {
+                Extension = model.Extension,
+                Url = model.Uri,
+                Name = model.Name
+            };
+
+            await this.data.ItemImages.AddAsync(image);
+            await this.data.SaveChangesAsync();
+
+            return image.Id;
+        }
     }
 }

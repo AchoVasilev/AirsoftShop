@@ -21,6 +21,7 @@ export class DetailsComponent implements OnInit {
   isClient: boolean = true;
   isOwner: boolean = false;
   dealerObj: DealerIdObj | undefined;
+
   gun!: GunDetailsViewModel;
 
   private itemsCount: number = 0;
@@ -38,13 +39,17 @@ export class DetailsComponent implements OnInit {
     private dataService: DataService,
     private toastr: ToastrService,
     private router: Router
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.getGunDetails();
     this.getDealerId();
-    this.dataService.cartItemsPrice.subscribe(price => this.cartItemsPrice = price);
-    this.dataService.cartItemsCount.subscribe(count => this.cartItemsCount = count);
+
+    this.dataService.cartItemsPrice
+      .subscribe(price => this.cartItemsPrice = price);
+    this.dataService.cartItemsCount
+      .subscribe(count => this.cartItemsCount = count);
 
     this.isLoggedIn = this.authService.isAuthenticated();
     this.isClient = this.authService.getClient();
