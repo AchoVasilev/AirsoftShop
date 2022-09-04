@@ -71,9 +71,9 @@
                     </ul>
                 </section>
                 <div class="gun-buttons-wrapper">
-                    <a routerLink="/building" title="Добави към любими" class="gun-wish">
+                    <button (click)="addToWishList(gun.id)" title="Добави към любими" class="gun-wish">
                         <i class="fa-regular fa-heart fa-lg"></i>
-                    </a>
+                    </button>
                     <a routerLink="/building" title="Сравни продукт" class="gun-compare">
                         <i class="fa-solid fa-scale-balanced fa-lg"></i>
                     </a>

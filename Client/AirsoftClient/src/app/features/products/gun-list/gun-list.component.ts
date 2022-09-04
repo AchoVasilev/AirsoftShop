@@ -10,6 +10,7 @@ import { CartService } from 'src/app/services/cart/cart.service';
 import { CategoryService } from 'src/app/services/categories/category.service';
 import { DataService } from 'src/app/services/data/data.service';
 import { ProductService } from 'src/app/services/products/product.service';
+import { WishListService } from 'src/app/services/wishList/wish-list.service';
 
 @Component({
   selector: 'app-gun-list',
@@ -57,6 +58,7 @@ export class GunListComponent implements OnInit {
     private cartService: CartService,
     private authService: AuthService,
     private dataService: DataService,
+    private wishListService: WishListService,
     private toastr: ToastrService,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute
@@ -177,6 +179,15 @@ export class GunListComponent implements OnInit {
           this.isLoading = false;
         }
       })
+  }
+
+  addToWishList(id: string) {
+    this.wishListService.addItem(id)
+      .subscribe({
+        next: () => {
+          this.toastr.success("Успешно добавяне!");
+        }
+      });
   }
 
   goOnePageBack() {

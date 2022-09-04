@@ -16,6 +16,12 @@ export class WishListService {
     return this.httpClient.get<WishListModel[]>(`${this.apiUrl}/wishlists`);
   }
 
+  addItem(id: string): Observable<any> {
+    return this.httpClient.post(`${this.apiUrl}/wishlists`, {
+      id
+    });
+  }
+
   removeItem(id: string): Observable<any> {
     return this.httpClient.delete(`${this.apiUrl}/wishlists`, {
       body: id

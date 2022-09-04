@@ -5,6 +5,7 @@ using Data.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Models.WishLists;
 using Services.Services.WishList;
 using static Common.Constants.Messages;
 
@@ -37,5 +38,24 @@ public class WishListsController : BaseController
         var items = await this.wishListService.GetItems(user.ClientId);
 
         return this.Ok(items);
+    }
+
+    [HttpPost]
+    public async Task<ActionResult> Add([FromBody]AddItemToWishListModel model)
+    {
+        var userId = this.currentUserService.GetUserId();
+        var user = await this.userManager.FindByIdAsync(userId);
+        if (user?.ClientId is null)
+        {
+            return this.BadRequest(new { ErrorMessage = UserNotClientMsg });
+        }
+
+        var result = await this.wishListService.Add(model.Id, user.ClientId);
+        if (result.Failed)
+        {
+            return this.BadRequest(result.ErrorMessage);
+        }
+
+        return this.NoContent();
     }
 }

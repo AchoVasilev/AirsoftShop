@@ -47,7 +47,7 @@ public class DealersController : BaseController
             return this.BadRequest(new { imageResult.ErrorMessage });
         }
 
-        var imageId = await this.fileService.AddImageToDatabase(imageResult.Model);
+        var imageId = await this.fileService.AddImageToDatabase(imageResult.Model!);
 
         var serviceModel = new CreateDealerServiceModel()
         {

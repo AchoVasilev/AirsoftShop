@@ -230,7 +230,7 @@ public class ProductService : IProductService
                 Length = x.Length,
                 Hopup = x.Hopup,
                 Price = x.Price,
-                ImageUrls = x.Images.Select(y => y.Url ?? y.RemoteImageUrl).ToList()
+                ImageUrl = x.Images.Select(y => y.Url ?? y.RemoteImageUrl).First()
             })
             .ToListAsync();
 
@@ -259,7 +259,7 @@ public class ProductService : IProductService
                 Length = x.Length,
                 Hopup = x.Hopup,
                 Price = x.Price,
-                ImageUrls = x.Images.Select(y => y.Url ?? y.RemoteImageUrl).ToList()
+                ImageUrl = x.Images.Select(y => y.Url ?? y.RemoteImageUrl).First()
             })
             .ToListAsync();
 
@@ -288,7 +288,7 @@ public class ProductService : IProductService
                 Length = x.Length,
                 Hopup = x.Hopup,
                 Price = x.Price,
-                ImageUrls = x.Images.Select(y => y.Url ?? y.RemoteImageUrl).ToList()
+                ImageUrl = x.Images.Select(y => y.Url ?? y.RemoteImageUrl).First()
             })
             .ToListAsync();
 
@@ -316,7 +316,7 @@ public class ProductService : IProductService
                 Length = x.Length,
                 Hopup = x.Hopup,
                 Price = x.Price,
-                ImageUrls = x.Images.Select(y => y.Url ?? y.RemoteImageUrl).ToList()
+                ImageUrl = x.Images.Select(y => y.Url ?? y.RemoteImageUrl).First()
             })
             .ToListAsync();
 
@@ -344,7 +344,7 @@ public class ProductService : IProductService
                 Length = x.Length,
                 Hopup = x.Hopup,
                 Price = x.Price,
-                ImageUrls = x.Images.Select(y => y.Url ?? y.RemoteImageUrl).ToList()
+                ImageUrl = x.Images.Select(y => y.Url ?? y.RemoteImageUrl).First()
             })
             .ToListAsync();
 
@@ -402,7 +402,7 @@ public class ProductService : IProductService
                 Length = x.Length,
                 Hopup = x.Hopup,
                 Price = x.Price,
-                ImageUrls = x.Images.Select(y => y.Url ?? y.RemoteImageUrl).ToList()
+                ImageUrl = x.Images.Select(y => y.Url ?? y.RemoteImageUrl).First()
             })
             .ToListAsync();
 

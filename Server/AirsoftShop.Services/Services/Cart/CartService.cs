@@ -45,7 +45,7 @@ public class CartService : ICartService
 
         var result = new AddedToCartResultServiceModel()
         {
-            CartId = client.CartId,
+            CartId = client.CartId!,
             ItemsCount = client.Cart.Guns.Count,
             GunId = gun.Id
         };
@@ -74,7 +74,7 @@ public class CartService : ICartService
             })
             .ToList();
 
-        return gunsInCart;
+        return gunsInCart ?? new List<CartViewServiceModel>();
     }
 
     public async Task<bool> DeleteItemById(string userClientId, string itemId)
@@ -83,9 +83,9 @@ public class CartService : ICartService
             .Where(x => x.Id == userClientId)
             .Include(x => x.Cart)
             .ThenInclude(x => x.Guns)
-            .FirstAsync();
+            .FirstOrDefaultAsync();
 
-        if (client.CartId is null)
+        if (client?.CartId is null)
         {
             return false;
         }
@@ -136,9 +136,9 @@ public class CartService : ICartService
             .ThenInclude(x => x.Guns)
             .FirstOrDefaultAsync();
 
-        client.Cart.Guns.Clear();
+        client?.Cart.Guns.Clear();
 
-        if (client.Cart.Guns.Count == 0)
+        if (client?.Cart.Guns.Count == 0)
         {
             await this.data.SaveChangesAsync();
 
