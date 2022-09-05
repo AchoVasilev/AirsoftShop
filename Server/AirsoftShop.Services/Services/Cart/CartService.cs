@@ -18,14 +18,8 @@ public class CartService : ICartService
 
     public async Task<OperationResult<AddedToCartResultServiceModel>> Add(string userClientId, string gunId)
     {
-        var gun = await this.data.Guns.FirstOrDefaultAsync(x => x.Id == gunId);
         var client = await this.data.Clients
             .FirstOrDefaultAsync(x => x.Id == userClientId);
-
-        if (gun is null)
-        {
-            return InvalidGun;
-        }
 
         if (client is null)
         {
@@ -40,6 +34,12 @@ public class CartService : ICartService
             };
         }
 
+        var gun = await this.data.Guns.FirstOrDefaultAsync(x => x.Id == gunId);
+        if (gun is null)
+        {
+            return InvalidGun;
+        }
+
         client.Cart.Guns.Add(gun);
         await this.data.SaveChangesAsync();
 
@@ -48,6 +48,52 @@ public class CartService : ICartService
             CartId = client.CartId!,
             ItemsCount = client.Cart.Guns.Count,
             GunId = gun.Id
+        };
+
+        return result;
+    }
+
+    public async Task<OperationResult<AddedToCartResultServiceModel>> Add(string userClientId, IEnumerable<string> gunIds)
+    {
+        var client = await this.data.Clients
+            .FirstOrDefaultAsync(x => x.Id == userClientId);
+
+        if (client is null)
+        {
+            return NotAuthorizedMsg;
+        }
+
+        if (client.CartId is null)
+        {
+            client.Cart = new Cart()
+            {
+                ClientId = client.Id
+            };
+        }
+
+        var guns = new List<Gun>();
+        foreach (var gunId in gunIds)
+        {
+            var gun = await this.data.Guns.FirstOrDefaultAsync(x => x.Id == gunId);
+            if (gun is null)
+            {
+                return InvalidGun;
+            }
+
+            guns.Add(gun);
+        }
+
+        foreach (var gun in guns)
+        {
+            client.Cart.Guns.Add(gun);
+        }
+
+        await this.data.SaveChangesAsync();
+
+        var result = new AddedToCartResultServiceModel()
+        {
+            CartId = client.CartId!,
+            ItemsCount = client.Cart.Guns.Count
         };
 
         return result;
@@ -158,7 +204,7 @@ public class CartService : ICartService
                 ItemsCount = x.Cart.Guns.Count
             })
             .FirstOrDefaultAsync();
-        
+
         return model ?? new NavCartServiceModel()
         {
             ItemsCount = 0,

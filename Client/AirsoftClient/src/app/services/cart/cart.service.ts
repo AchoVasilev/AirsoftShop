@@ -21,7 +21,9 @@ export class CartService {
   }
 
   AddItems(itemIds: string[]): Observable<AddToCartResultModel> {
-    return this.httpClient.post<AddToCartResultModel>(`${this.apiUrl}/carts/bulkAdd`, itemIds);
+    return this.httpClient.post<AddToCartResultModel>(`${this.apiUrl}/carts/bulkAdd`, {
+      itemIds
+    });
   }
 
   GetItems(): Observable<CartViewModel[]> {

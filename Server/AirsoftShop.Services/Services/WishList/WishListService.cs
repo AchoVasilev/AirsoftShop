@@ -42,7 +42,7 @@ public class WishListService : IWishListService
             .Where(x => x.Id == clientId)
             .Include(x => x.WishList)
             .FirstAsync();
-
+        
         client.WishList ??= new WishList()
         {
             ClientId = client.Id

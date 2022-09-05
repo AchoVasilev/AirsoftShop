@@ -5,7 +5,7 @@ using Data.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Models;
+using Models.Carts;
 using Services.Models.Cart;
 using Services.Services.Cart;
 using static Common.Constants.Messages;
@@ -38,6 +38,26 @@ public class CartsController : BaseController
         }
 
         var result = await this.cartService.Add(user.ClientId, model.ItemId);
+        if (result.Failed)
+        {
+            return this.BadRequest(new { result.ErrorMessage });
+        }
+
+        return this.CreatedAtAction(nameof(this.Add), result.Model);
+    }
+    
+    [HttpPost]
+    [Route("bulkAdd")]
+    public async Task<IActionResult> BulkAdd([FromBody] BulkCartInputModel model)
+    {
+        var userId = this.currentUserService.GetUserId();
+        var user = await this.userManager.FindByIdAsync(userId);
+        if (user?.ClientId is null)
+        {
+            return this.Unauthorized(new { ErrorMessage = NotAuthorizedMsg });
+        }
+
+        var result = await this.cartService.Add(user.ClientId, model.ItemIds);
         if (result.Failed)
         {
             return this.BadRequest(new { result.ErrorMessage });

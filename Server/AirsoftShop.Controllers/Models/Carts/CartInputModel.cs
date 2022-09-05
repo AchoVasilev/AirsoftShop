@@ -1,4 +1,4 @@
-namespace AirsoftShop.Controllers.Models;
+namespace AirsoftShop.Controllers.Models.Carts;
 
 public class CartInputModel
 {

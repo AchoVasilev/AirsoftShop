@@ -24,7 +24,9 @@ export class WishListService {
 
   removeItem(id: string): Observable<any> {
     return this.httpClient.delete(`${this.apiUrl}/wishlists`, {
-      body: id
+      params: {
+        id
+      }
     });
   }
 

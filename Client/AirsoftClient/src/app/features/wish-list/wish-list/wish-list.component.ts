@@ -93,19 +93,6 @@ export class WishListComponent implements OnInit {
       });
   }
 
-  removeItems(ids: string[]) {
-    this.isLoading = true;
-    this.isLoaded = false;
-
-    this.wishListService.removeItems(ids)
-      .subscribe({
-        complete: () => {
-          this.isLoading = false;
-          this.isLoaded = true;
-        }
-      });
-  }
-
   onRemove(id: string) {
     this.isLoading = true;
     this.isLoaded = false;
@@ -115,6 +102,19 @@ export class WishListComponent implements OnInit {
         next: () => {
           this.toastr.success("Успешно премахване!");
         },
+        complete: () => {
+          this.isLoading = false;
+          this.isLoaded = true;
+        }
+      });
+  }
+
+  private removeItems(ids: string[]) {
+    this.isLoading = true;
+    this.isLoaded = false;
+
+    this.wishListService.removeItems(ids)
+      .subscribe({
         complete: () => {
           this.isLoading = false;
           this.isLoaded = true;
