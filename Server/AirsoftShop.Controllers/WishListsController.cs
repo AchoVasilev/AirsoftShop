@@ -77,4 +77,24 @@ public class WishListsController : BaseController
 
         return this.NoContent();
     }
+
+    [HttpDelete]
+    [Route("bulkRemove")]
+    public async Task<ActionResult> BulkRemove([FromBody]BulkRemoveItemsFromWishListModel model)
+    {
+        var userId = this.currentUserService.GetUserId();
+        var user = await this.userManager.FindByIdAsync(userId);
+        if (user?.ClientId is null)
+        {
+            return this.BadRequest(new { ErrorMessage = UserNotClientMsg });
+        }
+
+        var result = await this.wishListService.Remove(user.ClientId, model.Ids);
+        if (result.Failed)
+        {
+            return this.BadRequest(result.ErrorMessage);
+        }
+
+        return this.NoContent();
+    }
 }

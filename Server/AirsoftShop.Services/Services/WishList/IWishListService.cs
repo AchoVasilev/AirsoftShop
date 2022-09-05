@@ -11,4 +11,6 @@ public interface IWishListService : ITransientService
     Task<OperationResult<AddedToWishListServiceModel>> Add(string gunId, string clientId);
 
     Task<OperationResult> Remove(string clientId, string itemId);
+    
+    Task<OperationResult> Remove(string clientId, IEnumerable<string> itemIds);
 }
