@@ -4,10 +4,10 @@ public class BaseGunServiceModel
 {
     public string? Id { get; set; }
     
-    public string Name { get; set; }
+    public string? Name { get; init; }
     
-    public string Manufacturer { get; set; }
+    public string? Manufacturer { get; init; }
     
-    public string Color { get; init; }
+    public string? Color { get; init; }
     
 }

@@ -4,7 +4,7 @@ using City;
 
 public class AddressServiceModel
 {
-    public string StreetName { get; set; }
+    public string? StreetName { get; set; }
     
-    public CityServiceModel City { get; set; }
+    public CityServiceModel? City { get; set; }
 }

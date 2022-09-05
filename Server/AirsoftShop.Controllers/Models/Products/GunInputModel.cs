@@ -5,6 +5,11 @@ namespace AirsoftShop.Controllers.Models.Products
 
     public class GunInputModel : BaseGunModel
     {
-        public List<IFormFile> Images { get; set; }
+        public GunInputModel()
+        {
+            this.Images = new List<IFormFile>();
+        }
+        
+        public List<IFormFile> Images { get; }
     }
 }

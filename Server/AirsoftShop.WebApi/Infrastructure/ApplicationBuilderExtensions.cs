@@ -347,15 +347,18 @@ internal static class ApplicationBuilderExtensions
         var citiesDto = JsonConvert.DeserializeObject<CityDto[]>(citiesJson);
         var cities = new List<City>();
 
-        foreach (var cityDto in citiesDto)
+        if (citiesDto != null)
         {
-            var city = new City()
+            foreach (var cityDto in citiesDto)
             {
-                Name = cityDto.Name,
-                ZipCode = cityDto.ZipCode
-            };
+                var city = new City()
+                {
+                    Name = cityDto.Name,
+                    ZipCode = cityDto.ZipCode
+                };
 
-            cities.Add(city);
+                cities.Add(city);
+            }
         }
 
         await data.Cities.AddRangeAsync(cities);

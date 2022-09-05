@@ -8,5 +8,5 @@ public class CourierServiceModel : BaseCourierServiceModel
 
     public int DeliveryDays { get; init; }
 
-    public string ImageUrl { get; init; }
+    public string? ImageUrl { get; init; }
 }

@@ -55,7 +55,7 @@ internal static class ServiceCollectionExtensions
     internal static IServiceCollection AddJwtAuthentication(this IServiceCollection services,
         JwtConfiguration jwtConfiguration)
     {
-        var key = Encoding.ASCII.GetBytes(jwtConfiguration.Secret);
+        var key = Encoding.ASCII.GetBytes(jwtConfiguration.Secret!);
 
         services.AddAuthentication(x =>
             {

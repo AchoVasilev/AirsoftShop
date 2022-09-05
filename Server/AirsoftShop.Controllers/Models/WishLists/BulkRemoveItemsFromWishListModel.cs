@@ -1,6 +1,9 @@
 namespace AirsoftShop.Controllers.Models.WishLists;
 
+using System.ComponentModel.DataAnnotations;
+
 public class BulkRemoveItemsFromWishListModel
 {
-    public IEnumerable<string> Ids { get; set; }
+    [Required]
+    public IEnumerable<string>? Ids { get; set; }
 }

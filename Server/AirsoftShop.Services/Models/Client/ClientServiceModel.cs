@@ -5,5 +5,5 @@ using Base;
 
 public class ClientServiceModel : BaseClientServiceModel
 {
-    public AddressServiceModel Address { get; set; }
+    public AddressServiceModel? Address { get; set; }
 }

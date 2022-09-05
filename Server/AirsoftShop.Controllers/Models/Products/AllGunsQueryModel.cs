@@ -12,7 +12,7 @@ public class AllGunsQueryModel
 
     public string? CategoryName { get; set; }
 
-    public string OrderBy { get; set; }
+    public string? OrderBy { get; set; }
 
     public int Page { get; set; }
 

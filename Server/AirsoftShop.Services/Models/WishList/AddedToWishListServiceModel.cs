@@ -2,5 +2,5 @@ namespace AirsoftShop.Services.Models.WishList;
 
 public class AddedToWishListServiceModel
 {
-    public string GunId { get; set; }
+    public string? GunId { get; set; }
 }

@@ -11,6 +11,8 @@ using static AirsoftShop.Common.Constants.Messages;
 
 public class ProductService : IProductService
 {
+    private const int NewestEightGunsNumber = 8;
+    
     private readonly ApplicationDbContext data;
 
     public ProductService(ApplicationDbContext data)
@@ -29,12 +31,13 @@ public class ProductService : IProductService
                 DealerSiteUrl = x.Dealer.SiteUrl,
                 ImageUrl = x.Images.Select(i => i.Url ?? i.RemoteImageUrl).First()
             })
-            .Take(8)
+            .Take(NewestEightGunsNumber)
             .AsNoTracking()
             .ToListAsync();
 
     public async Task<OperationResult<ResultGunServiceModel>> CreateGun(CreateGunServiceModel model, string dealerId)
     {
+        if (model == null) throw new ArgumentNullException(nameof(model));
         var dealer = await this.data.Dealers
             .FirstOrDefaultAsync(x => x.Id == dealerId);
 
@@ -70,9 +73,9 @@ public class ProductService : IProductService
             Length = model.Length,
             Speed = model.Speed,
             Price = model.Price,
-            Propulsion = Enum.Parse<Propulsion>(model.Propulsion),
+            Propulsion = Enum.Parse<Propulsion>(model.Propulsion!),
             Power = model.Power,
-            Images = model.Images.Select(x => new ItemImage()
+            Images = model.Images!.Select(x => new ItemImage()
             {
                 Url = x.Uri,
                 Name = x.Name,
@@ -85,8 +88,7 @@ public class ProductService : IProductService
 
         var result = new ResultGunServiceModel()
         {
-            Id = gun.Id,
-            Name = gun.Name
+            Id = gun.Id
         };
 
         return result;
@@ -164,14 +166,13 @@ public class ProductService : IProductService
         gun.Length = model.Length;
         gun.Speed = model.Speed;
         gun.Price = model.Price;
-        gun.Propulsion = Enum.Parse<Propulsion>(model.Propulsion);
+        gun.Propulsion = Enum.Parse<Propulsion>(model.Propulsion!);
         gun.Power = model.Power;
 
         await this.data.SaveChangesAsync();
 
         var result = new ResultGunServiceModel()
         {
-            Name = gun.Name,
             Id = gun.Id
         };
 
@@ -195,8 +196,7 @@ public class ProductService : IProductService
 
         var result = new ResultGunServiceModel()
         {
-            Id = gun.Id,
-            Name = gun.Name
+            Id = gun.Id
         };
 
         this.data.Remove(gun);

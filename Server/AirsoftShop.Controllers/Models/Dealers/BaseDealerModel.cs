@@ -7,27 +7,27 @@ public abstract class BaseDealerModel
 {
     [Required]
     [StringLength(DefaultMaxLength, MinimumLength = DefaultMinLength, ErrorMessage = LengthErrorMsg)]
-    public string Name { get; set; }
+    public string? Name { get; set; }
 
     [Required]
     [StringLength(DefaultMaxLength, MinimumLength = DefaultMinLength, ErrorMessage = LengthErrorMsg)]
-    public string DealerNumber { get; set; }
+    public string? DealerNumber { get; set; }
 
     [Required]
     [Phone]
-    public string PhoneNumber { get; set; }
+    public string? PhoneNumber { get; set; }
 
-    public string SiteUrl { get; set; }
+    public string? SiteUrl { get; set; }
 
     [Required]
     [EmailAddress(ErrorMessage = InvalidEmailErrorMsg)]
-    public string Email { get; set; }
+    public string? Email { get; set; }
 
     [Required]
     [StringLength(DefaultMaxLength, MinimumLength = DefaultMinLength, ErrorMessage = LengthErrorMsg)]
-    public string StreetName { get; set; }
+    public string? StreetName { get; set; }
 
     [Required]
     [StringLength(DefaultMaxLength, MinimumLength = DefaultMinLength, ErrorMessage = LengthErrorMsg)]
-    public string CityName { get; set; }
+    public string? CityName { get; set; }
 }

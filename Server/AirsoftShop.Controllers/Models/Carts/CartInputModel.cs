@@ -1,6 +1,9 @@
 namespace AirsoftShop.Controllers.Models.Carts;
 
+using System.ComponentModel.DataAnnotations;
+
 public class CartInputModel
 {
-    public string ItemId { get; set; }
+    [Required]
+    public string? ItemId { get; init; }
 }

@@ -39,7 +39,7 @@ export class GunListComponent implements OnInit {
   private colors: string[] = [];
   private powers: number[] = [];
   private price: number = 0;
-  itemsCount: number = 0;
+  private itemsCount: number = 0;
   private cartItemsPrice: number = 0;
   private cartItemsCount: number = 0;
 

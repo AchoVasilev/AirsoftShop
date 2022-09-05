@@ -208,9 +208,9 @@ public class ProductsController : BaseController
 
             foreach (var gun in guns)
             {
-                gunColors.Add(gun.Color);
-                gunManufacturers.Add(gun.Manufacturer);
-                gunDealers.Add(gun.DealerName);
+                gunColors.Add(gun.Color!);
+                gunManufacturers.Add(gun.Manufacturer!);
+                gunDealers.Add(gun.DealerName!);
                 gunPowers.Add(gun.Power);
             }
 

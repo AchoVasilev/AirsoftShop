@@ -56,8 +56,11 @@ public class WishListService : IWishListService
         client.WishList.ItemsInWishList.Add(itemInWishList);
 
         await this.data.SaveChangesAsync();
-
-        return true;
+        
+        return new AddedToWishListServiceModel()
+        {
+            GunId = itemInWishList.GunId
+        };
     }
 
     public async Task<OperationResult> Remove(string clientId, string itemId)

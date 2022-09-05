@@ -4,9 +4,14 @@ using Courier;
 
 public class CartDeliveryDataServiceModel
 {
-    public ICollection<CourierServiceModel> Couriers { get; set; } = new List<CourierServiceModel>();
+    public CartDeliveryDataServiceModel()
+    {
+        this.Couriers = new List<CourierServiceModel>();
+    }
+    
+    public ICollection<CourierServiceModel> Couriers { get; }
 
-    public string CashPayment { get; set; }
+    public string? CashPayment { get; set; }
 
-    public string CardPayment { get; set; }
+    public string? CardPayment { get; set; }
 }

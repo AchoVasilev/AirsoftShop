@@ -2,7 +2,7 @@ namespace AirsoftShop.Services.Models.Cart;
 
 public class AddedToCartResultServiceModel
 {
-    public string CartId { get; set; }
+    public string? CartId { get; set; }
     
     public string? GunId { get; set; }
     

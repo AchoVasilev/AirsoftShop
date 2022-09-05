@@ -50,7 +50,7 @@ public class WishListsController : BaseController
             return this.BadRequest(new { ErrorMessage = UserNotClientMsg });
         }
 
-        var result = await this.wishListService.Add(model.Id, user.ClientId);
+        var result = await this.wishListService.Add(model.Id!, user.ClientId);
         if (result.Failed)
         {
             return this.BadRequest(result.ErrorMessage);
@@ -89,7 +89,7 @@ public class WishListsController : BaseController
             return this.BadRequest(new { ErrorMessage = UserNotClientMsg });
         }
 
-        var result = await this.wishListService.Remove(user.ClientId, model.Ids);
+        var result = await this.wishListService.Remove(user.ClientId, model.Ids!);
         if (result.Failed)
         {
             return this.BadRequest(result.ErrorMessage);

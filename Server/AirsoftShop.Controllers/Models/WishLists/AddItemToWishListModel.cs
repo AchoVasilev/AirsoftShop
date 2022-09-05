@@ -1,6 +1,9 @@
 namespace AirsoftShop.Controllers.Models.WishLists;
 
+using System.ComponentModel.DataAnnotations;
+
 public class AddItemToWishListModel
 {
-    public string Id { get; set; }
+    [Required]
+    public string? Id { get; set; }
 }

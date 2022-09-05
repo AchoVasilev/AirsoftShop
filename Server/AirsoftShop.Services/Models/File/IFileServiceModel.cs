@@ -2,10 +2,10 @@
 {
     public interface IFileServiceModel
     {
-        string Extension { get; set; }
+        string? Extension { get; }
 
-        string Uri { get; set; }
+        string? Uri { get; }
 
-        string Name { get; set; }
+        string? Name { get; }
     }
 }

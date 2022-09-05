@@ -37,7 +37,7 @@ public class CartsController : BaseController
             return this.Unauthorized(new { ErrorMessage = NotAuthorizedMsg });
         }
 
-        var result = await this.cartService.Add(user.ClientId, model.ItemId);
+        var result = await this.cartService.Add(user.ClientId, model.ItemId!);
         if (result.Failed)
         {
             return this.BadRequest(new { result.ErrorMessage });
@@ -57,7 +57,7 @@ public class CartsController : BaseController
             return this.Unauthorized(new { ErrorMessage = NotAuthorizedMsg });
         }
 
-        var result = await this.cartService.Add(user.ClientId, model.ItemIds);
+        var result = await this.cartService.Add(user.ClientId, model.ItemIds!);
         if (result.Failed)
         {
             return this.BadRequest(new { result.ErrorMessage });

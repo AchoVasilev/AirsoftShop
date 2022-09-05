@@ -7,6 +7,7 @@ using Models.Category;
 public class CategoryService : ICategoryService
 {
     private const string GunCategoryName = "Еърсофт оръжия";
+    private const int NumberOfNewestCategories = 4;
     
     private readonly ApplicationDbContext data;
 
@@ -24,7 +25,7 @@ public class CategoryService : ICategoryService
                 {
                     Id = y.Id,
                     Name = y.Name
-                })
+                }).ToList()
             })
             .AsNoTracking()
             .ToListAsync();
@@ -37,7 +38,7 @@ public class CategoryService : ICategoryService
                 Name = x.Name,
                 ImageUrl = x.Image.Url
             })
-            .Take(4)
+            .Take(NumberOfNewestCategories)
             .AsNoTracking()
             .ToListAsync();
 

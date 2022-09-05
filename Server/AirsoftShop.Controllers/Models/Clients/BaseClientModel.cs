@@ -7,25 +7,25 @@ public abstract class BaseClientModel
 {
     [Required]
     [StringLength(DefaultMaxLength, MinimumLength = DefaultMinLength, ErrorMessage = LengthErrorMsg)]
-    public string FirstName { get; init; }
+    public string? FirstName { get; init; }
     
     [Required]
     [StringLength(DefaultMaxLength, MinimumLength = DefaultMinLength, ErrorMessage = LengthErrorMsg)]
-    public string LastName { get; init; }
+    public string? LastName { get; init; }
     
     [Required]
     [StringLength(DefaultMaxLength, MinimumLength = DefaultMinLength, ErrorMessage = LengthErrorMsg)]
-    public string StreetName { get; init; }
+    public string? StreetName { get; init; }
     
     [Required]
     [StringLength(DefaultMaxLength, MinimumLength = DefaultMinLength, ErrorMessage = LengthErrorMsg)]
-    public string CityName { get; init; }
+    public string? CityName { get; init; }
     
     [Required]
     [Phone]
-    public string PhoneNumber { get; init; }
+    public string? PhoneNumber { get; init; }
     
     [Required]
     [EmailAddress(ErrorMessage = InvalidEmailErrorMsg)]
-    public string Email { get; init; }
+    public string? Email { get; init; }
 }
