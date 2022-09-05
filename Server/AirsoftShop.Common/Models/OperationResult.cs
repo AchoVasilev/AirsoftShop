@@ -1,18 +1,49 @@
 namespace AirsoftShop.Common.Models;
 
-public class OperationResult<T>
+public class OperationResult
 {
-    public string? ErrorMessage { get; init; }
+    public string? ErrorMessage { get; private init; }
     
-    public List<string>? ErrorMessages { get; init; }
+    public List<string>? ErrorMessages { get; private init; }
 
-    public bool Succeeded { get; private set; }
+    public bool Succeeded { get; private init; }
 
     public bool Failed => this.Succeeded == false;
     
-    public T? Model { get; init; }
+    public static implicit operator OperationResult(bool succeeded)
+        => new OperationResult()
+        {
+            Succeeded = succeeded
+        };
     
-    public IEnumerable<T>? Models { get; init; }
+    public static implicit operator OperationResult(string errorMessage)
+        => new OperationResult()
+        {
+            Succeeded = false,
+            ErrorMessage = errorMessage
+        };
+
+    public static implicit operator OperationResult(List<string> errorMessages)
+        => new OperationResult()
+        {
+            Succeeded = false,
+            ErrorMessages = errorMessages
+        };
+}
+
+public class OperationResult<T> where T: class
+{
+    public string? ErrorMessage { get; private init; }
+    
+    public List<string>? ErrorMessages { get; private init; }
+
+    public bool Succeeded { get; private init; }
+
+    public bool Failed => this.Succeeded == false;
+    
+    public T? Model { get; private init; }
+    
+    public IEnumerable<T>? Models { get; private init; }
 
     public static implicit operator OperationResult<T>(bool succeeded)
         => new OperationResult<T>()

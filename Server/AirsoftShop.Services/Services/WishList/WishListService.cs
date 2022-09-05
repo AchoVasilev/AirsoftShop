@@ -59,4 +59,29 @@ public class WishListService : IWishListService
 
         return true;
     }
+
+    public async Task<OperationResult> Remove(string clientId, string itemId)
+    {
+        var client = await this.data.Clients
+            .Where(x => x.Id == clientId)
+            .Include(x => x.WishList)
+            .ThenInclude(x => x.ItemsInWishList)
+            .FirstOrDefaultAsync();
+
+        if (client is null)
+        {
+            return UserNotClientMsg;
+        }
+
+        var itemInWishList = client.WishList.ItemsInWishList.FirstOrDefault(i => i.GunId == itemId);
+        if (itemInWishList is null)
+        {
+            return InvalidRemoveAction;
+        }
+
+        client.WishList.ItemsInWishList.Remove(itemInWishList);
+        await this.data.SaveChangesAsync();
+
+        return true;
+    }
 }

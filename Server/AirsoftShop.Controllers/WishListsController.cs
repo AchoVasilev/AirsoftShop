@@ -58,4 +58,23 @@ public class WishListsController : BaseController
 
         return this.NoContent();
     }
+
+    [HttpDelete]
+    public async Task<ActionResult> Remove(string id)
+    {
+        var userId = this.currentUserService.GetUserId();
+        var user = await this.userManager.FindByIdAsync(userId);
+        if (user?.ClientId is null)
+        {
+            return this.BadRequest(new { ErrorMessage = UserNotClientMsg });
+        }
+        
+        var result = await this.wishListService.Remove(user.ClientId, id);
+        if (result.Failed)
+        {
+            return this.BadRequest(result.ErrorMessage);
+        }
+
+        return this.NoContent();
+    }
 }

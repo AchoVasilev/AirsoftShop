@@ -33,4 +33,5 @@ public static class Messages
     public const string InvalidSubcategoryErrorMsg = "Избрали сте невалидна подкатегория!";
     public const string InvalidGun = "Това оръжие не съществува!";
     public const string InvalidCourier = "Избрали сте невалиден куриер!";
+    public const string InvalidRemoveAction = "Не може да премахнете този артикул!";
 }

@@ -71,17 +71,9 @@ public class CartService : ICartService
             };
         }
 
-        var guns = new List<Gun>();
-        foreach (var gunId in gunIds)
-        {
-            var gun = await this.data.Guns.FirstOrDefaultAsync(x => x.Id == gunId);
-            if (gun is null)
-            {
-                return InvalidGun;
-            }
-
-            guns.Add(gun);
-        }
+        var guns = await this.data.Guns
+            .Where(x => gunIds.Contains(x.Id))
+            .ToListAsync();
 
         foreach (var gun in guns)
         {
