@@ -11,5 +11,5 @@ public class City : DeletableEntity<int>
     public string Name { get; init; }
 
     [MaxLength(NumbersMaxLength)]
-    public int ZipCode { get; init; }
+    public int ZipCode { get; set; }
 }

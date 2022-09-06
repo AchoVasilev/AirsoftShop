@@ -15,6 +15,7 @@ public class WishListsController : BaseController
     private readonly IWishListService wishListService;
     private readonly ICurrentUserService currentUserService;
     private readonly UserManager<ApplicationUser> userManager;
+    
     public WishListsController(
         IWishListService wishListService, 
         ICurrentUserService currentUserService, 
