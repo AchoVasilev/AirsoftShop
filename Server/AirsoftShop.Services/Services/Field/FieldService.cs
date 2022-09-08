@@ -55,7 +55,7 @@ public class FieldService : IFieldService
         
         return new CreatedFieldResultServiceModel()
         {
-            FieldId = field.Id
+            FieldId = field.Id,
         };
     }
 }

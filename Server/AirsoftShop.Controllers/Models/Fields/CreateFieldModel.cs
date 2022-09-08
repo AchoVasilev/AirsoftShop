@@ -13,10 +13,6 @@ public class CreateFieldModel
 
     public int CityId { get; set; }
     
-    [Required]
-    [StringLength(DefaultMaxLength, MinimumLength = DefaultMinLength, ErrorMessage = LengthErrorMsg)]
-    public string? CityName { get; set; }
-    
     public int ZipCode { get; set; }
     
     [Required]

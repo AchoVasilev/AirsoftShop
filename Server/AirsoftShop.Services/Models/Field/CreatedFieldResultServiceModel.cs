@@ -1,4 +1,4 @@
-namespace AirsoftShop.Services.Services.Field;
+namespace AirsoftShop.Services.Models.Field;
 
 public class CreatedFieldResultServiceModel
 {

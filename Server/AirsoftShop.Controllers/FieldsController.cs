@@ -33,7 +33,7 @@ public class FieldsController : BaseController
 
     [HttpPost]
     [Authorize]
-    public async Task<ActionResult> Create(CreateFieldModel model)
+    public async Task<ActionResult> Create([FromBody]CreateFieldModel model)
     {
         var userId = this.currentUserService.GetUserId();
         var user = await this.userManager.FindByIdAsync(userId);
@@ -57,7 +57,6 @@ public class FieldsController : BaseController
         var serviceModel = new CreateFieldServiceModel()
         {
             CityId = model.CityId,
-            CityName = model.CityName,
             StreetName = model.StreetName,
             ZipCode = model.ZipCode,
             Images = fileModels
