@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { shareReplay } from 'rxjs';
 import { CategoryViewModel } from 'src/app/models/categories/categoryViewModel';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { CartService } from 'src/app/services/cart/cart.service';
@@ -56,6 +57,7 @@ export class NavbarComponent implements OnInit {
 
   loadCategories(): void {
     this.categoryService.loadCategories()
+      .pipe(shareReplay(2))
       .subscribe(res => this.categories = res);
   }
 

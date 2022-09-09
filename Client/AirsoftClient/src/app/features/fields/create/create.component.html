@@ -33,7 +33,7 @@
             <article class="field-wrapper">
                 <label for="address" [class.error]="shouldShowErrorForControl('streetName')">Адрес:
                     <span>*</span></label>
-                <input type="text" id="address" name="address"
+                <input type="text" id="address" name="address" formControlName="streetName"
                     [class.invalid]="shouldShowErrorForControl('streetName')">
 
                 <ng-container *ngIf="shouldShowErrorForControl('streetName')">

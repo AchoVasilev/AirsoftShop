@@ -179,13 +179,15 @@
     max-height: 70vh;
 }
 
+.prev {
+    left: 6%;
+}
+
 .prev,
 .next {
     cursor: pointer;
     position: absolute;
-    bottom: 20%;
     width: auto;
-    margin-top: -22px;
     padding: 16px;
     color: white;
     font-weight: bold;
@@ -196,7 +198,7 @@
 }
 
 .next {
-    right: 0;
+    right: 40%;
     border-radius: 3px 0 0 3px;
 }
 

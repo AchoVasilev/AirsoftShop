@@ -73,7 +73,7 @@ export class CreateComponent implements OnInit {
     const body = new FormData();
     body.append('cityId', cityId);
     body.append('streetName', streetName);
-    body.append('zipCode', zipCode);
+    body.append('zipCode', this.zipCode.toString());
     body.append('description', description);
 
     for (let index = 0; index < this.files.length; index++) {
@@ -87,7 +87,7 @@ export class CreateComponent implements OnInit {
           this.isLoaded = true;
           this.isLoading = false;
 
-          this.router.navigate([`/fields/${res.id}`])
+          this.router.navigate([`/fields/${res.fieldId}`])
         },
         complete: () => {
           this.isLoaded = true;
