@@ -59,7 +59,8 @@ public class FieldsController : BaseController
             CityId = model.CityId,
             StreetName = model.StreetName,
             ZipCode = model.ZipCode,
-            Images = fileModels
+            Images = fileModels,
+            Description = model.Description
         };
 
         var result = await this.fieldService.Create(user.DealerId, serviceModel);
@@ -68,6 +69,19 @@ public class FieldsController : BaseController
             return this.BadRequest(new { result.ErrorMessage });
         }
 
+        return this.Ok(result.Model);
+    }
+
+    [HttpGet]
+    [Route("{id}")]
+    public async Task<ActionResult> Details(int id)
+    {
+        var result = await this.fieldService.Details(id);
+        if (result.Failed)
+        {
+            return this.BadRequest(result.ErrorMessage);
+        }
+        
         return this.Ok(result.Model);
     }
 }

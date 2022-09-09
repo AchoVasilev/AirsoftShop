@@ -75,6 +75,7 @@ public class ProductService : IProductService
             Price = model.Price,
             Propulsion = Enum.Parse<Propulsion>(model.Propulsion!),
             Power = model.Power,
+            Description = model.Description,
             Images = model.Images!.Select(x => new ItemImage()
             {
                 Url = x.Uri,
@@ -119,6 +120,7 @@ public class ProductService : IProductService
                 Length = x.Length,
                 Hopup = x.Hopup,
                 Price = x.Price,
+                Description = x.Description,
                 ImageUrl = x.Images.Select(y => y.Url ?? y.RemoteImageUrl).FirstOrDefault()
             })
             .FirstOrDefaultAsync();
@@ -168,6 +170,7 @@ public class ProductService : IProductService
         gun.Price = model.Price;
         gun.Propulsion = Enum.Parse<Propulsion>(model.Propulsion!);
         gun.Power = model.Power;
+        gun.Description = model.Description;
 
         await this.data.SaveChangesAsync();
 

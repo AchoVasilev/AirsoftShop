@@ -27,4 +27,6 @@ public class ExtendedBaseGunServiceModel : BaseGunServiceModel
     public string? Blowback { get; init; }
 
     public string? Hopup { get; init; }
+    
+    public string? Description { get; init; }
 }

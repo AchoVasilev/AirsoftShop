@@ -10,6 +10,10 @@ public class CreateFieldModel
     [Required]
     [StringLength(DefaultMaxLength, MinimumLength = DefaultMinLength, ErrorMessage = LengthErrorMsg)]
     public string? StreetName { get; set; }
+    
+    [Required(ErrorMessage = RequiredFieldErrorMsg)]
+    [StringLength(DescriptionMaxLength, MinimumLength = DefaultMinLength, ErrorMessage = LengthErrorMsg)]
+    public string? Description { get; set; }
 
     public int CityId { get; set; }
     

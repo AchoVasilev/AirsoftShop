@@ -5,6 +5,8 @@ using File;
 public class CreateFieldServiceModel
 {
     public string? StreetName { get; set; }
+    
+    public string? Description { get; set; }
 
     public int CityId { get; set; }
 

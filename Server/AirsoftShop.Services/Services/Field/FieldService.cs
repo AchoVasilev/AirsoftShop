@@ -5,6 +5,8 @@ using Data.Models;
 using Data.Models.Images;
 using Data.Persistence;
 using Microsoft.EntityFrameworkCore;
+using Models.Address;
+using Models.City;
 using Models.Field;
 using static AirsoftShop.Common.Constants.Messages;
 public class FieldService : IFieldService
@@ -34,6 +36,7 @@ public class FieldService : IFieldService
 
         var field = new Field()
         {
+            Description = model.Description,
             Address = new Address()
             {
                 StreetName = model.StreetName,
@@ -57,5 +60,37 @@ public class FieldService : IFieldService
         {
             FieldId = field.Id,
         };
+    }
+
+    public async Task<OperationResult<FieldDetailsServiceModel>> Details(int fieldId)
+    {
+        var field = await this.data.Fields
+            .Where(x => x.Id == fieldId)
+            .Select(x => new FieldDetailsServiceModel()
+            {
+                Id = x.Id,
+                Description = x.Description,
+                DealerName = x.Dealer.Name,
+                DealerPhone = x.Dealer.PhoneNumber,
+                Address = new AddressServiceModel()
+                {
+                    StreetName = x.Address.StreetName,
+                    City = new CityServiceModel()
+                    {
+                        Id = x.Address.CityId,
+                        Name = x.Address.City.Name,
+                        ZipCode = x.Address.City.ZipCode
+                    }
+                },
+                ImageUrls = x.Images.Select(img => img.Url ?? img.RemoteImageUrl).ToList()
+            })
+            .FirstOrDefaultAsync();
+
+        if (field is null)
+        {
+            return InvalidField;
+        }
+
+        return field;
     }
 }

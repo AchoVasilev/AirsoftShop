@@ -1,9 +1,11 @@
 namespace AirsoftShop.Data.Models;
 
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Base;
 using Images;
 
+using static Constants.Data.Constants;
 public class Field : DeletableEntity<int>
 {
     public Field()
@@ -15,6 +17,10 @@ public class Field : DeletableEntity<int>
     public string DealerId { get; set; }
 
     public virtual Dealer Dealer { get; set; }
+    
+    [Required]
+    [MaxLength(DescriptionMaxLength)]
+    public string Description { get; set; }
 
     [ForeignKey(nameof(Address))]
     public int AddressId { get; set; }

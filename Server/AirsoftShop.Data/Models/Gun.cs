@@ -72,6 +72,10 @@ public class Gun : DeletableEntity<string>
     public string Hopup { get; set; }
 
     public decimal Price { get; set; }
+    
+    [Required]
+    [MaxLength(DescriptionMaxLength)]
+    public string Description { get; set; }
 
     [ForeignKey(nameof(Dealer))]
     [Required]

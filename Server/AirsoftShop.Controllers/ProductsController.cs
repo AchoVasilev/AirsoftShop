@@ -80,7 +80,8 @@ public class ProductsController : BaseController
             Price = model.Price,
             Weight = model.Weight,
             Propulsion = model.Propulsion,
-            Images = fileModels
+            Images = fileModels,
+            Description = model.Description
         };
 
         var result = await this.productService.CreateGun(gunModel, user.DealerId);
@@ -136,6 +137,7 @@ public class ProductsController : BaseController
             Price = model.Price,
             Weight = model.Weight,
             Propulsion = model.Propulsion,
+            Description = model.Description,
         };
         
         var result = await this.productService.Edit(user.DealerId, editModel);
@@ -191,7 +193,13 @@ public class ProductsController : BaseController
             PageNumber = query.Page
         };
 
-        if (string.IsNullOrEmpty(query.CategoryName) || query.CategoryName.ToLower() == "all" || query.CategoryName == "null")
+        const string allStr = "all";
+        const string nullStr = "null";
+        var isBasicCategoryString = string.IsNullOrEmpty(query.CategoryName) || 
+                                    query.CategoryName.ToLower() == allStr ||
+                                    query.CategoryName == nullStr;
+        
+        if (isBasicCategoryString)
         {
             allGunsViewModel.Colors = await this.productService.GetAllColors();
             allGunsViewModel.Manufacturers = await this.productService.GetAllManufacturers();

@@ -61,7 +61,7 @@ public class OrdersController : BaseController
             return this.BadRequest(new { ErrorMessage = UnsuccessfulActionMsg });
         }
 
-        return this.Ok(new { Message = SuccessfulOrderMsg, createdResult?.Model?.OrdersCount });
+        return this.Ok(new { Message = SuccessfulOrderMsg, createdResult.Model?.OrdersCount });
     }
     
     [HttpGet]
