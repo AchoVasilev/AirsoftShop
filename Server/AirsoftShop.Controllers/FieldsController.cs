@@ -33,17 +33,17 @@ public class FieldsController : BaseController
 
     [HttpPost]
     [Authorize]
-    public async Task<ActionResult> Create([FromBody]CreateFieldModel model)
+    public async Task<ActionResult> Create([FromForm]CreateFieldModel model)
     {
         var userId = this.currentUserService.GetUserId();
         var user = await this.userManager.FindByIdAsync(userId);
         if (user?.DealerId is null)
         {
-            return this.BadRequest(new { ErrorMessage = UserNotDealerMsg });
+            return this.Unauthorized(new { ErrorMessage = UserNotDealerMsg });
         }
         
         var fileModels = new List<IFileServiceModel>();
-        foreach (var image in model.Images!)
+        foreach (var image in model.Images)
         {
             var imageResult = await this.fileService.UploadImage(image, CloudinaryFolderName);
             if (imageResult.Failed)
@@ -83,5 +83,25 @@ public class FieldsController : BaseController
         }
         
         return this.Ok(result.Model);
+    }
+
+    [HttpDelete]
+    [Route("{id}")]
+    public async Task<ActionResult> Delete(int id)
+    {
+        var userId = this.currentUserService.GetUserId();
+        var user = await this.userManager.FindByIdAsync(userId);
+        if (user?.DealerId is null)
+        {
+            return this.Unauthorized(new { ErrorMessage = UserNotDealerMsg });
+        }
+
+        var result = await this.fieldService.Delete(id, user.DealerId);
+        if (result.Failed)
+        {
+            return this.BadRequest(new { result.ErrorMessage });
+        }
+
+        return this.Ok();
     }
 }

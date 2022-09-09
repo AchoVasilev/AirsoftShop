@@ -94,4 +94,20 @@ public class FieldService : IFieldService
 
         return field;
     }
+
+    public async Task<OperationResult> Delete(int fieldId, string dealerId)
+    {
+        var field = await this.data.Fields
+            .FirstOrDefaultAsync(x => x.Id == fieldId && x.DealerId == dealerId);
+
+        if (field is null)
+        {
+            return InvalidField;
+        }
+
+        this.data.Fields.Remove(field);
+        await this.data.SaveChangesAsync();
+
+        return true;
+    }
 }

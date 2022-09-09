@@ -7,6 +7,11 @@ using static Data.Constants.Data.Constants;
 
 public class CreateFieldModel
 {
+    public CreateFieldModel()
+    {
+        this.Images = new List<IFormFile>();
+    }
+    
     [Required]
     [StringLength(DefaultMaxLength, MinimumLength = DefaultMinLength, ErrorMessage = LengthErrorMsg)]
     public string? StreetName { get; set; }
@@ -19,6 +24,5 @@ public class CreateFieldModel
     
     public int ZipCode { get; set; }
     
-    [Required]
-    public IEnumerable<IFormFile>? Images { get; set; }
+    public List<IFormFile> Images { get; set; }
 }
