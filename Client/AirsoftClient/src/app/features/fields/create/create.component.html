@@ -7,7 +7,8 @@
                 <article class="create-inline-wrapper">
                     <label for="city" [class.error]="shouldShowErrorForControl('cityId')">Град: <span>*</span></label>
                     <select id="city" formControlName="cityId">
-                        <option *ngFor="let city of cities" value="{{city.id}}">{{city.name}}</option>
+                        <option *ngFor="let city of cities" value="{{city.id}}" (click)="onOptionClick(city.zipCode)">
+                            {{city.name}}</option>
                     </select>
 
                     <ng-container *ngIf="shouldShowErrorForControl('cityId')">
@@ -20,7 +21,7 @@
                     <label for="postCode" [class.error]="shouldShowErrorForControl('zipCode')">Пощенски код:
                         <span>*</span></label>
                     <input type="text" id="postCode" name="postCode" formControlName="zipCode"
-                        [class.invalid]="shouldShowErrorForControl('zipCode')">
+                        [class.invalid]="shouldShowErrorForControl('zipCode')" [value]="zipCode">
 
                     <ng-container *ngIf="shouldShowErrorForControl('zipCode')">
                         <p class="error" *ngIf="createFieldFormGroup.controls['zipCode'].errors?.['required']">
@@ -47,19 +48,36 @@
                     </p>
                 </ng-container>
             </article>
-            <article class="create-wrapper">
-                <article class="create-inline-wrapper">
-                    <input type="file" id="image" name="image" multiple accept="image/*"
-                        [class.error]="shouldShowErrorForControl('images')" formControlName="images"
-                        (change)="onChange($event)">
-                    <label class="image-label" for="image" [class.invalid]="shouldShowErrorForControl('images')"><i
-                            class="fa-solid fa-image fa-2xl"></i> Снимки
-                        <span>*</span></label>
-                </article>
+            <article class="field-wrapper">
+                <label class="image-label" for="image" [class.invalid]="shouldShowErrorForControl('images')"><i
+                        class="fa-solid fa-image fa-2xl"></i> Снимки
+                    <span>*</span></label>
+                <input type="file" id="image" name="image" multiple accept="image/*"
+                    [class.error]="shouldShowErrorForControl('images')" formControlName="images"
+                    (change)="onChange($event)">
 
                 <ng-container *ngIf="shouldShowErrorForControl('images')">
                     <p class="error" *ngIf="createFieldFormGroup.controls['images'].errors?.['required']">
                         Полето е задължително!
+                    </p>
+                </ng-container>
+            </article>
+
+            <article class="field-wrapper">
+                <label for="description" class="description-label"
+                    [class.error]="shouldShowErrorForControl('description')">Описание*</label>
+                <textarea name="" id="description" cols="118" rows="10" formControlName="description"
+                    [class.invalid]="shouldShowErrorForControl('description')"></textarea>
+
+                <ng-container *ngIf="shouldShowErrorForControl('description')">
+                    <p class="error" *ngIf="createFieldFormGroup.controls['description'].errors?.['required']">
+                        Полето е задължително!
+                    </p>
+                    <p class="error" *ngIf="createFieldFormGroup.controls['description'].errors?.['minlength']">
+                        Полето трябва да е с дължина поне 2 символа!
+                    </p>
+                    <p class="error" *ngIf="createFieldFormGroup.controls['description'].errors?.['maxlength']">
+                        Полето трябва да е с максимална дължина от 1000 символа!
                     </p>
                 </ng-container>
             </article>

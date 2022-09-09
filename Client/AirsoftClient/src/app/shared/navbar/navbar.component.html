@@ -35,7 +35,7 @@
                     <span>Профил</span>
                 </a>
             </li>
-            <li *ngIf="!isClient && isLoggedIn">
+            <li *ngIf="isDealer">
                 <a class="nav-menu-item-link" [routerLink]="['products', 'create']">
                     <i class="fa-solid fa-person-rifle fa-2xl"></i>
                     <span>Добави артикул</span>
@@ -55,13 +55,19 @@
                     <span class="badge" hidden>1</span>
                 </a>
             </li>
-            <li>
+            <li *ngIf="isClient">
                 <a class="nav-menu-item-link" routerLink="building">
                     <i class="fa-solid fa-map-location fa-2xl"></i>
                     <span>Терени</span>
                 </a>
             </li>
-            <li *ngIf="isClient && isLoggedIn">
+            <li *ngIf="isDealer">
+                <a class="nav-menu-item-link" [routerLink]="['fields', 'create']">
+                    <i class="fa-solid fa-map-location fa-2xl"></i>
+                    <span>Добави терен</span>
+                </a>
+            </li>
+            <li *ngIf="isClient">
                 <a class="nav-menu-item-link" routerLink="cart">
                     <i class="fa-solid fa-cart-shopping fa-2xl"></i>
                     <span>{{cartItemsPrice}} лв.</span>

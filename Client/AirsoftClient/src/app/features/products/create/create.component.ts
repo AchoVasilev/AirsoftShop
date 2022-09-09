@@ -43,7 +43,8 @@ export class CreateComponent implements OnInit {
     'blowback': new FormControl(null, [Validators.required, Validators.minLength(2), Validators.maxLength(40)]),
     'hopup': new FormControl(null, [Validators.required, Validators.minLength(2), Validators.maxLength(40)]),
     'subCategoryName': new FormControl(null, [Validators.required]),
-    'price': new FormControl(null, [Validators.required])
+    'price': new FormControl(null, [Validators.required]),
+    'description': new FormControl(null, [Validators.required, Validators.minLength(2), Validators.maxLength(1000)])
   });
 
   constructor(
@@ -99,7 +100,8 @@ export class CreateComponent implements OnInit {
       blowback,
       hopup,
       subCategoryName,
-      price } = this.gunCreateFormGroup.value;
+      price,
+      description } = this.gunCreateFormGroup.value;
 
     const body = new FormData();
     body.append('name', name);
@@ -128,6 +130,7 @@ export class CreateComponent implements OnInit {
     body.append('hopup', hopup);
     body.append('subCategoryName', subCategoryName);
     body.append('price', price);
+    body.append('description', description);
 
     this.productService.createGun(body)
       .subscribe({

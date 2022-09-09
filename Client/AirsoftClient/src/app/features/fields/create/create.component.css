@@ -118,3 +118,26 @@
 .invalid {
     border: 1px solid rgb(235, 27, 27);
 }
+
+#image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 225px;
+    opacity: 0;
+    padding: 14px 0;
+    cursor: pointer;
+}
+
+.image-label {
+    display: block;
+    padding: 16px 45px;
+    color: #333;
+    border: 1px solid black;
+    cursor: pointer;
+    width: 100%;
+}
+
+.description-label {
+    margin-top: 15%;
+}

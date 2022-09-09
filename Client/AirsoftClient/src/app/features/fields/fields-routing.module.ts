@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from 'src/app/infrastructure/guards/auth-guard';
 import { DealerGuard } from 'src/app/infrastructure/guards/dealer.guard';
 import { CreateComponent } from './create/create.component';
+import { DetailsComponent } from './details/details.component';
 
 const routes: Routes = [
   {
@@ -13,6 +14,11 @@ const routes: Routes = [
         component: CreateComponent,
         pathMatch: 'full',
         canActivate: [AuthGuard, DealerGuard]
+      },
+      {
+        path: ':id',
+        component: DetailsComponent,
+        pathMatch: 'full'
       }
     ]
   }

@@ -22,6 +22,8 @@ export class NavbarComponent implements OnInit {
     return this.authService.getClient();
   }
 
+  isDealer: boolean = false;
+
   cartItemsPrice: number = 0;
   cartItemsCount: number = 0;
 
@@ -40,6 +42,8 @@ export class NavbarComponent implements OnInit {
     this.loadCategories();
     this.dataService.cartItemsCount.subscribe(count => this.cartItemsCount = count);
     this.dataService.cartItemsPrice.subscribe(price => this.cartItemsPrice = price);
+
+    this.isDealer = !this.isClient && this.isLoggedIn;
   }
 
   getCartData(): void {

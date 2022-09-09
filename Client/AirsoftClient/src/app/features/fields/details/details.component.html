@@ -1,0 +1,42 @@
+<mat-spinner *ngIf="isLoading" style="margin: 0 auto;"></mat-spinner>
+<section class="item" *ngIf="isLoaded">
+    <article class="item-top">
+        <article class="field-images" #slides>
+            <article class="field-image fade" [style.display]="slideIndex == 0 ? 'block' : 'none'"
+                *ngFor="let image in field.imageUrls">
+                <a href="https://www.airsoftimpact.com/teren/" target="_blank">
+                    <img src="{{image}}" alt="">
+                </a>
+            </article>
+        </article>
+
+        <div>
+            <a class="prev" (click)="plusSlides(-1)">&#10094;</a>
+            <a class="next" (click)="plusSlides(1)">&#10095;</a>
+        </div>
+
+        <article class="item-data">
+            <section class="item-data-wrapper">
+                <h1 class="item-title">
+                    Бойно поле
+                </h1>
+                <p class="item-subtitle">Предлагано от: {{field?.dealerName}}</p>
+                <p class="item-subtitle">Телефон за контакт: {{field?.dealerPhone}}</p>
+                <p class="item-subtitle">Адрес: {{field?.address?.streetName}}, {{field?.address?.city?.name}},
+                    {{field?.address?.city?.zipCode}}</p>
+            </section>
+
+            <section class="dealer-controls" *ngIf="isOwner">
+                <a routerLink="/fields/edit/{{field?.id}}" class="action-btn"><i class="fa-solid fa-scale-balanced"></i>
+                    Промени</a>
+                <button class="dealer-action-btn"><i class="fa-solid fa-trash-can"></i> Изтрий</button>
+            </section>
+        </article>
+    </article>
+
+    <article class="item-description">
+        <p class="description">
+            <span>Описание:</span> {{field?.description}}
+        </p>
+    </article>
+</section>

@@ -44,6 +44,8 @@ export class LoginComponent implements OnInit {
 
         if (result['isClient']) {
           this.authService.setClient(result['isClient']);
+        } else if (!result['isDealer']) {
+          this.authService.setDealer(true);
         }
 
         this.router.navigate(['/home']);

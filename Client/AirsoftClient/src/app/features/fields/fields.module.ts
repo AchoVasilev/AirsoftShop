@@ -5,11 +5,13 @@ import { FieldsRoutingModule } from './fields-routing.module';
 import { CreateComponent } from './create/create.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { DetailsComponent } from './details/details.component';
 
 
 @NgModule({
   declarations: [
-    CreateComponent
+    CreateComponent,
+    DetailsComponent
   ],
   imports: [
     CommonModule,

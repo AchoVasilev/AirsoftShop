@@ -19,16 +19,9 @@ export class ErrorInterceptor implements HttpInterceptor {
       .pipe(
         retry(1),
         catchError((err) => {
-          if (err.status === 401) {
-            err.errorMessage = 'Трябва да влезете с акаунта си!';
-            this.authService.logOut();
-          } else if (err.status === 404) {
-            err.errorMessage = 'Този ресурс не е намерен';
-          }
+          this.toastr.error(err.error.errorMessage);
 
-          this.toastr.error(err.errorMessage);
-
-          return throwError(() => err);
+          return throwError(() => err.error);
         })
       );
   }

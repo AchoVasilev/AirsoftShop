@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { CityViewModel } from 'src/app/models/address/cityViewModel';
+import { CityModel } from 'src/app/models/address/CityModel';
 import { CityService } from 'src/app/services/city/city.service';
 import { FieldService } from 'src/app/services/fields/field.service';
 
@@ -14,16 +14,17 @@ import { FieldService } from 'src/app/services/fields/field.service';
 export class CreateComponent implements OnInit {
   private files: File[] = [];
 
-  cities: CityViewModel[] = [];
-
+  cities: CityModel[] = [];
   isLoaded: boolean = false;
   isLoading: boolean = true;
+  zipCode: number = 0;
 
   createFieldFormGroup: FormGroup = this.formBuilder.group({
     'cityId': new FormControl('', [Validators.required]),
-    'zipCode': new FormControl('', [Validators.required]),
+    'zipCode': new FormControl({ value: '', disabled: true }, [Validators.required]),
     'streetName': new FormControl('', [Validators.required, Validators.maxLength(40), Validators.minLength(2)]),
-    'images': new FormControl('', Validators.required)
+    'images': new FormControl('', Validators.required),
+    'description': new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(1000)])
   });
 
   constructor(
@@ -49,6 +50,10 @@ export class CreateComponent implements OnInit {
     this.files = event.target.files;
   }
 
+  onOptionClick(zipCode: number) {
+    this.zipCode = zipCode;
+  }
+
   shouldShowErrorForControl(controlName: string, sourceGroup: FormGroup = this.createFieldFormGroup) {
     return sourceGroup.controls[controlName].touched && sourceGroup.controls[controlName].invalid;
   }
@@ -61,13 +66,15 @@ export class CreateComponent implements OnInit {
       cityId,
       streetName,
       zipCode,
-      images
+      images,
+      description
     } = this.createFieldFormGroup.value;
 
     const body = new FormData();
     body.append('cityId', cityId);
     body.append('streetName', streetName);
     body.append('zipCode', zipCode);
+    body.append('description', description);
 
     for (let index = 0; index < this.files.length; index++) {
       body.append('images', this.files[index]);

@@ -34,6 +34,10 @@ const routes: Routes = [
     loadChildren: () => import('./features/wish-list/wish-list.module').then(x => x.WishListModule)
   },
   {
+    path: 'fields',
+    loadChildren: () => import('./features/fields/fields.module').then(x => x.FieldsModule)
+  },
+  {
     path: 'building',
     component: UnderConstructionComponent
   },

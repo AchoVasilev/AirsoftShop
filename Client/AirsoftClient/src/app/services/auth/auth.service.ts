@@ -37,6 +37,10 @@ export class AuthService {
     localStorage.setItem('isClient', isClient);
   }
 
+  setDealer(isDealer: any) {
+    localStorage.setItem('isDealer', isDealer);
+  }
+
   getClient() {
     if (localStorage.getItem('isClient')) {
       return true;
@@ -47,5 +51,6 @@ export class AuthService {
 
   logOut() {
     localStorage.removeItem('token');
+    localStorage.removeItem('isClient');
   }
 }
