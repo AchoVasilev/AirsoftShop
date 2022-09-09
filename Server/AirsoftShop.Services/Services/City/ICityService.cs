@@ -5,5 +5,5 @@ using Models.City;
 
 public interface ICityService : ITransientService
 {
-    Task<IEnumerable<BaseCityServiceModel>> GetAll();
+    Task<IEnumerable<CityServiceModel>> GetAll();
 }

@@ -11,12 +11,13 @@ public class CityService : ICityService
     public CityService(ApplicationDbContext data) 
         => this.data = data;
 
-    public async Task<IEnumerable<BaseCityServiceModel>> GetAll()
+    public async Task<IEnumerable<CityServiceModel>> GetAll()
         => await this.data.Cities
-            .Select(x => new BaseCityServiceModel()
+            .Select(x => new CityServiceModel()
             {
                 Id = x.Id,
-                Name = x.Name
+                Name = x.Name,
+                ZipCode = x.ZipCode
             })
             .ToListAsync();
 }

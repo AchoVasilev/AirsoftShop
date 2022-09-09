@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Models.Users;
 using Services.Services.Identity;
-
+using static Common.Constants.Messages;
 public class UsersController : BaseController
 {
     private readonly UserManager<ApplicationUser> userManager;
@@ -31,13 +31,13 @@ public class UsersController : BaseController
         var user = await this.userManager.FindByEmailAsync(model.Email);
         if (user is null)
         {
-            return this.Unauthorized();
+            return this.Unauthorized(new {ErrorMessage = FailedUserLoginMsg});
         }
 
         var validPassword = await this.userManager.CheckPasswordAsync(user, model.Password);
         if (!validPassword)
         {
-            return this.Unauthorized();
+            return this.Unauthorized(new {ErrorMessage = FailedUserLoginMsg});
         }
 
         var appSettings = this.options.Value.Secret;

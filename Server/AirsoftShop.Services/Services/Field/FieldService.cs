@@ -70,6 +70,7 @@ public class FieldService : IFieldService
             {
                 Id = x.Id,
                 Description = x.Description,
+                DealerId = x.DealerId,
                 DealerName = x.Dealer.Name,
                 DealerPhone = x.Dealer.PhoneNumber,
                 Address = new AddressServiceModel()

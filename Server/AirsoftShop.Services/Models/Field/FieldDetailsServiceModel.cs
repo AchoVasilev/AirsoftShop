@@ -8,6 +8,8 @@ public class FieldDetailsServiceModel
     
     public string? Description { get; set; }
     
+    public string? DealerId { get; set; }
+    
     public string? DealerName { get; set; }
     
     public string? DealerPhone { get; set; }
