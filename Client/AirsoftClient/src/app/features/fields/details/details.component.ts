@@ -18,7 +18,6 @@ export class DetailsComponent implements OnInit {
 
   fieldId: number = this.route.snapshot.params['id'];
 
-  slideIndex: number = 1;
   scrollTop: number = 0;
   @ViewChild('slides')
   slides!: ElementRef;
@@ -50,31 +49,17 @@ export class DetailsComponent implements OnInit {
     this.isLoading = false;
   }
 
-  plusSlides(n: any) {
-    this.showSlides(this.slideIndex += n);
-  }
-
-  // Thumbnail image controls
-  currentSlide(n: any) {
-    this.showSlides(this.slideIndex = n);
-  }
-
-  showSlides(n: any) {
+  nextSlide() {
     let slidesElement: HTMLElement = this.slides.nativeElement;
+    let slide = document.querySelector('.slide');
+    slidesElement.scrollLeft += slide!.clientWidth;
+    console.log(slidesElement.scrollLeft);
+  }
 
-    if (slidesElement.children.length > 0) {
-      if (n >= slidesElement.children.length) {
-        this.slideIndex = 0;
-      }
-
-      if (n < 1) {
-        this.slideIndex = slidesElement.children.length;
-      }
-
-      if (this.slideIndex - 1 < 0) {
-        this.slideIndex = 0;
-      }
-    }
+  prevSlide() {
+    let slidesElement: HTMLElement = this.slides.nativeElement;
+    let slide = document.querySelector('.slide');
+    slidesElement.scrollLeft -= slide!.clientWidth;
   }
 
   onDelete(id: number) {

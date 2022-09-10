@@ -1,8 +1,8 @@
 <mat-spinner *ngIf="isLoading" style="margin: 0 auto;"></mat-spinner>
-<section class="item" *ngIf="isLoaded">
+<section class="item" *ngIf="isLoaded && field">
     <article class="item-top">
         <article class="field-images" #slides>
-            <article class="field-image fade" *ngFor="let image of field.imageUrls">
+            <article class="field-image fade slide" *ngFor="let image of field.imageUrls">
                 <a href="https://www.airsoftimpact.com/teren/" target="_blank">
                     <img src="{{image}}" alt="">
                 </a>
@@ -10,8 +10,8 @@
         </article>
 
         <div>
-            <a class="prev" (click)="plusSlides(-1)">&#10094;</a>
-            <a class="next" (click)="plusSlides(1)">&#10095;</a>
+            <a class="prev" (click)="prevSlide()">&#10094;</a>
+            <a class="next" (click)="nextSlide()">&#10095;</a>
         </div>
 
         <article class="item-data">
