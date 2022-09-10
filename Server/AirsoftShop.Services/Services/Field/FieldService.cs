@@ -110,4 +110,33 @@ public class FieldService : IFieldService
 
         return true;
     }
+
+    public async Task<OperationResult> Edit(EditFieldServiceModel serviceModel)
+    {
+        var city = await this.data.Cities
+            .FirstOrDefaultAsync(x => x.Id == serviceModel.CityId);
+        
+        if (city is null)
+        {
+            return InvalidCityMsg;
+        }
+
+        var field = await this.data.Fields
+            .Where(x => x.Id == serviceModel.Id && x.DealerId == serviceModel.DealerId)
+            .Include(x => x.Address)
+            .FirstOrDefaultAsync();
+
+        if (field is null)
+        {
+            return InvalidField;
+        }
+
+        field.Address.CityId = serviceModel.CityId;
+        field.Description = serviceModel.Description;
+        field.Address.StreetName = serviceModel.StreetName;
+
+        await this.data.SaveChangesAsync();
+
+        return true;
+    }
 }

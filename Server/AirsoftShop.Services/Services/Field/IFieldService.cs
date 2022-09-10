@@ -11,4 +11,6 @@ public interface IFieldService : ITransientService
     Task<OperationResult<FieldDetailsServiceModel>> Details(int fieldId);
 
     Task<OperationResult> Delete(int fieldId, string dealerId);
+    
+    Task<OperationResult> Edit(EditFieldServiceModel serviceModel);
 }

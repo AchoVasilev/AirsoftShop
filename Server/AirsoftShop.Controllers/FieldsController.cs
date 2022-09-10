@@ -85,6 +85,40 @@ public class FieldsController : BaseController
         return this.Ok(result.Model);
     }
 
+    [HttpPut]
+    public async Task<ActionResult> Edit(FieldEditModel model)
+    {
+        var userId = this.currentUserService.GetUserId();
+        var user = await this.userManager.FindByIdAsync(userId);
+        if (user?.DealerId is null)
+        {
+            return this.Unauthorized(new { ErrorMessage = UserNotDealerMsg });
+        }
+
+        if (user.DealerId != model.DealerId)
+        {
+            return this.Unauthorized(new { ErrorMessage = NotAuthorizedMsg });
+        }
+
+        var serviceModel = new EditFieldServiceModel()
+        {
+            Id = model.Id,
+            Description = model.Description,
+            CityId = model.CityId,
+            DealerId = model.DealerId,
+            StreetName = model.StreetName,
+            ZipCode = model.ZipCode
+        };
+
+        var result = await this.fieldService.Edit(serviceModel);
+        if (result.Failed)
+        {
+            return this.BadRequest(result.ErrorMessage);
+        }
+
+        return this.Ok();
+    }
+
     [HttpDelete]
     [Route("{id}")]
     public async Task<ActionResult> Delete(int id)
