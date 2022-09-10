@@ -13,7 +13,7 @@ export const routes: Routes = [
     path: '',
     children: [
       {
-        path: 'all',
+        path: 'guns/all',
         component: GunListComponent,
         pathMatch: 'full'
       },

@@ -4,6 +4,7 @@ import { AuthGuard } from 'src/app/infrastructure/guards/auth-guard';
 import { DealerGuard } from 'src/app/infrastructure/guards/dealer.guard';
 import { CreateComponent } from './create/create.component';
 import { DetailsComponent } from './details/details.component';
+import { EditComponent } from './edit/edit.component';
 
 const routes: Routes = [
   {
@@ -18,6 +19,11 @@ const routes: Routes = [
       {
         path: ':id',
         component: DetailsComponent,
+        pathMatch: 'full'
+      },
+      {
+        path: 'edit/:id',
+        component: EditComponent,
         pathMatch: 'full'
       }
     ]

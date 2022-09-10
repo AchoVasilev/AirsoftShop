@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { FieldDetailsModel } from 'src/app/models/fields/fieldDetailsModel';
+import { FieldEditModel } from 'src/app/models/fields/fieldEditModel';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -23,5 +24,9 @@ export class FieldService {
 
   deleteById(id: number): Observable<any> {
     return this.httpClient.delete(`${this.apiUrl}/fields/${id}`);
+  }
+
+  edit(model: FieldEditModel): Observable<any> {
+    return this.httpClient.put(`${this.apiUrl}/fields`, model);
   }
 }

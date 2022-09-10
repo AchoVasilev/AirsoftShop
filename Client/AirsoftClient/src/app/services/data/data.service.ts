@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { CartViewModel } from 'src/app/models/cart/cartViewModel';
 import { UserClientViewModel } from 'src/app/models/client/userClientViewModel';
+import { FieldDetailsModel } from 'src/app/models/fields/fieldDetailsModel';
 import { GunDetailsViewModel } from 'src/app/models/products/guns/gunDetailsViewModel';
 
 @Injectable({
@@ -68,6 +69,12 @@ export class DataService {
   paymentType: Observable<string> = this.paymentTypeSource.asObservable();
   changePaymentType(value: string) {
     this.paymentTypeSource.next(value);
+  }
+
+  private fieldDetailsTypeSource = new BehaviorSubject<FieldDetailsModel>(this.initialObjectSource);
+  fieldDetailsModel: Observable<FieldDetailsModel> = this.fieldDetailsTypeSource.asObservable();
+  changeFieldModel(value: FieldDetailsModel) {
+    this.fieldDetailsTypeSource.next(value);
   }
 
   constructor() { }

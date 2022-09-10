@@ -4,6 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { DealerIdObj } from 'src/app/models/dealers/dealerIdObj';
 import { FieldDetailsModel } from 'src/app/models/fields/fieldDetailsModel';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { DataService } from 'src/app/services/data/data.service';
 import { DealerService } from 'src/app/services/dealer/dealer.service';
 import { FieldService } from 'src/app/services/fields/field.service';
 
@@ -30,6 +31,7 @@ export class DetailsComponent implements OnInit {
     private authService: AuthService,
     private fieldService: FieldService,
     private dealerService: DealerService,
+    private dataService: DataService,
     private toastr: ToastrService,
     private router: Router,
     private route: ActivatedRoute) { }
@@ -39,7 +41,10 @@ export class DetailsComponent implements OnInit {
       .subscribe(dealer => this.dealerObj = dealer);
 
     this.fieldService.detailsById(this.fieldId)
-      .subscribe(data => this.field = data);
+      .subscribe(data => {
+        this.field = data;
+        this.dataService.changeFieldModel(data);
+      });
 
     this.isOwner = !this.authService.getClient() &&
       this.authService.isAuthenticated() &&
