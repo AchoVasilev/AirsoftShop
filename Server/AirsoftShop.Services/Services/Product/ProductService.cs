@@ -37,7 +37,6 @@ public class ProductService : IProductService
 
     public async Task<OperationResult<ResultGunServiceModel>> CreateGun(CreateGunServiceModel model, string dealerId)
     {
-        if (model == null) throw new ArgumentNullException(nameof(model));
         var dealer = await this.data.Dealers
             .FirstOrDefaultAsync(x => x.Id == dealerId);
 

@@ -12,6 +12,7 @@ using Services.Services.Field;
 using Services.Services.File;
 using static Common.Constants.Constants.WebConstants;
 using static Common.Constants.Messages;
+
 public class FieldsController : BaseController
 {
     private readonly IFieldService fieldService;
@@ -20,7 +21,7 @@ public class FieldsController : BaseController
     private readonly UserManager<ApplicationUser> userManager;
 
     public FieldsController(
-        IFieldService fieldService, 
+        IFieldService fieldService,
         ICurrentUserService currentUserService,
         IFileService fileService,
         UserManager<ApplicationUser> userManager)
@@ -33,7 +34,7 @@ public class FieldsController : BaseController
 
     [HttpPost]
     [Authorize]
-    public async Task<ActionResult> Create([FromForm]CreateFieldModel model)
+    public async Task<ActionResult> Create([FromForm] CreateFieldModel model)
     {
         var userId = this.currentUserService.GetUserId();
         var user = await this.userManager.FindByIdAsync(userId);
@@ -41,7 +42,7 @@ public class FieldsController : BaseController
         {
             return this.Unauthorized(new { ErrorMessage = UserNotDealerMsg });
         }
-        
+
         var fileModels = new List<IFileServiceModel>();
         foreach (var image in model.Images)
         {
@@ -81,7 +82,7 @@ public class FieldsController : BaseController
         {
             return this.BadRequest(result.ErrorMessage);
         }
-        
+
         return this.Ok(result.Model);
     }
 
