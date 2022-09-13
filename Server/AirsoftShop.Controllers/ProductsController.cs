@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Models.Products;
+using Services.Common;
 using Services.Models.File;
 using Services.Models.Product;
 using Services.Services.File;
@@ -17,17 +18,20 @@ public class ProductsController : BaseController
 {
     private readonly IProductService productService;
     private readonly ICurrentUserService currentUserService;
+    private readonly IGunService gunService;
     private readonly IFileService fileService;
     private readonly UserManager<ApplicationUser> userManager;
 
     public ProductsController(
         IProductService productService,
         ICurrentUserService currentUserService,
+        IGunService gunService,
         IFileService fileService,
         UserManager<ApplicationUser> userManager)
     {
         this.productService = productService;
         this.currentUserService = currentUserService;
+        this.gunService = gunService;
         this.fileService = fileService;
         this.userManager = userManager;
     }
@@ -35,7 +39,7 @@ public class ProductsController : BaseController
     [HttpGet]
     [Route("newest")]
     public async Task<ActionResult> GetNewest()
-        => this.Ok(await this.productService.GetNewestEightGuns());
+        => this.Ok(await this.gunService.GetNewestEightGuns());
 
     [HttpPost]
     [Authorize]

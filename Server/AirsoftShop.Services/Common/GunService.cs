@@ -76,4 +76,21 @@ public class GunService : BaseProductService<Gun, ResultGunServiceModel>, IGunSe
 
         return result;
     }
+    
+    public async Task<IEnumerable<InitialGunViewModel>> GetNewestEightGuns()
+        => await this.DbSet
+            .Select(x => new InitialGunViewModel()
+            {
+                Id = x.Id,
+                Name = x.Name,
+                Color = x.Color,
+                Manufacturer = x.Manufacturer,
+                Power = x.Power,
+                DealerName = x.Dealer.Name,
+                DealerSiteUrl = x.Dealer.SiteUrl,
+                ImageUrl = x.Images.Select(i => i.Url ?? i.RemoteImageUrl).First()
+            })
+            .Take(8)
+            .AsNoTracking()
+            .ToListAsync();
 }

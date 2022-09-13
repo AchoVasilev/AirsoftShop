@@ -13,6 +13,7 @@ using Common.Services;
 using Microsoft.OpenApi.Models;
 using Models;
 using Services.Common;
+using Services.Services.Product;
 
 internal static class ServiceCollectionExtensions
 {
@@ -101,32 +102,34 @@ internal static class ServiceCollectionExtensions
         var types = transientRegistrationType
             .Assembly
             .GetExportedTypes()
-            .Where(t => t.IsClass && !t.IsAbstract)
+            .Where(t => t.Name.EndsWith("Service") && t.IsClass && !t.IsAbstract)
             .Select(t => new
             {
-                Service = t.GetInterface($"I{t.Name}"),
+                Services = t.GetInterfaces().ToList(),
                 Implementation = t
             })
-            .Where(s => s.Service != null);
+            .Where(s => s.Services.Count > 0);
 
         foreach (var type in types)
         {
-            if (transientRegistrationType.IsAssignableFrom(type.Service))
+            foreach (var service in type.Services)
             {
-                services.AddTransient(type.Service, type.Implementation);
-            }
-            else if (scopedRegistrationType.IsAssignableFrom(type.Service))
-            {
-                services.AddScoped(type.Service, type.Implementation);
-            }
-            else if (singletonRegistrationType.IsAssignableFrom(type.Service))
-            {
-                services.AddSingleton(type.Service, type.Implementation);
+                if (transientRegistrationType.IsAssignableFrom(service))
+                {
+                    services.AddTransient(service, type.Implementation);
+                }
+                else if (scopedRegistrationType.IsAssignableFrom(service))
+                {
+                    services.AddScoped(service, type.Implementation);
+                }
+                else if (singletonRegistrationType.IsAssignableFrom(service))
+                {
+                    services.AddSingleton(service, type.Implementation);
+                }
             }
         }
 
         services.AddScoped<ICurrentUserService, CurrentUserService>();
-        
         return services;
     }
 
