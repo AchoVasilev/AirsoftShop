@@ -4,10 +4,9 @@ using AirsoftShop.Common.Models;
 using Data.Persistence;
 using Microsoft.EntityFrameworkCore;
 
-public abstract class BaseProductService<T, R, E> : IBaseProductService<T, R, E>
+public abstract class BaseProductService<T, R> : IBaseProductService<T, R>
     where T : class
     where R : class
-    where E : class
 {
     public BaseProductService(ApplicationDbContext data)
     {
@@ -18,5 +17,5 @@ public abstract class BaseProductService<T, R, E> : IBaseProductService<T, R, E>
 
     protected ApplicationDbContext Context { get; }
 
-    public abstract Task<OperationResult<R>> CreateGun(E model, string dealerId);
+    public abstract Task<OperationResult<R>> Create(IProduct model, string dealerId);
 }

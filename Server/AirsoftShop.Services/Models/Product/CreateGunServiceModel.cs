@@ -4,7 +4,7 @@ using Base;
 using Common;
 using File;
 
-public class CreateGunServiceModel : ExtendedBaseGunServiceModel, IGunModel
+public class CreateGunServiceModel : ExtendedBaseGunServiceModel
 {
         public IEnumerable<IFileServiceModel>? Images { get; init; }
         

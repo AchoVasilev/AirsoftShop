@@ -7,17 +7,19 @@ using Data.Models.Images;
 using Data.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Models.Product;
-
 using static AirsoftShop.Common.Constants.Messages;
 
-public class GunService : BaseProductService<Gun, ResultGunServiceModel, CreateGunServiceModel>, IGunService
+public class GunService : BaseProductService<Gun, ResultGunServiceModel>, IGunService
 {
-    public GunService(ApplicationDbContext data) : base(data)
+    public GunService(ApplicationDbContext data) 
+        : base(data)
     {
     }
     
-    public override async Task<OperationResult<ResultGunServiceModel>> CreateGun(CreateGunServiceModel model, string dealerId)
+    public override async Task<OperationResult<ResultGunServiceModel>> Create(IProduct input, string dealerId)
     {
+        var model = (CreateGunServiceModel)input;
+        
         var dealer = await this.Context.Dealers
             .FirstOrDefaultAsync(x => x.Id == dealerId);
 

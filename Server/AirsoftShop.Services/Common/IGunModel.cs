@@ -1,12 +1,8 @@
 namespace AirsoftShop.Services.Common;
 
-public interface IGunModel
+public interface IGunModel : IProduct
 {
-    string? Id { get; }
+    public string? Manufacturer { get; init; }
     
-     string? Name { get; }
-    
-     string? Manufacturer { get; }
-    
-     string? Color { get; }
+    public string? Color { get; init; }
 }

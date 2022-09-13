@@ -2,8 +2,8 @@ namespace AirsoftShop.Services.Common;
 
 using AirsoftShop.Common.Models;
 
-public interface IBaseProductService <T, R, E> where R : class
+public interface IBaseProductService <T, R> 
+    where R : class
 {
-    Task<OperationResult<R>> CreateGun(E model, string dealerId);
-
+    Task<OperationResult<R>> Create(IProduct model, string dealerId);
 }

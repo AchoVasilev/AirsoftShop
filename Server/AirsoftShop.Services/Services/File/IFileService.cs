@@ -10,6 +10,4 @@ public interface IFileService : ITransientService
     Task<OperationResult<IFileServiceModel>> UploadImage(IFormFile? image, string folderName);
 
     Task<string> AddImageToDatabase(IFileServiceModel model);
-
-    Task<string> AddItemImageToDatabase(IFileServiceModel model);
 }
