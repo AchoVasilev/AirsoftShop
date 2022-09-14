@@ -1,32 +1,32 @@
-namespace AirsoftShop.Controllers;
+namespace AirsoftShop.Controllers.Products;
 
-using Common.Services;
-using Data.Models;
+using AirsoftShop.Common.Services;
+using AirsoftShop.Controllers.Models.Products;
+using AirsoftShop.Data.Models;
+using AirsoftShop.Services.Models.File;
+using AirsoftShop.Services.Models.Product;
+using AirsoftShop.Services.Services.File;
+using AirsoftShop.Services.Services.Product.Gun;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Models.Products;
-using Services.Models.File;
-using Services.Models.Product;
-using Services.Services.File;
-using Services.Services.Product;
 using static Common.Constants.Constants.WebConstants;
 using static Common.Constants.Messages;
 
-public class ProductsController : BaseController
+public class GunsController : BaseController
 {
-    private readonly IProductService productService;
+    private readonly IGunService gunService;
     private readonly ICurrentUserService currentUserService;
     private readonly IFileService fileService;
     private readonly UserManager<ApplicationUser> userManager;
 
-    public ProductsController(
-        IProductService productService,
+    public GunsController(
+        IGunService gunService,
         ICurrentUserService currentUserService,
         IFileService fileService,
         UserManager<ApplicationUser> userManager)
     {
-        this.productService = productService;
+        this.gunService = gunService;
         this.currentUserService = currentUserService;
         this.fileService = fileService;
         this.userManager = userManager;
@@ -35,7 +35,7 @@ public class ProductsController : BaseController
     [HttpGet]
     [Route("newest")]
     public async Task<ActionResult> GetNewest()
-        => this.Ok(await this.productService.GetNewestEightGuns());
+        => this.Ok(await this.gunService.GetNewestEightGuns());
 
     [HttpPost]
     [Authorize]
@@ -84,7 +84,7 @@ public class ProductsController : BaseController
             Description = model.Description
         };
 
-        var result = await this.productService.CreateGun(gunModel, user.DealerId);
+        var result = await this.gunService.CreateGun(gunModel, user.DealerId);
         if (result.Failed)
         {
             return this.BadRequest(new { result.ErrorMessage });
@@ -97,7 +97,7 @@ public class ProductsController : BaseController
     [Route("details/{gunId}")]
     public async Task<IActionResult> GetDetails([FromQuery] string gunId)
     {
-        var res = await this.productService.GetDetails(gunId);
+        var res = await this.gunService.GetDetails(gunId);
         if (res is null)
         {
             return this.NotFound();
@@ -140,7 +140,7 @@ public class ProductsController : BaseController
             Description = model.Description,
         };
         
-        var result = await this.productService.Edit(user.DealerId, editModel);
+        var result = await this.gunService.Edit(user.DealerId, editModel);
         if (result.Failed)
         {
             return this.BadRequest(new { result.ErrorMessage });
@@ -161,7 +161,7 @@ public class ProductsController : BaseController
             return this.Unauthorized(new { ErrorMessage = NotAuthorizedMsg });
         }
         
-        var result = await this.productService.DeleteGun(gunId, user.DealerId);
+        var result = await this.gunService.DeleteGun(gunId, user.DealerId);
         if (result.Failed)
         {
             return this.BadRequest(new { result.ErrorMessage });
@@ -185,7 +185,7 @@ public class ProductsController : BaseController
             Powers = query.Powers
         };
         
-        var guns = await this.productService.GetAllGuns(queryModel);
+        var guns = await this.gunService.GetAllGuns(queryModel);
         var allGunsViewModel = new GunsViewModel
         {
             AllGuns = guns,
@@ -201,11 +201,11 @@ public class ProductsController : BaseController
         
         if (isBasicCategoryString)
         {
-            allGunsViewModel.Colors = await this.productService.GetAllColors();
-            allGunsViewModel.Manufacturers = await this.productService.GetAllManufacturers();
-            allGunsViewModel.Dealers = await this.productService.GetAllDealers();
-            allGunsViewModel.Powers = await this.productService.GetAllPowers();
-            allGunsViewModel.ItemCount = await this.productService.GetAllGunsCount();
+            allGunsViewModel.Colors = await this.gunService.GetAllColors();
+            allGunsViewModel.Manufacturers = await this.gunService.GetAllManufacturers();
+            allGunsViewModel.Dealers = await this.gunService.GetAllDealers();
+            allGunsViewModel.Powers = await this.gunService.GetAllPowers();
+            allGunsViewModel.ItemCount = await this.gunService.GetAllGunsCount();
         }
         else
         {
@@ -238,7 +238,7 @@ public class ProductsController : BaseController
     public async Task<IActionResult> MyProducts()
     {
         var userId = this.currentUserService.GetUserId();
-        var result = await this.productService.GetMyProducts(userId!);
+        var result = await this.gunService.GetMyProducts(userId!);
 
         if (result.Failed)
         {

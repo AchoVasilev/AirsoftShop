@@ -1,21 +1,21 @@
-namespace AirsoftShop.Services.Services.Product;
+namespace AirsoftShop.Services.Services.Product.Gun;
 
 using AirsoftShop.Common.Models;
-using Data.Models;
-using Data.Models.Enums;
-using Data.Models.Images;
+using AirsoftShop.Data.Models.Enums;
+using AirsoftShop.Data.Models.Images;
 using Data.Persistence;
+using AirsoftShop.Services.Models.Product;
+using Data.Models;
 using Microsoft.EntityFrameworkCore;
-using Models.Product;
 using static AirsoftShop.Common.Constants.Messages;
 
-public class ProductService : IProductService
+public class GunService : IGunService
 {
     private const int NewestEightGunsNumber = 8;
     
     private readonly ApplicationDbContext data;
 
-    public ProductService(ApplicationDbContext data)
+    public GunService(ApplicationDbContext data)
         => this.data = data;
 
     public async Task<IEnumerable<InitialGunViewModel>> GetNewestEightGuns()
@@ -150,7 +150,7 @@ public class ProductService : IProductService
 
         if (gun is null)
         {
-            return InvalidGun;
+            return InvalidProduct;
         }
 
         gun.Name = model.Name;
@@ -189,7 +189,7 @@ public class ProductService : IProductService
 
         if (gun is null)
         {
-            return InvalidGun;
+            return InvalidProduct;
         }
 
         if (gun.DealerId != dealerId)
@@ -207,149 +207,6 @@ public class ProductService : IProductService
 
         return result;
     }
-
-    public async Task<ICollection<GunViewServiceModel>> FilterGunsByManufacturer(List<string> query)
-        => await this.data.Guns
-            .Where(x => query.Contains(x.Manufacturer))
-            .Select(x => new GunViewServiceModel()
-            {
-                Id = x.Id,
-                Name = x.Name,
-                Manufacturer = x.Manufacturer,
-                Power = x.Power,
-                Barrel = x.Barrel,
-                Propulsion = x.Propulsion.ToString(),
-                Material = x.Material,
-                Blowback = x.Blowback,
-                Capacity = x.Capacity,
-                Speed = x.Speed,
-                Color = x.Color,
-                Weight = x.Weight,
-                Magazine = x.Magazine,
-                DealerId = x.DealerId,
-                DealerName = x.Dealer.Name,
-                DealerUrl = x.Dealer.SiteUrl,
-                Firing = x.Firing,
-                Length = x.Length,
-                Hopup = x.Hopup,
-                Price = x.Price,
-                ImageUrl = x.Images.Select(y => y.Url ?? y.RemoteImageUrl).First()
-            })
-            .ToListAsync();
-
-    public async Task<ICollection<GunViewServiceModel>> FilterGunsByDealer(List<string> query)
-        => await this.data.Guns
-            .Where(x => query.Contains(x.Dealer.Name))
-            .Select(x => new GunViewServiceModel()
-            {
-                Id = x.Id,
-                Name = x.Name,
-                Manufacturer = x.Manufacturer,
-                Power = x.Power,
-                Barrel = x.Barrel,
-                Propulsion = x.Propulsion.ToString(),
-                Material = x.Material,
-                Blowback = x.Blowback,
-                Capacity = x.Capacity,
-                Speed = x.Speed,
-                Color = x.Color,
-                Weight = x.Weight,
-                Magazine = x.Magazine,
-                DealerId = x.DealerId,
-                DealerName = x.Dealer.Name,
-                DealerUrl = x.Dealer.SiteUrl,
-                Firing = x.Firing,
-                Length = x.Length,
-                Hopup = x.Hopup,
-                Price = x.Price,
-                ImageUrl = x.Images.Select(y => y.Url ?? y.RemoteImageUrl).First()
-            })
-            .ToListAsync();
-
-    public async Task<ICollection<GunViewServiceModel>> FilterGunsByColor(List<string> query)
-        => await this.data.Guns
-            .Where(x => query.Contains(x.Color))
-            .Select(x => new GunViewServiceModel()
-            {
-                Id = x.Id,
-                Name = x.Name,
-                Manufacturer = x.Manufacturer,
-                Power = x.Power,
-                Barrel = x.Barrel,
-                Propulsion = x.Propulsion.ToString(),
-                Material = x.Material,
-                Blowback = x.Blowback,
-                Capacity = x.Capacity,
-                Speed = x.Speed,
-                Color = x.Color,
-                Weight = x.Weight,
-                Magazine = x.Magazine,
-                DealerId = x.DealerId,
-                DealerName = x.Dealer.Name,
-                DealerUrl = x.Dealer.SiteUrl,
-                Firing = x.Firing,
-                Length = x.Length,
-                Hopup = x.Hopup,
-                Price = x.Price,
-                ImageUrl = x.Images.Select(y => y.Url ?? y.RemoteImageUrl).First()
-            })
-            .ToListAsync();
-
-    public async Task<ICollection<GunViewServiceModel>> FilterGunsByPower(GunsQueryServiceModel query)
-        => await this.QueryGuns(query)
-            .Select(x => new GunViewServiceModel()
-            {
-                Id = x.Id,
-                Name = x.Name,
-                Manufacturer = x.Manufacturer,
-                Power = x.Power,
-                Barrel = x.Barrel,
-                Propulsion = x.Propulsion.ToString(),
-                Material = x.Material,
-                Blowback = x.Blowback,
-                Capacity = x.Capacity,
-                Speed = x.Speed,
-                Color = x.Color,
-                Weight = x.Weight,
-                Magazine = x.Magazine,
-                DealerId = x.DealerId,
-                DealerName = x.Dealer.Name,
-                DealerUrl = x.Dealer.SiteUrl,
-                Firing = x.Firing,
-                Length = x.Length,
-                Hopup = x.Hopup,
-                Price = x.Price,
-                ImageUrl = x.Images.Select(y => y.Url ?? y.RemoteImageUrl).First()
-            })
-            .ToListAsync();
-
-    public async Task<ICollection<GunViewServiceModel>> FilterGunsByCategory(GunsQueryServiceModel query)
-        => await this.QueryGuns(query)
-            .Select(x => new GunViewServiceModel()
-            {
-                Id = x.Id,
-                Name = x.Name,
-                Manufacturer = x.Manufacturer,
-                Power = x.Power,
-                Barrel = x.Barrel,
-                Propulsion = x.Propulsion.ToString(),
-                Material = x.Material,
-                Blowback = x.Blowback,
-                Capacity = x.Capacity,
-                Speed = x.Speed,
-                Color = x.Color,
-                Weight = x.Weight,
-                Magazine = x.Magazine,
-                DealerId = x.DealerId,
-                DealerName = x.Dealer.Name,
-                DealerUrl = x.Dealer.SiteUrl,
-                Firing = x.Firing,
-                Length = x.Length,
-                Hopup = x.Hopup,
-                Price = x.Price,
-                ImageUrl = x.Images.Select(y => y.Url ?? y.RemoteImageUrl).First()
-            })
-            .ToListAsync();
 
     public async Task<OperationResult<OwnerGunListServiceModel>> GetMyProducts(string userId)
     {
@@ -380,35 +237,7 @@ public class ProductService : IProductService
 
         return guns;
     }
-
-    public async Task<ICollection<GunViewServiceModel>> OrderGuns(GunSortModel model)
-        => await this.QuerySortGuns(model)
-            .Select(x => new GunViewServiceModel()
-            {
-                Id = x.Id,
-                Name = x.Name,
-                Manufacturer = x.Manufacturer,
-                Power = x.Power,
-                Barrel = x.Barrel,
-                Propulsion = x.Propulsion.ToString(),
-                Material = x.Material,
-                Blowback = x.Blowback,
-                Capacity = x.Capacity,
-                Speed = x.Speed,
-                Color = x.Color,
-                Weight = x.Weight,
-                Magazine = x.Magazine,
-                DealerId = x.DealerId,
-                DealerName = x.Dealer.Name,
-                DealerUrl = x.Dealer.SiteUrl,
-                Firing = x.Firing,
-                Length = x.Length,
-                Hopup = x.Hopup,
-                Price = x.Price,
-                ImageUrl = x.Images.Select(y => y.Url ?? y.RemoteImageUrl).First()
-            })
-            .ToListAsync();
-
+    
     public async Task<ICollection<GunViewServiceModel>> GetAllGuns(GunsQueryServiceModel query)
         => await this.QueryAll(query)
             .Select(x => new GunViewServiceModel()
@@ -464,36 +293,6 @@ public class ProductService : IProductService
             .Distinct()
             .ToListAsync();
 
-    private IQueryable<Gun> QuerySortGuns(GunSortModel query)
-    {
-        var gunsQuery = this.data.Guns
-            .AsQueryable();
-
-        if (string.IsNullOrWhiteSpace(query.CategoryName) == false && query.CategoryName != "null")
-        {
-            gunsQuery = gunsQuery.Where(x => x.SubCategory.Name == query.CategoryName);
-        }
-
-        if (string.IsNullOrWhiteSpace(query.OrderBy) == false && query.OrderBy != "null")
-        {
-            gunsQuery = query.OrderBy switch
-            {
-                "newest" => gunsQuery.OrderByDescending(x => x.CreatedOn),
-                "alphabetical" => gunsQuery.OrderBy(x => x.Name),
-                "priceDown" => gunsQuery.OrderByDescending(x => x.Price),
-                "priceUp" => gunsQuery.OrderBy(x => x.Price),
-                _ => gunsQuery
-            };
-        }
-
-        if (query.Count != null)
-        {
-            gunsQuery = gunsQuery.Take((int)query.Count);
-        }
-
-        return gunsQuery;
-    }
-
     private IQueryable<Gun> QueryAll(GunsQueryServiceModel query)
     {
         var gunsQuery = this.data.Guns
@@ -544,40 +343,5 @@ public class ProductService : IProductService
             .Take(query.ItemsPerPage);
 
         return gunsQuery;
-    }
-
-    private IQueryable<Gun> QueryGuns(GunsQueryServiceModel query)
-    {
-        var gunsQuery = this.data.Guns
-            .AsQueryable();
-
-        if (query.Manufacturers != null)
-        {
-            gunsQuery = gunsQuery
-                .Where(x => query.Manufacturers.Contains(x.Manufacturer));
-        }
-
-        if (query.Dealers != null)
-        {
-            gunsQuery = gunsQuery
-                .Where(x => query.Dealers.Contains(x.Dealer.Name));
-        }
-
-        if (query.Colors != null)
-        {
-            gunsQuery = gunsQuery.Where(x => query.Colors.Contains(x.Color));
-        }
-
-        if (query.Powers != null)
-        {
-            gunsQuery = gunsQuery.Where(x => query.Powers.Contains(x.Power));
-        }
-
-        if (string.IsNullOrWhiteSpace(query.CategoryName) == false && query.CategoryName != "null")
-        {
-            gunsQuery = gunsQuery.Where(x => x.SubCategory.Name == query.CategoryName);
-        }
-
-        return gunsQuery.OrderByDescending(x => x.CreatedOn);
     }
 }

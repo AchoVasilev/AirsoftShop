@@ -35,7 +35,7 @@ public class WishListService : IWishListService
 
         if (!gunExists)
         {
-            return InvalidGun;
+            return InvalidProduct;
         }
         
         var client = await this.data.Clients

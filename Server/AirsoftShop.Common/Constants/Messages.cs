@@ -31,7 +31,7 @@ public static class Messages
     public const string InvalidImage = "Необходимо е да качите снимка!";
     public const string InvalidImageExtension = "Снимката е с невалидно разширение! Поддържани са 'jpg', 'jpeg', 'png' и 'gif'.";
     public const string InvalidSubcategoryErrorMsg = "Избрали сте невалидна подкатегория!";
-    public const string InvalidGun = "Това оръжие не съществува!";
+    public const string InvalidProduct = "Този продукт не съществува!";
     public const string InvalidField = "Това поле не съществува!";
     public const string InvalidCourier = "Избрали сте невалиден куриер!";
     public const string InvalidRemoveAction = "Не може да премахнете този артикул!";
