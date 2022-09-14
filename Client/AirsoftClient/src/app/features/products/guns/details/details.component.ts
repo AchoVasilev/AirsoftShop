@@ -7,7 +7,7 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 import { CartService } from 'src/app/services/cart/cart.service';
 import { DataService } from 'src/app/services/data/data.service';
 import { DealerService } from 'src/app/services/dealer/dealer.service';
-import { ProductService } from 'src/app/services/products/product.service';
+import { GunService } from 'src/app/services/products/guns/gun.service';
 
 @Component({
   selector: 'app-details',
@@ -30,7 +30,7 @@ export class DetailsComponent implements OnInit {
   private cartItemsPrice: number = 0;
 
   constructor(
-    private productService: ProductService,
+    private gunService: GunService,
     private route: ActivatedRoute,
     private authService: AuthService,
     private cartService: CartService,
@@ -59,7 +59,7 @@ export class DetailsComponent implements OnInit {
   }
 
   getGunDetails() {
-    this.productService.getGunDetails(this.gunId)
+    this.gunService.getGunDetails(this.gunId)
       .subscribe(res => this.gun = res);
   }
 
@@ -98,7 +98,7 @@ export class DetailsComponent implements OnInit {
   onDelete(gunId: string) {
     this.isLoading = true;
     this.isLoaded = false;
-    this.productService.deleteGun(gunId)
+    this.gunService.deleteGun(gunId)
       .subscribe({
         next: () => {
           this.toastr.success("Успешно изтриване");

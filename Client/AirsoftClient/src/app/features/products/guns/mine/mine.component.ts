@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DealerGunsList } from 'src/app/models/products/guns/dealerGunList';
-import { ProductService } from 'src/app/services/products/product.service';
+import { GunService } from 'src/app/services/products/guns/gun.service';
 
 @Component({
   selector: 'app-mine',
@@ -12,7 +12,7 @@ export class MineComponent implements OnInit {
   isLoading: boolean = true;
   isLoaded: boolean = false;
 
-  constructor(private productService: ProductService) { }
+  constructor(private gunService: GunService) { }
 
   ngOnInit(): void {
     this.loadGuns();
@@ -21,7 +21,7 @@ export class MineComponent implements OnInit {
   }
 
   loadGuns(): void {
-    this.productService.getDealerProducts()
+    this.gunService.getDealerProducts()
       .subscribe(res => this.guns = res);
   }
 }

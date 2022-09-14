@@ -11,21 +11,21 @@ import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class ProductService {
-  private apiUrl: string = environment.apiUrl;
+export class GunService {
+  private apiUrl: string = `${environment.apiUrl}/guns`;
 
   constructor(private httpClient: HttpClient) { }
 
   createGun(body: FormData): Observable<string> {
-    return this.httpClient.post<string>(`${this.apiUrl}/products`, body);
+    return this.httpClient.post<string>(`${this.apiUrl}`, body);
   }
 
   getNewestEightGuns(): Observable<InitialGunViewModel[]> {
-    return this.httpClient.get<InitialGunViewModel[]>(`${this.apiUrl}/products/newest`);
+    return this.httpClient.get<InitialGunViewModel[]>(`${this.apiUrl}/newest`);
   }
 
   getGunDetails(gunId: string): Observable<GunDetailsViewModel> {
-    return this.httpClient.get<GunDetailsViewModel>(`${this.apiUrl}/products/details`, {
+    return this.httpClient.get<GunDetailsViewModel>(`${this.apiUrl}/details`, {
       params: {
         gunId
       }
@@ -33,7 +33,7 @@ export class ProductService {
   }
 
   deleteGun(gunId: string): Observable<object> {
-    return this.httpClient.delete(`${this.apiUrl}/products`, {
+    return this.httpClient.delete(`${this.apiUrl}`, {
       params: {
         gunId
       }
@@ -41,14 +41,14 @@ export class ProductService {
   }
 
   editGun(model: GunEditModel): Observable<object> {
-    return this.httpClient.put(`${this.apiUrl}/products`, model);
+    return this.httpClient.put(`${this.apiUrl}`, model);
   }
 
   getAllGunsQuery(categoryName: string,
     itemsPerPage: number,
     orderBy: string, dealers: string[], manufacturers: string[], colors: string[], powers: number[], page: number)
     : Observable<GunsViewModel> {
-    return this.httpClient.get<GunsViewModel>(`${this.apiUrl}/products`, {
+    return this.httpClient.get<GunsViewModel>(`${this.apiUrl}`, {
       params: {
         categoryName,
         itemsPerPage,
@@ -63,6 +63,6 @@ export class ProductService {
   }
 
   getDealerProducts(): Observable<DealerGunsList[]> {
-    return this.httpClient.get<DealerGunsList[]>(`${this.apiUrl}/products/mine`);
+    return this.httpClient.get<DealerGunsList[]>(`${this.apiUrl}/mine`);
   }
 }

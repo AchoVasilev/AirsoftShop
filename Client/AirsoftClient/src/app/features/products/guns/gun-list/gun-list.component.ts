@@ -9,7 +9,7 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 import { CartService } from 'src/app/services/cart/cart.service';
 import { CategoryService } from 'src/app/services/categories/category.service';
 import { DataService } from 'src/app/services/data/data.service';
-import { ProductService } from 'src/app/services/products/product.service';
+import { GunService } from 'src/app/services/products/guns/gun.service';
 import { WishListService } from 'src/app/services/wishList/wish-list.service';
 
 @Component({
@@ -53,7 +53,7 @@ export class GunListComponent implements OnInit {
   countElement!: ElementRef;
 
   constructor(
-    private productService: ProductService,
+    private gunService: GunService,
     private categoryService: CategoryService,
     private cartService: CartService,
     private authService: AuthService,
@@ -98,7 +98,7 @@ export class GunListComponent implements OnInit {
     this.route.params.pipe(
       map(params => params['name'] ? this.categoryName = params['name'] : this.categoryName = ''),
       switchMap(() =>
-        this.productService
+        this.gunService
           .getAllGunsQuery(this.categoryName, this.itemsPerPage, this.orderBy, this.dealers, this.manufacturers, this.colors, this.powers, this.page))
     ).subscribe(res => {
       this.allGuns = res;

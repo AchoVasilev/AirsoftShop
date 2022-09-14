@@ -1,34 +1,28 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { CategoryService } from 'src/app/services/categories/category.service';
-import { ProductService } from 'src/app/services/products/product.service';
 import { GunSubCategoryViewModel } from 'src/app/models/categories/gunSubCategoryViewModel';
+import { GunDetailsViewModel } from 'src/app/models/products/guns/gunDetailsViewModel';
+import { GunEditModel } from 'src/app/models/products/guns/gunEditModel';
+import { CategoryService } from 'src/app/services/categories/category.service';
+import { GunService } from 'src/app/services/products/guns/gun.service';
 
 @Component({
-  selector: 'app-create',
-  templateUrl: './create.component.html',
-  styleUrls: ['./create.component.css']
+  selector: 'app-edit',
+  templateUrl: './edit.component.html',
+  styleUrls: ['./edit.component.css']
 })
-export class CreateComponent implements OnInit {
-  isAddingGun: boolean = false;
-  isAddingTacticalEquipment: boolean = false;
-  isAddingMaintanence: boolean = false;
-  isAddingAddOns: boolean = false;
-  isAddingAccessories: boolean = false;
-  isAddingCloting: boolean = false;
-
+export class EditComponent implements OnInit {
   isLoaded: boolean = false;
   isLoading: boolean = true;
-
-  files: File[] = [];
+  gun!: GunDetailsViewModel;
+  gunId: string = this.route.snapshot.params['id'];
+  file!: File;
   gunSubCategories: GunSubCategoryViewModel[] = [];
-
   gunCreateFormGroup: FormGroup = this.formBuilder.group({
     'name': new FormControl(null, [Validators.required, Validators.minLength(2), Validators.maxLength(40)]),
     'manufacturer': new FormControl(null, [Validators.required, Validators.minLength(2), Validators.maxLength(40)]),
-    'image': new FormControl(null, [Validators.required]),
     'power': new FormControl(null, [Validators.required, Validators.max(999), Validators.min(1)]),
     'color': new FormControl(null, [Validators.required, Validators.minLength(2), Validators.maxLength(40)]),
     'weight': new FormControl(null, [Validators.required, Validators.max(9999), Validators.min(1)]),
@@ -43,31 +37,53 @@ export class CreateComponent implements OnInit {
     'blowback': new FormControl(null, [Validators.required, Validators.minLength(2), Validators.maxLength(40)]),
     'hopup': new FormControl(null, [Validators.required, Validators.minLength(2), Validators.maxLength(40)]),
     'subCategoryName': new FormControl(null, [Validators.required]),
-    'price': new FormControl(null, [Validators.required]),
-    'description': new FormControl(null, [Validators.required, Validators.minLength(2), Validators.maxLength(1000)])
+    'price': new FormControl(null, [Validators.required])
   });
 
   constructor(
     private categoryService: CategoryService,
     private formBuilder: FormBuilder,
-    private productService: ProductService,
+    private gunService: GunService,
     private router: Router,
+    private route: ActivatedRoute,
     private toastr: ToastrService
   ) { }
 
   ngOnInit(): void {
+    this.getGun();
     this.getGunSubCategories();
+
+    this.gunCreateFormGroup.patchValue({
+      name: this.gun.name,
+      manufacturer: this.gun.manufacturer,
+      power: this.gun.power,
+      color: this.gun.color,
+      weight: this.gun.weight,
+      magazine: this.gun.magazine,
+      capacity: this.gun.capacity,
+      speed: this.gun.speed,
+      firing: this.gun.firing,
+      length: this.gun.length,
+      barrel: this.gun.barrel,
+      propulsion: this.gun.propulsion,
+      material: this.gun.material,
+      blowback: this.gun.blowback,
+      hopup: this.gun.hopup,
+      price: this.gun.price
+    });
+
     this.isLoaded = true;
     this.isLoading = false;
+  }
+
+  getGun() {
+    this.gunService.getGunDetails(this.gunId)
+      .subscribe(gun => this.gun = gun);
   }
 
   getGunSubCategories() {
     this.categoryService.loadGunSubcategories()
       .subscribe(subCat => this.gunSubCategories = subCat);
-  }
-
-  onChange(event: any) {
-    this.files = event.target.files;
   }
 
   shouldShowErrorForControl(controlName: string, sourceGroup: FormGroup = this.gunCreateFormGroup) {
@@ -78,14 +94,13 @@ export class CreateComponent implements OnInit {
     this.router.navigate(['/building']);
   }
 
-  createGunHandler() {
+  editGun() {
     this.isLoaded = false;
     this.isLoading = true;
 
     const {
       name,
       manufacturer,
-      image,
       power,
       color,
       weight,
@@ -98,52 +113,41 @@ export class CreateComponent implements OnInit {
       propulsion,
       material,
       blowback,
-      hopup,
       subCategoryName,
+      hopup,
       price,
-      description } = this.gunCreateFormGroup.value;
+    } = this.gunCreateFormGroup.value;
 
-    const body = new FormData();
-    body.append('name', name);
-    body.append('manufacturer', manufacturer);
+    const editModel: GunEditModel = {
+      name,
+      manufacturer,
+      power,
+      color,
+      weight,
+      magazine,
+      capacity,
+      speed,
+      firing,
+      length,
+      barrel,
+      propulsion,
+      material,
+      blowback,
+      subCategoryName,
+      hopup,
+      price
+    };
 
-    for (let index = 0; index < this.files.length; index++) {
-      body.append('images', this.files[index]);
-    }
-
-    // Array.from(this.files).map((file, index) => {
-    //   return body.append('images' + index, file);
-    // });
-
-    body.append('power', power);
-    body.append('color', color);
-    body.append('weight', weight);
-    body.append('magazine', magazine);
-    body.append('capacity', capacity);
-    body.append('speed', speed);
-    body.append('firing', firing);
-    body.append('length', length);
-    body.append('barrel', barrel);
-    body.append('propulsion', propulsion);
-    body.append('material', material);
-    body.append('blowback', blowback);
-    body.append('hopup', hopup);
-    body.append('subCategoryName', subCategoryName);
-    body.append('price', price);
-    body.append('description', description);
-
-    this.productService.createGun(body)
+    this.gunService.editGun(editModel)
       .subscribe({
-        next: (res: any) => {
-          this.toastr.success("Успешно добавихте нов артикул");
+        next: () => {
+          this.toastr.success("Успешна промяна");
+
           this.isLoaded = true;
           this.isLoading = false;
 
-          this.router.navigate([`/products/${res.name}/${res.id}`])
-        },
-        complete: () => {
-          this.isLoaded = true;
-          this.isLoading = false;
+          this.gunCreateFormGroup.reset();
+          this.router.navigate(['/products/mine'])
         }
       })
   }

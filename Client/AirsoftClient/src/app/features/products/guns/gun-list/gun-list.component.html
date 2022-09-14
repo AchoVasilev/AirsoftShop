@@ -57,7 +57,7 @@
         </section>
         <section class="guns" *ngIf="allGuns.allGuns.length > 0">
             <article class="gun" *ngFor="let gun of allGuns.allGuns">
-                <a routerLink="/products/{{gun.name}}/{{gun.id}}" class="gun-img">
+                <a routerLink="/products/guns/{{gun.name}}/{{gun.id}}" class="gun-img">
                     <img src="{{gun.imageUrl}}" alt="product {{gun.name}} image">
                 </a>
                 <section class="tooltip">
