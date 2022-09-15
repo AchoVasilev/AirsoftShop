@@ -1,4 +1,4 @@
-namespace AirsoftShop.Services.Models.Product;
+namespace AirsoftShop.Services.Models.Product.Guns;
 
 public class GunSortModel
 {

@@ -1,4 +1,4 @@
-namespace AirsoftShop.Controllers.Models.Products;
+namespace AirsoftShop.Controllers.Models.Products.Guns;
 
 public class AllGunsQueryModel
 {

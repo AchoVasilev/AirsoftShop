@@ -4,16 +4,8 @@ using System.ComponentModel.DataAnnotations;
 using static Data.Constants.Data.Constants;
 using static Common.Constants.Messages;
 
-public abstract class BaseGunModel
+public abstract class BaseGunModel : BaseProductModel
 {
-    [Required(ErrorMessage = RequiredFieldErrorMsg)]
-    [StringLength(DefaultMaxLength, MinimumLength = DefaultMinLength, ErrorMessage = LengthErrorMsg)]
-    public string? Name { get; set; }
-
-    [Required(ErrorMessage = RequiredFieldErrorMsg)]
-    [StringLength(DefaultMaxLength, MinimumLength = DefaultMinLength, ErrorMessage = LengthErrorMsg)]
-    public string? Manufacturer { get; set; }
-
     [Range(RangeMinLength, RangeMaxLength, ErrorMessage = LengthErrorMsg)]
     public double Power { get; set; }
 
@@ -62,14 +54,4 @@ public abstract class BaseGunModel
     [Required(ErrorMessage = RequiredFieldErrorMsg)]
     [StringLength(DefaultMaxLength, MinimumLength = DefaultMinLength, ErrorMessage = LengthErrorMsg)]
     public string? Hopup { get; set; }
-
-    public decimal Price { get; set; }
-
-    [Required(ErrorMessage = RequiredFieldErrorMsg)]
-    [StringLength(DefaultMaxLength, MinimumLength = DefaultMinLength, ErrorMessage = LengthErrorMsg)]
-    public string? SubCategoryName { get; set; }
-    
-    [Required(ErrorMessage = RequiredFieldErrorMsg)]
-    [StringLength(DescriptionMaxLength, MinimumLength = DefaultMinLength, ErrorMessage = LengthErrorMsg)]
-    public string? Description { get; set; }
 }

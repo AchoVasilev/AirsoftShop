@@ -2,7 +2,6 @@ namespace AirsoftShop.Data.Models;
 
 using System.ComponentModel.DataAnnotations;
 using Base;
-using Products;
 using static Constants.Data.Constants;
 public class SubCategory : DeletableEntity<int>
 {

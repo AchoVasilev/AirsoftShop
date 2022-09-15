@@ -1,6 +1,6 @@
-namespace AirsoftShop.Controllers.Models.Products
+namespace AirsoftShop.Controllers.Models.Products.Guns
 {
-    using Base;
+    using AirsoftShop.Controllers.Models.Products.Base;
     using Microsoft.AspNetCore.Http;
 
     public class GunInputModel : BaseGunModel

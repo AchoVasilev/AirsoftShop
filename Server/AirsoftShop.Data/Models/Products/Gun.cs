@@ -1,10 +1,7 @@
 namespace AirsoftShop.Data.Models.Products;
 
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using AirsoftShop.Data.Models.Base;
 using AirsoftShop.Data.Models.Enums;
-using AirsoftShop.Data.Models.Images;
 using static Constants.Data.Constants;
 
 public class Gun : Product

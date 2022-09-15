@@ -2,7 +2,7 @@ namespace AirsoftShop.Services.Services.Product.Gun;
 
 using AirsoftShop.Common.Models;
 using Common;
-using AirsoftShop.Services.Models.Product;
+using Models.Product.Guns;
 
 public interface IGunService : ITransientService
 {

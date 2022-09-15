@@ -1,15 +1,15 @@
 namespace AirsoftShop.Controllers.Products;
 
 using AirsoftShop.Common.Services;
-using AirsoftShop.Controllers.Models.Products;
 using AirsoftShop.Data.Models;
 using AirsoftShop.Services.Models.File;
-using AirsoftShop.Services.Models.Product;
 using AirsoftShop.Services.Services.File;
 using AirsoftShop.Services.Services.Product.Gun;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Models.Products.Guns;
+using Services.Models.Product.Guns;
 using static Common.Constants.Constants.WebConstants;
 using static Common.Constants.Messages;
 

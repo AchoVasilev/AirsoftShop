@@ -1,6 +1,6 @@
-namespace AirsoftShop.Services.Models.Product;
+namespace AirsoftShop.Services.Models.Product.Guns;
 
-using Base;
+using AirsoftShop.Services.Models.Product.Base;
 
 public class OwnerGunListServiceModel : BaseGunServiceModel
 {
