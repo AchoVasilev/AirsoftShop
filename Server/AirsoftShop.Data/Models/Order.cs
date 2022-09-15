@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Base;
 using Enums;
+using Products;
 
 public class Order : DeletableEntity<string>
 {
@@ -12,6 +13,7 @@ public class Order : DeletableEntity<string>
         this.Id = Guid.NewGuid().ToString();
         this.Dealers = new HashSet<Dealer>();
         this.Guns = new HashSet<Gun>();
+        this.Clothing = new HashSet<Clothing>();
     }
 
     public PaymentType PaymentType { get; set; }
@@ -32,6 +34,8 @@ public class Order : DeletableEntity<string>
     public virtual Client Client { get; set; }
 
     public virtual ICollection<Gun> Guns { get; set; }
+    
+    public virtual ICollection<Clothing> Clothing { get; set; }
 
     public virtual ICollection<Dealer> Dealers { get; set; }
 }

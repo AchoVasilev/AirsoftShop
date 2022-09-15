@@ -13,17 +13,17 @@ const routes: Routes = [
     path: '',
     children: [
       {
+        path: 'create',
+        component: CreateComponent,
+        canActivate: [AuthGuard, DealerGuard]
+      },
+      {
         path: 'all',
         component: GunListComponent,
       },
       {
         path: ':name',
         component: GunListComponent,
-      },
-      {
-        path: 'create',
-        component: CreateComponent,
-        canActivate: [AuthGuard, DealerGuard]
       },
       {
         path: ':name/:id',

@@ -1,6 +1,7 @@
 namespace AirsoftShop.Data.Models.Images;
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Products;
 
 public class ItemImage : BaseImage
 {

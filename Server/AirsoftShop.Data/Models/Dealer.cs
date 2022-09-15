@@ -3,6 +3,7 @@ namespace AirsoftShop.Data.Models;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Base;
+using Products;
 using static Constants.Data.Constants;
 
 public class Dealer : DeletableEntity<string>
@@ -13,6 +14,7 @@ public class Dealer : DeletableEntity<string>
         this.Orders = new HashSet<Order>();
         this.Guns = new HashSet<Gun>();
         this.Fields = new HashSet<Field>();
+        this.Clothings = new HashSet<Clothing>();
     }
 
     [Required]
@@ -44,6 +46,8 @@ public class Dealer : DeletableEntity<string>
     public virtual ICollection<Order> Orders { get; set; }
 
     public virtual ICollection<Gun> Guns { get; set; }
+    
+    public virtual ICollection<Clothing> Clothings { get; set; }
 
     public virtual ICollection<Field> Fields { get; set; }
 }

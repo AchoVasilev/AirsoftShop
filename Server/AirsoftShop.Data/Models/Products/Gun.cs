@@ -1,28 +1,14 @@
-namespace AirsoftShop.Data.Models;
+namespace AirsoftShop.Data.Models.Products;
 
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Base;
-using Enums;
-using Images;
+using AirsoftShop.Data.Models.Base;
+using AirsoftShop.Data.Models.Enums;
+using AirsoftShop.Data.Models.Images;
 using static Constants.Data.Constants;
 
-public class Gun : DeletableEntity<string>
+public class Gun : Product
 {
-    public Gun()
-    {
-        this.Id = Guid.NewGuid().ToString();
-        this.Images = new HashSet<ItemImage>();
-    }
-
-    [Required]
-    [MaxLength(DefaultMaxLength)]
-    public string Name { get; set; }
-
-    [Required]
-    [MaxLength(DefaultMaxLength)]
-    public string Manufacturer { get; set; }
-    
     [MaxLength(RangeMaxLength)] 
     public double Power { get; set; }
 
@@ -70,23 +56,4 @@ public class Gun : DeletableEntity<string>
     [Required]
     [MaxLength(DefaultMaxLength)]
     public string Hopup { get; set; }
-
-    public decimal Price { get; set; }
-    
-    [Required]
-    [MaxLength(DescriptionMaxLength)]
-    public string Description { get; set; }
-
-    [ForeignKey(nameof(Dealer))]
-    [Required]
-    public string DealerId { get; set; }
-
-    public virtual Dealer Dealer { get; set; }
-
-    [ForeignKey(nameof(SubCategory))] 
-    public int SubCategoryId { get; set; }
-
-    public virtual SubCategory SubCategory { get; set; }
-    
-    public IEnumerable<ItemImage> Images { get; set; }
 }

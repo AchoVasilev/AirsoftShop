@@ -6,6 +6,7 @@ using AirsoftShop.Data.Models.Images;
 using Data.Persistence;
 using AirsoftShop.Services.Models.Product;
 using Data.Models;
+using Data.Models.Products;
 using Microsoft.EntityFrameworkCore;
 using static AirsoftShop.Common.Constants.Messages;
 

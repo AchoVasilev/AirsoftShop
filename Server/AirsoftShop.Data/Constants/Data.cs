@@ -18,5 +18,7 @@ public class Data
         public const int PasswordMinLength = 6;
 
         public const int PopularItemsCount = 8;
+
+        public const int MaxSize = 70;
     }
 }
