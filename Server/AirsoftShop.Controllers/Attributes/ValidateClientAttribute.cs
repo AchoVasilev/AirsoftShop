@@ -18,6 +18,11 @@ public class ValidateClientAttribute : ActionFilterAttribute
         this.userManager = ValidationAttributesHelper.RequestServiceContext<UserManager<ApplicationUser>>(context);
         
         var userId = this.currentUserService!.GetUserId();
+        if (userId is null)
+        {
+            context.Result = new UnauthorizedObjectResult(new { ErrorMessage = UserNotLoggedInMsg });
+        }
+        
         var user = await this.userManager!.FindByIdAsync(userId);
         
         if (user.ClientId is null)

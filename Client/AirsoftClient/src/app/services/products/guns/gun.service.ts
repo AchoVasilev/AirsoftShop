@@ -25,11 +25,7 @@ export class GunService {
   }
 
   getGunDetails(gunId: string): Observable<GunDetailsViewModel> {
-    return this.httpClient.get<GunDetailsViewModel>(`${this.apiUrl}/details`, {
-      params: {
-        gunId
-      }
-    })
+    return this.httpClient.get<GunDetailsViewModel>(`${this.apiUrl}/${gunId}`)
   }
 
   deleteGun(gunId: string): Observable<object> {
