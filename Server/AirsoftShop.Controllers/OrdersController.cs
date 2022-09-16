@@ -1,5 +1,6 @@
 namespace AirsoftShop.Controllers;
 
+using Attributes;
 using Common.Services;
 using Data.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -32,14 +33,11 @@ public class OrdersController : BaseController
     }
 
     [HttpPost]
+    [ValidateClient]
     public async Task<IActionResult> Create(OrderInputModel order)
     {
         var userId = this.currentUserService.GetUserId();
         var user = await this.userManager.FindByIdAsync(userId);
-        if (user?.ClientId is null)
-        {
-            return this.BadRequest(new { ErrorMessage = UserNotClientMsg });
-        }
 
         var model = new CreateOrderServiceModel()
         {
@@ -66,14 +64,11 @@ public class OrdersController : BaseController
     
     [HttpGet]
     [Route("client")]
+    [ValidateClient]
     public async Task<IActionResult> GetClientOrders()
     {
         var userId = this.currentUserService.GetUserId();
         var user = await this.userManager.FindByIdAsync(userId);
-        if (user?.ClientId is null)
-        {
-            return this.BadRequest(new { ErrorMessage = UserNotClientMsg });
-        }
         
         var orders = await this.orderService.GetClientOrders(user.ClientId);
 
@@ -82,14 +77,11 @@ public class OrdersController : BaseController
     
     [HttpGet]
     [Route("{id}")]
+    [ValidateClient]
     public async Task<IActionResult> GetOrderDetails([FromQuery]string id)
     {
         var userId = this.currentUserService.GetUserId();
         var user = await this.userManager.FindByIdAsync(userId);
-        if (user?.ClientId is null)
-        {
-            return this.BadRequest(new { ErrorMessage = UserNotClientMsg });
-        }
         
         var result = await this.orderService.GetOrderDetails(user.ClientId, id);
 

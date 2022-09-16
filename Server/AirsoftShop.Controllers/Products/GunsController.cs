@@ -5,6 +5,7 @@ using AirsoftShop.Data.Models;
 using AirsoftShop.Services.Models.File;
 using AirsoftShop.Services.Services.File;
 using AirsoftShop.Services.Services.Product.Gun;
+using Attributes;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -39,15 +40,11 @@ public class GunsController : BaseController
 
     [HttpPost]
     [Authorize]
+    [ValidateDealer]
     public async Task<IActionResult> CreateGun([FromForm]GunInputModel model)
     {
         var userId = this.currentUserService.GetUserId();
         var user = await this.userManager.FindByIdAsync(userId);
-
-        if (user.DealerId is null)
-        {
-            return this.Unauthorized(new { ErrorMessage = NotAuthorizedMsg });
-        }
 
         var fileModels = new List<IFileServiceModel>();
         foreach (var image in model.Images)
@@ -94,8 +91,8 @@ public class GunsController : BaseController
     }
     
     [HttpGet]
-    [Route("details/{gunId}")]
-    public async Task<IActionResult> GetDetails([FromQuery] string gunId)
+    [Route("{gunId}")]
+    public async Task<IActionResult> GetDetails(string gunId)
     {
         var res = await this.gunService.GetDetails(gunId);
         if (res is null)
@@ -108,15 +105,11 @@ public class GunsController : BaseController
 
     [Authorize]
     [HttpPut]
+    [ValidateDealer]
     public async Task<IActionResult> EditGun([FromBody] GunEditModel model)
     {
         var userId = this.currentUserService.GetUserId();
         var user = await this.userManager.FindByIdAsync(userId);
-
-        if (user.DealerId is null)
-        {
-            return this.Unauthorized(new { ErrorMessage = NotAuthorizedMsg });
-        }
         
         var editModel = new EditGunServiceModel()
         {
@@ -151,15 +144,11 @@ public class GunsController : BaseController
 
     [HttpDelete]
     [Authorize]
+    [ValidateDealer]
     public async Task<IActionResult> DeleteGun([FromBody] string gunId)
     {
         var userId = this.currentUserService.GetUserId();
         var user = await this.userManager.FindByIdAsync(userId);
-
-        if (user.DealerId is null)
-        {
-            return this.Unauthorized(new { ErrorMessage = NotAuthorizedMsg });
-        }
         
         var result = await this.gunService.DeleteGun(gunId, user.DealerId);
         if (result.Failed)

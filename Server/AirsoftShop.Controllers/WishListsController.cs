@@ -1,5 +1,6 @@
 namespace AirsoftShop.Controllers;
 
+using Attributes;
 using Common.Services;
 using Data.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -27,14 +28,11 @@ public class WishListsController : BaseController
     }
 
     [HttpGet]
+    [ValidateClient]
     public async Task<ActionResult> All()
     {
         var userId = this.currentUserService.GetUserId();
         var user = await this.userManager.FindByIdAsync(userId);
-        if (user?.ClientId is null)
-        {
-            return this.BadRequest(new { ErrorMessage = UserNotClientMsg });
-        }
 
         var items = await this.wishListService.GetItems(user.ClientId);
 
@@ -42,14 +40,11 @@ public class WishListsController : BaseController
     }
 
     [HttpPost]
+    [ValidateClient]
     public async Task<ActionResult> Add([FromBody]AddItemToWishListModel model)
     {
         var userId = this.currentUserService.GetUserId();
         var user = await this.userManager.FindByIdAsync(userId);
-        if (user?.ClientId is null)
-        {
-            return this.BadRequest(new { ErrorMessage = UserNotClientMsg });
-        }
 
         var result = await this.wishListService.Add(model.Id!, user.ClientId);
         if (result.Failed)
@@ -61,14 +56,11 @@ public class WishListsController : BaseController
     }
 
     [HttpDelete]
+    [ValidateClient]
     public async Task<ActionResult> Remove(string id)
     {
         var userId = this.currentUserService.GetUserId();
         var user = await this.userManager.FindByIdAsync(userId);
-        if (user?.ClientId is null)
-        {
-            return this.BadRequest(new { ErrorMessage = UserNotClientMsg });
-        }
         
         var result = await this.wishListService.Remove(user.ClientId, id);
         if (result.Failed)
@@ -81,14 +73,11 @@ public class WishListsController : BaseController
 
     [HttpDelete]
     [Route("bulkRemove")]
+    [ValidateClient]
     public async Task<ActionResult> BulkRemove([FromBody]BulkRemoveItemsFromWishListModel model)
     {
         var userId = this.currentUserService.GetUserId();
         var user = await this.userManager.FindByIdAsync(userId);
-        if (user?.ClientId is null)
-        {
-            return this.BadRequest(new { ErrorMessage = UserNotClientMsg });
-        }
 
         var result = await this.wishListService.Remove(user.ClientId, model.Ids!);
         if (result.Failed)

@@ -1,5 +1,6 @@
 namespace AirsoftShop.Controllers;
 
+using Attributes;
 using Common.Services;
 using Data.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -28,14 +29,11 @@ public class CartsController : BaseController
     }
 
     [HttpPost]
+    [ValidateClient]
     public async Task<IActionResult> Add([FromBody] CartInputModel model)
     {
         var userId = this.currentUserService.GetUserId();
         var user = await this.userManager.FindByIdAsync(userId);
-        if (user?.ClientId is null)
-        {
-            return this.Unauthorized(new { ErrorMessage = NotAuthorizedMsg });
-        }
 
         var result = await this.cartService.Add(user.ClientId, model.ItemId!);
         if (result.Failed)
@@ -48,14 +46,11 @@ public class CartsController : BaseController
     
     [HttpPost]
     [Route("bulkAdd")]
+    [ValidateClient]
     public async Task<IActionResult> BulkAdd([FromBody] BulkCartInputModel model)
     {
         var userId = this.currentUserService.GetUserId();
         var user = await this.userManager.FindByIdAsync(userId);
-        if (user?.ClientId is null)
-        {
-            return this.Unauthorized(new { ErrorMessage = NotAuthorizedMsg });
-        }
 
         var result = await this.cartService.Add(user.ClientId, model.ItemIds!);
         if (result.Failed)
@@ -67,14 +62,11 @@ public class CartsController : BaseController
     }
 
     [HttpGet]
+    [ValidateClient]
     public async Task<IActionResult> GetUserItemsInCart()
     {
         var userId = this.currentUserService.GetUserId();
         var user = await this.userManager.FindByIdAsync(userId);
-        if (user?.ClientId is null)
-        {
-            return this.Unauthorized(new { ErrorMessage = NotAuthorizedMsg });
-        }
 
         var items = await this.cartService.GetItemsInCart(user.ClientId);
 
@@ -82,14 +74,11 @@ public class CartsController : BaseController
     }
 
     [HttpDelete]
+    [ValidateClient]
     public async Task<IActionResult> DeleteItemById(string itemId)
     {
         var userId = this.currentUserService.GetUserId();
         var user = await this.userManager.FindByIdAsync(userId);
-        if (user?.ClientId is null)
-        {
-            return this.Unauthorized(new { ErrorMessage = NotAuthorizedMsg });
-        }
 
         var result = await this.cartService.DeleteItemById(user.ClientId, itemId);
         if (!result)

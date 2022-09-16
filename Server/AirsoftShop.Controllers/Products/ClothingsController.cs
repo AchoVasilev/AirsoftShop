@@ -1,5 +1,6 @@
 namespace AirsoftShop.Controllers.Products;
 
+using Attributes;
 using Common.Services;
 using Data.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -33,15 +34,11 @@ public class ClothingsController : BaseController
 
     [HttpPost]
     [Authorize]
+    [ValidateDealer]
     public async Task<IActionResult> CreateGun([FromForm]CreateClothingInputModel model)
     {
         var userId = this.currentUserService.GetUserId();
         var user = await this.userManager.FindByIdAsync(userId);
-
-        if (user.DealerId is null)
-        {
-            return this.Unauthorized(new { ErrorMessage = NotAuthorizedMsg });
-        }
 
         var fileModels = new List<IFileServiceModel>();
         foreach (var image in model.Images)
