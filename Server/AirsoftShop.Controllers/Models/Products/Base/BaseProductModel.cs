@@ -18,10 +18,6 @@ public class BaseProductModel
     public int SubcategoryId { get; set; }
     
     [Required(ErrorMessage = RequiredFieldErrorMsg)]
-    [StringLength(DefaultMaxLength, MinimumLength = DefaultMinLength, ErrorMessage = LengthErrorMsg)]
-    public string? SubCategoryName { get; set; }
-    
-    [Required(ErrorMessage = RequiredFieldErrorMsg)]
     [StringLength(DescriptionMaxLength, MinimumLength = DefaultMinLength, ErrorMessage = LengthErrorMsg)]
     public string? Description { get; set; }
 }

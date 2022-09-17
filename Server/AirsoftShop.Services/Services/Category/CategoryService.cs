@@ -7,6 +7,7 @@ using Models.Category;
 public class CategoryService : ICategoryService
 {
     private const string GunCategoryName = "Еърсофт оръжия";
+    private const string ClothingCategoryName = "Облекло";
     private const int NumberOfNewestCategories = 4;
     
     private readonly ApplicationDbContext data;
@@ -45,6 +46,16 @@ public class CategoryService : ICategoryService
     public async Task<IEnumerable<SubcategoryServiceModel>> GetGunSubcategories()
         => await this.data.SubCategories
             .Where(x => x.Category.Name == GunCategoryName)
+            .Select(x => new SubcategoryServiceModel()
+            {
+                Id = x.Id,
+                Name = x.Name
+            })
+            .ToListAsync();
+    
+    public async Task<IEnumerable<SubcategoryServiceModel>> GetClothingSubcategories()
+        => await this.data.SubCategories
+            .Where(x => x.Category.Name == ClothingCategoryName)
             .Select(x => new SubcategoryServiceModel()
             {
                 Id = x.Id,

@@ -10,4 +10,8 @@ public class Clothing : Product
     [Required]
     [MaxLength(DefaultMaxLength)]
     public string Material { get; set; }
+    
+    [Required]
+    [MaxLength(DefaultMaxLength)]
+    public string Color { get; set; }
 }

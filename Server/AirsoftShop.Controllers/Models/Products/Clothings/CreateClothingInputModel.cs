@@ -20,5 +20,9 @@ public class CreateClothingInputModel : BaseProductModel
     [StringLength(DefaultMaxLength, MinimumLength = DefaultMinLength, ErrorMessage = LengthErrorMsg)]
     public string? Material { get; set; }
     
+    [Required(ErrorMessage = RequiredFieldErrorMsg)]
+    [StringLength(DefaultMaxLength, MinimumLength = DefaultMinLength, ErrorMessage = LengthErrorMsg)]
+    public string? Color { get; set; }
+    
     public IEnumerable<IFormFile> Images { get; set; }
 }

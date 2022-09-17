@@ -41,7 +41,7 @@ public class GunsController : BaseController
     [HttpPost]
     [Authorize]
     [ValidateDealer]
-    public async Task<IActionResult> CreateGun([FromForm]GunInputModel model)
+    public async Task<IActionResult> CreateGun([FromForm] GunInputModel model)
     {
         var userId = this.currentUserService.GetUserId();
         var user = await this.userManager.FindByIdAsync(userId);
@@ -72,7 +72,7 @@ public class GunsController : BaseController
             Material = model.Material,
             Name = model.Name,
             Speed = model.Speed,
-            SubCategoryName = model.SubCategoryName,
+            SubCategoryId = model.SubcategoryId,
             Power = model.Power,
             Price = model.Price,
             Weight = model.Weight,
@@ -89,7 +89,7 @@ public class GunsController : BaseController
 
         return this.CreatedAtAction(nameof(this.CreateGun), result.Model);
     }
-    
+
     [HttpGet]
     [Route("{gunId}")]
     public async Task<IActionResult> GetDetails(string gunId)
@@ -99,7 +99,7 @@ public class GunsController : BaseController
         {
             return this.NotFound();
         }
-        
+
         return this.Ok(res);
     }
 
@@ -110,7 +110,7 @@ public class GunsController : BaseController
     {
         var userId = this.currentUserService.GetUserId();
         var user = await this.userManager.FindByIdAsync(userId);
-        
+
         var editModel = new EditGunServiceModel()
         {
             Barrel = model.Barrel,
@@ -125,14 +125,14 @@ public class GunsController : BaseController
             Material = model.Material,
             Name = model.Name,
             Speed = model.Speed,
-            SubCategoryName = model.SubCategoryName,
+            SubCategoryId = model.SubcategoryId,
             Power = model.Power,
             Price = model.Price,
             Weight = model.Weight,
             Propulsion = model.Propulsion,
             Description = model.Description,
         };
-        
+
         var result = await this.gunService.Edit(user.DealerId, editModel);
         if (result.Failed)
         {
@@ -149,7 +149,7 @@ public class GunsController : BaseController
     {
         var userId = this.currentUserService.GetUserId();
         var user = await this.userManager.FindByIdAsync(userId);
-        
+
         var result = await this.gunService.DeleteGun(gunId, user.DealerId);
         if (result.Failed)
         {
@@ -158,7 +158,7 @@ public class GunsController : BaseController
 
         return this.Ok(result);
     }
-    
+
     [HttpGet]
     public async Task<IActionResult> GetAll([FromQuery] AllGunsQueryModel query)
     {
@@ -173,7 +173,7 @@ public class GunsController : BaseController
             Page = query.Page,
             Powers = query.Powers
         };
-        
+
         var guns = await this.gunService.GetAllGuns(queryModel);
         var allGunsViewModel = new GunsViewModel
         {
@@ -184,10 +184,10 @@ public class GunsController : BaseController
 
         const string allStr = "all";
         const string nullStr = "null";
-        var isBasicCategoryString = string.IsNullOrEmpty(query.CategoryName) || 
+        var isBasicCategoryString = string.IsNullOrEmpty(query.CategoryName) ||
                                     query.CategoryName.ToLower() == allStr ||
                                     query.CategoryName == nullStr;
-        
+
         if (isBasicCategoryString)
         {
             allGunsViewModel.Colors = await this.gunService.GetAllColors();
@@ -220,7 +220,7 @@ public class GunsController : BaseController
 
         return this.Ok(allGunsViewModel);
     }
-    
+
     [HttpGet]
     [Route("mine")]
     [Authorize]
@@ -233,7 +233,7 @@ public class GunsController : BaseController
         {
             return this.Unauthorized(new { result.ErrorMessage });
         }
-        
+
         return this.Ok(result.Models);
     }
 }

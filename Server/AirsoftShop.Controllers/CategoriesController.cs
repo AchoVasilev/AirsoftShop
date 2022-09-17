@@ -22,6 +22,11 @@ public class CategoriesController : BaseController
 
     [HttpGet]
     [Route("gunSubcategories")]
-    public async Task<ActionResult> GetSubcategories()
+    public async Task<ActionResult> GetGunSubcategories()
         => this.Ok(await this.categoryService.GetGunSubcategories());
+    
+    [HttpGet]
+    [Route("clothingSubcategories")]
+    public async Task<ActionResult> GetClothingSubcategories()
+        => this.Ok(await this.categoryService.GetClothingSubcategories());
 }

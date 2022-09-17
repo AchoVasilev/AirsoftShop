@@ -4,5 +4,5 @@ using AirsoftShop.Services.Models.Product.Base;
 
 public class EditGunServiceModel : ExtendedBaseGunServiceModel
 {
-        public string? SubCategoryName { get; init; }
+        public int SubCategoryId { get; init; }
 }

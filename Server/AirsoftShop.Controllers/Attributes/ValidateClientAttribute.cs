@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using static Common.Constants.Messages;
 
-public class ValidateClientAttribute : ActionFilterAttribute
+internal class ValidateClientAttribute : ActionFilterAttribute
 {
     private ICurrentUserService? currentUserService;
     private UserManager<ApplicationUser>? userManager;

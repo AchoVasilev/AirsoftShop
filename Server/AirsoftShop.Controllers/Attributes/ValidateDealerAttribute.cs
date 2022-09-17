@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using static Common.Constants.Messages;
 
-public class ValidateDealerAttribute : ActionFilterAttribute
+internal class ValidateDealerAttribute : ActionFilterAttribute
 {
     private ICurrentUserService? currentUserService;
     private UserManager<ApplicationUser>? userManager;
@@ -30,5 +30,4 @@ public class ValidateDealerAttribute : ActionFilterAttribute
             context.Result = new UnauthorizedObjectResult(new { ErrorMessage = UserNotDealerMsg });
         }
     }
-
 }

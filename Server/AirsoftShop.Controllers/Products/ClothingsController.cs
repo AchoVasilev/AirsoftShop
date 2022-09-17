@@ -13,6 +13,7 @@ using Services.Services.File;
 using Services.Services.Product.Clothing;
 using static Common.Constants.Messages;
 using static Common.Constants.Constants.WebConstants;
+
 public class ClothingsController : BaseController
 {
     private readonly UserManager<ApplicationUser> userManager;
@@ -35,7 +36,7 @@ public class ClothingsController : BaseController
     [HttpPost]
     [Authorize]
     [ValidateDealer]
-    public async Task<IActionResult> CreateGun([FromForm]CreateClothingInputModel model)
+    public async Task<IActionResult> CreateGun([FromForm] CreateClothingInputModel model)
     {
         var userId = this.currentUserService.GetUserId();
         var user = await this.userManager.FindByIdAsync(userId);
@@ -60,8 +61,8 @@ public class ClothingsController : BaseController
             Size = model.Size,
             Price = model.Price,
             SubcategoryId = model.SubcategoryId,
-            SubCategoryName = model.SubCategoryName,
             Name = model.Name,
+            Color = model.Color,
             Images = fileModels,
         };
 

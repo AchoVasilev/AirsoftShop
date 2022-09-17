@@ -45,12 +45,10 @@ public class GunService : IGunService
             return NotAuthorizedMsg;
         }
 
-        var subCategoryId = await this.data.SubCategories
-            .Where(x => x.Name == model.SubCategoryName)
-            .Select(x => x.Id)
-            .FirstOrDefaultAsync();
+        var subCategoryExists = await this.data.SubCategories
+            .AnyAsync(x => x.Id == model.SubCategoryId);
 
-        if (subCategoryId == 0)
+        if (!subCategoryExists)
         {
             return InvalidSubcategoryErrorMsg;
         }
@@ -65,7 +63,7 @@ public class GunService : IGunService
             Blowback = model.Blowback,
             Capacity = model.Capacity,
             Color = model.Color,
-            SubCategoryId = subCategoryId,
+            SubCategoryId = model.SubCategoryId,
             Firing = model.Firing,
             Hopup = model.Hopup,
             Weight = model.Weight,
@@ -134,12 +132,10 @@ public class GunService : IGunService
             return NotAuthorizedMsg;
         }
 
-        var subCategoryId = await this.data.SubCategories
-            .Where(x => x.Name == model.SubCategoryName)
-            .Select(x => x.Id)
-            .FirstOrDefaultAsync();
+        var subCategoryExists = await this.data.SubCategories
+            .AnyAsync(x => x.Id == model.SubCategoryId);
 
-        if (subCategoryId == 0)
+        if (!subCategoryExists)
         {
             return InvalidSubcategoryErrorMsg;
         }
@@ -160,7 +156,7 @@ public class GunService : IGunService
         gun.Blowback = model.Blowback;
         gun.Capacity = model.Capacity;
         gun.Color = model.Color;
-        gun.SubCategoryId = subCategoryId;
+        gun.SubCategoryId = model.SubCategoryId;
         gun.Firing = model.Firing;
         gun.Hopup = model.Hopup;
         gun.Weight = model.Weight;

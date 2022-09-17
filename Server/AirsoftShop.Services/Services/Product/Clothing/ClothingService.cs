@@ -42,6 +42,7 @@ public class ClothingService : IClothingService
             Size = serviceModel.Size,
             Material = serviceModel.Material,
             Description = serviceModel.Description,
+            Color = serviceModel.Color,
             Images = serviceModel.Images.Select(x => new ItemImage()
             {
                 Url = x.Uri,

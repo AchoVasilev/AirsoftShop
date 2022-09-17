@@ -10,4 +10,6 @@ public interface ICategoryService : ITransientService
     Task<IEnumerable<BasicCategoryServiceModel>> GetFourNewestCategories();
 
     Task<IEnumerable<SubcategoryServiceModel>> GetGunSubcategories();
+
+    Task<IEnumerable<SubcategoryServiceModel>> GetClothingSubcategories();
 }
