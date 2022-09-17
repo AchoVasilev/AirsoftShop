@@ -16,8 +16,8 @@ export class GunService {
 
   constructor(private httpClient: HttpClient) { }
 
-  createGun(body: FormData): Observable<string> {
-    return this.httpClient.post<string>(`${this.apiUrl}`, body);
+  createGun(body: FormData): Observable<any> {
+    return this.httpClient.post<any>(`${this.apiUrl}`, body);
   }
 
   getNewestEightGuns(): Observable<InitialGunViewModel[]> {

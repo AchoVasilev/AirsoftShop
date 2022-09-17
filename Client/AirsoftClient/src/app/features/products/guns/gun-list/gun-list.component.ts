@@ -3,7 +3,7 @@ import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { BehaviorSubject, map, switchMap } from 'rxjs';
-import { GunSubCategoryViewModel } from 'src/app/models/categories/gunSubCategoryViewModel';
+import { SubCategoryViewModel } from 'src/app/models/categories/subCategoryViewModel';
 import { GunsViewModel } from 'src/app/models/products/guns/gunsViewModel';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { CartService } from 'src/app/services/cart/cart.service';
@@ -18,7 +18,7 @@ import { WishListService } from 'src/app/services/wishList/wish-list.service';
   styleUrls: ['./gun-list.component.css']
 })
 export class GunListComponent implements OnInit {
-  subCategories: GunSubCategoryViewModel[] = [];
+  subCategories: SubCategoryViewModel[] = [];
   isLoading: boolean = true;
   isLoaded: boolean = false;
   categoryName: string = '';

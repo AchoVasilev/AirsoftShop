@@ -22,7 +22,7 @@ export class DetailsComponent implements OnInit {
   isOwner: boolean = false;
   dealerObj: DealerIdObj | undefined;
 
-  gun!: GunDetailsViewModel;
+  gun: GunDetailsViewModel | undefined;
 
   private cartItemsCount: number = 0;
   private price: number = 0;
@@ -59,6 +59,7 @@ export class DetailsComponent implements OnInit {
   }
 
   getGunDetails() {
+    this.gun = undefined;
     this.gunService.getGunDetails(this.gunId)
       .subscribe(res => this.gun = res);
   }

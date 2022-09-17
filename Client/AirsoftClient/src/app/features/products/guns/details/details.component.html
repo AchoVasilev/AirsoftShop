@@ -1,5 +1,5 @@
 <mat-spinner *ngIf="isLoading" style="margin: 0 auto;"></mat-spinner>
-<section class="item" *ngIf="isLoaded">
+<section class="item" *ngIf="isLoaded && gun">
     <article class="item-top">
         <article class="img-wrapper">
             <img src="{{gun.imageUrl}}" alt="{{gun.name}} image">

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { GunSubCategoryViewModel } from 'src/app/models/categories/gunSubCategoryViewModel';
+import { SubCategoryViewModel } from 'src/app/models/categories/subCategoryViewModel';
 import { GunDetailsViewModel } from 'src/app/models/products/guns/gunDetailsViewModel';
 import { GunEditModel } from 'src/app/models/products/guns/gunEditModel';
 import { CategoryService } from 'src/app/services/categories/category.service';
@@ -19,7 +19,7 @@ export class EditComponent implements OnInit {
   gun!: GunDetailsViewModel;
   gunId: string = this.route.snapshot.params['id'];
   file!: File;
-  gunSubCategories: GunSubCategoryViewModel[] = [];
+  gunSubCategories: SubCategoryViewModel[] = [];
   gunCreateFormGroup: FormGroup = this.formBuilder.group({
     'name': new FormControl(null, [Validators.required, Validators.minLength(2), Validators.maxLength(40)]),
     'manufacturer': new FormControl(null, [Validators.required, Validators.minLength(2), Validators.maxLength(40)]),
@@ -36,7 +36,7 @@ export class EditComponent implements OnInit {
     'material': new FormControl(null, [Validators.required, Validators.minLength(2), Validators.maxLength(40)]),
     'blowback': new FormControl(null, [Validators.required, Validators.minLength(2), Validators.maxLength(40)]),
     'hopup': new FormControl(null, [Validators.required, Validators.minLength(2), Validators.maxLength(40)]),
-    'subCategoryName': new FormControl(null, [Validators.required]),
+    'subCategoryId': new FormControl(null, [Validators.required]),
     'price': new FormControl(null, [Validators.required])
   });
 
@@ -69,7 +69,7 @@ export class EditComponent implements OnInit {
       material: this.gun.material,
       blowback: this.gun.blowback,
       hopup: this.gun.hopup,
-      price: this.gun.price
+      price: this.gun.price,
     });
 
     this.isLoaded = true;
@@ -113,7 +113,7 @@ export class EditComponent implements OnInit {
       propulsion,
       material,
       blowback,
-      subCategoryName,
+      subCategoryId,
       hopup,
       price,
     } = this.gunCreateFormGroup.value;
@@ -133,7 +133,7 @@ export class EditComponent implements OnInit {
       propulsion,
       material,
       blowback,
-      subCategoryName,
+      subCategoryId,
       hopup,
       price
     };

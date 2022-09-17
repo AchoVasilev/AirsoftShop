@@ -296,15 +296,15 @@
             <article class="create-wrapper">
                 <article class="create-inline-wrapper">
                     <label for="subCategoryName">Категория: <span
-                            [class.error]="shouldShowErrorForControl('subCategoryName')">*</span></label>
-                    <select id="subCategoryName" class="custom-select" formControlName="subCategoryName"
-                        [class.invalid]="shouldShowErrorForControl('subCategoryName')">
+                            [class.error]="shouldShowErrorForControl('subCategoryId')">*</span></label>
+                    <select id="subCategoryName" class="custom-select" formControlName="subCategoryId"
+                        [class.invalid]="shouldShowErrorForControl('subCategoryId')">
                         <option *ngFor="let category of gunSubCategories" id="{{category.id}}"
-                            value="{{category.name}}">{{category.name}}</option>
+                            value="{{category.id}}">{{category.name}}</option>
                     </select>
 
-                    <ng-container *ngIf="shouldShowErrorForControl('subCategoryName')">
-                        <p class="error" *ngIf="gunCreateFormGroup.controls['subCategoryName'].errors?.['required']">
+                    <ng-container *ngIf="shouldShowErrorForControl('subCategoryId')">
+                        <p class="error" *ngIf="gunCreateFormGroup.controls['subCategoryId'].errors?.['required']">
                             Полето е задължително!
                         </p>
                     </ng-container>

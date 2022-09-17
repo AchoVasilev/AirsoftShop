@@ -8,6 +8,10 @@ export const routes: Routes = [
       {
         path: 'guns',
         loadChildren: () => import('./guns/guns.module').then(m => m.GunsModule)
+      },
+      {
+        path: 'clothings',
+        loadChildren: () => import('./clothing/clothing.module').then(m => m.ClothingModule)
       }
     ]
   }

@@ -1,0 +1,175 @@
+<mat-spinner *ngIf="isLoading" style="margin: 0 auto;"></mat-spinner>
+<section class="controls" *ngIf="isLoaded">
+    <button class="control-btn" routerLink="/guns/create" >Оръжия</button>
+    <button class="control-btn" (click)="notReady()">Тактическа екипировка</button>
+    <button class="control-btn" (click)="notReady()">Поддръжка</button>
+    <button class="control-btn" (click)="notReady()">Добавки</button>
+    <button class="control-btn" (click)="notReady()">Аксесоари</button>
+    <button class="control-btn" disabled>Облекло</button>
+</section>
+<section class="create" *ngIf="isLoaded">
+    <h1 class="create-title">Добавяне на ново оръжие</h1>
+    <form action="post" class="create-form" [formGroup]="createClothingFormGroup" (ngSubmit)="createClothingHandler()">
+        <section class="create-data">
+            <article class="create-wrapper">
+                <article class="create-inline-wrapper">
+                    <label for="name">Име <span [class.error]="shouldShowErrorForControl('name')">*</span></label>
+                    <input type="text" id="name" name="name" formControlName="name"
+                        [class.invalid]="shouldShowErrorForControl('name')">
+
+                    <ng-container *ngIf="shouldShowErrorForControl('name')">
+                        <p class="error" *ngIf="createClothingFormGroup.controls['name'].errors?.['required']">
+                            Полето е задължително!
+                        </p>
+                        <p class="error" *ngIf="createClothingFormGroup.controls['name'].errors?.['minlength']">
+                            Полето трябва да е с дължина поне 2 символа!
+                        </p>
+                        <p class="error" *ngIf="createClothingFormGroup.controls['name'].errors?.['maxlength']">
+                            Полето трябва да е с максимална дължина от 40 символа!
+                        </p>
+                    </ng-container>
+                </article>
+                <article class="create-inline-wrapper">
+                    <label for="manufacturer">Производител <span
+                            [class.error]="shouldShowErrorForControl('manufacturer')">*</span></label>
+                    <input type="text" id="manufacturer" name="manufacturer" formControlName="manufacturer"
+                        [class.invalid]="shouldShowErrorForControl('manufacturer')">
+
+                    <ng-container *ngIf="shouldShowErrorForControl('manufacturer')">
+                        <p class="error" *ngIf="createClothingFormGroup.controls['manufacturer'].errors?.['required']">
+                            Полето е задължително!
+                        </p>
+                        <p class="error" *ngIf="createClothingFormGroup.controls['manufacturer'].errors?.['minlength']">
+                            Полето трябва да е с дължина поне 2 символа!
+                        </p>
+                        <p class="error" *ngIf="createClothingFormGroup.controls['manufacturer'].errors?.['maxlength']">
+                            Полето трябва да е с максимална дължина от 40 символа!
+                        </p>
+                    </ng-container>
+                </article>
+            </article>
+            <article class="create-wrapper">
+                <article class="create-inline-wrapper">
+                    <input type="file" id="image" name="images" accept="image/*" multiple formControlName="images"
+                        (change)="onChange($event)" [class.invalid]="shouldShowErrorForControl('images')">
+                    <label class="image-label" for="image"><i class="fa-solid fa-image fa-2xl"></i> Снимка
+                        <span [class.error]="shouldShowErrorForControl('images')">*</span>
+                    </label>
+
+                    <ng-container *ngIf="shouldShowErrorForControl('images')">
+                        <p class="error" *ngIf="createClothingFormGroup.controls['images'].errors?.['required']">
+                            Полето е задължително!
+                        </p>
+                    </ng-container>
+                </article>
+               <article class="create-inline-wrapper">
+                    <label for="material">Изработка: <span
+                            [class.error]="shouldShowErrorForControl('material')">*</span></label>
+                    <input type="text" id="material" name="material" formControlName="material"
+                        [class.invalid]="shouldShowErrorForControl('material')">
+
+                    <ng-container *ngIf="shouldShowErrorForControl('material')">
+                        <p class="error" *ngIf="createClothingFormGroup.controls['material'].errors?.['required']">
+                            Полето е задължително!
+                        </p>
+                        <p class="error" *ngIf="createClothingFormGroup.controls['material'].errors?.['minlength']">
+                            Полето трябва да е с дължина поне 2 символа!
+                        </p>
+                        <p class="error" *ngIf="createClothingFormGroup.controls['material'].errors?.['maxlength']">
+                            Полето трябва да е с максимална дължина от 40 символа!
+                        </p>
+                    </ng-container>
+                </article>
+            </article>
+            <article class="create-wrapper">
+                <article class="create-inline-wrapper">
+                    <label for="blowback">Цвят <span
+                            [class.error]="shouldShowErrorForControl('color')">*</span></label>
+                    <input type="text" id="blowback" name="color" formControlName="color"
+                        [class.invalid]="shouldShowErrorForControl('color')">
+
+                    <ng-container *ngIf="shouldShowErrorForControl('color')">
+                        <p class="error" *ngIf="createClothingFormGroup.controls['color'].errors?.['required']">
+                            Полето е задължително!
+                        </p>
+                        <p class="error" *ngIf="createClothingFormGroup.controls['color'].errors?.['minlength']">
+                            Полето трябва да е с дължина поне 2 символа!
+                        </p>
+                        <p class="error" *ngIf="createClothingFormGroup.controls['color'].errors?.['maxlength']">
+                            Полето трябва да е с максимална дължина от 40 символа!
+                        </p>
+                    </ng-container>
+                </article>
+                <article class="create-inline-wrapper">
+                    <label for="hopup">Размер: <span [class.error]="shouldShowErrorForControl('size')">*</span></label>
+                    <input type="number" id="hopup" name="size" formControlName="size"
+                        [class.invalid]="shouldShowErrorForControl('size')">
+
+                    <ng-container *ngIf="shouldShowErrorForControl('size')">
+                        <p class="error" *ngIf="createClothingFormGroup.controls['size'].errors?.['required']">
+                            Полето е задължително!
+                        </p>
+                        <p class="error" *ngIf="createClothingFormGroup.controls['size'].errors?.['minlength']">
+                            Полето трябва да е с дължина поне 2 символа!
+                        </p>
+                        <p class="error" *ngIf="createClothingFormGroup.controls['size'].errors?.['maxlength']">
+                            Полето трябва да е с максимална дължина от 40 символа!
+                        </p>
+                    </ng-container>
+                </article>
+            </article>
+            <article class="create-wrapper">
+                <article class="create-inline-wrapper">
+                    <label for="subCategoryName">Категория: <span
+                            [class.error]="shouldShowErrorForControl('subCategoryId')">*</span></label>
+                    <select id="subCategoryName" class="custom-select" formControlName="subCategoryId"
+                        [class.invalid]="shouldShowErrorForControl('subCategoryId')">
+                        <option *ngFor="let category of categories" id="{{category.id}}"
+                            value="{{category.id}}">{{category.name}}</option>
+                    </select>
+
+                    <ng-container *ngIf="shouldShowErrorForControl('subCategoryId')">
+                        <p class="error" *ngIf="createClothingFormGroup.controls['subCategoryId'].errors?.['required']">
+                            Полето е задължително!
+                        </p>
+                    </ng-container>
+                </article>
+                <article class="create-inline-wrapper">
+                    <label for="price">Цена (лв.): <span
+                            [class.error]="shouldShowErrorForControl('price')">*</span></label>
+                    <input type="number" id="price" name="price" formControlName="price"
+                        [class.invalid]="shouldShowErrorForControl('price')">
+
+                    <ng-container *ngIf="shouldShowErrorForControl('price')">
+                        <p class="error" *ngIf="createClothingFormGroup.controls['price'].errors?.['required']">
+                            Полето е задължително!
+                        </p>
+                    </ng-container>
+                </article>
+            </article>
+
+            <article class="field-wrapper">
+                <label for="description" class="description-label"
+                    [class.error]="shouldShowErrorForControl('description')">Описание*</label>
+                <textarea name="" id="description" cols="118" rows="10" formControlName="description"
+                    [class.invalid]="shouldShowErrorForControl('description')"></textarea>
+
+                <ng-container *ngIf="shouldShowErrorForControl('description')">
+                    <p class="error" *ngIf="createClothingFormGroup.controls['description'].errors?.['required']">
+                        Полето е задължително!
+                    </p>
+                    <p class="error" *ngIf="createClothingFormGroup.controls['description'].errors?.['minlength']">
+                        Полето трябва да е с дължина поне 2 символа!
+                    </p>
+                    <p class="error" *ngIf="createClothingFormGroup.controls['description'].errors?.['maxlength']">
+                        Полето трябва да е с максимална дължина от 1000 символа!
+                    </p>
+                </ng-container>
+            </article>
+        </section>
+        <section class="create-submit-data">
+            <p class="required-fields">Полетата, които имат * (звездичка), са задължителни.</p>
+            <button type="submit" [disabled]="createClothingFormGroup.invalid" class="submit-btn">Изпращане</button>
+        </section>
+    </form>
+</section>

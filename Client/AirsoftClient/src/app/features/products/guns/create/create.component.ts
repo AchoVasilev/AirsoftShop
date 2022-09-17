@@ -3,7 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CategoryService } from 'src/app/services/categories/category.service';
-import { GunSubCategoryViewModel } from 'src/app/models/categories/gunSubCategoryViewModel';
+import { SubCategoryViewModel } from 'src/app/models/categories/subCategoryViewModel';
 import { GunService } from 'src/app/services/products/guns/gun.service';
 
 @Component({
@@ -12,18 +12,11 @@ import { GunService } from 'src/app/services/products/guns/gun.service';
   styleUrls: ['./create.component.css']
 })
 export class CreateComponent implements OnInit {
-  isAddingGun: boolean = false;
-  isAddingTacticalEquipment: boolean = false;
-  isAddingMaintanence: boolean = false;
-  isAddingAddOns: boolean = false;
-  isAddingAccessories: boolean = false;
-  isAddingCloting: boolean = false;
-
   isLoaded: boolean = false;
   isLoading: boolean = true;
 
   files: File[] = [];
-  gunSubCategories: GunSubCategoryViewModel[] = [];
+  gunSubCategories: SubCategoryViewModel[] = [];
 
   gunCreateFormGroup: FormGroup = this.formBuilder.group({
     'name': new FormControl(null, [Validators.required, Validators.minLength(2), Validators.maxLength(40)]),
@@ -42,7 +35,7 @@ export class CreateComponent implements OnInit {
     'material': new FormControl(null, [Validators.required, Validators.minLength(2), Validators.maxLength(40)]),
     'blowback': new FormControl(null, [Validators.required, Validators.minLength(2), Validators.maxLength(40)]),
     'hopup': new FormControl(null, [Validators.required, Validators.minLength(2), Validators.maxLength(40)]),
-    'subCategoryName': new FormControl(null, [Validators.required]),
+    'subCategoryId': new FormControl(null, [Validators.required]),
     'price': new FormControl(null, [Validators.required]),
     'description': new FormControl(null, [Validators.required, Validators.minLength(2), Validators.maxLength(1000)])
   });
@@ -99,7 +92,7 @@ export class CreateComponent implements OnInit {
       material,
       blowback,
       hopup,
-      subCategoryName,
+      subCategoryId,
       price,
       description } = this.gunCreateFormGroup.value;
 
@@ -110,10 +103,6 @@ export class CreateComponent implements OnInit {
     for (let index = 0; index < this.files.length; index++) {
       body.append('images', this.files[index]);
     }
-
-    // Array.from(this.files).map((file, index) => {
-    //   return body.append('images' + index, file);
-    // });
 
     body.append('power', power);
     body.append('color', color);
@@ -128,7 +117,7 @@ export class CreateComponent implements OnInit {
     body.append('material', material);
     body.append('blowback', blowback);
     body.append('hopup', hopup);
-    body.append('subCategoryName', subCategoryName);
+    body.append('subCategoryId', subCategoryId);
     body.append('price', price);
     body.append('description', description);
 
@@ -139,7 +128,7 @@ export class CreateComponent implements OnInit {
           this.isLoaded = true;
           this.isLoading = false;
 
-          this.router.navigate([`/products/${res.name}/${res.id}`])
+          this.router.navigate([`/products/guns/${res.name}/${res.id}`])
         },
         complete: () => {
           this.isLoaded = true;
