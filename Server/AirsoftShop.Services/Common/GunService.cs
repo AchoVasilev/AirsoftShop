@@ -5,14 +5,15 @@ using Data.Models;
 using Data.Models.Enums;
 using Data.Models.Images;
 using Data.Persistence;
+using Factories;
 using Microsoft.EntityFrameworkCore;
 using Models.Product;
 using static AirsoftShop.Common.Constants.Messages;
 
 public class GunService : BaseProductService<Gun, ResultGunServiceModel>, IGunService
 {
-    public GunService(ApplicationDbContext data) 
-        : base(data)
+    public GunService(ApplicationDbContext data, IProductFactory<Gun, ResultGunServiceModel> gunFactory) 
+        : base(data, gunFactory)
     {
     }
     
