@@ -30,6 +30,14 @@ public abstract class BaseProductService<T, R> : IBaseProductService<T, R>
         {
             return UserNotDealerMsg;
         }
+        
+        var subCategoryExists = await this.Context.SubCategories
+            .AnyAsync(x => x.Id == model.SubCategoryId);
+
+        if (!subCategoryExists)
+        {
+            return InvalidSubcategoryErrorMsg;
+        }
 
         var product = this.productFactory.CreateFromInputModel(model, dealerId);
 
