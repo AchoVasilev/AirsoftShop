@@ -14,7 +14,6 @@ using Microsoft.OpenApi.Models;
 using Models;
 using Services.Common;
 using Services.Common.Factories;
-using Services.Services.Product;
 
 internal static class ServiceCollectionExtensions
 {

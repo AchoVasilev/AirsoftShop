@@ -64,10 +64,6 @@ public abstract class BaseGunModel
     public string? Hopup { get; set; }
 
     public decimal Price { get; set; }
-
-    [Required(ErrorMessage = RequiredFieldErrorMsg)]
-    [StringLength(DefaultMaxLength, MinimumLength = DefaultMinLength, ErrorMessage = LengthErrorMsg)]
-    public string? SubCategoryName { get; set; }
     
     [Required(ErrorMessage = RequiredFieldErrorMsg)]
     [StringLength(DescriptionMaxLength, MinimumLength = DefaultMinLength, ErrorMessage = LengthErrorMsg)]

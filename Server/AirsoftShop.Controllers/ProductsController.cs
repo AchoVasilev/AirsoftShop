@@ -79,16 +79,16 @@ public class ProductsController : BaseController
             Material = model.Material,
             Name = model.Name,
             Speed = model.Speed,
-            SubCategoryName = model.SubCategoryName,
             Power = model.Power,
             Price = model.Price,
             Weight = model.Weight,
             Propulsion = model.Propulsion,
             Images = fileModels,
-            Description = model.Description
+            Description = model.Description,
+            SubCategoryId = model.SubCategoryId
         };
 
-        var result = await this.productService.CreateGun(gunModel, user.DealerId);
+        var result = await this.gunService.Create(gunModel, user.DealerId);
         if (result.Failed)
         {
             return this.BadRequest(new { result.ErrorMessage });
@@ -136,7 +136,7 @@ public class ProductsController : BaseController
             Material = model.Material,
             Name = model.Name,
             Speed = model.Speed,
-            SubCategoryName = model.SubCategoryName,
+            //SubCategoryName = model.SubCategoryName,
             Power = model.Power,
             Price = model.Price,
             Weight = model.Weight,

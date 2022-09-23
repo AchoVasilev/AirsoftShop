@@ -1,6 +1,5 @@
 namespace AirsoftShop.Services.Common;
 
-using AirsoftShop.Common.Models;
 using Data.Models;
 using Data.Persistence;
 using Factories;
