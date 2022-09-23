@@ -17,7 +17,7 @@ namespace AirsoftShop.Data.Persistence.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.8")
+                .HasAnnotation("ProductVersion", "6.0.9")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -527,7 +527,359 @@ namespace AirsoftShop.Data.Persistence.Migrations
                     b.ToTable("Fields");
                 });
 
-            modelBuilder.Entity("AirsoftShop.Data.Models.Gun", b =>
+            modelBuilder.Entity("AirsoftShop.Data.Models.Images.CategoryImage", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int?>("CategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DeletedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Extension")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RemoteImageUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Url")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.ToTable("CategoryImages");
+                });
+
+            modelBuilder.Entity("AirsoftShop.Data.Models.Images.Image", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int?>("CourierId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DeletedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Extension")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("FieldId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RemoteImageUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Url")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CourierId");
+
+                    b.HasIndex("FieldId");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Images");
+                });
+
+            modelBuilder.Entity("AirsoftShop.Data.Models.Images.ItemImage", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ClothingId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DeletedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Extension")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("GunId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RemoteImageUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Url")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClothingId");
+
+                    b.HasIndex("GunId");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.ToTable("ItemImages");
+                });
+
+            modelBuilder.Entity("AirsoftShop.Data.Models.ItemInWishList", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ClothingId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DeletedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("GunId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("WishListId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClothingId");
+
+                    b.HasIndex("GunId");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.HasIndex("WishListId");
+
+                    b.ToTable("ItemsInWishList");
+                });
+
+            modelBuilder.Entity("AirsoftShop.Data.Models.Order", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ClientId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int?>("CourierId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DeletedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("OrderStatus")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PaymentType")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("TotalPrice")
+                        .HasPrecision(14, 2)
+                        .HasColumnType("decimal(14,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClientId");
+
+                    b.HasIndex("CourierId");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("AirsoftShop.Data.Models.Products.Clothing", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("CartId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Color")
+                        .IsRequired()
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DealerId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("DeletedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Manufacturer")
+                        .IsRequired()
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)");
+
+                    b.Property<string>("Material")
+                        .IsRequired()
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)");
+
+                    b.Property<string>("OrderId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("Size")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SubCategoryId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CartId");
+
+                    b.HasIndex("DealerId");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.HasIndex("OrderId");
+
+                    b.HasIndex("SubCategoryId");
+
+                    b.ToTable("Clothings");
+                });
+
+            modelBuilder.Entity("AirsoftShop.Data.Models.Products.Gun", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -657,263 +1009,6 @@ namespace AirsoftShop.Data.Persistence.Migrations
                     b.HasIndex("SubCategoryId");
 
                     b.ToTable("Guns");
-                });
-
-            modelBuilder.Entity("AirsoftShop.Data.Models.Images.CategoryImage", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int?>("CategoryId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("DeletedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Extension")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("ModifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("ModifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("RemoteImageUrl")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Url")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CategoryId");
-
-                    b.HasIndex("IsDeleted");
-
-                    b.ToTable("CategoryImages");
-                });
-
-            modelBuilder.Entity("AirsoftShop.Data.Models.Images.Image", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int?>("CourierId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("DeletedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Extension")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("FieldId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("ModifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("ModifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("RemoteImageUrl")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Url")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CourierId");
-
-                    b.HasIndex("FieldId");
-
-                    b.HasIndex("IsDeleted");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Images");
-                });
-
-            modelBuilder.Entity("AirsoftShop.Data.Models.Images.ItemImage", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("DeletedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Extension")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("GunId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("ModifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("ModifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("RemoteImageUrl")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Url")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("GunId");
-
-                    b.HasIndex("IsDeleted");
-
-                    b.ToTable("ItemImages");
-                });
-
-            modelBuilder.Entity("AirsoftShop.Data.Models.ItemInWishList", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("DeletedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("GunId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("ModifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("ModifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("WishListId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("GunId");
-
-                    b.HasIndex("IsDeleted");
-
-                    b.HasIndex("WishListId");
-
-                    b.ToTable("ItemsInWishList");
-                });
-
-            modelBuilder.Entity("AirsoftShop.Data.Models.Order", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("ClientId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int?>("CourierId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("DeletedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("ModifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("ModifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("OrderStatus")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PaymentType")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("TotalPrice")
-                        .HasPrecision(14, 2)
-                        .HasColumnType("decimal(14,2)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ClientId");
-
-                    b.HasIndex("CourierId");
-
-                    b.HasIndex("IsDeleted");
-
-                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("AirsoftShop.Data.Models.SubCategory", b =>
@@ -1285,33 +1380,6 @@ namespace AirsoftShop.Data.Persistence.Migrations
                     b.Navigation("Dealer");
                 });
 
-            modelBuilder.Entity("AirsoftShop.Data.Models.Gun", b =>
-                {
-                    b.HasOne("AirsoftShop.Data.Models.Cart", null)
-                        .WithMany("Guns")
-                        .HasForeignKey("CartId");
-
-                    b.HasOne("AirsoftShop.Data.Models.Dealer", "Dealer")
-                        .WithMany("Guns")
-                        .HasForeignKey("DealerId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("AirsoftShop.Data.Models.Order", null)
-                        .WithMany("Guns")
-                        .HasForeignKey("OrderId");
-
-                    b.HasOne("AirsoftShop.Data.Models.SubCategory", "SubCategory")
-                        .WithMany("Guns")
-                        .HasForeignKey("SubCategoryId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Dealer");
-
-                    b.Navigation("SubCategory");
-                });
-
             modelBuilder.Entity("AirsoftShop.Data.Models.Images.CategoryImage", b =>
                 {
                     b.HasOne("AirsoftShop.Data.Models.Category", "Category")
@@ -1344,7 +1412,11 @@ namespace AirsoftShop.Data.Persistence.Migrations
 
             modelBuilder.Entity("AirsoftShop.Data.Models.Images.ItemImage", b =>
                 {
-                    b.HasOne("AirsoftShop.Data.Models.Gun", "Gun")
+                    b.HasOne("AirsoftShop.Data.Models.Products.Clothing", null)
+                        .WithMany("Images")
+                        .HasForeignKey("ClothingId");
+
+                    b.HasOne("AirsoftShop.Data.Models.Products.Gun", "Gun")
                         .WithMany("Images")
                         .HasForeignKey("GunId");
 
@@ -1353,13 +1425,19 @@ namespace AirsoftShop.Data.Persistence.Migrations
 
             modelBuilder.Entity("AirsoftShop.Data.Models.ItemInWishList", b =>
                 {
-                    b.HasOne("AirsoftShop.Data.Models.Gun", "Gun")
+                    b.HasOne("AirsoftShop.Data.Models.Products.Clothing", "Clothing")
+                        .WithMany()
+                        .HasForeignKey("ClothingId");
+
+                    b.HasOne("AirsoftShop.Data.Models.Products.Gun", "Gun")
                         .WithMany()
                         .HasForeignKey("GunId");
 
                     b.HasOne("AirsoftShop.Data.Models.WishList", "WishList")
                         .WithMany("ItemsInWishList")
                         .HasForeignKey("WishListId");
+
+                    b.Navigation("Clothing");
 
                     b.Navigation("Gun");
 
@@ -1381,6 +1459,60 @@ namespace AirsoftShop.Data.Persistence.Migrations
                     b.Navigation("Client");
 
                     b.Navigation("Courier");
+                });
+
+            modelBuilder.Entity("AirsoftShop.Data.Models.Products.Clothing", b =>
+                {
+                    b.HasOne("AirsoftShop.Data.Models.Cart", null)
+                        .WithMany("Clothings")
+                        .HasForeignKey("CartId");
+
+                    b.HasOne("AirsoftShop.Data.Models.Dealer", "Dealer")
+                        .WithMany("Clothings")
+                        .HasForeignKey("DealerId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("AirsoftShop.Data.Models.Order", null)
+                        .WithMany("Clothing")
+                        .HasForeignKey("OrderId");
+
+                    b.HasOne("AirsoftShop.Data.Models.SubCategory", "SubCategory")
+                        .WithMany()
+                        .HasForeignKey("SubCategoryId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Dealer");
+
+                    b.Navigation("SubCategory");
+                });
+
+            modelBuilder.Entity("AirsoftShop.Data.Models.Products.Gun", b =>
+                {
+                    b.HasOne("AirsoftShop.Data.Models.Cart", null)
+                        .WithMany("Guns")
+                        .HasForeignKey("CartId");
+
+                    b.HasOne("AirsoftShop.Data.Models.Dealer", "Dealer")
+                        .WithMany("Guns")
+                        .HasForeignKey("DealerId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("AirsoftShop.Data.Models.Order", null)
+                        .WithMany("Guns")
+                        .HasForeignKey("OrderId");
+
+                    b.HasOne("AirsoftShop.Data.Models.SubCategory", "SubCategory")
+                        .WithMany()
+                        .HasForeignKey("SubCategoryId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Dealer");
+
+                    b.Navigation("SubCategory");
                 });
 
             modelBuilder.Entity("AirsoftShop.Data.Models.SubCategory", b =>
@@ -1473,6 +1605,8 @@ namespace AirsoftShop.Data.Persistence.Migrations
 
             modelBuilder.Entity("AirsoftShop.Data.Models.Cart", b =>
                 {
+                    b.Navigation("Clothings");
+
                     b.Navigation("Guns");
                 });
 
@@ -1493,6 +1627,8 @@ namespace AirsoftShop.Data.Persistence.Migrations
 
             modelBuilder.Entity("AirsoftShop.Data.Models.Dealer", b =>
                 {
+                    b.Navigation("Clothings");
+
                     b.Navigation("Fields");
 
                     b.Navigation("Guns");
@@ -1503,19 +1639,21 @@ namespace AirsoftShop.Data.Persistence.Migrations
                     b.Navigation("Images");
                 });
 
-            modelBuilder.Entity("AirsoftShop.Data.Models.Gun", b =>
+            modelBuilder.Entity("AirsoftShop.Data.Models.Order", b =>
+                {
+                    b.Navigation("Clothing");
+
+                    b.Navigation("Guns");
+                });
+
+            modelBuilder.Entity("AirsoftShop.Data.Models.Products.Clothing", b =>
                 {
                     b.Navigation("Images");
                 });
 
-            modelBuilder.Entity("AirsoftShop.Data.Models.Order", b =>
+            modelBuilder.Entity("AirsoftShop.Data.Models.Products.Gun", b =>
                 {
-                    b.Navigation("Guns");
-                });
-
-            modelBuilder.Entity("AirsoftShop.Data.Models.SubCategory", b =>
-                {
-                    b.Navigation("Guns");
+                    b.Navigation("Images");
                 });
 
             modelBuilder.Entity("AirsoftShop.Data.Models.WishList", b =>

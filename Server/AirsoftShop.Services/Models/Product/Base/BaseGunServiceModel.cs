@@ -1,6 +1,6 @@
 namespace AirsoftShop.Services.Models.Product.Base;
 
-using Common;
+using Services.Common;
 
 public class BaseGunServiceModel : IGunModel
 {

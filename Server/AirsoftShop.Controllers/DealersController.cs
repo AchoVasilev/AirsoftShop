@@ -1,5 +1,6 @@
 namespace AirsoftShop.Controllers;
 
+using Attributes;
 using Common.Services;
 using Data.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -89,14 +90,11 @@ public class DealersController : BaseController
 
     [Authorize]
     [HttpPut]
+    [ValidateDealer]
     public async Task<ActionResult> Edit(EditDealerInputModel model)
     {
         var userId = this.currentUserService.GetUserId();
         var user = await this.userManager.FindByIdAsync(userId);
-        if (user?.DealerId is null)
-        {
-            return this.BadRequest(new { ErrorMessage = UserNotDealerMsg });
-        }
 
         var serviceModel = new EditDealerServiceModel()
         {

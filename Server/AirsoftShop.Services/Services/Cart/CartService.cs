@@ -37,7 +37,7 @@ public class CartService : ICartService
         var gun = await this.data.Guns.FirstOrDefaultAsync(x => x.Id == gunId);
         if (gun is null)
         {
-            return InvalidGun;
+            return InvalidProduct;
         }
 
         client.Cart.Guns.Add(gun);

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { InitialGunViewModel } from 'src/app/models/products/guns/initialGunViewModel';
-import { ProductService } from 'src/app/services/products/product.service';
+import { GunService } from 'src/app/services/products/guns/gun.service';
 
 @Component({
   selector: 'app-products',
@@ -12,7 +12,7 @@ export class ProductsComponent implements OnInit {
   isLoading: boolean = true;
   guns: InitialGunViewModel[] = [];
 
-  constructor(private productService: ProductService) { }
+  constructor(private gunService: GunService) { }
 
   ngOnInit(): void {
     this.getNewestGuns();
@@ -21,7 +21,7 @@ export class ProductsComponent implements OnInit {
   }
 
   getNewestGuns(): void {
-    this.productService.getNewestEightGuns()
+    this.gunService.getNewestEightGuns()
       .subscribe({
         next: (res: InitialGunViewModel[]) => {
           this.guns = res;

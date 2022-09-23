@@ -1,0 +1,163 @@
+<mat-spinner *ngIf="isLoading" style="margin: 0 auto;"></mat-spinner>
+<section class="item" *ngIf="isLoaded && gun">
+    <article class="item-top">
+        <article class="img-wrapper">
+            <img src="{{gun.imageUrl}}" alt="{{gun.name}} image">
+        </article>
+
+        <article class="item-data">
+            <section class="item-data-wrapper">
+                <h1 class="item-title">
+                    Реплика на {{gun.name}}
+                </h1>
+                <p class="item-subtitle">Предлагано от: <a href="{{gun.dealerUrl}}"
+                        target="_blank">{{gun.dealerName}}</a></p>
+                <p class="item-subtitle">Производител: <a>{{gun.manufacturer}}</a></p>
+                <p class="item-subtitle">Мощност: <span>{{gun.power}} J</span></p>
+                <p class="item-subtitle">Цвят: <span>{{gun.color}}</span></p>
+                <p class="item-subtitle">Тегло (гр.): <span>{{gun.weight}}</span></p>
+                <p class="item-subtitle">Вид на пълнителя: <span>{{gun.magazine}}</span></p>
+                <p class="item-subtitle">Задвижване: <span>{{gun.propulsion}}</span></p>
+                <p class="item-subtitle">Блоубек: <span>{{gun.blowback}}</span></p>
+                <h2 class="item-price">{{gun.price}} лв.</h2>
+            </section>
+            <section class="item-data-controls-wrapper" *ngIf="isLoggedIn && isClient">
+                <button class="add-btn" (click)="addToBasket(gun.id, gun.price)"><i
+                        class="fa-solid fa-cart-arrow-down"></i> Добави в количката</button>
+                <article class="buttons-wrapper">
+                    <button class="action-btn"><i class="fa-solid fa-scale-balanced"></i> Добави в любими</button>
+                    <button class="action-btn"><i class="fa-solid fa-heart"></i> Сравни</button>
+                </article>
+            </section>
+
+            <section class="dealer-controls" *ngIf="isOwner">
+                <a routerLink="/products/guns/edit/{{gun.id}}" class="action-btn"><i
+                        class="fa-solid fa-scale-balanced"></i> Промени</a>
+                <button class="dealer-action-btn"><i class="fa-solid fa-trash-can"></i> Изтрий</button>
+            </section>
+        </article>
+    </article>
+
+    <article class="item-description">
+        <p class="description">
+            <span>Описание:</span> Lorem ipsum dolor sit, amet consectetur adipisicing elit. Molestiae officiis deserunt
+            ipsa expedita?
+            Beatae quidem porro atque laudantium blanditiis aut natus, doloremque iste vero, dolorum sapiente
+            sunt et, veritatis omnis.
+            Molestias nulla sint iure quibusdam? Inventore numquam a quaerat et nihil possimus repellendus
+            aliquid! Accusamus et, libero aliquam error, enim, officia maxime consequuntur autem asperiores ea
+            vero quibusdam dolore minus!
+            Quam quos, reiciendis possimus molestiae dignissimos odit officiis nemo expedita id debitis
+            cupiditate? Eaque, nam eveniet provident iure, rem tenetur deserunt obcaecati repellat saepe
+            pariatur iste. Dicta sit cupiditate obcaecati.
+            Facilis dolor fugit quidem magni qui accusamus, suscipit incidunt vero natus vitae, laboriosam
+            beatae voluptatem. Iure ex quo, sapiente soluta repudiandae hic minus, at numquam sunt, cumque
+            aperiam error eum?
+            Consequuntur, numquam, sed animi asperiores illum beatae, aperiam doloribus magnam ad est
+            voluptatibus eligendi! Quidem laborum, sint repudiandae quos maiores nostrum nesciunt id nemo illum.
+            Maiores sapiente commodi enim provident.
+        </p>
+        <h5 class="includes-title">В поръчката е включено:</h5>
+        <ul class="item-includes">
+            <li>1 бр. реплика {{gun.name}}</li>
+            <li>Зарядно устройство</li>
+            <li>Ръководство</li>
+            <li>Батерия</li>
+        </ul>
+    </article>
+
+    <article class="item-data">
+        <table>
+            <tbody>
+                <tr class="element">
+                    <td class="element-heading"><span>Име</span></td>
+                    <td>
+                        <p>{{gun.name}}</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="element-heading"><span>Дистрибутор</span></td>
+                    <td>
+                        <p>{{gun.dealerName}}</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="element-heading"><span>Производител</span></td>
+                    <td>
+                        <p>{{gun.manufacturer}}</p>
+                    </td>
+                </tr>
+                <tr class="element">
+                    <td class="element-heading">
+                        <span>Скорост [FPS]</span>
+                    </td>
+                    <td class="">
+                        <p class="">~{{gun.speed}} FPS</p>
+                    </td>
+                </tr>
+                <tr class="element">
+                    <td class="element-heading"><span>Вид на стрелбата</span></td>
+                    <td class="">
+                        <p class="">{{gun.firing}}</p>
+                    </td>
+                </tr>
+                <tr class="element">
+                    <td class="element-heading"><span>Дължина [mm]</span></td>
+                    <td class="">
+                        <p class="">{{gun.length}} mm.</p>
+                    </td>
+                </tr>
+                <tr class="element">
+                    <td class="element-heading"><span>Дължина на цевта[mm]</span></td>
+                    <td class="">
+                        <p class="">{{gun.barrel}} mm.</p>
+                    </td>
+                </tr>
+                <tr class="element">
+                    <td class="element-heading"><span>Тегло [g]</span></td>
+                    <td class="">
+                        <p class="">{{gun.weight}}</p>
+                    </td>
+                </tr>
+                <tr class="element">
+                    <td class="element-heading"><span>Вид на пълнителя</span></td>
+                    <td class="">
+                        <p class="">{{gun.magazine}}</p>
+                    </td>
+                </tr>
+                <tr class="element">
+                    <td class="element-heading"><span>Капацитет на пълнителя [pcs]</span></td>
+                    <td class="">
+                        <p class="">{{gun.capacity}}</p>
+                    </td>
+                </tr>
+                <tr class="element">
+                    <td class="element-heading"><span>Хоп-Ъп</span>
+                    </td>
+                    <td class="">
+                        <p class="">{{gun.hopup}}</p>
+                    </td>
+                </tr>
+                <tr class="element">
+                    <td class="element-heading"><span>Блоу бек</span>
+                    </td>
+                    <td class="">
+                        <p class="">{{gun.blowback}}</p>
+                    </td>
+                </tr>
+                <tr class="element">
+                    <td class="element-heading"><span>Изработен от:</span></td>
+                    <td class="">
+                        <p class="">{{gun.material}}</p>
+                    </td>
+                </tr>
+                <tr class="element">
+                    <td class="element-heading"><span>Задвижван от:</span></td>
+                    <td class="">
+                        <p class="">{{gun.propulsion}}</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </article>
+</section>

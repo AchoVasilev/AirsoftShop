@@ -3,6 +3,7 @@ namespace AirsoftShop.Services.Services.Order;
 using AirsoftShop.Common.Models;
 using Data.Models;
 using Data.Models.Enums;
+using Data.Models.Products;
 using Data.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Models.Courier;

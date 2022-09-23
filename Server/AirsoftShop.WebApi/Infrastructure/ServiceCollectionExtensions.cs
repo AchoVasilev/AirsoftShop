@@ -10,10 +10,12 @@ using Microsoft.IdentityModel.Tokens;
 using AirsoftShop.Common.Models;
 using CloudinaryDotNet;
 using Common.Services;
+using Data.Models.Products;
 using Microsoft.OpenApi.Models;
 using Models;
-using Services.Common;
-using Services.Common.Factories;
+using Services.Models.Product;
+using Services.Services.Common;
+using Services.Services.Common.Factories;
 
 internal static class ServiceCollectionExtensions
 {

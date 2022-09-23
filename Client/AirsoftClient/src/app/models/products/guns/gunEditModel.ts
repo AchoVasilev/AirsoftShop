@@ -14,6 +14,6 @@ export interface GunEditModel {
     material: string,
     blowback: string,
     hopup: string,
-    subCategoryName: string,
+    subCategoryId: number,
     price: number
 }

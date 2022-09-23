@@ -1,5 +1,6 @@
 namespace AirsoftShop.Controllers;
 
+using Attributes;
 using Common.Services;
 using Data.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -34,14 +35,11 @@ public class FieldsController : BaseController
 
     [HttpPost]
     [Authorize]
+    [ValidateDealer]
     public async Task<ActionResult> Create([FromForm] CreateFieldModel model)
     {
         var userId = this.currentUserService.GetUserId();
         var user = await this.userManager.FindByIdAsync(userId);
-        if (user?.DealerId is null)
-        {
-            return this.Unauthorized(new { ErrorMessage = UserNotDealerMsg });
-        }
 
         var fileModels = new List<IFileServiceModel>();
         foreach (var image in model.Images)
@@ -87,14 +85,11 @@ public class FieldsController : BaseController
     }
 
     [HttpPut]
+    [ValidateDealer]
     public async Task<ActionResult> Edit(FieldEditModel model)
     {
         var userId = this.currentUserService.GetUserId();
         var user = await this.userManager.FindByIdAsync(userId);
-        if (user?.DealerId is null)
-        {
-            return this.Unauthorized(new { ErrorMessage = UserNotDealerMsg });
-        }
 
         if (user.DealerId != model.DealerId)
         {
@@ -122,14 +117,11 @@ public class FieldsController : BaseController
 
     [HttpDelete]
     [Route("{id}")]
+    [ValidateDealer]
     public async Task<ActionResult> Delete(int id)
     {
         var userId = this.currentUserService.GetUserId();
         var user = await this.userManager.FindByIdAsync(userId);
-        if (user?.DealerId is null)
-        {
-            return this.Unauthorized(new { ErrorMessage = UserNotDealerMsg });
-        }
 
         var result = await this.fieldService.Delete(id, user.DealerId);
         if (result.Failed)

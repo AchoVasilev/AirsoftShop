@@ -6,5 +6,4 @@ using Microsoft.AspNetCore.Mvc;
 [Route("[controller]")]
 public class BaseController : ControllerBase
 {
-    
 }

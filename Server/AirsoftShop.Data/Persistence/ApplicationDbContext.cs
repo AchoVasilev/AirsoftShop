@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Models;
 using Models.Base;
 using Models.Images;
+using Models.Products;
 
 public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 {
@@ -49,6 +50,8 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     public DbSet<SubCategory> SubCategories { get; init; }
 
     public DbSet<WishList> WishLists { get; init; }
+    
+    public DbSet<Clothing> Clothings { get; init; }
 
     public override int SaveChanges(bool acceptAllChangesOnSuccess)
     {
