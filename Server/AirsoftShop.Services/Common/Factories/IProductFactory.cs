@@ -1,8 +1,10 @@
 namespace AirsoftShop.Services.Common.Factories;
 
-public interface IProductFactory<T, R> : IScopedService
+public interface IProductFactory<TEntity, out TResult>
+    where TEntity : class
+    where TResult : class
 {
-    T CreateFromInputModel(IProduct product, string dealerId);
+    TEntity CreateFromInputModel(IProduct product, string dealerId);
 
-    R CreateResultModel(T product);
+    TResult CreateResultModel(TEntity product);
 }

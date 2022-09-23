@@ -6,22 +6,23 @@ using Factories;
 using Microsoft.EntityFrameworkCore;
 using static AirsoftShop.Common.Constants.Messages;
 
-public abstract class BaseProductService<T, R> : IBaseProductService<T, R>
-    where T : class
-    where R : class
+public abstract class BaseProductService<TEntity, TResult> : IBaseProductService<TEntity, TResult>
+    where TEntity : class
+    where TResult : class
 {
-    private readonly IProductFactory<T, R> productFactory;
-    public BaseProductService(ApplicationDbContext data, IProductFactory<T, R> productFactory)
+    private readonly IProductFactory<TEntity, TResult> productFactory;
+
+    protected BaseProductService(ApplicationDbContext data, IProductFactory<TEntity, TResult> productFactory)
     {
         this.Context = data;
         this.productFactory = productFactory;
     }
 
-    protected DbSet<T> DbSet => this.Context.Set<T>();
+    protected DbSet<TEntity> DbSet => this.Context.Set<TEntity>();
 
-    protected ApplicationDbContext Context { get; }
+    private ApplicationDbContext Context { get; }
 
-    public virtual async Task<OperationResult<R>> Create(IProduct model, string dealerId)
+    public virtual async Task<OperationResult<TResult>> Create(IProduct model, string dealerId)
     {
         var dealerExists = await this.Context.Dealers
             .AnyAsync(x => x.Id == dealerId);

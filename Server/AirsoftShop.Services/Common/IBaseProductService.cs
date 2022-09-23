@@ -2,8 +2,9 @@ namespace AirsoftShop.Services.Common;
 
 using AirsoftShop.Common.Models;
 
-public interface IBaseProductService <T, R> : ITransientService
-    where R : class
+public interface IBaseProductService <TEntity, TResult> : ITransientService
+    where TEntity: class
+    where TResult : class
 {
-    Task<OperationResult<R>> Create(IProduct model, string dealerId);
+    Task<OperationResult<TResult>> Create(IProduct model, string dealerId);
 }

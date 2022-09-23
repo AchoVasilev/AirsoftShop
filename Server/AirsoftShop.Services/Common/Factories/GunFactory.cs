@@ -5,7 +5,7 @@ using Data.Models.Enums;
 using Data.Models.Images;
 using Models.Product;
 
-public class GunFactory: IProductFactory<Gun, ProductResultModel>
+public class GunFactory : IProductFactory<Gun, ProductResultModel>
 {
     public Gun CreateFromInputModel(IProduct product, string dealerId)
     {
