@@ -1,34 +1,34 @@
 namespace AirsoftShop.Controllers.Products;
 
-using AirsoftShop.Common.Services;
-using AirsoftShop.Data.Models;
-using AirsoftShop.Services.Models.File;
-using AirsoftShop.Services.Services.File;
-using AirsoftShop.Services.Services.Product.Gun;
 using Attributes;
+using Common.Services;
+using Data.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Models.Products.Guns;
+using Services.Models.File;
 using Services.Models.Product.Guns;
+using Services.Services.Common;
+using Services.Services.File;
 using static Common.Constants.Constants.WebConstants;
 using static Common.Constants.Messages;
-
 public class GunsController : BaseController
 {
-    private readonly IGunService gunService;
     private readonly ICurrentUserService currentUserService;
+    private readonly IGunService gunService;
     private readonly IFileService fileService;
     private readonly UserManager<ApplicationUser> userManager;
 
     public GunsController(
-        IGunService gunService,
         ICurrentUserService currentUserService,
+        IGunService gunService,
         IFileService fileService,
         UserManager<ApplicationUser> userManager)
     {
         this.gunService = gunService;
         this.currentUserService = currentUserService;
+        this.gunService = gunService;
         this.fileService = fileService;
         this.userManager = userManager;
     }
@@ -78,10 +78,10 @@ public class GunsController : BaseController
             Weight = model.Weight,
             Propulsion = model.Propulsion,
             Images = fileModels,
-            Description = model.Description
+            Description = model.Description,
         };
 
-        var result = await this.gunService.CreateGun(gunModel, user.DealerId);
+        var result = await this.gunService.Create(gunModel, user.DealerId);
         if (result.Failed)
         {
             return this.BadRequest(new { result.ErrorMessage });

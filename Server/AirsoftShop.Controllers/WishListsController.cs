@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Models.WishLists;
 using Services.Services.WishList;
-using static Common.Constants.Messages;
 
 [Authorize]
 public class WishListsController : BaseController

@@ -6,6 +6,4 @@ using AirsoftShop.Services.Models.Product.Base;
 public class CreateGunServiceModel : ExtendedBaseGunServiceModel
 {
         public IEnumerable<IFileServiceModel>? Images { get; init; }
-        
-        public int SubCategoryId { get; init; }
 }
