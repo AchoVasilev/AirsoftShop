@@ -11,4 +11,6 @@ public interface IBaseProductService<TEntity, TResult> : ITransientService
 
     Task<OperationResult<TResult>> Edit(IProduct product, string dealerId,
         Expression<Func<TEntity, bool>> filter);
+
+    Task<OperationResult> Delete(string productId, string dealerId);
 }

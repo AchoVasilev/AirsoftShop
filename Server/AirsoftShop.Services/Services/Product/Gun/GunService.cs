@@ -1,7 +1,6 @@
 namespace AirsoftShop.Services.Services.Product.Gun;
 
 using AirsoftShop.Common.Models;
-using AirsoftShop.Data.Models.Enums;
 using AirsoftShop.Data.Models.Products;
 using Data.Persistence;
 using AirsoftShop.Services.Models.Product;
@@ -37,7 +36,7 @@ public class GunService : BaseProductService<Gun, ProductResultModel>, IGunServi
             .AsNoTracking()
             .ToListAsync();
 
- public async Task<GunDetailsServiceModel?> GetDetails(string gunId)
+    public async Task<GunDetailsServiceModel?> GetDetails(string gunId)
         => await this.DbSet
             .Where(x => x.Id == gunId)
             .Select(x => new GunDetailsServiceModel
@@ -67,88 +66,7 @@ public class GunService : BaseProductService<Gun, ProductResultModel>, IGunServi
             })
             .FirstOrDefaultAsync();
 
-    public async Task<OperationResult<ResultGunServiceModel>> Edit(string dealerId, EditGunServiceModel model)
-    {
-        var dealer = await this.Context.Dealers
-            .FirstOrDefaultAsync(x => x.Id == dealerId);
-
-        if (dealer is null)
-        {
-            return NotAuthorizedMsg;
-        }
-
-        var subCategoryExists = await this.Context.SubCategories
-            .AnyAsync(x => x.Id == model.SubCategoryId);
-
-        if (!subCategoryExists)
-        {
-            return InvalidSubcategoryErrorMsg;
-        }
-
-        var gun = await this.Context.Guns
-            .FirstOrDefaultAsync(x => x.Id == model.Id && dealer.Id == x.DealerId);
-
-        if (gun is null)
-        {
-            return InvalidProduct;
-        }
-
-        gun.Name = model.Name;
-        gun.Magazine = model.Magazine;
-        gun.Manufacturer = model.Manufacturer;
-        gun.Material = model.Material;
-        gun.Barrel = model.Barrel;
-        gun.Blowback = model.Blowback;
-        gun.Capacity = model.Capacity;
-        gun.Color = model.Color;
-        gun.SubCategoryId = model.SubCategoryId;
-        gun.Firing = model.Firing;
-        gun.Hopup = model.Hopup;
-        gun.Weight = model.Weight;
-        gun.Length = model.Length;
-        gun.Speed = model.Speed;
-        gun.Price = model.Price;
-        gun.Propulsion = Enum.Parse<Propulsion>(model.Propulsion!);
-        gun.Power = model.Power;
-        gun.Description = model.Description;
-
-        await this.Context.SaveChangesAsync();
-
-        var result = new ResultGunServiceModel()
-        {
-            Id = gun.Id
-        };
-
-        return result;
-    }
-
-    public async Task<OperationResult<ResultGunServiceModel>> DeleteGun(string gunId, string dealerId)
-    {
-        var gun = await this.Context.Guns
-            .FirstOrDefaultAsync(x => x.Id == gunId);
-
-        if (gun is null)
-        {
-            return InvalidProduct;
-        }
-
-        if (gun.DealerId != dealerId)
-        {
-            return NotAuthorizedMsg;
-        }
-
-        var result = new ResultGunServiceModel()
-        {
-            Id = gun.Id
-        };
-
-        this.Context.Remove(gun);
-        await this.Context.SaveChangesAsync();
-
-        return result;
-    }
-
-    public async Task<OperationResult<OwnerGunListServiceModel>> GetMyProducts(string userId)
+ public async Task<OperationResult<OwnerGunListServiceModel>> GetMyProducts(string userId)
     {
         var dealerId = await this.Context.Users
             .Where(x => x.Id == userId)

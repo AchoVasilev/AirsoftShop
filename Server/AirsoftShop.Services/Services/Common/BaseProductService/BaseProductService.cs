@@ -87,4 +87,23 @@ public abstract class BaseProductService<TEntity, TResult> : IBaseProductService
         
         return resultModel;
     }
+
+    public virtual async Task<OperationResult> Delete(string productId, string dealerId)
+    {
+        var product = await this.DbSet.FindAsync(productId);
+        if (product is null)
+        {
+            return InvalidProduct;
+        }
+
+        if (product.DealerId != dealerId)
+        {
+            return NotAuthorizedMsg;
+        }
+        
+        this.DbSet.Remove(product);
+        await this.Context.SaveChangesAsync();
+
+        return true;
+    }
 }

@@ -11,9 +11,6 @@ public interface IGunService : IBaseProductService<Gun, ProductResultModel>
     Task<IEnumerable<InitialGunViewModel>> GetNewestEightGuns();
     
     Task<GunDetailsServiceModel?> GetDetails(string gunId);
-    
-
-    Task<OperationResult<ResultGunServiceModel>> DeleteGun(string gunId, string dealerId);
 
     Task<OperationResult<OwnerGunListServiceModel>> GetMyProducts(string userId);
 

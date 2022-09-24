@@ -156,13 +156,13 @@ public class GunsController : BaseController
         var userId = this.currentUserService.GetUserId();
         var user = await this.userManager.FindByIdAsync(userId);
 
-        var result = await this.gunService.DeleteGun(gunId, user.DealerId);
+        var result = await this.gunService.Delete(gunId, user.DealerId);
         if (result.Failed)
         {
             return this.BadRequest(new { result.ErrorMessage });
         }
 
-        return this.Ok(result);
+        return this.Ok();
     }
 
     [HttpGet]
