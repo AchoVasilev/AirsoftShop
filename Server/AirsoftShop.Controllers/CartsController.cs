@@ -1,6 +1,7 @@
 namespace AirsoftShop.Controllers;
 
 using Attributes;
+using Common.Constants;
 using Common.Services;
 using Data.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -10,6 +11,7 @@ using Models.Carts;
 using Services.Models.Cart;
 using Services.Services.Cart;
 using static Common.Constants.Messages;
+using static Common.Constants.Constants.ControllerRoutes;
 
 [Authorize]
 public class CartsController : BaseController
@@ -45,7 +47,7 @@ public class CartsController : BaseController
     }
     
     [HttpPost]
-    [Route("bulkAdd")]
+    [Route(Constants.ControllerRoutes.BulkAdd)]
     [ValidateClient]
     public async Task<IActionResult> BulkAdd([FromBody] BulkCartInputModel model)
     {
@@ -90,7 +92,7 @@ public class CartsController : BaseController
     }
     
     [HttpGet]
-    [Route("deliveryData")]
+    [Route(DeliveryData)]
     public async Task<IActionResult> GetDeliveryData()
     {
         var data = await this.cartService.GetCartDeliveryData();
@@ -99,7 +101,7 @@ public class CartsController : BaseController
     }
     
     [HttpGet]
-    [Route("getNavData")]
+    [Route(GetNavData)]
     [AllowAnonymous]
     public async Task<IActionResult> GetProductCountAndPrice()
     {

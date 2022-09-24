@@ -12,6 +12,7 @@ using Services.Models.Product.Guns;
 using Services.Services.File;
 using Services.Services.Product.Gun;
 using static Common.Constants.Constants.WebConstants;
+using static Common.Constants.Constants.ControllerRoutes;
 using static Common.Constants.Messages;
 public class GunsController : BaseController
 {
@@ -34,7 +35,7 @@ public class GunsController : BaseController
     }
 
     [HttpGet]
-    [Route("newest")]
+    [Route(Newest)]
     public async Task<ActionResult> GetNewest()
         => this.Ok(await this.gunService.GetNewestEightGuns());
 
@@ -91,10 +92,10 @@ public class GunsController : BaseController
     }
 
     [HttpGet]
-    [Route("{gunId}")]
-    public async Task<IActionResult> GetDetails(string gunId)
+    [Route(ById)]
+    public async Task<IActionResult> GetDetails(string id)
     {
-        var res = await this.gunService.GetDetails(gunId);
+        var res = await this.gunService.GetDetails(id);
         if (res is null)
         {
             return this.NotFound();
@@ -227,7 +228,7 @@ public class GunsController : BaseController
     }
 
     [HttpGet]
-    [Route("mine")]
+    [Route(Mine)]
     [Authorize]
     public async Task<IActionResult> MyProducts()
     {

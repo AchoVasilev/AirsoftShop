@@ -10,8 +10,9 @@ using Models.Orders;
 using Services.Models.Order;
 using Services.Services.Cart;
 using Services.Services.Order;
-
+using static Common.Constants.Constants.ControllerRoutes;
 using static Common.Constants.Messages;
+
 [Authorize]
 public class OrdersController : BaseController
 {
@@ -63,7 +64,7 @@ public class OrdersController : BaseController
     }
     
     [HttpGet]
-    [Route("client")]
+    [Route(ForClient)]
     [ValidateClient]
     public async Task<IActionResult> GetClientOrders()
     {
@@ -76,7 +77,7 @@ public class OrdersController : BaseController
     }
     
     [HttpGet]
-    [Route("{id}")]
+    [Route(ById)]
     [ValidateClient]
     public async Task<IActionResult> GetOrderDetails([FromQuery]string id)
     {

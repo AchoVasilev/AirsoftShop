@@ -1,6 +1,7 @@
 namespace AirsoftShop.Controllers;
 
 using Attributes;
+using Common.Constants;
 using Common.Services;
 using Data.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -117,7 +118,7 @@ public class DealersController : BaseController
     }
 
     [HttpGet]
-    [Route("getDealerId")]
+    [Route(Constants.ControllerRoutes.GetDealerId)]
     public async Task<ActionResult<string>> GetDealerId()
     {
         var userId = this.currentUserService.GetUserId();

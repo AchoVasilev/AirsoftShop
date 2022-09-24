@@ -12,6 +12,7 @@ using Services.Models.File;
 using Services.Services.Field;
 using Services.Services.File;
 using static Common.Constants.Constants.WebConstants;
+using static Common.Constants.Constants.ControllerRoutes;
 using static Common.Constants.Messages;
 
 public class FieldsController : BaseController
@@ -72,7 +73,7 @@ public class FieldsController : BaseController
     }
 
     [HttpGet]
-    [Route("{id}")]
+    [Route(ById)]
     public async Task<ActionResult> Details(int id)
     {
         var result = await this.fieldService.Details(id);
@@ -116,7 +117,7 @@ public class FieldsController : BaseController
     }
 
     [HttpDelete]
-    [Route("{id}")]
+    [Route(ById)]
     [ValidateDealer]
     public async Task<ActionResult> Delete(int id)
     {

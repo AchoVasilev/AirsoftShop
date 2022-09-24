@@ -1,9 +1,10 @@
 namespace AirsoftShop.Controllers;
 
 using Microsoft.AspNetCore.Mvc;
+using static Common.Constants.Constants.ControllerRoutes;
 
 [ApiController]
-[Route("[controller]")]
+[Route(ControllerTemplate)]
 public class BaseController : ControllerBase
 {
 }

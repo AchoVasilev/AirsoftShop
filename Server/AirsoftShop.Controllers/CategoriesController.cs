@@ -2,6 +2,7 @@ namespace AirsoftShop.Controllers;
 
 using AirsoftShop.Services.Services.Category;
 using Microsoft.AspNetCore.Mvc;
+using static Common.Constants.Constants.ControllerRoutes;
 
 public class CategoriesController : BaseController
 {
@@ -11,22 +12,21 @@ public class CategoriesController : BaseController
         => this.categoryService = categoryService;
 
     [HttpGet]
-    [Route("all")]
     public async Task<ActionResult> GetAll() 
         => this.Ok(await this.categoryService.GetAllWithSubcategories());
 
     [HttpGet]
-    [Route("newest")]
+    [Route(Newest)]
     public async Task<ActionResult> GetNewest()
         => this.Ok(await this.categoryService.GetFourNewestCategories());
 
     [HttpGet]
-    [Route("gunSubcategories")]
+    [Route(GunSubcategories)]
     public async Task<ActionResult> GetGunSubcategories()
         => this.Ok(await this.categoryService.GetGunSubcategories());
     
     [HttpGet]
-    [Route("clothingSubcategories")]
+    [Route(ClothingSubcategories)]
     public async Task<ActionResult> GetClothingSubcategories()
         => this.Ok(await this.categoryService.GetClothingSubcategories());
 }

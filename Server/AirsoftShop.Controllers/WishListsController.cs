@@ -71,7 +71,7 @@ public class WishListsController : BaseController
     }
 
     [HttpDelete]
-    [Route("bulkRemove")]
+    [Route(nameof(BulkRemove))]
     [ValidateClient]
     public async Task<ActionResult> BulkRemove([FromBody]BulkRemoveItemsFromWishListModel model)
     {
