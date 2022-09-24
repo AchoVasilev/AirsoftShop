@@ -9,8 +9,8 @@ using Microsoft.AspNetCore.Mvc;
 using Models.Products.Guns;
 using Services.Models.File;
 using Services.Models.Product.Guns;
-using Services.Services.Common;
 using Services.Services.File;
+using Services.Services.Product.Gun;
 using static Common.Constants.Constants.WebConstants;
 using static Common.Constants.Messages;
 public class GunsController : BaseController
@@ -113,6 +113,7 @@ public class GunsController : BaseController
 
         var editModel = new EditGunServiceModel()
         {
+            Id = model.Id,
             Barrel = model.Barrel,
             Blowback = model.Blowback,
             Capacity = model.Capacity,
@@ -133,7 +134,11 @@ public class GunsController : BaseController
             Description = model.Description,
         };
 
-        var result = await this.gunService.Edit(user.DealerId, editModel);
+        var result = await this.gunService.Edit(
+            editModel, 
+            user.DealerId, 
+            x => x.Id == editModel.Id && x.DealerId == user.DealerId);
+        
         if (result.Failed)
         {
             return this.BadRequest(new { result.ErrorMessage });

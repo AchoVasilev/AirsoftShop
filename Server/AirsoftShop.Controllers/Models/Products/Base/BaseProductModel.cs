@@ -5,6 +5,8 @@ using static Common.Constants.Messages;
 using static Data.Constants.Data.Constants;
 public class BaseProductModel
 {
+    public string? Id { get; set; }
+    
     [Required(ErrorMessage = RequiredFieldErrorMsg)]
     [StringLength(DefaultMaxLength, MinimumLength = DefaultMinLength, ErrorMessage = LengthErrorMsg)]
     public string? Name { get; set; }

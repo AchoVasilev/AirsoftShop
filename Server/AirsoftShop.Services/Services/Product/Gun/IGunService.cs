@@ -1,18 +1,17 @@
 namespace AirsoftShop.Services.Services.Product.Gun;
 
 using AirsoftShop.Common.Models;
-using Common;
-using Models.Product.Guns;
+using AirsoftShop.Data.Models.Products;
+using AirsoftShop.Services.Models.Product;
+using AirsoftShop.Services.Models.Product.Guns;
+using Common.BaseProductService;
 
-public interface IGunService : ITransientService
+public interface IGunService : IBaseProductService<Gun, ProductResultModel>
 {
     Task<IEnumerable<InitialGunViewModel>> GetNewestEightGuns();
     
-    Task<OperationResult<ResultGunServiceModel>> CreateGun (CreateGunServiceModel model, string dealerId);
-
     Task<GunDetailsServiceModel?> GetDetails(string gunId);
     
-    Task<OperationResult<ResultGunServiceModel>> Edit(string dealerId, EditGunServiceModel model);
 
     Task<OperationResult<ResultGunServiceModel>> DeleteGun(string gunId, string dealerId);
 

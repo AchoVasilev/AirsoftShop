@@ -1,6 +1,6 @@
 namespace AirsoftShop.Services.Models.Product.Guns;
 
-using AirsoftShop.Services.Models.Product.Base;
+using Base;
 
 public class EditGunServiceModel : ExtendedBaseGunServiceModel
 {

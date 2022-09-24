@@ -1,6 +1,6 @@
 namespace AirsoftShop.Controllers.Models.Products.Guns;
 
-using AirsoftShop.Controllers.Models.Products.Base;
+using Base;
 
 public class GunEditModel : BaseGunModel
 {

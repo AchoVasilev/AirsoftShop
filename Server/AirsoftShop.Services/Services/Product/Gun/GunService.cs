@@ -2,24 +2,26 @@ namespace AirsoftShop.Services.Services.Product.Gun;
 
 using AirsoftShop.Common.Models;
 using AirsoftShop.Data.Models.Enums;
-using AirsoftShop.Data.Models.Images;
+using AirsoftShop.Data.Models.Products;
 using Data.Persistence;
-using Data.Models.Products;
+using AirsoftShop.Services.Models.Product;
+using AirsoftShop.Services.Models.Product.Guns;
+using Common.BaseProductService;
+using Common.Factories;
 using Microsoft.EntityFrameworkCore;
-using Models.Product.Guns;
 using static AirsoftShop.Common.Constants.Messages;
 
-public class GunService : IGunService
+public class GunService : BaseProductService<Gun, ProductResultModel>, IGunService
 {
-    private const int NewestEightGunsNumber = 8;
+    private const int Take = 8;
     
-    private readonly ApplicationDbContext data;
-
-    public GunService(ApplicationDbContext data)
-        => this.data = data;
+    public GunService(ApplicationDbContext data, IProductFactory<Gun, ProductResultModel> gunFactory) 
+        : base(data, gunFactory)
+    {
+    }
 
     public async Task<IEnumerable<InitialGunViewModel>> GetNewestEightGuns()
-        => await this.data.Guns
+        => await this.DbSet
             .Select(x => new InitialGunViewModel()
             {
                 Id = x.Id,
@@ -31,69 +33,12 @@ public class GunService : IGunService
                 DealerSiteUrl = x.Dealer.SiteUrl,
                 ImageUrl = x.Images.Select(i => i.Url ?? i.RemoteImageUrl).First()
             })
-            .Take(NewestEightGunsNumber)
+            .Take(Take)
             .AsNoTracking()
             .ToListAsync();
 
-    public async Task<OperationResult<ResultGunServiceModel>> CreateGun(CreateGunServiceModel model, string dealerId)
-    {
-        var dealer = await this.data.Dealers
-            .FirstOrDefaultAsync(x => x.Id == dealerId);
-
-        if (dealer is null)
-        {
-            return NotAuthorizedMsg;
-        }
-
-        var subCategoryExists = await this.data.SubCategories
-            .AnyAsync(x => x.Id == model.SubCategoryId);
-
-        if (!subCategoryExists)
-        {
-            return InvalidSubcategoryErrorMsg;
-        }
-
-        var gun = new Gun()
-        {
-            Name = model.Name,
-            Magazine = model.Magazine,
-            Manufacturer = model.Manufacturer,
-            Material = model.Material,
-            Barrel = model.Barrel,
-            Blowback = model.Blowback,
-            Capacity = model.Capacity,
-            Color = model.Color,
-            SubCategoryId = model.SubCategoryId,
-            Firing = model.Firing,
-            Hopup = model.Hopup,
-            Weight = model.Weight,
-            Length = model.Length,
-            Speed = model.Speed,
-            Price = model.Price,
-            Propulsion = Enum.Parse<Propulsion>(model.Propulsion!),
-            Power = model.Power,
-            Description = model.Description,
-            Images = model.Images!.Select(x => new ItemImage()
-            {
-                Url = x.Uri,
-                Name = x.Name,
-                Extension = x.Extension
-            }).ToList()
-        };
-
-        dealer.Guns.Add(gun);
-        await this.data.SaveChangesAsync();
-
-        var result = new ResultGunServiceModel()
-        {
-            Id = gun.Id
-        };
-
-        return result;
-    }
-
-    public async Task<GunDetailsServiceModel?> GetDetails(string gunId)
-        => await this.data.Guns
+ public async Task<GunDetailsServiceModel?> GetDetails(string gunId)
+        => await this.DbSet
             .Where(x => x.Id == gunId)
             .Select(x => new GunDetailsServiceModel
             {
@@ -124,7 +69,7 @@ public class GunService : IGunService
 
     public async Task<OperationResult<ResultGunServiceModel>> Edit(string dealerId, EditGunServiceModel model)
     {
-        var dealer = await this.data.Dealers
+        var dealer = await this.Context.Dealers
             .FirstOrDefaultAsync(x => x.Id == dealerId);
 
         if (dealer is null)
@@ -132,7 +77,7 @@ public class GunService : IGunService
             return NotAuthorizedMsg;
         }
 
-        var subCategoryExists = await this.data.SubCategories
+        var subCategoryExists = await this.Context.SubCategories
             .AnyAsync(x => x.Id == model.SubCategoryId);
 
         if (!subCategoryExists)
@@ -140,8 +85,8 @@ public class GunService : IGunService
             return InvalidSubcategoryErrorMsg;
         }
 
-        var gun = await this.data.Guns
-            .FirstOrDefaultAsync(x => x.Name == model.Name && dealer.Id == x.DealerId);
+        var gun = await this.Context.Guns
+            .FirstOrDefaultAsync(x => x.Id == model.Id && dealer.Id == x.DealerId);
 
         if (gun is null)
         {
@@ -167,7 +112,7 @@ public class GunService : IGunService
         gun.Power = model.Power;
         gun.Description = model.Description;
 
-        await this.data.SaveChangesAsync();
+        await this.Context.SaveChangesAsync();
 
         var result = new ResultGunServiceModel()
         {
@@ -179,7 +124,7 @@ public class GunService : IGunService
 
     public async Task<OperationResult<ResultGunServiceModel>> DeleteGun(string gunId, string dealerId)
     {
-        var gun = await this.data.Guns
+        var gun = await this.Context.Guns
             .FirstOrDefaultAsync(x => x.Id == gunId);
 
         if (gun is null)
@@ -197,15 +142,15 @@ public class GunService : IGunService
             Id = gun.Id
         };
 
-        this.data.Remove(gun);
-        await this.data.SaveChangesAsync();
+        this.Context.Remove(gun);
+        await this.Context.SaveChangesAsync();
 
         return result;
     }
 
     public async Task<OperationResult<OwnerGunListServiceModel>> GetMyProducts(string userId)
     {
-        var dealerId = await this.data.Users
+        var dealerId = await this.Context.Users
             .Where(x => x.Id == userId)
             .Select(x => x.DealerId)
             .FirstOrDefaultAsync();
@@ -215,7 +160,7 @@ public class GunService : IGunService
             return NotAuthorizedMsg;
         }
 
-        var guns = await this.data.Guns
+        var guns = await this.Context.Guns
             .Where(x => x.DealerId == dealerId)
             .Select(x => new OwnerGunListServiceModel()
             {
@@ -262,35 +207,35 @@ public class GunService : IGunService
             .ToListAsync();
 
     public async Task<int> GetAllGunsCount()
-        => await this.data.Guns.CountAsync();
+        => await this.Context.Guns.CountAsync();
 
     public async Task<ICollection<string>> GetAllColors()
-        => await this.data.Guns
+        => await this.Context.Guns
             .Select(x => x.Color)
             .Distinct()
             .ToListAsync();
 
     public async Task<ICollection<string>> GetAllDealers()
-        => await this.data.Guns
+        => await this.Context.Guns
             .Select(x => x.Dealer.Name)
             .Distinct()
             .ToListAsync();
 
     public async Task<ICollection<string>> GetAllManufacturers()
-        => await this.data.Guns
+        => await this.Context.Guns
             .Select(x => x.Manufacturer)
             .Distinct()
             .ToListAsync();
 
     public async Task<ICollection<double>> GetAllPowers()
-        => await this.data.Guns
+        => await this.Context.Guns
             .Select(x => x.Power)
             .Distinct()
             .ToListAsync();
 
     private IQueryable<Gun> QueryAll(GunsQueryServiceModel query)
     {
-        var gunsQuery = this.data.Guns
+        var gunsQuery = this.Context.Guns
             .AsQueryable();
 
         if (string.IsNullOrWhiteSpace(query.CategoryName) == false && query.CategoryName != "null")

@@ -1,7 +1,7 @@
 namespace AirsoftShop.Data.Models.Products;
 
 using System.ComponentModel.DataAnnotations;
-using AirsoftShop.Data.Models.Enums;
+using Enums;
 using static Constants.Data.Constants;
 
 public class Gun : Product

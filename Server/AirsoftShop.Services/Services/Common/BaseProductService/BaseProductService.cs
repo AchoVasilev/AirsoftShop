@@ -1,13 +1,15 @@
 namespace AirsoftShop.Services.Services.Common.BaseProductService;
 
+using System.Linq.Expressions;
 using AirsoftShop.Common.Models;
-using AirsoftShop.Data.Persistence;
+using Data.Persistence;
+using Data.Models.Products;
 using Factories;
 using Microsoft.EntityFrameworkCore;
 using static AirsoftShop.Common.Constants.Messages;
 
 public abstract class BaseProductService<TEntity, TResult> : IBaseProductService<TEntity, TResult>
-    where TEntity : class
+    where TEntity : Product
     where TResult : class
 {
     private readonly IProductFactory<TEntity, TResult> productFactory;
@@ -46,6 +48,42 @@ public abstract class BaseProductService<TEntity, TResult> : IBaseProductService
         await this.Context.SaveChangesAsync();
 
         var resultModel = this.productFactory.CreateResultModel(product);
+        
+        return resultModel;
+    }
+
+    public virtual async Task<OperationResult<TResult>> Edit(IProduct productEntity, string dealerId, Expression<Func<TEntity, bool>> filter)
+    {
+        var dealer = await this.Context.Dealers
+            .FirstOrDefaultAsync(x => x.Id == dealerId);
+
+        if (dealer is null)
+        {
+            return NotAuthorizedMsg;
+        }
+
+        var subCategoryExists = await this.Context.SubCategories
+            .AnyAsync(x => x.Id == productEntity.SubCategoryId);
+
+        if (!subCategoryExists)
+        {
+            return InvalidSubcategoryErrorMsg;
+        }
+
+        var item = await this.DbSet
+            .FirstOrDefaultAsync(filter);
+        if (item is null)
+        {
+            return InvalidProduct;
+        }
+        
+        item = this.productFactory.CreateUpdatedModel(item, productEntity);
+        this.DbSet.Attach(item);
+        this.Context.Entry(item).State = EntityState.Modified;
+
+        await this.Context.SaveChangesAsync();
+        
+        var resultModel = this.productFactory.CreateResultModel(item);
         
         return resultModel;
     }
