@@ -14,7 +14,7 @@ export class CategoryService {
   constructor(private httpClient: HttpClient) { }
 
   loadCategories(): Observable<CategoryViewModel[]> {
-    return this.httpClient.get<CategoryViewModel[]>(`${this.apiUrl}/all`);
+    return this.httpClient.get<CategoryViewModel[]>(`${this.apiUrl}`);
   }
 
   loadNewestCategories(): Observable<BasicCategoryViewModel[]> {
