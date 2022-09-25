@@ -106,4 +106,25 @@ public abstract class BaseProductService<TEntity, TResult> : IBaseProductService
 
         return true;
     }
+
+    public async Task<IProduct?> GetById(string productId, string includeProperties = "")
+    {
+        var query = this.DbSet.Where(x => x.Id == productId);
+        var properties = includeProperties.Split(", ", StringSplitOptions.RemoveEmptyEntries);
+
+        foreach (var property in properties)
+        {
+            query.Include(property);
+        }
+
+        var entity = await query.FirstOrDefaultAsync();
+        if (entity is null)
+        {
+            return null;
+        }
+        
+        var model = this.productFactory.CreateDetailsModel(entity);
+
+        return model;
+    }
 }

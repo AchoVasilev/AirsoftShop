@@ -13,4 +13,6 @@ public interface IBaseProductService<TEntity, TResult> : ITransientService
         Expression<Func<TEntity, bool>> filter);
 
     Task<OperationResult> Delete(string productId, string dealerId);
+
+    Task<IProduct?> GetById(string productId, string includeProperties = "");
 }

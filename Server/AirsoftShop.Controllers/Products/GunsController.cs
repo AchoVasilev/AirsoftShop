@@ -95,7 +95,7 @@ public class GunsController : BaseController
     [Route(ById)]
     public async Task<IActionResult> GetDetails(string id)
     {
-        var res = await this.gunService.GetDetails(id);
+        var res = await this.gunService.GetById(id, "Dealer, Images");
         if (res is null)
         {
             return this.NotFound();

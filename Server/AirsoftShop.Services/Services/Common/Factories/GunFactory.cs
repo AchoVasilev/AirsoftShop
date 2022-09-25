@@ -43,12 +43,12 @@ public class GunFactory : IProductFactory<Gun, ProductResultModel>
         return gun;
     }
 
-    public ProductResultModel CreateResultModel(Gun product)
+    public ProductResultModel CreateResultModel(Gun item)
     {
         var result = new ProductResultModel()
         {
-            Id = product.Id,
-            Name = product.Name
+            Id = item.Id,
+            Name = item.Name
         };
 
         return result;
@@ -77,5 +77,36 @@ public class GunFactory : IProductFactory<Gun, ProductResultModel>
         item.Description = model.Description;
 
         return item;
+    }
+
+    public IProduct CreateDetailsModel(Gun item)
+    {
+        var model = new GunDetailsServiceModel
+        {
+            Id = item.Id,
+            Name = item.Name,
+            Manufacturer = item.Manufacturer,
+            Power = item.Power,
+            Barrel = item.Barrel,
+            Propulsion = item.Propulsion.ToString(),
+            Material = item.Material,
+            Blowback = item.Blowback,
+            Capacity = item.Capacity,
+            Speed = item.Speed,
+            Color = item.Color,
+            Weight = item.Weight,
+            Magazine = item.Magazine,
+            DealerId = item.DealerId,
+            DealerName = item.Dealer.Name,
+            DealerUrl = item.Dealer.SiteUrl,
+            Firing = item.Firing,
+            Length = item.Length,
+            Hopup = item.Hopup,
+            Price = item.Price,
+            Description = item.Description,
+            ImageUrl = item.Images.Select(y => y.Url ?? y.RemoteImageUrl).FirstOrDefault()
+        };
+
+        return model;
     }
 }

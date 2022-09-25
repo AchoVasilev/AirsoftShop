@@ -8,7 +8,9 @@ public interface IProductFactory<TEntity, out TResult>
 {
     TEntity CreateFromInputModel(IProduct product, string dealerId);
 
-    TResult CreateResultModel(TEntity product);
+    TResult CreateResultModel(TEntity item);
 
     TEntity CreateUpdatedModel(TEntity item, IProduct product);
+
+    IProduct CreateDetailsModel(TEntity item);
 }
