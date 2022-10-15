@@ -181,6 +181,11 @@ public class GunsController : BaseController
         };
 
         var guns = await this.gunService.GetAllGuns(queryModel);
+        if (guns is null)
+        {
+            return this.NotFound();
+        }
+        
         var allGunsViewModel = new GunsViewModel
         {
             AllGuns = guns,

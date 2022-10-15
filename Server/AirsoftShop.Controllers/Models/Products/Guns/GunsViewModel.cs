@@ -14,7 +14,7 @@ public class GunsViewModel : PagingModel
         this.Powers = new List<double>();
     }
     
-    public ICollection<GunViewServiceModel> AllGuns { get; set; }
+    public ICollection<GunViewServiceModel>? AllGuns { get; init; }
 
     public ICollection<string> Colors { get; set; }
 

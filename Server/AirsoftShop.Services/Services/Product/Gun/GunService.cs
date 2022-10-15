@@ -96,7 +96,7 @@ public class GunService : BaseProductService<Gun, ProductResultModel>, IGunServi
         return guns;
     }
     
-    public async Task<ICollection<GunViewServiceModel>> GetAllGuns(GunsQueryServiceModel query)
+    public async Task<ICollection<GunViewServiceModel>?> GetAllGuns(GunsQueryServiceModel query)
         => await this.QueryAll(query)
             .Select(x => new GunViewServiceModel()
             {

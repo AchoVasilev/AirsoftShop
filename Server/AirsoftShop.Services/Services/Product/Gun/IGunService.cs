@@ -14,7 +14,7 @@ public interface IGunService : IBaseProductService<Gun, ProductResultModel>
 
     Task<OperationResult<OwnerGunListServiceModel>> GetMyProducts(string userId);
 
-    Task<ICollection<GunViewServiceModel>> GetAllGuns(GunsQueryServiceModel query);
+    Task<ICollection<GunViewServiceModel>?> GetAllGuns(GunsQueryServiceModel query);
 
     Task<int> GetAllGunsCount();
 
